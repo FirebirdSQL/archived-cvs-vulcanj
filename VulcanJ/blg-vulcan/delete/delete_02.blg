@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+INSERT INTO tb VALUES(10);
+INSERT INTO tb VALUES(10);
+INSERT INTO tb VALUES(20);
+COMMIT;
+DELETE FROM tb WHERE id>10;
+SELECT * FROM tb;
+
+          ID 
+============ 
+
+          10 
+          10 
+
+DROP DATABASE;

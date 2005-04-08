@@ -1,0 +1,15 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL);
+INSERT INTO test VALUES(2100000000);
+INSERT INTO test VALUES(2100000000);
+INSERT INTO test VALUES(2100000000);
+INSERT INTO test VALUES(2100000000);
+SELECT AVG(2100000000*id) FROM test;
+
+                  AVG 
+===================== 
+Statement failed, SQLCODE = -901
+
+Integer overflow.  The result of an integer operation caused the most significant bit of the result to carry.
+DROP DATABASE;

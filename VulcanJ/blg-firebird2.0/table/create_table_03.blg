@@ -1,0 +1,18 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test VARCHAR(32765)[40000];
+CREATE TABLE test(
+ c1 VARCHAR(40) CHARACTER SET CYRL COLLATE CYRL,
+ c2 VARCHAR(40) CHARACTER SET DOS437 COLLATE DB_DEU437,
+ c3 BLOB SUB_TYPE TEXT CHARACTER SET DOS437,
+ c4 test
+);
+SHOW TABLE test;
+C1                              VARCHAR(40) CHARACTER SET CYRL Nullable 
+C2                              VARCHAR(40) CHARACTER SET DOS437 Nullable 
+                                 COLLATE DB_DEU437
+C3                              BLOB segment 80, subtype TEXT CHARACTER SET DOS437 Nullable 
+C4                              (TEST) ARRAY OF [1:40000] 
+                                VARCHAR(32765) Nullable 
+
+DROP DATABASE;

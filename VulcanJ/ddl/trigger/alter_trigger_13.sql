@@ -1,0 +1,25 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg1 FOR test BEFORE INSERT POSITION 1
+AS
+BEGIN
+  new.text=new.text||'tg1 ';
+END ^
+
+CREATE TRIGGER tg2 FOR test BEFORE INSERT POSITION 10
+AS
+BEGIN
+  new.text=new.text||'tg2 ';
+END ^
+
+SET TERM ;^
+
+ALTER TRIGGER tg2 POSITION 0;
+INSERT INTO test VALUES(0,'');
+COMMIT;
+SELECT text FROM test;
+
+DROP DATABASE;
+

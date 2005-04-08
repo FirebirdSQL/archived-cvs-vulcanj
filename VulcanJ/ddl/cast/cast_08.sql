@@ -1,0 +1,6 @@
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST('28.1.2001' AS DATE) FROM rdb$Database;
+
+DROP DATABASE;
+

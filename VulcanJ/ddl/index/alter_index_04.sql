@@ -1,0 +1,9 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE t( a INTEGER NOT NULL,
+                CONSTRAINT pkindx PRIMARY KEY(a)
+              );
+
+ALTER INDEX RDB$PRIMARY1 INACTIVE;
+
+DROP DATABASE;
+

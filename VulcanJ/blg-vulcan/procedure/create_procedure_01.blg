@@ -1,0 +1,18 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+SET TERM ^;
+CREATE PROCEDURE test AS
+BEGIN
+  POST_EVENT 'Test';
+END ^
+SET TERM ;^
+SHOW PROCEDURE test;
+Procedure text:
+=============================================================================
+
+BEGIN
+  POST_EVENT 'Test';
+END
+=============================================================================
+Parameters:
+DROP DATABASE;

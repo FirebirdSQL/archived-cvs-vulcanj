@@ -1,0 +1,8 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE t( a INTEGER, b INT, c INT, d INT);
+
+CREATE INDEX test ON t(a,b,c,d);
+SHOW INDEX test;
+
+DROP DATABASE;
+

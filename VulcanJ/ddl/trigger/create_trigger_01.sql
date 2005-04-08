@@ -1,0 +1,14 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+
+SET TERM ^;
+/* Tested command: */
+CREATE TRIGGER test FOR tb BEFORE INSERT AS
+BEGIN
+  new.id=1;
+END^
+SET TERM ;^
+SHOW TRIGGER test;
+
+DROP DATABASE;
+

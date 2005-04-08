@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<project name="VulcanJ" default="all-tests-html" basedir=".">
+	<property environment="env" />
+	<property name="src" value="./test" />
+	<property name="lib" value="./lib" />
+	<property name="classes" value="./classes" />
+	<property name="test.reports" value="./reports" />
+	<property name="test.blg" value="./blg-vulcan" />
+	<property name="javac.debug" value="on" />
+	<property name="javac.debuglevel" value="lines,vars,source" />
+	<property name="FBLog4J" value="false" />
+	<property name="test.gds_type" value="EMBEDDED" />
+	<!-- test.gds_type is used for firebird/vulcan. For Embedded testing, set to -->
+	<!-- EMBEDDED. When running using a server kit, use PURE_JAVA -->
+	<property name="test.db.user" value="sysdba" />
+	<property name="test.db.password" value="masterkey" />
+	<property name="test.db.dialect" value="FirebirdSQL" />
+	<!-- test.db.dialect values: FIREBIRDSQL, TSSQL, NIST. case isn't important -->
+	<property name="test.driver.name" value="org.firebirdsql.jdbc.FBDriver" />
+	<!-- test.driver.name common values -->
+	<!-- com.sas.tkts.TKTSDriver, org.firebirdsql.jdbc.FBDriver -->
+	<property name="test.db.url" value="none" />
+	<!-- if the user supplies a JDBC url, then run tests with that URL -->
+	<!-- this feature will be used for non-firebird databases that don't -->
+	<!-- support the ability to create a database -->
+	<property name="test.db.name" value="sqltest.fdb" />
+	<property name="test.db.dir" value="./output/db" />
+	<property name="test.db.host" value="localhost" />
+	<property name="test.db.port" value="3050" />
+	<property name="junit.haltonerror" value="no" />
+	<property name="junit.haltonfailure" value="no" />
+	<property name="junit.jvm" value="java" />
+	<property name="junit.jvm.options" value="-Ddummy" />
+	<property name="junit.stylesheets" value="./resources/stylesheets" />
+	<property name="junit.timeout" value="300000" />
+	<!-- 5 minutes. Any longer, use -Djunit.timeout=XX from command line -->
+
+	<!-- below line implies jaybird jdbc driver always in lib directory -->
+	<path id="compile.classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<path id="test.classpath">
+		<path refid="compile.classpath" />
+		<pathelement location="${lib}" />
+		<pathelement location="${classes}" />
+		<pathelement location="${basedir}" />
+	</path>
+
+	<!-- Build targets follow -->
+
+	<target name="help" description="VulcanJ, a junit test suite for Firebird">
+		<echo>For a list of the test targets, type "ant -projecthelp"</echo>
+		<echo>For detailed help, check out the index.html file in this directory.</echo>
+		<echo>Here are some common invocations:</echo>
+		<echo>   ant -Dtest.gds_type=PURE_JAVA</echo>
+		<echo>   ant -Dtest=Cdr one-test</echo>
+		<echo>   ant isql-report</echo>
+		<echo>Here are some options:</echo>
+		<echo>   -Dtest.reports=reportdir</echo>
+
+	</target>
+
+	<target name="clean" description="Cleanup by removing work directories.">
+		<delete dir="${classes}" />
+		<delete dir="${test.reports}" />
+	</target>
+
+	<target name="init">
+		<echo message="test.gds_type is ${test.gds_type}" />
+		<condition property="use.embedded">
+			<equals arg1="${test.gds_type}" arg2="EMBEDDED" casesensitive="false" trim="true" />
+		</condition>
+		<echo message="test.blg is ${test.blg}" />
+	</target>
+
+	<target name="check-for-isql" depends="init">
+		<condition property="isql" value="isql.exe">
+			<os family="windows" />
+		</condition>
+		<condition property="isql" value="isql">
+			<os family="unix" />
+		</condition>
+		<available property="isql.present" file="${isql}">
+			<filepath>
+				<pathelement path="${env.Path}" />
+			</filepath>
+		</available>
+		<fail message="Could not find ISQL in path." unless="isql.present"/>
+		<!-- should also check for benchmark log directory if running isql -->
+		<available property="blg.present" type="dir" file="${test.blg}"/>
+		<fail message="Could not find benchmark log directory ${test.blg}" unless="blg.present"/>
+	</target>
+
+	<target name="compile" depends="init" description="Compile source *.java files">
+		<mkdir dir="${classes}" />
+		<javac classpathref="compile.classpath" srcdir="${src}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" destdir="${classes}" source="1.4">
+		</javac>
+	</target>
+
+	<target name="check-embedded" depends="compile" if="use.embedded">
+		<!--
+		If we are running embedded, look for the jaybird library. Because
+		this file can be jaybird.dll, libjaybird.so, or other variants,
+		most reliable approach is to try and load it from a simple java
+		program.
+		-->
+		<taskdef name="check-embedded" classname="CheckEmbedded">
+			<classpath refid="test.classpath" />
+		</taskdef>
+		<check-embedded />
+	</target>
+
+	<target name="all-tests-html" depends="compile, check-for-isql, check-embedded" description="Run all ISQL and JDBC tests.">
+		<!-- had to remove this line because of slow file server response on MVS.
+		<delete dir="${test.reports}" />
+		-->
+		<mkdir dir="${test.reports}" />
+		<mkdir dir="${test.db.dir}" />
+		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
+			<batchtest fork="yes" todir="${test.reports}">
+				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
+				<fileset dir="${classes}">
+					<include name="**/*Test.class" />
+					<include name="**/Test*.class" />
+					<exclude name="org/firebirdsql/nist/TestQueriesThatFailWithFB15.class" />
+					<exclude name="org/firebirdsql/nist/TestMultiThreadedQueries$$*.class" />
+				</fileset>
+			</batchtest>
+			<formatter type="xml" />
+
+			<classpath refid="test.classpath" />
+			<jvmarg value="${junit.jvm.options}" />
+			<sysproperty key="test.db.url" value="${test.db.url}" />
+			<sysproperty key="test.db.host" value="${test.db.host}" />
+			<sysproperty key="test.db.port" value="${test.db.port}" />
+			<sysproperty key="test.db.dir" value="${test.db.dir}" />
+			<sysproperty key="test.db.name" value="${test.db.name}" />
+			<sysproperty key="test.driver.name" value="${test.driver.name}" />
+			<sysproperty key="test.db.user" value="${test.db.user}" />
+			<sysproperty key="test.db.password" value="${test.db.password}" />
+			<sysproperty key="test.gds_type" value="${test.gds_type}" />
+			<sysproperty key="log4j.properties" file="${lib}/log4j.properties" />
+			<sysproperty key="FBLog4j" value="${FBLog4j}" />
+		</junit>
+		<junitreport todir="${test.reports}">
+			<fileset dir="${test.reports}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report todir="${test.reports}" format="frames" styledir="${junit.stylesheets}" />
+		</junitreport>
+	</target>
+
+	<!-- nist-report target is JDBC tests only, no ISQL required -->
+	<target name="nist-report" depends="compile, check-embedded" description="Run all JDBC tests">
+		<delete dir="${test.reports}" />
+		<mkdir dir="${test.reports}" />
+		<mkdir dir="${test.db.dir}" />
+		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
+			<batchtest fork="yes" todir="${test.reports}">
+				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
+				<fileset dir="${classes}">
+					<include name="org/firebirdsql/nist/Test*.class" />
+					<exclude name="org/firebirdsql/nist/TestQueriesThatFailWithFB15.class" />
+					<exclude name="org/firebirdsql/nist/TestMultiThreadedQueries$$*.class" />
+				</fileset>
+			</batchtest>
+			<formatter type="xml" />
+
+			<classpath refid="test.classpath" />
+			<jvmarg value="${junit.jvm.options}" />
+			<sysproperty key="test.db.url" value="${test.db.url}" />
+			<sysproperty key="test.db.host" value="${test.db.host}" />
+			<sysproperty key="test.db.port" value="${test.db.port}" />
+			<sysproperty key="test.db.dir" value="${test.db.dir}" />
+			<sysproperty key="test.db.name" value="${test.db.name}" />
+			<sysproperty key="test.driver.name" value="${test.driver.name}" />
+			<sysproperty key="test.db.user" value="${test.db.user}" />
+			<sysproperty key="test.db.password" value="${test.db.password}" />
+			<sysproperty key="test.gds_type" value="${test.gds_type}" />
+			<sysproperty key="log4j.properties" file="${lib}/log4j.properties" />
+			<sysproperty key="FBLog4j" value="${FBLog4j}" />
+		</junit>
+		<junitreport todir="${test.reports}">
+			<fileset dir="${test.reports}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report todir="${test.reports}" format="frames" styledir="${junit.stylesheets}" />
+		</junitreport>
+	</target>
+
+	<target name="isql-report" depends="compile, check-for-isql" description="Run all ISQL tests. ISQL must be in your path.">
+		<delete dir="${test.reports}" />
+		<mkdir dir="${test.reports}" />
+		<mkdir dir="${test.db.dir}" />
+		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
+			<batchtest fork="yes" todir="${test.reports}">
+				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
+				<fileset dir="${classes}">
+					<include name="org/firebirdsql/isql/Test*.class" />
+				</fileset>
+			</batchtest>
+			<formatter type="xml" />
+
+			<classpath refid="test.classpath" />
+			<jvmarg value="${junit.jvm.options}" />
+			<sysproperty key="test.blg" value="${test.blg}" />
+		</junit>
+		<junitreport todir="${test.reports}">
+			<fileset dir="${test.reports}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report todir="${test.reports}" format="frames" styledir="${junit.stylesheets}" />
+		</junitreport>
+	</target>
+
+
+	<!-- we don't run the report formatter for just 1 test -->
+	<!-- we always turn on Jaybird logging for one-test -->
+	<target name="one-test" depends="compile" description="Run a single Junit test.">
+		<delete dir="${test.reports}" />
+		<mkdir dir="${test.reports}" />
+		<mkdir dir="${test.db.dir}" />
+		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" showoutput="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
+			<batchtest fork="yes" todir="${test.reports}">
+				<fileset dir="${classes}">
+					<include name="org/firebirdsql/nist/Test${test}*.class" />
+					<include name="org/firebirdsql/isql/Test${test}*.class" />
+					<exclude name="org/firebirdsql/nist/TestMultiThreadedQueries$$*.class" />
+				</fileset>
+			</batchtest>
+			<formatter type="xml" />
+			<classpath refid="test.classpath" />
+			<jvmarg value="${junit.jvm.options}" />
+			<sysproperty key="test.db.url" value="${test.db.url}" />
+			<sysproperty key="test.db.host" value="${test.db.host}" />
+			<sysproperty key="test.db.port" value="${test.db.port}" />
+			<sysproperty key="test.driver.name" value="${test.driver.name}" />
+			<sysproperty key="test.db.user" value="${test.db.user}" />
+			<sysproperty key="test.db.password" value="${test.db.password}" />
+			<sysproperty key="test.db.dir" value="${test.db.dir}" />
+			<sysproperty key="test.db.name" value="${test.db.name}" />
+			<sysproperty key="test.gds_type" value="${test.gds_type}" />
+			<sysproperty key="log4j.properties" value="${lib}/log4j.properties" />
+			<sysproperty key="FBLog4j" value="true" />
+
+		</junit>
+	</target>
+
+</project>

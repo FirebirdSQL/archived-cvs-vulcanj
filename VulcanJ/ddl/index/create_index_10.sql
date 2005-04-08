@@ -1,0 +1,8 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE t( a INTEGER);
+CREATE INDEX test ON t(a);
+
+CREATE INDEX test ON t(a);
+
+DROP DATABASE;
+

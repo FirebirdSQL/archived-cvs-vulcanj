@@ -1,0 +1,8 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test 'message to show';
+
+DROP EXCEPTION test;
+SHOW EXCEPTION test;
+
+DROP DATABASE;
+

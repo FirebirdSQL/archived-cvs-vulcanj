@@ -1,0 +1,19 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg FOR test INACTIVE BEFORE INSERT 
+AS
+BEGIN
+  new.id=1;
+END ^
+SET TERM ;^
+
+/*
+Tested command:
+*/
+ALTER TRIGGER tg ACTIVE;
+SHOW TRIGGER tg;
+
+DROP DATABASE;
+

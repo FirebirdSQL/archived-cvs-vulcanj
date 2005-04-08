@@ -1,0 +1,9 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+ALTER DATABASE ADD FILE 'test.g00' STARTING 10000;
+ALTER DATABASE ADD FILE 'test.g00' STARTING 20000;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-Cannot add file with the same name as the database or added files
+DROP DATABASE;

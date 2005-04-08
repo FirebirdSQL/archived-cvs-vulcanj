@@ -1,0 +1,6 @@
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST(1.25001 AS CHAR(21)) FROM rdb$Database;
+
+DROP DATABASE;
+

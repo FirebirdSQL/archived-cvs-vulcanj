@@ -1,0 +1,12 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE GENERATOR test;
+COMMIT;
+SELECT GENERATOR_NAME, SYSTEM_FLAG FROM RDB$GENERATORS WHERE RDB$GENERATOR_NAME='TEST';
+Statement failed, SQLCODE = -206
+Dynamic SQL Error
+-SQL error code = -206
+-Column unknown
+-GENERATOR_NAME
+-At line 1, column 8.
+DROP DATABASE;

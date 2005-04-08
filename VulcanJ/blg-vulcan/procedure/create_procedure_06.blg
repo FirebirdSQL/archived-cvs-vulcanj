@@ -1,0 +1,25 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+SET TERM ^;
+CREATE PROCEDURE test RETURNS(id INT)AS
+BEGIN
+  ID=4;
+  SUSPEND;
+  ID=5;
+  SUSPEND;
+END ^
+SET TERM ;^
+SHOW PROCEDURE test;
+Procedure text:
+=============================================================================
+
+BEGIN
+  ID=4;
+  SUSPEND;
+  ID=5;
+  SUSPEND;
+END
+=============================================================================
+Parameters:
+ID                                OUTPUT INTEGER 
+DROP DATABASE;

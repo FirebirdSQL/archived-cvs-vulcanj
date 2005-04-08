@@ -1,0 +1,6 @@
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST(1.24999 AS NUMERIC(2,1)) FROM rdb$Database;
+
+DROP DATABASE;
+

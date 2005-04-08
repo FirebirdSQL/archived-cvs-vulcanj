@@ -1,0 +1,7 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test VARCHAR(32765)[40000];
+SHOW DOMAIN test;
+TEST                            ARRAY OF [1:40000] 
+                                VARCHAR(32765) Nullable
+DROP DATABASE;

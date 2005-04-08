@@ -1,0 +1,10 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET NONE;
+SELECT RDB$CHARACTER_SET_NAME FROM rdb$Database;
+
+RDB$CHARACTER_SET_NAME          
+=============================== 
+
+NONE                            
+
+DROP DATABASE;

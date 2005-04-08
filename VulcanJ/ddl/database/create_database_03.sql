@@ -1,0 +1,4 @@
+CREATE DATABASE 'test.fdb'  USER 'test' PASSWORD 'test';
+
+DROP DATABASE;
+

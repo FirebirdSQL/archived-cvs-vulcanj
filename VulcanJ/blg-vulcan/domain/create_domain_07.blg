@@ -1,0 +1,6 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test DATE;
+SHOW DOMAIN test;
+TEST                            DATE Nullable
+DROP DATABASE;

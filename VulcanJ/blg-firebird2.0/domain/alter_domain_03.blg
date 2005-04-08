@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test VARCHAR(63);
+ALTER DOMAIN test ADD CONSTRAINT CHECK (VALUE LIKE 'TE%');
+COMMIT;
+SELECT RDB$FIELD_NAME, RDB$VALIDATION_SOURCE FROM rdb$fields WHERE RDB$FIELD_NAME='TEST';
+
+RDB$FIELD_NAME                  RDB$VALIDATION_SOURCE 
+=============================== ===================== 
+
+TEST                                        2:11d 
+==============================================================================
+RDB$VALIDATION_SOURCE:  
+CHECK (VALUE LIKE 'TE%')
+==============================================================================
+
+DROP DATABASE;

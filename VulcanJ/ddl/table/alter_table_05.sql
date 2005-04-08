@@ -1,0 +1,8 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL);
+
+ALTER TABLE test ALTER id TO new_col_name;
+SHOW TABLE test;
+
+DROP DATABASE;
+

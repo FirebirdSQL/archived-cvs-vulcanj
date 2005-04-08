@@ -1,0 +1,14 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+CREATE VIEW test (id) AS SELECT id FROM tb WHERE id<10 WITH CHECK OPTION;
+INSERT INTO test VALUES(2);
+COMMIT;
+SELECT * FROM test;
+
+          ID 
+============ 
+
+           2 
+
+DROP DATABASE;

@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE SCHEMA 'test.fdb' ;
+
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 153
+Sweep interval = 20000
+Forced Writes are ON 
+Transaction - oldest = 1 
+Transaction - oldest active = 2 
+Transaction - oldest snapshot = 2 
+Transaction - Next = 5 
+ODS = 11.0
+Default Character set: NONE                           
+
+DROP DATABASE;
+

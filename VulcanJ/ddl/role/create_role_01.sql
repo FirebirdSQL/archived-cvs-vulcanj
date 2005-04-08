@@ -1,0 +1,11 @@
+CREATE DATABASE 'test.fdb' ;
+
+/*
+Tested command:
+*/
+CREATE ROLE test;
+COMMIT;
+SELECT * FROM RDB$ROLES;
+
+DROP DATABASE;
+

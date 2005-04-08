@@ -1,0 +1,14 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test(
+ c1 SMALLINT
+);
+CREATE TABLE test(
+ c1 SMALLINT,
+ c2 INTEGER
+);
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-Table TEST already exists
+DROP DATABASE;

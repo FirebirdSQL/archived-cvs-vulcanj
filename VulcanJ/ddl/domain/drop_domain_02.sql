@@ -1,0 +1,8 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test SMALLINT;
+CREATE TABLE tb( id test);
+
+DROP DOMAIN test;
+
+DROP DATABASE;
+

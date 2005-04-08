@@ -1,0 +1,23 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test 'message to show';
+SET TERM ^;
+CREATE PROCEDURE a AS
+BEGIN
+  EXCEPTION test;
+END ^
+SET TERM ;^
+DROP EXCEPTION test;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-cannot delete
+-EXCEPTION TEST
+-there are 1 dependencies
+SHOW EXCEPTION test;
+Exception Name                  Used by, Type
+=============================== =============================================
+TEST                            A, Stored procedure
+  message to show
+
+DROP DATABASE;

@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test VARCHAR(63);
+ALTER DOMAIN test SET DEFAULT 'test string';
+COMMIT;
+SELECT RDB$FIELD_NAME, RDB$DEFAULT_SOURCE FROM rdb$fields WHERE RDB$FIELD_NAME='TEST';
+
+RDB$FIELD_NAME                  RDB$DEFAULT_SOURCE 
+=============================== ================== 
+
+TEST                                        2:11d 
+==============================================================================
+RDB$DEFAULT_SOURCE:  
+DEFAULT 'test string'
+==============================================================================
+
+DROP DATABASE;

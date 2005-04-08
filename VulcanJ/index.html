@@ -1,0 +1,792 @@
+<HTML>
+<head>
+<style type="text/css">
+body {
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	background-color: #FFFFFF;
+	margin-left: 54px;
+	margin-right: 54px;
+	margin-top: 10px;
+	margin-bottom: 36px;
+	padding:0px; 
+}
+
+h1 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+h2.section 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-weight: bold;
+	border-top: thin inset;
+}
+	
+h2	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+h3	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+h4	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+
+h5	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: italic;
+	color: #000000;
+}
+
+li.h1 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16pt;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+li.h2section 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-weight: bold;
+	border-top: thin inset;
+}
+	
+li.h2	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+li.h3	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+li.h4	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	color: #000000;
+}
+
+
+li.h5	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-weight: bold; 
+	font-style: italic;
+	color: #000000;
+}
+
+
+b.component	{ 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	text-decoration: underline;
+	color: #3311AA;
+}
+
+b.jump 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+b.menu_option 	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+	color: #6250C8;
+}
+
+ul.component	{ 
+	font-family: Arial, Verdana, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-weight: normal; 
+	color: #000000;
+	list-style-type: square  ;
+	padding-left: 5%;
+
+}
+
+
+
+
+p	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 3%;
+}
+
+p.chapter_head {
+	font-family: Verdana,sans-serif; 
+	font-size: 9pt; 
+	font-style: italic; 
+	font-weight: normal; 
+	text-align: right;
+	border-bottom: thin inset;
+	color: #333333;
+	width: 100%;
+	padding-top: 0px;
+}
+
+hr.chapter_div {
+	border-bottom: thin inset;
+	width: 100%;
+}
+
+
+div	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 7%; 
+	padding-right: 5%;
+}
+
+div.note	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 8pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 10%; 
+	padding-right: 10%;
+	BORDER-TOP: thin solid #D3D3D3; 
+	BORDER-BOTTOM: thin solid #D3D3D3;
+	text-align: justify;
+	
+}
+
+div.toc	{
+	
+	padding-left: 5%; 
+	padding-right: 10%;
+}
+
+ul	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 5%;
+}
+
+.sub	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 1%;
+}
+
+ul.toc	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 11pt;
+	font-style: normal; 
+	font-weight: normal; 
+	text-decoration: none;
+	padding-left: 7%;
+	list-style-type: square  
+}
+
+ol	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 3%;
+}
+
+ol.directions	{
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 9pt;
+	font-style: normal; 
+	font-weight: normal; 
+	padding-left: 3%;
+}
+
+span.classname1	{
+	font-family:Arial;
+	color:sienna;
+}
+	
+
+A:hover.toc{
+	color: #6633CC; 
+	text-decoration:underline;
+}
+
+A:link.toc{
+	color: #000000; 
+	text-decoration: underline;
+	
+}
+
+A:active.toc{
+	color: #6633CC; 
+	text-decoration: none;
+}
+A:visited.toc{
+	color: #000000; 
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+a.chapter{
+	color: #000000; 
+	text-decoration: underline;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold;
+	font-variant: small-caps;
+	
+}
+
+A:link.chapter{
+	color: #000000; 
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold;
+	font-variant: small-caps;
+	
+}
+
+A:active.chapter{
+	color: #6633CC; 
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+A:hover.chapter{
+	color: #6633CC; 
+	text-decoration:underline;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold;
+	font-variant: small-caps;	
+}
+
+
+A:visited.chapter{
+	color: #000000; 
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+A:link.chapter_sub1	{
+	color: #000000; 
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11pt; 
+	font-weight: normal;
+	font-variant: small-caps;
+	
+}
+
+A:active.chapter_sub1	{
+	color: #6633CC; 
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11pt; 
+	font-weight: normal;
+	font-variant: small-caps;
+}
+
+A:hover.chapter_sub1	{
+	color: #6633CC; 
+	text-decoration:underline;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11pt; 
+	font-weight: normal;
+	font-variant: small-caps;	
+}
+
+
+A:visited.chapter_sub1	{
+	color: #000000; 
+	text-decoration: none;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11pt; 
+	font-weight: normal;
+	font-variant: small-caps;
+}
+
+b{
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-weight: bold;
+}
+
+table {
+	cellpadding: 0;
+	cellspacing: 0;
+}
+
+.chart {
+
+	border-left: thin inset;
+	border-right: thin inset;
+	border-top: thin inset;
+	border-bottom: thin inset;
+
+}
+
+
+td {
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 8pt; 
+	font-style: normal; 
+	font-weight: normal; 
+	color: #000000;
+}
+
+td.left		{
+	text-align: left;
+	font-size: 9pt; 
+	width: 33%;
+	padding-top: 10px;
+	padding-bottom: 10px;}
+
+td.center	{
+	text-align: center;
+	font-size: 9pt; 
+	width: 33%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+td.right	{
+	text-align: right;
+	font-size: 9pt; 
+	width: 33%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+table.navigation {
+	font-family: Arial, Helvetica, sans-serif; 	
+	font-style: italic; 
+	font-weight: normal; 
+	border-top: thin solid #6633CC;
+	border-bottom: thin solid #6633CC;
+	width: 100%;
+}
+
+
+
+th {
+	font-family: Arial, Helvetica, sans-serif;  
+	font-size: 8pt; 
+	font-style: normal; 
+	font-weight: normal; 
+	color: #333333;
+}
+
+.subhead {
+	font-weight: bold; 
+	font-size: 12pt
+}
+A:hover{
+	color: #6633CC; 
+	text-decoration:underline;
+}
+
+A:link{
+	color: #000000; 
+	text-decoration: underline;
+	
+}
+
+A:active{
+	color: #6633CC; 
+	text-decoration: none;
+}
+A:visited{
+	color: #000000; 
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+
+
+
+.note {
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 9pt;
+	font-style: none; 
+	font-weight: bold; color: "maroon";}
+
+.constant {
+	font-family: Arial Unicode MS, Arial, Helvetica, sans-serif; 
+	font-size: 10pt;
+	font-style: normal; 
+	letter-spacing: 1px;
+	font-weight: normal;
+}
+
+.underlined{
+	color: #6633CC; 
+	text-decoration: underline;
+}
+
+
+
+.note_text {
+	font-family:Verdana,Arial,Helvetica,sans-serif; 
+	font-size: 8pt;
+	font-style: normal; 
+	color: #000000;
+	width: 400px;
+	padding-left: 50px;
+	
+}	
+.get {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-style: normal; 
+	font-weight: normal;
+	color: "purple"
+}
+
+.readme_title {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14pt; 
+	
+	color: #491FB8;
+}
+
+.small_dynamic_bold_white {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 9pt; 
+	font-weight: 
+	bold; color: #FFFFFF;
+}
+
+.bold_white {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12pt; 
+	font-weight: bold; 
+	color: #FFFFFF;
+}
+
+
+
+
+.small_text{
+	font-size: 8pt; 
+	font-family: Verdana, Arial, Helvetica, sans-serif
+}
+
+
+
+
+.list {
+	font-size: 12pt; 
+	font-family: Arial, Verdana, Helvetica, sans-serif; 
+	text-decoration: none
+}
+
+.forms {
+	font-size: 12pt; 
+	font-family: Arial, Verdana, Helvetica, sans-serif
+}
+
+span.classname1
+	{mso-style-name:classname1;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:sienna;}
+</style>	
+</head>
+<BODY>
+<h1>Introduction</h1>
+<P>VulcanJ is a SQL test suite, originally designed for testing the "Vulcan" port
+Firebird, a popular open-source database. This suite contains two packages - 
+org.firebirdsql.isql and org.firebirdsql.nist.
+</P>
+
+<P>Tests in the isql package were were previously implemented under QMTest. These
+tests use Junit to fork an ISQL process and compare
+the output from the ISQL run to a benchmark log. They do not test the JDBC API at all.
+These tests can only be used with the Firebird ISQL utility.</p>
+
+<p>Tests in the nist package are written in Java and can be run against any database
+that provides a JDBC driver. These tests use JDBC metadata to determine if the database supports
+transactions, string manipulation, sort order of NULL's, and other database-specific items.
+</P>
+
+<P>Tests in the com.sas.nist package are derived from the NIST (National Institue
+ of Standards and Technology) test suite. 
+ See <a href="http://www.itl.nist.gov/div897/ctg/sql_form.htm">
+ http://www.itl.nist.gov/div897/ctg/sql_form.htm</a>.
+</p>
+
+<H1>Contents</h1>
+<a href="#setup">Setup</a><br>
+<a href="#trouble">Trouble Shooting</A><BR>
+<a href="#ant">Running the Tests Using Ant</A><BR>
+<a href="#know">You Should Know</a><BR>
+<a href="#debugging">Debugging</a><BR>
+<a href="#advanced">Advanced usage For ISQL Tests</a><BR>
+
+<a name="setup">
+<H1>Setting up VulcanJ</h1>
+</A>
+
+<ul>
+	<LI>First, download the VulcanJ package to your workstation and install,
+	for example c:\vulcanj.</li>
+	<LI>You will need ant in your path. VulcanJ has been tested with ant 1.5, and 1.6.2.
+	ANT_HOME should be set.</li>
+	<LI>You will need the Java SDK installed, with java in your path. VulcanJ has 
+	been tested with J2SDK 1.4.2. JAVA_HOME should be set.</li>
+	<LI>If Firebird is installed on your local machine, you can run the ISQL and NIST tests.
+	If you are connecting to a remote computer, you can only run the NIST tests. </li>
+	<LI>When using Firebird Embedded, you will need:</li>
+		<OL>
+		<li>Jaybird JNI (jaybird.dll for example) in java.library.path. On Windows this seems
+		to be the same as your path. On unix systems, this may be controlled by the environment
+		variable LD_LIBRARY_PATH on S64 and linux, LIBPATH on MVS and AIX, and maybe SHLIB_PATH
+		on HP-UX (see the <a href="http://www.sun-microsystems.org/Tutorials/rosetta/rosetta.html">
+		unix rosetta stone</a>). <B>Jaybird JNI 1.5.5 for several different hosts is provided
+		in ./jaybird</B>.</li>
+		<li>Jaybird JDBC driver (firebirdsql-full.jar) in ./lib</LI>
+		<li>Firebird library (libfirebird.dll) in the path</li>
+		</OL>
+	</li>
+	<LI>When using Firebird Server, you will need:</li>
+		<OL>
+		<LI>Jaybird JDBC driver (firebirdsql-full.jar) in ./lib</li>
+		<LI>Running Firebird server</li>
+		<LI>You need to add <B>-Dtest.gds_type=PURE_JAVA</B> to ant invocation</li>
+		</ol>
+	</li>
+	<LI>To test security and roles, you need the following userids setup, otherwise
+	you will see several test failures. 
+		<UL>
+			<LI>SYSDBA, masterkey</li>
+			<LI>USER1, masterkey</li>
+			<LI>USER2, masterkey</li>
+			<LI>USER3, masterkey</li>
+			<LI>TESTUSER, masterkey</li>
+		</uL>
+	</li>
+	<LI>Warning! VulcanJ is a test tool designed for a sanity check of Firebird SQL.
+	As part of its testing, it drops and creates the test database. VulcanJ is not
+	recommended for a production environment.
+	</li>
+</UL>
+
+<a name=trouble>
+<H1>Trouble Shooting</h1></name>
+</A>
+<UL>
+<LI>The error message "org.firebirdsql.gds.GDSException: I/O error for file
+ %.0s"CreateFile (create)" is thrown when the directory that you're using to 
+ save the database doesn't exist, or when the database file can't be created. 
+ The default directory is ./output/db.</li>
+<LI>Not all of these tests will pass Firebird 1.5 or Vulcan. Tests that don't pass are in the TestQueriesThatFailWithFB15 package.</li>
+<LI>By default, the tests are designed to run against Firebird EMBEDDED. To change to Firebird SERVER, you need to supply the <B>-Dtest.gds_TYPE=PUREJAVA</B> option. </li>
+<LI>Remember to supply the test options before the target, as in "ant <B>-Dtest.gds_type=PURE_JAVA all-tests-html</B>"</li>
+<LI>When running against Firebird SERVER, make sure the server is started. D'oh!</li>
+<LI>The reason why a test failed can be found in the .XML file corresponding to the test in the reports directory. Scroll to the end of the file to see output messages and exceptions.</li>
+</ul>
+
+<A name="ant"><H1>Running the tests using Ant</h1>
+</a>
+<P>When unzipped, this package includes the following directories:</p>
+<UL>
+<LI>./blg - Benchmark log files (correct output) generated by Firebird 1.5 on Windows XP. </li>
+<LI>./classes - Directory containing Java class files for Junit tests.
+<LI>./ddl - ISQL command files that can be executed by the "ISQL -e file" command. These files were
+originally run using the QM Test application.</li>
+<LI>./jaybird - Contains host-specific jaybird library for running these tests. If
+you are testing on a different host than Windows, copy the appropriate library to
+./lib and remove the existing "jaybird.dll", which is Windows-specific. </li>
+<LI>./lib - JAR's needed for the tests, including the FirebirdSQL-full.jar file for Firebird. 
+<LI>./output - Contains output from last Jayunit tests. Output is .output files ("ISQL -o file.output"),
+along with a .diff file for any output files that differed from the benchmark log.
+the tests that were previously run with QM Test. </li>
+<li>./reports - (is removed when you do an "ant clean") - contains the HTML Junit reports.</li>
+<LI>./resources - primarily style sheets for formatting the Junit reports. </li>
+<LI>./test - Java JUnit test cases. This includes all of the com.sas.nist test suite, along with the 
+generated code for com.sas.isql.</li>
+</ul>
+
+<P>The tests are invoked using "ant". There are serveral ant targets available:</P> 
+<UL>
+	<LI><B>ant</b>. By default ant will build the project, run the tests against Firebird Embedded,
+	and generate the HTML output report at ./reports/win/vul/index.html.</li>
+	<li><B>ant clean</B>. Removes old reports and class files.</li>
+	<LI><B>ant help</b>. Useful when you forget the name of the targets.</li>
+	<li><B>ant -Dtest.blg=blg-firebird2.0 isql-reports</B>. Run just the isql tests, but use
+	the Firebird 2.0 (not Vulcan) benchmark logs.</li>
+	<LI><B>ant -Dtest.gds_type=PURE_JAVA -Dtest.reports=\workspace\vulcanj\reports\win\fbd</b>. For use when running against a Firebird/Vulcan Server and explicitly providing the report directory.</li>
+	<LI><B>ant -Dtest=Cdr one-test</b>. This runs just one test, and does not produce HTML output. The system property test= is the name of the test class to run, minus the Test prefix.</li>
+	<LI><B>ant -Dtest.gds_type=EMBEDDED -Dlog4j.configuration=file:lib/log4j-console.lcf
+	 -DFBLog4j=true nist-report</B>. Run the nist tests, with Jaybird's logging turned on.
+	 Jaybird's logging will be written to the console.</li>
+	
+	<LI><B>ant -Ddialect=tssql -Dtest.db.url=jdbc:sastkts://localhost:2171?constring=DRIVER=SPDE;CATALOG=SPDE;
+	schema=(name=testdata;
+	primarypath='c:\\workspace\\VulcanJ\\output\\db\\') 
+	-Dtest.reports=\workspace\vulcanj\reports\win\tsspd</B>. Use this
+	combination of options to run the tests against SAS Table Server with a SPD data source, and change report directory appropriately.</LI>
+</ul>
+
+</P>
+
+
+<a name="know">
+<H1>You Should Know</h1>
+</A>
+<P>The version of the Jaybird JDBC driver that is included here is 1.5.5, but it has
+been modified in two respects to work with these tests:</P>
+<UL>
+	<li>It correctly supports the DatabaseMetaData.NullsAreSorted... methods for Vulcan,
+	Firebird 1.5, and Firebird 2.0. There was a change in null sort order between FB15
+	and FB2.0/Vulcan. </li>
+	<LI>The testware is used at my company for several hosts, and when running embedded,
+	the testware needed to pickup different names of the Firebird embedded library.
+	</li>
+</UL>
+<p>It is expected that these changes will eventually be made to the Jaybird driver,
+and at that time, a custom JDBC jar will no longer be necessary.
+</p>
+
+<a name="debugging">
+<H1>Debugging</h1>
+</a>
+<P>VulcanJ works great as a nightly build test program. Setup a cron job to build 
+Firebird, and then immediately run the tests to make sure nothing was broken during the
+day. That's how we use this test suite at my company. I have included some batch/shell
+scripts in the ./script directory for that purpose.</p>
+<P>VulcanJ also works well for debugging problems that pop-up in development. Since VulcanJ
+contains both ISQL and JDBC tests, the technique for debugging a problem is different
+depending on where the problem is found.
+</p>
+
+<P>If the problem is found in one of the ISQL tests, your best bet is to find the
+test with the problem in the ./ddl directory. Then, you can simply run this test
+with isql yourself, using the <B>isql -i file.sql -o out.sql -m -e</B> syntax.
+All of these tests must first create a new database and then drop the database, so
+they are completely self-contained.
+</p>
+
+<P>If the problem is found in the one of the JDBC tests, debugging can be more
+difficult. If you are primarily a C developer, your best bet is to read the junit
+HTML report, and find the line number of the Java source where the test is failing.
+This might be line 4154 of ./test/com/sas/nist/TestDml.java. Again, the Junit report
+will identify the file and line number of the problem. The next step is to insert
+a call to "System.exit(0)". Run the test again, and a .fdb file with your sample
+data already prepared will be located in ./output/db/sqltest.fdb (if you use the
+default settings). You can then run ISQL queries against the debugging database.</P>
+
+<P>The JDBC tests are heavier and use shared code to create sample data, and this
+is the reason for the additional debugging steps. And, if you try to get fancy
+and set the junit haltonfailure or haltonerror options, you will see that junit
+always destroys the database on teardown, so there is no ready way to preserve
+the database execept by modifying the test code as described above.</P>
+
+<A name="advanced">
+<H1>Advanced Usage For ISQL Tests</h1>
+</a>
+<P><B>Adding A New ISQL Test</B> - A new ISQL test can easily be added to this test package. 
+ISQL tests run ISQL in a shell session and pass if their output matches their 
+benchmark log (.blg) file. Here are the steps to add a new ISQL test:</p>
+<UL>
+	<LI>Create the ISQL test, and store it in a file with the .sql suffix. A new test should
+	begin by creating a fresh database, and end by dropping the database. Remember to put
+	a blank line at the end of the .sql file.
+	</li>
+	<LI>Verify the test will run clean against your baseline database, 
+	using isql -i test.sql -o test.blg.	Copy the new test to 
+	VulcanJ/ddl/testArea/test.sql. New test areas can also be created. 
+	</li>
+	<LI>Copy the benchmark log file to VulcanJ/blgArea/testArea/test.blg. Current values
+	for blgArea are "blg-firebird2.0" and "blg-vulcan".
+	</li>
+	<LI>Run the "createTestISQL" java program. This takes the new test case and adds a java wrapper, so that it
+	will be picked up by Junit. To execute this program, 
+type from the VulcanJ directory<BR><BR><B>java -cp classes createTestISQL</B><BR><BR>
+</li>
+	<LI>That should be it. To verify, re-run the tests, and verify that your
+	test was run and that it passed.
+	</li>
+</ul>
+
+
+<P><B>Rebenching</B> - It is possible to automatically regenerate all of the benchmark
+log (.blg) files. This is typically done to baseline a new version of Firebid. 
+This step only applies to the ISQL tests.</P>
+
+<ul>
+<li>Run all of the isql tests (for example "ant isql-report"), and verify all tests run
+clean. This creates the .ouput files in the VulcanJ/output directory that will be 
+copied over to the appropriate blg directory. 
+</li>
+<li>From the VulcanJ directory, type <BR><BR><B>java -cp classes CopyOutputToBlg blgArea</B><BR><BR>
+blgArea is the name of the benchmark log directory you wish to create/overwrite, for
+example "blg-vulcan." The .output files you previously generated will over-write the benchmark log files.</LI>
+</uL>
+
+<H1>Firebird Differences from NIST</h1>
+<P>This section describes those areas where Firebird is not compliant with NIST. 
+In these cases, we've opted to implement the test using Firebird SQL, where possible.
+If this is not possible, we've stubbed out the test case and/or included commented code
+so the test can be added at a later date.</p>
+
+<UL>
+<LI>No support for DROP TABLE CASCADE (throughout).</li>
+<LI>No support for DROP VIEW CASCADE (throughout). </li>
+<LI>No support for TIME WITH TIMEZONE type or TIMESTAMP WITH TIMEZONE type (yts_780).</li>
+<LI>Maximum Column Name length is 32 characters in FB - this test calls for maximum column identifier
+length of 128 characters (xts_731).</li>
+<LI>Tests specified Unicode character strings as N'test'. Not supported by Firebird (xts_734).</li>
+<LI>Couldn't get ESCAPE clause working properly (xts_702).</li>
+<LI>Natural joins are not supported.</li>
+<LI>Join syntax of USING not supproted. </li>
+</ul>
+
+</body>
+</html>
+

@@ -1,0 +1,6 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test BLOB SEGMENT SIZE 244;
+SHOW DOMAIN test;
+TEST                            BLOB segment 244, subtype BINARY Nullable
+DROP DATABASE;

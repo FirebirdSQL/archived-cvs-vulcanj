@@ -1,0 +1,6 @@
+CREATE SCHEMA 'test.fdb' ;
+
+SHOW DATABASE;
+
+DROP DATABASE;
+

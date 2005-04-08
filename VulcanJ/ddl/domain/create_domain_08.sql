@@ -1,0 +1,7 @@
+CREATE DATABASE 'test.fdb' ;
+
+CREATE DOMAIN test TIME;
+SHOW DOMAIN test;
+
+DROP DATABASE;
+

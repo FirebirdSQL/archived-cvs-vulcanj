@@ -1,0 +1,6 @@
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST('9:11:60' AS TIME) FROM rdb$Database;
+
+DROP DATABASE;
+

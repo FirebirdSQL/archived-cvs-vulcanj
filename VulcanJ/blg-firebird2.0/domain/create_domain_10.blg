@@ -1,0 +1,7 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test TIMESTAMP [1024];
+SHOW DOMAIN test;
+TEST                            ARRAY OF [1:1024] 
+                                TIMESTAMP Nullable
+DROP DATABASE;

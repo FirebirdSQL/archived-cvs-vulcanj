@@ -1,0 +1,6 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test BLOB SUB_TYPE TEXT;
+SHOW DOMAIN test;
+TEST                            BLOB segment 80, subtype TEXT Nullable
+DROP DATABASE;

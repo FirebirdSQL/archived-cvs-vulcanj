@@ -1,0 +1,7 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+/*
+Tested command:
+*/
+CREATE SHADOW 1 'test.shd';
+DROP DATABASE;

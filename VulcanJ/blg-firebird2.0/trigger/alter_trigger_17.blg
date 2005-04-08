@@ -1,0 +1,27 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg FOR test BEFORE DELETE POSITION 1
+AS
+BEGIN
+  old.text='tg';
+END ^
+Statement failed, SQLCODE = -151
+attempted update of read-only column
+
+ALTER TRIGGER tg AS
+BEGIN
+  new.text='altered trigger';
+END ^
+Statement failed, SQLCODE = -204
+Dynamic SQL Error
+-SQL error code = -204
+-Trigger unknown
+-TG
+
+SET TERM ;^
+
+DROP DATABASE;
+

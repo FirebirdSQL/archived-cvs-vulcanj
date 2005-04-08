@@ -1,0 +1,7 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE ROLE test;
+
+CREATE ROLE test;
+
+DROP DATABASE;
+

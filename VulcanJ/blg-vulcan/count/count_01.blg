@@ -1,0 +1,11 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER);
+SELECT COUNT(*) FROM test;
+
+       COUNT 
+============ 
+
+           0 
+
+DROP DATABASE;

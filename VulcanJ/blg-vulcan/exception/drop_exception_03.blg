@@ -1,0 +1,10 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+DROP EXCEPTION test;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-Exception not found
+SHOW EXCEPTION test;
+There is no exception TEST in this database
+DROP DATABASE;

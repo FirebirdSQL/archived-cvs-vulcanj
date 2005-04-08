@@ -1,0 +1,10 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+SELECT CAST('1.5001' AS INTEGER) FROM rdb$Database;
+
+        CAST 
+============ 
+
+           1 
+
+DROP DATABASE;

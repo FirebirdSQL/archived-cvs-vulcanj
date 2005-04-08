@@ -1,0 +1,9 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL,
+                   text VARCHAR(32));
+
+ALTER TABLE test ALTER text POSITION 1;
+SHOW TABLE test;
+
+DROP DATABASE;
+

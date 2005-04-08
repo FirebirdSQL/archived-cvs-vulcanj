@@ -1,0 +1,15 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+/*
+Tested command:
+*/
+CREATE ROLE test;
+COMMIT;
+SELECT * FROM RDB$ROLES;
+
+RDB$ROLE_NAME                   RDB$OWNER_NAME                    RDB$DESCRIPTION RDB$SYSTEM_FLAG 
+=============================== =============================== ================= =============== 
+
+TEST                            SYSDBA                                     <null>          <null> 
+
+DROP DATABASE;

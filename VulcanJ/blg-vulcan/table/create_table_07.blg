@@ -1,0 +1,11 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test(
+ c1 unk_domain
+);
+Statement failed, SQLCODE = -607
+
+SQL error code = -607
+-Invalid command
+-Specified domain or source column UNK_DOMAIN does not exist
+DROP DATABASE;

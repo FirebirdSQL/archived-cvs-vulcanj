@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+SET TERM ^;
+CREATE PROCEDURE test RETURNS(id INT)AS
+BEGIN
+  ID=4;
+  SUSPEND;
+END ^
+CREATE PROCEDURE test RETURNS(id INT)AS
+BEGIN
+  ID=5;
+  SUSPEND;
+END ^
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-Procedure TEST already exists
+SET TERM ;^
+DROP DATABASE;

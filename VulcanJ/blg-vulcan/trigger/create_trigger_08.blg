@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+SET TERM ^;
+CREATE TRIGGER test FOR tb AFTER DELETE POSITION 12 AS
+BEGIN
+  old.id=1;
+END^
+SET TERM ;^
+SHOW TRIGGER test;
+
+Triggers on Table TB:
+TEST, Sequence: 12, Type: AFTER DELETE, Active
+AS
+BEGIN
+  old.id=1;
+END
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DROP DATABASE;

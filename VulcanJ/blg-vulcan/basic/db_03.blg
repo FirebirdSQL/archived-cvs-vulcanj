@@ -1,0 +1,5 @@
+Use CONNECT or CREATE DATABASE to specify a database
+select * from RDB$COLLATIONS;
+Use CONNECT or CREATE DATABASE to specify a database
+commit;
+Use CONNECT or CREATE DATABASE to specify a database

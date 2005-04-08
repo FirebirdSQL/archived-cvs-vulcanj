@@ -1,0 +1,6 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test SMALLINT;
+SHOW DOMAIN test;
+TEST                            SMALLINT Nullable
+DROP DATABASE;

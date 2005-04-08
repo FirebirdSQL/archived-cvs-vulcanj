@@ -1,0 +1,13 @@
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE pk( a INTEGER NOT NULL,
+                CONSTRAINT pkindx PRIMARY KEY(a)
+              );
+
+CREATE TABLE fk( a INTEGER NOT NULL,
+                 CONSTRAINT fkindx FOREIGN KEY(a) REFERENCES pk(a)
+              );
+
+ALTER INDEX RDB$FOREIGN2 INACTIVE;
+
+DROP DATABASE;
+

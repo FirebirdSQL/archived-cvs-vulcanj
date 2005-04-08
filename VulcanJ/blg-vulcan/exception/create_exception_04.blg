@@ -1,0 +1,9 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test '01234567890123456789012345678901234567890123456789012345678901234567890123456789';
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-DEFINE EXCEPTION failed
+-arithmetic exception, numeric overflow, or string truncation
+DROP DATABASE;
