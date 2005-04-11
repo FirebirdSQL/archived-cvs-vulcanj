@@ -273,8 +273,7 @@ public class XMLJUnitResultFormatter
 
 		String strace = JUnitTestRunner.getFilteredTrace(t);
 		if (skipTrace) {
-			strace = new String(strace.replaceAll("\tat.*\\)"
-					+ SEPARATOR, ""));
+			strace = new String(strace.replaceAll("at .*\\.invoke", ""));
 			strace = new String(strace.replaceAll("junit\\.framework.*was",""));
 			// strace = new
 			// String(strace.replaceAll("junit.framework.AssertionFailedError.*<1>",""));

@@ -9,7 +9,7 @@ REM copy /y \\dntsrc\u\sassek\vulcan3\vulcan\com\w32nd\* c:\sasv9\vulcan\bin
 set VUL_PATH=c:\sasv9\vulcan\bin;c:\workspace\client-java\output\native
 set CURR_PATH=%PATH%
 
-pushd \workspace\vulcanj
+pushd \workspace\firebird\vulcanj
 
 @echo off
 rem Create the date and time elements.
