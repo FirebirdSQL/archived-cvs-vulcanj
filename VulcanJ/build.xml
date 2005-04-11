@@ -84,7 +84,7 @@
 		</condition>
 		<available property="isql.present" file="${isql}">
 			<filepath>
-				<pathelement path="${env.Path}" />
+				<pathelement path="${env.PATH}" />
 			</filepath>
 		</available>
 		<fail message="Could not find ISQL in path." unless="isql.present"/>

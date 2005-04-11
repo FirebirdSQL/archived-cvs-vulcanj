@@ -18,8 +18,8 @@ public class CheckEmbedded extends Task {
 	private FBManager fbManager;
 	public void execute() {
 		try {
-			System.loadLibrary("jaybird");
-			System.out.println("loaded jaybird library successfully");
+			// System.loadLibrary("jaybird");
+			// System.out.println("loaded jaybird library successfully");
 			fbManager = new FBManager(GDSType.getType("EMBEDDED"));
 			// fbManager.setServer(host);
 			//fbManager.setPort(Integer.parseInt(port));
