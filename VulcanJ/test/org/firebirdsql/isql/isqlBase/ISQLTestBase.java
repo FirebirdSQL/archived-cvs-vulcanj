@@ -171,6 +171,12 @@ public class ISQLTestBase extends TestCase {
 				+ ".diff");
 
 		File f = new File(outputFile);
+		// check to see if output file's directory is present
+		if (!(f.getParentFile().exists())){
+			f.getParentFile().mkdir();
+		}
+
+		// delete output file if it exists
 		f.delete();
 
 		// may not exist, but try to delete to be on safe side
