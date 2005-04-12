@@ -1,6 +1,8 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+SET NAMES ASCII;
 CREATE EXCEPTION test 'message to show';
+
 ALTER EXCEPTION test 'new message';
 COMMIT;
 SELECT RDB$EXCEPTION_NAME, RDB$EXCEPTION_NUMBER, cast(RDB$MESSAGE as varchar(15)) FROM RDB$EXCEPTIONS;
@@ -10,4 +12,6 @@ RDB$EXCEPTION_NAME              RDB$EXCEPTION_NUMBER CAST
 
 TEST                                               1 new message     
 
+
 DROP DATABASE;
+

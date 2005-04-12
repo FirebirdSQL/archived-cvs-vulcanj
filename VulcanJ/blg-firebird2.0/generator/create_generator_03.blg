@@ -1,10 +1,13 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE GENERATOR test;
+
 CREATE GENERATOR test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -DEFINE GENERATOR failed
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_11"
+After line 2 in file ddl/generator/create_generator_03.sql
+
 DROP DATABASE;
+

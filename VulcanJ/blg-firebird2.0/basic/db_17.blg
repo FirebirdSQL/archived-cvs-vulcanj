@@ -3,3 +3,4 @@ select * from RDB$LOG_FILES;
 Use CONNECT or CREATE DATABASE to specify a database
 commit;
 Use CONNECT or CREATE DATABASE to specify a database
+

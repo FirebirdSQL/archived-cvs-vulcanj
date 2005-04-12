@@ -1,4 +1,5 @@
 CREATE DATABASE 'test.fdb' ;
+SET NAMES ASCII;
 CREATE EXCEPTION test 'message to show';
 COMMIT;
 

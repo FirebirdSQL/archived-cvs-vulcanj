@@ -3,3 +3,4 @@ select * from RDB$SECURITY_CLASSES;
 Use CONNECT or CREATE DATABASE to specify a database
 commit;
 Use CONNECT or CREATE DATABASE to specify a database
+

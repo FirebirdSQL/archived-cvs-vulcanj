@@ -8,10 +8,12 @@ AS
 BEGIN
   new.text=new.text||'tg1 ';
 END ^
+
 ALTER TRIGGER tg AS
 BEGIN
   new.text='altered trigger';
 END ^
+
 SET TERM ;^
 INSERT INTO test VALUES(0,null);
 SELECT text FROM test;
@@ -21,4 +23,6 @@ TEXT
 
 altered trigger                  
 
+
 DROP DATABASE;
+

@@ -1,6 +1,8 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+SET NAMES ASCII;
 CREATE DOMAIN test VARCHAR(63) DEFAULT 'test string';
+
 ALTER DOMAIN test DROP DEFAULT;
 COMMIT;
 SELECT RDB$FIELD_NAME, RDB$DEFAULT_SOURCE FROM rdb$fields WHERE RDB$FIELD_NAME='TEST';
@@ -10,4 +12,6 @@ RDB$FIELD_NAME                  RDB$DEFAULT_SOURCE
 
 TEST                                        <null> 
 
+
 DROP DATABASE;
+

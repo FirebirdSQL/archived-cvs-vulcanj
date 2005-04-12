@@ -7,4 +7,5 @@ Statement failed, SQLCODE = -104
 SQL error code = -104
 -Token unknown
 -F
+After line 0 in file ddl/database/create_database_13.sql
 

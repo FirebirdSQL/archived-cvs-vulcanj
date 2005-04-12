@@ -8,11 +8,14 @@ BEGIN
   id=GEN_ID(test,1);
 END ^
 SET TERM ;^
+
 DROP GENERATOR test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -GENERATOR TEST
 -there are 1 dependencies
+After line 9 in file ddl/generator/drop_generator_02.sql
+
 DROP DATABASE;
+

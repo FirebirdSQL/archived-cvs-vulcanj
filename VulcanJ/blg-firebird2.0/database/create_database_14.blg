@@ -1,10 +1,11 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' user 'user1' password 'masterkey';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 0 in file ddl/database/create_database_14.sql
+SET NAMES ASCII;
 select rdb$owner_name from rdb$relations where rdb$relation_name = 'RDB$DATABASE';
-
-RDB$OWNER_NAME                  
-=============================== 
-
-USER1                           
+Use CONNECT or CREATE DATABASE to specify a database
 
 DROP DATABASE;
+

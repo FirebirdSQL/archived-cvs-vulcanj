@@ -1,8 +1,11 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 DROP GENERATOR test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Generator not found
+After line 1 in file ddl/generator/drop_generator_03.sql
+
 DROP DATABASE;
+

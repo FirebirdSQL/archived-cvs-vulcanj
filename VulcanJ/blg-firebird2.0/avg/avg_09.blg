@@ -2,6 +2,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE test( id DOUBLE PRECISION NOT NULL);
 INSERT INTO test VALUES(5.123456789);
+
 SELECT AVG(id) FROM test;
 
                     AVG 
@@ -9,4 +10,6 @@ SELECT AVG(id) FROM test;
 
       5.123456789000000 
 
+
 DROP DATABASE;
+

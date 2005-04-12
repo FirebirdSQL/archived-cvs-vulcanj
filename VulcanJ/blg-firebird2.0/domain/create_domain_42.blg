@@ -1,9 +1,13 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 CREATE DOMAIN INT AS VARCHAR(32);
 Statement failed, SQLCODE = -104
 Dynamic SQL Error
 -SQL error code = -104
 -Token unknown - line 1, char 15
 -INT
+At line 2 in file ddl/domain/create_domain_42.sql
+
 DROP DATABASE;
+

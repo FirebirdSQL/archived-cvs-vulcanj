@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 CREATE GENERATOR test;
 COMMIT;
 SELECT GENERATOR_NAME, SYSTEM_FLAG FROM RDB$GENERATORS WHERE RDB$GENERATOR_NAME='TEST';
@@ -9,4 +10,7 @@ Dynamic SQL Error
 -Column unknown
 -GENERATOR_NAME
 -At line 1, column 8.
+At line 5 in file ddl/generator/create_generator_01.sql
+
 DROP DATABASE;
+

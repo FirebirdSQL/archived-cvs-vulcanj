@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 CREATE PROCEDURE test AS
 BEGIN
@@ -15,4 +16,6 @@ BEGIN
 END
 =============================================================================
 Parameters:
+
 DROP DATABASE;
+

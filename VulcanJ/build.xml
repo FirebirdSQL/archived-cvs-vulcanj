@@ -85,6 +85,7 @@
 		<available property="isql.present" file="${isql}">
 			<filepath>
 				<pathelement path="${env.PATH}" />
+				<pathelement path="${env.Path}" />
 			</filepath>
 		</available>
 		<fail message="Could not find ISQL in path." unless="isql.present"/>
@@ -143,6 +144,7 @@
 			<sysproperty key="test.gds_type" value="${test.gds_type}" />
 			<sysproperty key="log4j.properties" file="${lib}/log4j.properties" />
 			<sysproperty key="FBLog4j" value="${FBLog4j}" />
+			<sysproperty key="test.blg" value="${test.blg}" />
 		</junit>
 		<junitreport todir="${test.reports}">
 			<fileset dir="${test.reports}">
@@ -244,6 +246,7 @@
 			<sysproperty key="test.gds_type" value="${test.gds_type}" />
 			<sysproperty key="log4j.properties" value="${lib}/log4j.properties" />
 			<sysproperty key="FBLog4j" value="true" />
+			<sysproperty key="test.blg" value="${test.blg}" />
 
 		</junit>
 	</target>

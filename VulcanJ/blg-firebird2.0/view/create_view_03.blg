@@ -1,12 +1,16 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE tb(id INT);
+
 CREATE VIEW test (id,num,text) AS SELECT id,5 FROM tb;
 Statement failed, SQLCODE = -607
 Dynamic SQL Error
 -SQL error code = -607
 -Invalid command
 -number of columns does not match select list
+After line 2 in file ddl/view/create_view_03.sql
 SHOW VIEW test;
 There is no view TEST in this database
+
 DROP DATABASE;
+

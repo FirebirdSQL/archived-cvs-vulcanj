@@ -10,6 +10,7 @@ BEGIN
 END ^
 Statement failed, SQLCODE = -151
 attempted update of read-only column
+After line 4 in file ddl/trigger/alter_trigger_17.sql
 
 ALTER TRIGGER tg AS
 BEGIN
@@ -20,6 +21,7 @@ Dynamic SQL Error
 -SQL error code = -204
 -Trigger unknown
 -TG
+After line 9 in file ddl/trigger/alter_trigger_17.sql
 
 SET TERM ;^
 

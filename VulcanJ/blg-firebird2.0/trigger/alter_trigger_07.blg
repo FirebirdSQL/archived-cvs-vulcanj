@@ -8,15 +8,18 @@ AS
 BEGIN
   new.id=1;
 END ^
+Statement failed, SQLCODE = -151
+attempted update of read-only column
+After line 4 in file ddl/trigger/alter_trigger_07.sql
 SET TERM ;^
-ALTER TRIGGER tg BEFORE UPDATE;
-SHOW TRIGGER tg;
 
-Triggers on Table TEST:
-TG, Sequence: 0, Type: BEFORE UPDATE, Active
-AS
-BEGIN
-  new.id=1;
-END
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ALTER TRIGGER tg BEFORE UPDATE;
+Statement failed, SQLCODE = -607
+unsuccessful metadata update
+-Trigger TG not found
+After line 10 in file ddl/trigger/alter_trigger_07.sql
+SHOW TRIGGER tg;
+There is no table or trigger TG in this database
+
 DROP DATABASE;
+

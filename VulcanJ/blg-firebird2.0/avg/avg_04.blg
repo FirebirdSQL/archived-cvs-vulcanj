@@ -4,6 +4,7 @@ CREATE TABLE test( id INTEGER NOT NULL);
 INSERT INTO test VALUES(5);
 INSERT INTO test VALUES(6);
 INSERT INTO test VALUES(6);
+
 SELECT AVG(id) FROM test;
 
                   AVG 
@@ -11,4 +12,6 @@ SELECT AVG(id) FROM test;
 
                     5 
 
+
 DROP DATABASE;
+

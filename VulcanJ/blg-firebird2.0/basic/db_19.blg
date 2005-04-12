@@ -3,3 +3,4 @@ select * from RDB$PROCEDURE_PARAMETERS;
 Use CONNECT or CREATE DATABASE to specify a database
 commit;
 Use CONNECT or CREATE DATABASE to specify a database
+

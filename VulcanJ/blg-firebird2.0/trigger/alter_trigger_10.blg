@@ -9,14 +9,20 @@ BEGIN
   new.id=1;
 END ^
 SET TERM ;^
+
 ALTER TRIGGER tg AFTER INSERT;
+Statement failed, SQLCODE = -151
+attempted update of read-only column
+After line 10 in file ddl/trigger/alter_trigger_10.sql
 SHOW TRIGGER tg;
 
 Triggers on Table TEST:
-TG, Sequence: 0, Type: AFTER INSERT, Active
+TG, Sequence: 0, Type: BEFORE UPDATE, Active
 AS
 BEGIN
   new.id=1;
 END
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 DROP DATABASE;
+

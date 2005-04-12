@@ -3,6 +3,7 @@ CREATE DATABASE 'test.fdb' LENGTH 200
   FILE 'test.g00' LENGTH 200
   FILE 'test.g01' LENGTH 200
   FILE 'test.g02' LENGTH 200;
+
 SELECT RDB$FILE_SEQUENCE,RDB$FILE_START,RDB$FILE_LENGTH 
   FROM RDB$FILES;
 
@@ -13,4 +14,6 @@ RDB$FILE_SEQUENCE RDB$FILE_START RDB$FILE_LENGTH
                 2            401             200 
                 3            601             200 
 
+
 DROP DATABASE;
+

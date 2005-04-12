@@ -1,10 +1,13 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE test( id INTEGER);
+
 ALTER TABLE test ADD text varchar(32) DEFAULT CURRENT_ROLE NOT NULL CONSTRAINT pk PRIMARY KEY;
 SHOW TABLE test;
 ID                              INTEGER Nullable 
 TEXT                            VARCHAR(32) Not Null DEFAULT CURRENT_ROLE
 CONSTRAINT PK:
   Primary key (TEXT)
+
 DROP DATABASE;
+

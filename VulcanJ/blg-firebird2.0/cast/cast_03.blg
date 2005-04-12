@@ -1,10 +1,13 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SELECT CAST(CAST(1.25001 AS INT) AS DATE) FROM rdb$Database;
 
        CAST 
 =========== 
 Statement failed, SQLCODE = -413
-
 conversion error from string "1"
+After line 1 in file ddl/cast/cast_03.sql
+
 DROP DATABASE;
+

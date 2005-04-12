@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 CREATE PROCEDURE test RETURNS( 
   p1 SMALLINT, p2 INTEGER, p3 FLOAT, p4 DOUBLE PRECISION, p5 DECIMAL(9,3), p6 NUMERIC(10,4),
@@ -52,4 +53,7 @@ P9                                OUTPUT TIMESTAMP
 P10                               OUTPUT CHAR(40) 
 P11                               OUTPUT VARCHAR(60) 
 P12                               OUTPUT CHAR(70)  CHARACTER SET ISO8859_1
+
+
 DROP DATABASE;
+

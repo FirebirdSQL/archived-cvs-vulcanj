@@ -1,19 +1,18 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE tb(id INT);
+
 SET TERM ^;
 CREATE TRIGGER test FOR tb AFTER INSERT AS
 BEGIN
   new.id=1;
 END^
+Statement failed, SQLCODE = -151
+attempted update of read-only column
+After line 4 in file ddl/trigger/create_trigger_02.sql
 SET TERM ;^
 SHOW TRIGGER test;
+There is no table or trigger TEST in this database
 
-Triggers on Table TB:
-TEST, Sequence: 0, Type: AFTER INSERT, Active
-AS
-BEGIN
-  new.id=1;
-END
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 DROP DATABASE;
+

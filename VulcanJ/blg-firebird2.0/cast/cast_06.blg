@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SELECT CAST('1.25001' AS INTEGER) FROM rdb$Database;
 
         CAST 
@@ -7,4 +8,6 @@ SELECT CAST('1.25001' AS INTEGER) FROM rdb$Database;
 
            1 
 
+
 DROP DATABASE;
+

@@ -1,9 +1,12 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE ROLE test;
+
 CREATE ROLE test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -SQL role TEST already exists
+After line 2 in file ddl/role/create_role_02.sql
+
 DROP DATABASE;
+

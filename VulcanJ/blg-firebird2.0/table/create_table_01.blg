@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 /*
 Tested command:
 */
@@ -52,4 +53,6 @@ C20                             BLOB segment 80, subtype BINARY Nullable
 C21                             BLOB segment 80, subtype TEXT Nullable 
 C22                             BLOB segment 512, subtype BINARY Nullable 
 C23                             BLOB segment 1024, subtype TEXT Nullable 
+
 DROP DATABASE;
+

@@ -7,10 +7,12 @@ CREATE PROCEDURE dummy (id INT) AS
 BEGIN
   id=id;
 END ^
+
 CREATE PROCEDURE dummy2 (id INT) RETURNS(newID INT) AS
 BEGIN
   newid=id;
 END ^
+
 CREATE PROCEDURE test
 AS
 DECLARE VARIABLE p1 SMALLINT;
@@ -86,4 +88,6 @@ BEGIN
 END
 =============================================================================
 Parameters:
+
 DROP DATABASE;
+

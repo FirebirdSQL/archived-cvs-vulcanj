@@ -9,6 +9,7 @@ BEGIN
 END^
 Statement failed, SQLCODE = -151
 attempted update of read-only column
+After line 4 in file ddl/trigger/create_trigger_07.sql
 SET TERM ;^
 SHOW TRIGGER test;
 There is no table or trigger TEST in this database

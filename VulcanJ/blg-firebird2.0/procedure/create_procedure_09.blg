@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 CREATE PROCEDURE test RETURNS(id INT)AS
 BEGIN
@@ -10,6 +11,9 @@ Dynamic SQL Error
 -SQL error code = -104
 -Token unknown - line 3, char 3
 -COMMIT
+At line 6 in file ddl/procedure/create_procedure_09.sql
 SET TERM ;^
 
+
 DROP DATABASE;
+

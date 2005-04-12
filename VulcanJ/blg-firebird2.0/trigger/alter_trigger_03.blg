@@ -10,12 +10,14 @@ BEGIN
 END ^
 Statement failed, SQLCODE = -151
 attempted update of read-only column
+After line 4 in file ddl/trigger/alter_trigger_03.sql
 SET TERM ;^
 
 ALTER TRIGGER tg BEFORE DELETE;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Trigger TG not found
+After line 10 in file ddl/trigger/alter_trigger_03.sql
 SHOW TRIGGER tg;
 There is no table or trigger TG in this database
 

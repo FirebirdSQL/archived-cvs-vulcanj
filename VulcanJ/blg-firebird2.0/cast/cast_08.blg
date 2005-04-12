@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SELECT CAST('28.1.2001' AS DATE) FROM rdb$Database;
 
        CAST 
@@ -7,4 +8,6 @@ SELECT CAST('28.1.2001' AS DATE) FROM rdb$Database;
 
 2001-01-28  
 
+
 DROP DATABASE;
+

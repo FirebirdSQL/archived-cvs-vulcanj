@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 CREATE TABLE test(
  c1 unk_domain
 );
@@ -8,4 +9,7 @@ Dynamic SQL Error
 -SQL error code = -607
 -Invalid command
 -Specified domain or source column UNK_DOMAIN does not exist
+After line 1 in file ddl/table/create_table_07.sql
+
 DROP DATABASE;
+
