@@ -27,7 +27,7 @@ public class NistTestBase extends TestCase {
 	protected static final String DB_PATH = System.getProperty("test.db.path",
 			"output/db");
 	protected static final String DB_GDS_TYPE = System.getProperty(
-			"test.db.gds_type", "EMBEDDED");
+			"test.gds_type", "EMBEDDED");
 	protected static final String DB_NAME = System.getProperty("test.db.name",
 			"sqltest.fdb");
 	protected static final String DB_USER = System.getProperty("test.db.user",

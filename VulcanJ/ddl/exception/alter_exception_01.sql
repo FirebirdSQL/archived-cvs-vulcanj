@@ -1,5 +1,5 @@
-CREATE DATABASE 'test.fdb' ;
 SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' ;
 CREATE EXCEPTION test 'message to show';
 
 ALTER EXCEPTION test 'new message';

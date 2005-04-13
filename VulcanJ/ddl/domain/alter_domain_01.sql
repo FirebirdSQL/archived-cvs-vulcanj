@@ -1,5 +1,5 @@
-CREATE DATABASE 'test.fdb' ;
 SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN test VARCHAR(63);
 
 ALTER DOMAIN test SET DEFAULT 'test string';

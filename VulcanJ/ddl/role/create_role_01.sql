@@ -1,5 +1,5 @@
-CREATE DATABASE 'test.fdb' ;
 SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' ;
 
 /*
 Tested command:

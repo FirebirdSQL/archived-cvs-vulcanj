@@ -31,6 +31,7 @@ REM
 REM Vulcan Tasks
 REM
 set path=%VUL_PATH%;%CURR_PATH%
+del test.fdb
 call ant -Dtest.reports=\\dntsrc\bioliv\public\vulcanj-reports-%yy%-%mm%-%dd%\win\vul
 
 REM
