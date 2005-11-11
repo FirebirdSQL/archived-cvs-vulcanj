@@ -1,4 +1,3 @@
-/* $Id$ */
 package org.firebirdsql.isql;
 import java.sql.SQLException;
 import java.io.IOException;

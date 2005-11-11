@@ -1,7 +1,7 @@
 /* $Id$ */
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
-import org.firebirdsql.gds.GDSType;
+import org.firebirdsql.gds.impl.GDSType;
 import org.firebirdsql.management.FBManager;
 
 /*

@@ -2,3 +2,8 @@ classes
 output
 reports
 junit*properties
+*.ftp
+*.xls
+time1.sh
+template.sql
+t.cmd

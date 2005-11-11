@@ -5,11 +5,14 @@
 	<property name="lib" value="./lib" />
 	<property name="classes" value="./classes" />
 	<property name="test.reports" value="./reports" />
+	<property name="test.output" value="./output" />
+	<property name="test.diff" value="./diff" />
+	<property name="test.reports" value ="./reports" />
 	<property name="test.blg" value="./blg-vulcan" />
 	<property name="javac.debug" value="on" />
 	<property name="javac.debuglevel" value="lines,vars,source" />
 	<property name="FBLog4J" value="false" />
-	<property name="test.gds_type" value="EMBEDDED" />
+	<property name="test.gds_type" value="VULCAN_EMBEDDED" />
 	<!-- test.gds_type is used for firebird/vulcan. For Embedded testing, set to -->
 	<!-- EMBEDDED. When running using a server kit, use PURE_JAVA -->
 	<property name="test.db.user" value="sysdba" />
@@ -59,11 +62,12 @@
 		<echo>   ant isql-report</echo>
 		<echo>Here are some options:</echo>
 		<echo>   -Dtest.reports=reportdir</echo>
-
 	</target>
 
 	<target name="clean" description="Cleanup by removing work directories.">
 		<delete dir="${classes}" />
+		<delete dir="${test.diff}" />
+		<delete dir="${test.output}" />
 		<delete dir="${test.reports}" />
 	</target>
 
@@ -73,6 +77,22 @@
 			<equals arg1="${test.gds_type}" arg2="EMBEDDED" casesensitive="false" trim="true" />
 		</condition>
 		<echo message="test.blg is ${test.blg}" />
+      <delete quiet="true">
+         <fileset dir="${test.db.dir}" includes="**/*"/>
+      </delete>
+      <delete quiet="true">
+         <fileset dir="${test.diff}" includes="**/*"/>
+      </delete>
+      <delete quiet="true">
+         <fileset dir="${test.output}" includes="**/*"/>
+      </delete>
+      <delete quiet="true">
+         <fileset dir="${test.reports}" includes="**/*"/>
+      </delete>
+      <mkdir dir="${test.diff}"/>
+      <mkdir dir="${test.output}"/>
+      <mkdir dir="${test.db.dir}"/>
+      <mkdir dir="${test.reports}"/>
 	</target>
 
 	<target name="check-for-isql" depends="init">
@@ -94,7 +114,7 @@
 		<fail message="Could not find benchmark log directory ${test.blg}" unless="blg.present"/>
 	</target>
 
-	<target name="compile" depends="init" description="Compile source *.java files">
+	<target name="compile" depends="init, create-wrapper" description="Compile source *.java files">
 		<mkdir dir="${classes}" />
 		<javac classpathref="compile.classpath" srcdir="${src}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" destdir="${classes}" source="1.4">
 		</javac>
@@ -113,12 +133,24 @@
 		<check-embedded />
 	</target>
 
-	<target name="all-tests-html" depends="compile, check-for-isql, check-embedded" description="Run all ISQL and JDBC tests.">
+	<target name="create-wrapper">
+		<!--
+		-->
+		<mkdir dir="${classes}" />
+		<javac classpathref="compile.classpath" sourcepath="" srcdir="${src}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" destdir="${classes}" source="1.4">
+         <include name="**/createTestISQL.java"/>
+		</javac>
+		
+		<taskdef name="create-wrapper" classname="createTestISQL">
+			<classpath refid="test.classpath" />
+		</taskdef>
+		<create-wrapper />
+	</target>
+
+	<target name="all-tests-html" depends="compile, check-for-isql, check-embedded, create-wrapper" description="Run all ISQL and JDBC tests.">
 		<!-- had to remove this line because of slow file server response on MVS.
 		<delete dir="${test.reports}" />
 		-->
-		<mkdir dir="${test.reports}" />
-		<mkdir dir="${test.db.dir}" />
 		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
 			<batchtest fork="yes" todir="${test.reports}">
 				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
@@ -127,6 +159,8 @@
 					<include name="**/Test*.class" />
 					<exclude name="org/firebirdsql/nist/TestQueriesThatFailWithFB15.class" />
 					<exclude name="org/firebirdsql/nist/TestMultiThreadedQueries$$*.class" />
+					<!-- wbo remove isql/testNist here, since this target exercises those tests through JDBC -->
+					<exclude name="org/firebirdsql/isql/TestNist.class" />
 				</fileset>
 			</batchtest>
 			<formatter type="xml" />
@@ -158,7 +192,6 @@
 	<target name="nist-report" depends="compile, check-embedded" description="Run all JDBC tests">
 		<delete dir="${test.reports}" />
 		<mkdir dir="${test.reports}" />
-		<mkdir dir="${test.db.dir}" />
 		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
 			<batchtest fork="yes" todir="${test.reports}">
 				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
@@ -192,10 +225,9 @@
 		</junitreport>
 	</target>
 
-	<target name="isql-report" depends="compile, check-for-isql" description="Run all ISQL tests. ISQL must be in your path.">
+	<target name="isql-report" depends="compile, check-for-isql, create-wrapper" description="Run all ISQL tests. ISQL must be in your path.">
 		<delete dir="${test.reports}" />
 		<mkdir dir="${test.reports}" />
-		<mkdir dir="${test.db.dir}" />
 		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
 			<batchtest fork="yes" todir="${test.reports}">
 				<formatter classname="org.firebirdsql.isql.isqlBase.XMLJUnitResultFormatter" extension=".xml" usefile="true" />
@@ -223,7 +255,6 @@
 	<target name="one-test" depends="compile" description="Run a single Junit test.">
 		<delete dir="${test.reports}" />
 		<mkdir dir="${test.reports}" />
-		<mkdir dir="${test.db.dir}" />
 		<junit fork="yes" jvm="${junit.jvm}" printsummary="yes" showoutput="yes" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" timeout="${junit.timeout}">
 			<batchtest fork="yes" todir="${test.reports}">
 				<fileset dir="${classes}">

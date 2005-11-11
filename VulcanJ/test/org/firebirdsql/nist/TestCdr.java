@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class TestCdr extends NistTestBase {
 	private Connection conn;
 	private Statement stmt;
@@ -2448,7 +2449,10 @@ public class TestCdr extends NistTestBase {
 		// PASS:0439 If 17 rows are selected?
 		rs = stmt.executeQuery("SELECT EXP_NAME, DESCR, BTH_DATE "
 				+ "FROM EXPERIENCE " + "ORDER BY EXP_NAME, BTH_DATE; ");
+		
+		
 		java.sql.DatabaseMetaData dbmd = conn.getMetaData();
+		System.out.println ("low"+dbmd.nullsAreSortedLow()); 
 		if (dbmd.nullsAreSortedAtEnd()) {
 			rs.next();
 			assertEquals("David", rs.getString(1).trim());

@@ -1213,7 +1213,6 @@ public class TestDml2 extends NistTestBase {
 		while (rs.next()) {
 			if (rs.getString(1).toUpperCase().matches(".*INTERVAL.*"))
 				supportsIntervalType = true;
-
 		}
 
 		boolean supportsExtract = false;

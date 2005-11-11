@@ -671,11 +671,12 @@ public class TestQueriesThatUseGrantRevoke extends NistTestBase {
 						.executeUpdate("GRANT SELECT,INSERT, DELETE ON STAFF4 TO User3;");
 				fail();
 			} catch (SQLException sqle) {
-				if (DB_DIALECT.equalsIgnoreCase("firebirdsql"))
-					assertEquals(
-							"GDS Exception. 335544351. unsuccessful metadata update\n"
-									+ "no grant option for privilege S on table/view STAFF4",
-							sqle.getMessage());
+				if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
+					String FBError = "GDS Exception. 335544351. unsuccessful metadata update\n"
+							+ "no grant option for privilege S on table/view STAFF4";
+					assertEquals(FBError, sqle.getMessage().substring(0,
+							FBError.length()));
+				}
 			}
 			stmtUser2.close();
 			connUser2.close();
@@ -1950,8 +1951,7 @@ public class TestQueriesThatUseGrantRevoke extends NistTestBase {
 				fail();
 			} catch (SQLException sqle) {
 				if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-					assertEquals(
-							"Shouldn't be able to update this view",
+					assertEquals("Shouldn't be able to update this view",
 							335544352, sqle.getErrorCode());
 				}
 			}
@@ -2840,14 +2840,14 @@ public class TestQueriesThatUseGrantRevoke extends NistTestBase {
 						.executeUpdate("GRANT SELECT, UPDATE ON VSTAFF3 TO user3;");
 				fail();
 			} catch (SQLException sqle) {
-				if (DB_DIALECT.equalsIgnoreCase("firebirdsql"))
-					assertEquals(
-							"GDS Exception. 335544351. unsuccessful metadata update\n"
-									+ "no S privilege with grant option on table/view VSTAFF3",
-							sqle.getMessage());
+				if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
+					String FBError = "GDS Exception. 335544351. unsuccessful metadata update\n"
+							+ "no S privilege with grant option on table/view VSTAFF3";
 
+					assertEquals(FBError, sqle.getMessage().substring(0,
+							FBError.length()));
+				}
 			}
-
 		} finally {
 			try {
 				connUser1.close();
@@ -2905,11 +2905,12 @@ public class TestQueriesThatUseGrantRevoke extends NistTestBase {
 
 				fail();
 			} catch (SQLException sqle) {
-				if (DB_DIALECT.equalsIgnoreCase("firebirdsql"))
-					assertEquals(
-							"GDS Exception. 335544351. unsuccessful metadata update\n"
-									+ "no S privilege with grant option on table/view STAFF3",
-							sqle.getMessage());
+				if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
+					String FBError = "GDS Exception. 335544351. unsuccessful metadata update\n"
+							+ "no S privilege with grant option on table/view STAFF3";
+					assertEquals(FBError, sqle.getMessage().substring(0,
+							FBError.length()));
+				}
 			}
 			// user2 REALLY shouldn't be able to do an update
 			try {

@@ -21,9 +21,11 @@ package org.firebirdsql.isql.isqlBase;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -237,75 +239,78 @@ public class XMLJUnitResultFormatter
 	private void formatError(String type, Test test, Throwable t) {
 		boolean skipTrace = false;
 		final String SEPARATOR = System.getProperty("line.separator");
-		if (test != null) {
-			endTest(test);
-			failedTests.put(test, test);
-		}
-
-		Element nested = doc.createElement(type);
-		Element currentTest = null;
-		if (test != null) {
-			currentTest = (Element) testElements.get(test);
-		} else {
-			currentTest = rootElement;
-		}
-
-		currentTest.appendChild(nested);
-
-		String message = t.getMessage();
-		String diffFileName = null;
-		if (message != null && message.length() > 0) {
-			// hack the JUnit message for special ISQL cases!
-			if (message.startsWith("ISQL output does not match")) {
-				skipTrace = true;
-				diffFileName = message.substring((message.indexOf(":") + 2),
-						(message.indexOf(" expected")));
-				// message = new String("ISQL output does not match benchmark
-				// run.");
-			} else if (message.startsWith("ISQL exited abnormally")) {
-				skipTrace = true;
-				// message = new String(message.substring(0,
-				// message.indexOf("expected:")));
+		PrintWriter pw=null;
+		try {
+			pw = new PrintWriter(new FileWriter("./vj.txt", true));
+			if (test != null) {
+				endTest(test);
+				failedTests.put(test, test);
 			}
-			nested.setAttribute(ATTR_MESSAGE, message);
-		}
-		nested.setAttribute(ATTR_TYPE, t.getClass().getName());
 
-		String strace = JUnitTestRunner.getFilteredTrace(t);
-		if (skipTrace) {
-			strace = new String(strace.replaceAll("at .*\\.invoke", ""));
-			strace = new String(strace.replaceAll("junit\\.framework.*was",""));
-			// strace = new
-			// String(strace.replaceAll("junit.framework.AssertionFailedError.*<1>",""));
-			// if we have a special diff file to display, show it now.
-			if (diffFileName != null)
-				try {
-					BufferedReader is = new BufferedReader(new FileReader(
-							diffFileName));
-					String s = null;
-					while ((s = is.readLine()) != null) {
-						strace = strace + s;
-						strace = strace + "\n";
-					}
-					is.close();
-				} catch (IOException ioe) {
-					strace = "JUnit formatter error - could not open isql ouptut file \""
-							+ diffFileName
-							+ "\". Perhaps no ouptut file was created?";
+			Element nested = doc.createElement(type);
+			Element currentTest = null;
+			if (test != null) {
+				currentTest = (Element) testElements.get(test);
+			} else {
+				currentTest = rootElement;
+			}
+
+			currentTest.appendChild(nested);
+
+			String message = t.getMessage();
+			pw.println(message);
+			String diffFileName = null;
+			if (message != null && message.length() > 0) {
+				// hack the JUnit message for special ISQL cases!
+				if (message.startsWith("ISQL output does not match")) {
+					skipTrace = true;
+					diffFileName = message.substring(
+							(message.indexOf(":") + 2), message.length());
+				} else if (message.startsWith("ISQL exited abnormally")) {
+					skipTrace = true;
+					// message = new String(message.substring(0,
+					// message.indexOf("expected:")));
 				}
-			//			strace.replaceAll("\tat.*\\)", "");
-			skipTrace = false;
-		} // remove traceback
+				nested.setAttribute(ATTR_MESSAGE, message);
+			}
+			nested.setAttribute(ATTR_TYPE, t.getClass().getName());
 
-		Text trace = doc.createTextNode(strace);
-		//		try {
-		//			PrintWriter pw = new PrintWriter(
-		//					new FileWriter("/foo.txt", true));
-		//			pw.println("trace:" + trace);
-		//			pw.close();
-		//		} catch (IOException ioe) {
-		//		}
-		nested.appendChild(trace);
+			String strace = JUnitTestRunner.getFilteredTrace(t);
+			
+			if (skipTrace) {
+				pw.println (strace);
+				strace = new String(strace.replaceAll("at .*\\.invoke", ""));
+				strace = new String(strace.replaceAll("junit\\.framework.*was",
+						""));
+				// strace = new
+				// String(strace.replaceAll("junit.framework.AssertionFailedError.*<1>",""));
+				// if we have a special diff file to display, show it now.
+				if (diffFileName != null)
+					try {
+						BufferedReader is = new BufferedReader(new FileReader(
+								diffFileName));
+						String s = null;
+						while ((s = is.readLine()) != null) {
+							strace = strace + s;
+							strace = strace + "\n";
+						}
+						is.close();
+					} catch (IOException ioe) {
+						strace = "JUnit formatter error - could not open isql ouptut file \""
+								+ diffFileName
+								+ "\". Perhaps no ouptut file was created?";
+					}
+				//			strace.replaceAll("\tat.*\\)", "");
+				skipTrace = false;
+			} // remove traceback
+
+			Text trace = doc.createTextNode(strace);
+			nested.appendChild(trace);
+		} catch (IOException ioe) {
+			System.out.println("couldnt open output file!");
+		} finally {
+			pw.close();
+		}
 	}
 	private void formatOutput(String type, String output) {
 		Element nested = doc.createElement(type);

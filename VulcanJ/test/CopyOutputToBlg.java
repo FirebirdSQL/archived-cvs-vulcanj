@@ -131,9 +131,6 @@ public class CopyOutputToBlg {
 				// System.out.println("huh? : " + f.getName());
 			}
 		}
-
-		String fn;
-
 	}
 
 	public static void printHelp() {

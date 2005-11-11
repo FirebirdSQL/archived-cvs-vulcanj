@@ -19,6 +19,8 @@ import java.io.PrintWriter;
 
 public class createTestISQL {
 
+	static boolean VERBOSE = false;
+
 	// code to append to the generated .java file
 	static final String[] testISQLEndsWith = {"}"};
 
@@ -62,7 +64,8 @@ public class createTestISQL {
 		pw.println("public " + "Test" + toTitleCase(f) + " (String name) {");
 		pw.println("super(name);");
 		pw.println("}");
-		pw.println("public static String blgDir = System.getProperty(\"test.blg\", \"blg-vulcan\");");
+		pw
+				.println("public static String blgDir = System.getProperty(\"test.blg\", \"blg-vulcan\");");
 	}
 
 	private static void doFile(PrintWriter pw, String f, String p,
@@ -72,11 +75,11 @@ public class createTestISQL {
 				.println("public void "
 						+ testClass
 						+ "() throws SQLException, InterruptedException, IOException {");
-//		pw.println("processISQLInput (\"" + p + fn + ".sql\", \""
-//				+ p.replaceFirst(".*ddl", "blg") + fn + ".blg\", \""
-//				+ p.replaceFirst(".*ddl", "output") + fn + ".output\");");
+		//		pw.println("processISQLInput (\"" + p + fn + ".sql\", \""
+		//				+ p.replaceFirst(".*ddl", "blg") + fn + ".blg\", \""
+		//				+ p.replaceFirst(".*ddl", "output") + fn + ".output\");");
 		pw.println("processISQLInput (\"" + p + fn + ".sql\", "
-				+ p.replaceFirst(".*ddl", "blgDir+\"") +  fn + ".blg\", \""
+				+ p.replaceFirst(".*ddl", "blgDir+\"") + fn + ".blg\", \""
 				+ p.replaceFirst(".*ddl", "output") + fn + ".output\");");
 		pw.println("}");
 
@@ -89,8 +92,12 @@ public class createTestISQL {
 		for (int i = 0; i < dir.length; i++) {
 			File f = new File(myDir + java.io.File.separator + dir[i]);
 			String fileName = f.getName();
-			System.out.println("fileName: " + fileName);
-			if (!fileName.equals("CVS")) {
+			if (VERBOSE)
+				System.out.println("fileName: " + fileName);
+			if ((!fileName.equals("CVS"))
+					&& (!fileName.toLowerCase().endsWith(".txt"))
+					&& (!fileName.equalsIgnoreCase("input"))
+					&& (!fileName.equalsIgnoreCase("draft"))) {
 				if (f.isFile()
 						&& fileName.substring(fileName.lastIndexOf("."))
 								.equalsIgnoreCase(".sql")) {
@@ -108,7 +115,7 @@ public class createTestISQL {
 						//							parent.length());
 						String javaFile = outputDir + "Test"
 								+ toTitleCase(parent) + ".java";
-						System.out.println("Creating javaFile: " + javaFile);
+						System.out.println("Creating: " + javaFile);
 						myPw = new PrintWriter(new FileWriter(javaFile));
 						writeHeader(myPw, parent);
 						firstTime = false;
@@ -130,7 +137,7 @@ public class createTestISQL {
 					//					}
 					doName(myDir + "/" + dir[i]);
 				} else
-					System.out.println("huh? : " + f.getName());
+					System.out.println("huh? : " + f.getAbsolutePath());
 			}
 			// if myPW != null, then we have an open file to close
 		}
@@ -150,9 +157,25 @@ public class createTestISQL {
 			System.exit(0);
 		}
 
+		if (args.length > 0) {
+			for (int i = 0; i < args.length; i++) {
+				if (args[i].equalsIgnoreCase("-v"))
+					VERBOSE = true;
+				else if (args[i].equalsIgnoreCase("-h")) {
+					System.out
+							.println("Use this utility to recreate the .java wrapper files around the .sql");
+					System.out
+							.println("test cases in the ./ddl directory. See index.html for help.");
+					System.exit(0);
+				}
+
+			}
+		}
+
 		try {
 			System.out
-					.println("This will re-create the Java Junit ISQL tests. Are you sure (y/n)?");
+					.println("This will re-create the .java wrapper files for the .sql test cases.");
+			System.out.println("Are you sure (y/n)?");
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
 
@@ -174,5 +197,13 @@ public class createTestISQL {
 			System.out.println(ioe.getMessage());
 		}
 
+	}
+
+	public void execute() {
+		try { 
+		doName("ddl");
+		} catch (IOException ioe) {
+			System.out.println ("createTestISQL error. " + ioe.getMessage());
+		}
 	}
 }
