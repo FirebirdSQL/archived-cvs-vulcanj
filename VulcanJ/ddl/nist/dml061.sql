@@ -1,0 +1,74 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+COMMIT;
+ 
+ CREATE VIEW V_WORKS1                
+    AS SELECT * FROM WORKS       
+       WHERE HOURS > 15          
+       WITH CHECK OPTION;
+
+COMMIT;
+ 
+-- TEST:0269 BETWEEN value expressions in wrong order!
+
+ SELECT COUNT(*) FROM WORKS WHERE HOURS BETWEEN 80 AND 40;
+-- PASS:0269 If count = 0   ?
+ INSERT INTO WORKS VALUES('E6','P6',-60);
+ SELECT COUNT(*) FROM WORKS WHERE HOURS BETWEEN -40 AND -80;
+ SELECT COUNT(*) FROM WORKS WHERE HOURS BETWEEN -80 AND -40;
+-- PASS:0269 If count = 1?
+
+ROLLBACK;
+
+-- TEST:0270 BETWEEN approximate and exact numeric values!
+ SELECT COUNT(*) FROM WORKS WHERE HOURS BETWEEN 11.999 AND 12 OR HOURS BETWEEN 19.999 AND 2.001E1;
+-- PASS:0270 If count = 6?
+
+-- TEST:0271 COUNT(*) with Cartesian product subset !
+ SELECT COUNT(*) FROM WORKS,STAFF WHERE WORKS.EMPNUM = 'E1';
+-- PASS:0271 If count = 30?
+
+
+-- TEST:0272 Statement rollback for integrity!
+ UPDATE WORKS SET EMPNUM = 'E7' WHERE EMPNUM = 'E1' OR EMPNUM = 'E4';
+-- PASS:0272 If ERROR, unique constraint, 0 rows updated?
+
+ INSERT INTO WORKS SELECT 'E3',PNUM,17 FROM PROJ;
+-- PASS:0272 If ERROR, unique constraint, 0 rows inserted?
+
+ UPDATE V_WORKS1 SET HOURS = HOURS - 9;
+-- PASS:0272 If ERROR, view check constraint, 0 rows updated?
+
+ SELECT COUNT(*) FROM WORKS WHERE EMPNUM = 'E7' OR HOURS = 31 OR HOURS = 17;
+-- PASS:0272 If count = 0?
+
+ROLLBACK;
+
+-- TEST:0273 SUM, MAX, MIN = NULL for empty arguments  !
+ UPDATE WORKS SET HOURS = NULL;
+-- PASS:0273 If 12 rows updated?
+ SELECT SUM(HOURS),MAX(HOURS),MIN(HOURS),MIN(EMPNUM) FROM WORKS;
+-- PASS:0273 If 1 row is selected?
+-- PASS:0273 If SUM(HOURS), MAX(HOURS), and MIN(HOURS) are NULL?
+
+ROLLBACK;
+
+-- TEST:0277 Computation with NULL value specification!
+ UPDATE WORKS SET HOURS = NULL  WHERE EMPNUM = 'E1';
+ UPDATE WORKS SET HOURS = HOURS - (3 + -17);
+ UPDATE WORKS SET HOURS = 3 / -17 * HOURS;
+ UPDATE WORKS SET HOURS = HOURS + 5;
+ SELECT COUNT(*) FROM WORKS WHERE HOURS IS NULL;
+-- PASS:0277 If count = 6?
+
+ROLLBACK;
+
+-- TEST:0278 IN value list with USER, literal, variable spec.!
+ UPDATE STAFF SET EMPNAME = 'SYSDBA' WHERE EMPNAME = 'Ed';
+ SELECT COUNT(*) FROM STAFF WHERE EMPNAME IN (USER,'Betty','Carmen');
+-- PASS:0278 If count = 3?
+
+
+DROP DATABASE;

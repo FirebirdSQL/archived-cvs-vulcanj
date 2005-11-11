@@ -1,0 +1,52 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb';
+/*-------------------------------------------------------------*/
+/* Create a table with computed field and improper attributes. */
+/*-------------------------------------------------------------*/
+create table t0 (a integer, af computed by (a*3) default 10);
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 4, char 50
+-default
+create table t1 (a integer, af computed by (a*3) not null);
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 50
+-not
+create table t2 (a char(5), af computed by (a||a) collate DOS850);
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 51
+-collate
+create table t3 (a integer, af computed by (a*3) check (a > 3));
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 50
+-check
+create table t4 (a integer);
+create table t4r (a integer, af computed by (a*3) references t4(a));
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 51
+-references
+create table t5 (a integer, af computed by (a*3) unique);
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 50
+-unique
+create table t6 (a integer, af computed by (a*3) primary key);
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 50
+-primary
+show tables;
+       T4                              
+drop database;
+exit;

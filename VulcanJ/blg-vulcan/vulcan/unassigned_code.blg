@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- S0253329
+-- VULCAN NIST UNEXPECTED "UNASSIGNED CODE ERROR" MISSING VALID ERROR
+--
+create database 'test.fdb' default character set iso8859_1 page_size=16834; 
+CREATE TABLE STAFF3
+  (EMPNUM   CHAR(3) NOT NULL,
+   EMPNAME  CHAR(20),
+   GRADE    DECIMAL(4),
+   CITY     CHAR(15));
+CREATE TABLE STAFFz
+  ( EMPNUM CHAR(3) REFERENCES STAFF3(EMPNUM),
+    SALARY DECIMAL(6) CHECK (SALARY > 0));
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-could not find UNIQUE INDEX with specified columns
+drop database;

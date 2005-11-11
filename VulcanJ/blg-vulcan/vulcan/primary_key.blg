@@ -1,0 +1,14 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- defectid=S0284768
+-- VULCAN ERROR MESSAGE ON CREATE TABLE WHEN PRIMARY KEY IS NULLABLE
+--
+create database 'test.fdb'; 
+create table t2 (c char(20) primary key); 
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-Column: C not defined as NOT NULL - cannot be used in PRIMARY KEY/UNIQUE constraint definition
+-- create table should fail, because c is NULLABLE
+
+drop database;

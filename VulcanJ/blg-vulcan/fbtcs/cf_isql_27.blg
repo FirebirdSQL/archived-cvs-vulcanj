@@ -1,0 +1,35 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb';
+CREATE GENERATOR GEN_TEST1;
+SET GENERATOR GEN_TEST1 TO 0;
+CREATE GENERATOR GEN_TEST2;
+SET GENERATOR GEN_TEST2 TO 0;
+SET TERM ^ ;
+create procedure rpl$generator_values
+returns (
+   gen_name varchar(31),
+   gen_value integer
+)
+as
+begin
+  for 
+    select rdb$generator_name
+    from rdb$generators 
+    where rdb$system_flag is null 
+    into :gen_name do
+  begin
+    execute statement 'select gen_id(' || gen_name || ',0) from rdb$database' into :gen_value;
+    suspend;
+  end
+END^
+SET TERM ; ^
+commit;
+show procedures;
+Procedure Name                    Dependency, Type
+================================= ======================================
+RPL$GENERATOR_VALUES              RDB$GENERATORS, Table
+connect 'test.fdb';
+execute procedure rpl$generator_values;
+Statement failed, SQLCODE = -904
+
+Variable type (position 0) in EXECUTE STATEMENT 'select gen_id(GEN_TEST1                      ,0) f' INTO does not match return

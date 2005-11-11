@@ -1,0 +1,65 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb';
+set echo;
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Unexpected end of command
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Unexpected end of command
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
+================= =============== =============================== =============================== 
+
+           <null>             128 <null>                          NONE                            
+

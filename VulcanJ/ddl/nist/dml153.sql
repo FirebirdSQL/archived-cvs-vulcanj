@@ -1,0 +1,23 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+COMMIT;
+
+-- TEST:0848 Query spec with subquery is now updatable!
+
+ CREATE VIEW EXON AS SELECT * FROM STAFF WHERE CITY IN (SELECT CITY FROM PROJ);
+-- PASS:0848 If view is created?
+
+ DELETE FROM EXON WHERE GRADE = 10;
+
+ SELECT COUNT(*) FROM STAFF; 
+-- PASS:0848 If count = 4?
+
+ UPDATE EXON SET EMPNAME = 'Heathen' WHERE EMPNAME = 'Alice'; 
+-- PASS:0848 If 1 row is updated?
+
+ SELECT COUNT(*) FROM STAFF WHERE EMPNAME LIKE 'H%';
+-- PASS:0848 If count = 1?
+
+DROP DATABASE;

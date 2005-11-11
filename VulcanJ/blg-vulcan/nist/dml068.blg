@@ -1,0 +1,111 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+-- TEST:0389 95-character graphic subset of ASCII!
+-- NOTE: OPTIONAL test
+-- NOTE:0389 Collating sequence is implementor defined
+
+ CREATE TABLE AA (CHARTEST     CHAR(20));
+DELETE FROM AA;
+INSERT INTO AA VALUES('@ at');
+INSERT INTO AA VALUES('`-qt');
+INSERT INTO AA VALUES('!exc');
+INSERT INTO AA VALUES('"dqt');
+INSERT INTO AA VALUES('#pou');
+INSERT INTO AA VALUES('$dol');
+INSERT INTO AA VALUES('%pct');
+INSERT INTO AA VALUES('&amp');
+INSERT INTO AA VALUES('''+qt');
+INSERT INTO AA VALUES('(lpr');
+INSERT INTO AA VALUES(')rpr');
+INSERT INTO AA VALUES('*ast');
+INSERT INTO AA VALUES('aaaa');
+INSERT INTO AA VALUES(':col');
+INSERT INTO AA VALUES('+plu');
+INSERT INTO AA VALUES(';sem');
+INSERT INTO AA VALUES('[lbk');
+INSERT INTO AA VALUES('{lbc');
+INSERT INTO AA VALUES(',com');
+INSERT INTO AA VALUES('< lt');
+INSERT INTO AA VALUES('\bsl');
+INSERT INTO AA VALUES('|dvt');
+INSERT INTO AA VALUES('-hyp');
+INSERT INTO AA VALUES('=equ');
+INSERT INTO AA VALUES(']rbk');
+INSERT INTO AA VALUES('}rbc');
+INSERT INTO AA VALUES('.per');
+INSERT INTO AA VALUES('> gt');
+INSERT INTO AA VALUES('^hat');
+INSERT INTO AA VALUES('~til');
+INSERT INTO AA VALUES('/ sl');
+INSERT INTO AA VALUES('?que');
+INSERT INTO AA VALUES('_und');
+INSERT INTO AA VALUES('AAAA');
+INSERT INTO AA VALUES('0000');
+INSERT INTO AA VALUES('9999');
+INSERT INTO AA VALUES('zzzz');
+INSERT INTO AA VALUES('  sp');
+INSERT INTO AA VALUES('ZZZZ');
+SELECT * FROM AA ORDER BY CHARTEST;
+
+CHARTEST             
+==================== 
+
+  sp                 
+!exc                 
+"dqt                 
+#pou                 
+$dol                 
+%pct                 
+&amp                 
+'+qt                 
+(lpr                 
+)rpr                 
+*ast                 
++plu                 
+,com                 
+-hyp                 
+.per                 
+/ sl                 
+0000                 
+9999                 
+:col                 
+;sem                 
+
+CHARTEST             
+==================== 
+< lt                 
+=equ                 
+> gt                 
+?que                 
+@ at                 
+AAAA                 
+ZZZZ                 
+[lbk                 
+\bsl                 
+]rbk                 
+^hat                 
+_und                 
+`-qt                 
+aaaa                 
+zzzz                 
+{lbc                 
+|dvt                 
+}rbc                 
+~til                 
+
+-- PASS:0389 If character in 1st position matches ?
+-- PASS:0389 description in positions 2-4 ?
+-- PASS:0389 If ASCII, then ORDER is: space followed by characters?
+-- PASS:0389 !"#$%&'()*+,-./09:;<=>?@AZ[\]^_`az{|}~ ?
+
+ SELECT COUNT(*) FROM AA;
+
+       COUNT 
+============ 
+
+          39 
+
+-- PASS:0389 If count = 39?
+
+DROP DATABASE;

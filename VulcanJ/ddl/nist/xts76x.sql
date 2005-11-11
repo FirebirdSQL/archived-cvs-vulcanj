@@ -1,0 +1,86 @@
+  SET NAMES ASCII; 
+  CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+COMMIT WORK;
+
+-- TEST:7060 MAX of column derived from <set function specification>!
+ CREATE TABLE TABX760 ( DEPTNO  NUMERIC(5) not null unique, EMPNAME CHAR(20) not null unique,  SALARY  DECIMAL(7));
+ INSERT INTO TABX760 VALUES (10,'SPYROS',25000);
+ INSERT INTO TABX760 VALUES (11,'ALEXIS',18000);
+ INSERT INTO TABX760 VALUES (12,'LAMBIS',9000);
+ INSERT INTO TABX760 VALUES (13,'ELENI',4000);
+ INSERT INTO TABX760 VALUES (14,'MARIOS',47000);
+ INSERT INTO TABX760 VALUES (15,'NICKOLAS',78000);
+
+-- with firebird we can't (1) include a computed column in the select
+-- clause of a view or (2) include a group by expression in the view.
+-- So there's not much to do here.
+
+-- CREATE VIEW V000V AS 
+-- SELECT DEPTNO, AVG(SALARY) AS AVSAL 
+-- FROM TABX760 GROUP BY DEPTNO;
+-- PASS:7060 If view created successfully?
+-- PASS:7060 If MAX(avsal) is 78000?
+
+ROLLBACK WORK;
+
+
+-- testXts_761 : skipped
+-- TEST:7061 Defined character set in <comparison predicate>!
+
+-- testXts_762 : skipped
+-- TEST:7062 Defined character set in <like predicate>!
+
+-- testXts_763 : skipped
+-- TEST:7063 Access to CHARACTER_SETS view!
+
+-- testXts_764 : skipped
+-- TEST:7064 REVOKE USAGE on character set RESTRICT!
+
+-- testXts_765 : skipped
+-- TEST:7065 REVOKE USAGE on character set CASCADE!
+
+-- testXts_766 : skipped
+-- TEST:7066 Drop character set no granted privileges!
+
+-- testXts_767 : skipped
+-- TEST:7067 DROP character set, outstanding granted privileges!
+
+-- testXts_768 : skipped
+-- TEST:7068 Presence of SQL_TEXT in CHARACTER_SETS view!
+
+-- TEST:7069 <Character set specification> of LATIN1 in <literal>!
+
+
+
+-- TEST:7069 <Character set specification> of LATIN1 in <literal>!
+
+ CREATE TABLE TABLATIN1 ( COL1 CHARACTER(10) CHARACTER SET LATIN1, COL2 CHAR(12)      CHARACTER SET LATIN1, COL3 CHAR(15)   CHARACTER SET LATIN1, COL4 NUMERIC(5));
+ INSERT INTO TABLATIN1 VALUES (_LATIN1 'NICKOS', _LATIN1 'VASO', _LATIN1 'BILL',2);
+ INSERT INTO TABLATIN1 VALUES (_LATIN1 'HELEN', _LATIN1 'JIM', _LATIN1 'ALLOS',5);
+ INSERT INTO TABLATIN1 VALUES (_LATIN1 'LAMIA', _LATIN1 'ISOS', _LATIN1 'ALLOS',3);
+ INSERT INTO TABLATIN1 VALUES (_LATIN1 'PAROS', _LATIN1 'MYKONOS', _LATIN1 'ALLOS',4);
+ INSERT INTO TABLATIN1 VALUES (_LATIN1 'HULL', _LATIN1 'MYKONOS', _LATIN1 'OFFERTON',6);
+ SELECT COL1, COL2, COL3, COL4 FROM TABLATIN1 WHERE COL1 = _LATIN1'NICKOS'; 
+-- PASS:7069 If COL1 = NICKOS?
+-- PASS:7069 If COL2 = VASO?
+-- PASS:7069 If COL3 = BILL?
+-- PASS:7069 If COL4 = 2?
+
+ SELECT COUNT(COL2) FROM TABLATIN1 WHERE COL2 = _LATIN1'MYKONOS';
+-- PASS:7069 If COUNT = 2?
+
+ SELECT COL1, COL2, COL3, COL4 FROM TABLATIN1 WHERE COL3 = _LATIN1'ALLOS' ORDER BY COL4; 
+-- PASS:7069 If 3 rows are selected in the following order?
+--                  COL1 COL2 COL3 COL4
+--               ======== ======== ======== ========
+-- PASS:7069 If LAMIA ISOS ALLOS 3 ?
+-- PASS:7069 If PAROS MYKONOS ALLOS 4 ?
+-- PASS:7069 If HELEN JIM ALLOS 5 ?
+
+ROLLBACK WORK;
+
+ DROP TABLE TABLATIN1;
+-- PASS:7069 If table dropped successfully?
+
+DROP DATABASE;

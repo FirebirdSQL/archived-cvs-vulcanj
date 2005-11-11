@@ -1,0 +1,334 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+INPUT ddl/input/base-tab.sql;
+CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+INSERT INTO WORKS VALUES  ('E1','P1',40);
+INSERT INTO WORKS VALUES  ('E1','P2',20);
+INSERT INTO WORKS VALUES  ('E1','P3',80);
+INSERT INTO WORKS VALUES  ('E1','P4',20);
+INSERT INTO WORKS VALUES  ('E1','P5',12);
+INSERT INTO WORKS VALUES  ('E1','P6',12);
+INSERT INTO WORKS VALUES  ('E2','P1',40);
+INSERT INTO WORKS VALUES  ('E2','P2',80);
+INSERT INTO WORKS VALUES  ('E3','P2',20);
+INSERT INTO WORKS VALUES  ('E4','P2',20);
+INSERT INTO WORKS VALUES  ('E4','P4',40);
+INSERT INTO WORKS VALUES  ('E4','P5',80);
+INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+INSERT INTO STAFF3 SELECT * FROM STAFF;
+INSERT INTO UPUNIQ VALUES(1,'A');
+INSERT INTO UPUNIQ VALUES(2,'B');
+INSERT INTO UPUNIQ VALUES(3,'C');
+INSERT INTO UPUNIQ VALUES(4,'D');
+INSERT INTO UPUNIQ VALUES(6,'F');
+INSERT INTO UPUNIQ VALUES(8,'H');
+CREATE VIEW SUBSP (EMPNUM,PNUM,HOURS)
+     AS SELECT EMPNUM,PNUM,HOURS
+        FROM   WORKS
+        WHERE  EMPNUM='E3'
+     WITH CHECK OPTION;
+CREATE TABLE WORKS1(EMPNUM    CHAR(3) NOT NULL,
+                PNUM    CHAR(3) NOT NULL,
+                HOURS   DECIMAL(5));
+CREATE UNIQUE INDEX WORKS1_IND ON WORKS1(EMPNUM, PNUM);
+commit; 
+-- TEST:0261 WHERE (2 * (c1 - c2)) BETWEEN!
+
+     SELECT COL1, COL2
+          FROM VTABLE
+          WHERE(2*(COL3 - COL2)) BETWEEN 5 AND 200
+          ORDER BY COL1;
+
+        COL1         COL2 
+============ ============ 
+
+          10           20 
+         100          200 
+
+-- PASS:0261 If 2 rows are selected ?
+-- PASS:0261 If first row is  ( 10,  20)?
+-- PASS:0261 If second row is (100, 200)?
+
+-- END TEST >>> 0261 <<< END TEST
+
+-- ********************************************************************
+
+-- TEST:0262 WHERE clause with computation, ANY/ALL subqueries!
+
+     UPDATE VTABLE
+          SET COL1 = 1
+          WHERE COL1 = 0;
+-- PASS:0262 If 1 row is updated?
+
+     SELECT COL1, COL2
+          FROM VTABLE
+          WHERE (COL3 * COL2/COL1) > ALL
+                (SELECT HOURS FROM WORKS)
+                OR -(COL3 * COL2/COL1) > ANY
+                (SELECT HOURS FROM WORKS)
+          ORDER BY COL1;
+
+        COL1         COL2 
+============ ============ 
+
+         100          200 
+        1000        -2000 
+
+-- PASS:0262 If 2 rows are selected?
+-- PASS:0262 If first row is  ( 100,   200)?
+-- PASS:0262 If second row is (1000, -2000)?
+
+-- restore
+     ROLLBACK WORK;
+-- END TEST >>> 0262 <<< END TEST
+ 
+-- ******************************************************************
+
+-- TEST:0263 Computed column in ORDER BY!
+
+     SELECT COL1, (COL3 * COL2/COL1 - COL2 + 10)
+          FROM VTABLE
+          WHERE COL1 > 0
+          ORDER BY 2;
+
+        COL1                       
+============ ===================== 
+
+        1000                 -3990 
+          10                    50 
+         100                   410 
+
+-- PASS:0263 If 3 rows are selected in order with values:?
+-- PASS:0263      (1000, -3990)?
+-- PASS:0263      (  10,    50)?
+-- PASS:0263      ( 100,   410)?
+
+-- END TEST >>> 0263 <<< END TEST
+
+-- ********************************************************************
+
+-- TEST:0265 Update:searched - view with check option!
+
+-- setup
+     INSERT INTO WORKS
+            VALUES('E3','P4',50);
+-- PASS:0265 If 1 row is inserted?
+
+           SELECT EMPNUM, PNUM, HOURS
+                FROM SUBSP;
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E3     P2               20 
+E3     P4               50 
+
+-- PASS:0265 If 2 rows are selected?
+
+     SELECT * FROM WORKS;
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E1     P1               40 
+E1     P2               20 
+E1     P3               80 
+E1     P4               20 
+E1     P5               12 
+E1     P6               12 
+E2     P1               40 
+E2     P2               80 
+E3     P2               20 
+E4     P2               20 
+E4     P4               40 
+E4     P5               80 
+E3     P4               50 
+
+-- PASS:0265 If 13 rows selected?
+
+     UPDATE SUBSP 
+          SET EMPNUM = 'E9'
+          WHERE PNUM = 'P2';
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint  on view or table SUBSP
+-- PASS:0265 If ERROR, view check constraint, 0 rows are updated?
+ 
+     SELECT * FROM WORKS;
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E1     P1               40 
+E1     P2               20 
+E1     P3               80 
+E1     P4               20 
+E1     P5               12 
+E1     P6               12 
+E2     P1               40 
+E2     P2               80 
+E3     P2               20 
+E4     P2               20 
+E4     P4               40 
+E4     P5               80 
+E3     P4               50 
+
+-- PASS:0265 If 13 rows selected and no EMPNUM = 'E9'?
+
+-- restore
+     ROLLBACK WORK;
+-- END TEST >>> 0265 <<< END TEST
+
+-- ******************************************************************
+
+-- TEST:0266 Update:searched - UNIQUE violation under view!
+
+-- setup
+     INSERT INTO WORKS
+            VALUES('E3','P4',50);
+-- PASS:0266 If 1 row is inserted?
+
+     SELECT EMPNUM, PNUM, HOURS
+          FROM SUBSP;
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E3     P2               20 
+E3     P4               50 
+
+-- PASS:0266 If 2 rows are selected?
+
+     SELECT * FROM WORKS WHERE EMPNUM = 'E3';
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E3     P2               20 
+E3     P4               50 
+
+-- PASS:0266 If 2 rows selected and PNUM values are 'P2' and 'P4'?
+
+     UPDATE SUBSP
+          SET PNUM = 'P6'
+          WHERE EMPNUM = 'E3';
+Statement failed, SQLCODE = -803
+
+violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
+-- PASS:0266 If ERROR, unique constraint, 0 rows updated?
+
+     SELECT EMPNUM, PNUM, HOURS
+          FROM SUBSP;
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E3     P2               20 
+E3     P4               50 
+
+-- PASS:0266 If 2 rows are selected?
+
+     SELECT * FROM WORKS WHERE EMPNUM = 'E3';
+
+EMPNUM PNUM          HOURS 
+====== ====== ============ 
+
+E3     P2               20 
+E3     P4               50 
+
+-- PASS:0266 If 2 rows selected and PNUM values are 'P2' and 'P4'?
+
+-- restore
+     ROLLBACK WORK;
+-- END TEST >>> 0266 <<< END TEST
+
+-- ******************************************************************
+
+-- TEST:0267 Update compound key, interim uniqueness conflict!
+
+     DELETE FROM WORKS1;
+-- Making sure the table is empty
+
+-- setup
+     INSERT INTO WORKS1 VALUES ('P1','P6',1);
+INSERT INTO WORKS1 VALUES ('P2','P6',2);
+INSERT INTO WORKS1 VALUES ('P3','P6',3);
+INSERT INTO WORKS1 VALUES ('P4','P6',4);
+INSERT INTO WORKS1 VALUES ('P5','P6',5);
+INSERT INTO WORKS1 VALUES ('P6','P6',6);
+INSERT INTO WORKS1 VALUES ('P1','P5',7);
+INSERT INTO WORKS1 VALUES ('P2','P5',8);
+INSERT INTO WORKS1 VALUES ('P3','P5',9);
+INSERT INTO WORKS1 VALUES ('P4','P5',10);
+INSERT INTO WORKS1 VALUES ('P5','P5',11);
+INSERT INTO WORKS1 VALUES ('P6','P5',12);
+INSERT INTO WORKS1 VALUES ('P1','P4',13);
+INSERT INTO WORKS1 VALUES ('P2','P4',14);
+INSERT INTO WORKS1 VALUES ('P3','P4',15);
+INSERT INTO WORKS1 VALUES ('P4','P4',16);
+INSERT INTO WORKS1 VALUES ('P5','P4',17);
+INSERT INTO WORKS1 VALUES ('P6','P4',18);
+INSERT INTO WORKS1 VALUES ('P1','P3',19);
+INSERT INTO WORKS1 VALUES ('P2','P3',20);
+INSERT INTO WORKS1 VALUES ('P3','P3',21);
+INSERT INTO WORKS1 VALUES ('P4','P3',22);
+INSERT INTO WORKS1 VALUES ('P5','P3',23);
+INSERT INTO WORKS1 VALUES ('P6','P3',24);
+INSERT INTO WORKS1 VALUES ('P1','P2',25);
+INSERT INTO WORKS1 VALUES ('P2','P2',26);
+INSERT INTO WORKS1 VALUES ('P3','P2',27);
+INSERT INTO WORKS1 VALUES ('P4','P2',28);
+INSERT INTO WORKS1 VALUES ('P5','P2',29);
+INSERT INTO WORKS1 VALUES ('P6','P2',30);
+INSERT INTO WORKS1 VALUES ('P1','P1',31);
+INSERT INTO WORKS1 VALUES ('P2','P1',32);
+INSERT INTO WORKS1 VALUES ('P3','P1',33);
+INSERT INTO WORKS1 VALUES ('P4','P1',34);
+INSERT INTO WORKS1 VALUES ('P5','P1',35);
+INSERT INTO WORKS1 VALUES ('P6','P1',36);
+UPDATE WORKS1
+       SET PNUM = EMPNUM, EMPNUM = PNUM;
+Statement failed, SQLCODE = -803
+
+attempt to store duplicate value (visible to active transactions) in unique index "WORKS1_IND"
+-- PASS:0267 If 36 rows are updated?
+
+     SELECT COUNT(*) 
+          FROM WORKS1
+          WHERE EMPNUM = 'P1' AND HOURS > 30;
+
+       COUNT 
+============ 
+
+           1 
+
+-- PASS:0267 If count = 6?
+
+-- restore
+     ROLLBACK WORK;
+-- END TEST >>> 0267 <<< END TEST
+
+drop database;

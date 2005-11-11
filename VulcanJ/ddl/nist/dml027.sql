@@ -1,0 +1,24 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+COMMIT WORK;
+
+
+-- TEST:0124 UPDATE UNIQUE column (key = key + 1) interim conflict!
+
+ UPDATE UPUNIQ SET NUMKEY = NUMKEY + 1;
+-- PASS:0124 If 0 rows updated?
+ SELECT COUNT(*),SUM(NUMKEY) FROM UPUNIQ;
+-- Expected output:
+--        COUNT SUM
+--            6 24
+
+ UPDATE UPUNIQ SET NUMKEY = NUMKEY + 1 WHERE NUMKEY >= 4;
+ 
+ SELECT COUNT(*),SUM(NUMKEY) FROM UPUNIQ;
+-- PASS:0124 If count = 6 and SUM(NUMKEY) = 24?
+
+ROLLBACK WORK;
+
+DROP DATABASE;

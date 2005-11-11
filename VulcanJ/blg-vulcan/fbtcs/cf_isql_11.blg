@@ -1,0 +1,26 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb';
+/*-----------------------------------------*/
+/* Computed field using non-existing field */
+/*-----------------------------------------*/
+create table t0 (a integer, af computed by (b));
+Statement failed, SQLCODE = -206
+
+SQL error code = -206
+-Column unknown
+-B
+-At line 4, column 45.
+/*--------------------------------------------*/
+/* Computed field using not yet defined field */
+/*--------------------------------------------*/
+create table t1 (af computed by (a), a integer);
+Statement failed, SQLCODE = -206
+
+SQL error code = -206
+-Column unknown
+-A
+-At line 4, column 34.
+show tables;
+There are no tables in this database
+drop database;
+exit;

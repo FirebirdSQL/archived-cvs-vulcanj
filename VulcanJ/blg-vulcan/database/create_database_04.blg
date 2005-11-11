@@ -4,7 +4,7 @@ SHOW DATABASE;
 Database: test.fdb
         Owner: SYSDBA                         
 PAGE_SIZE 1024 
-Number of DB pages allocated = 253 
+Number of DB pages allocated = 248 
 Sweep interval = 20000 
 Forced Writes are ON 
 Transaction - oldest = 1 

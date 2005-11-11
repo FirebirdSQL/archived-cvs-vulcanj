@@ -1,0 +1,20 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb';
+create table t(a int);
+create table u(a int);
+set term ^;
+create trigger t for u after delete as begin
+old.a=old.a; end^
+commit ^
+set term ;^
+show table t;
+A                               INTEGER Nullable 
+
+Triggers on Table U:
+T, Sequence: 0, Type: AFTER DELETE, Active
+show table u;
+A                               INTEGER Nullable 
+
+Triggers on Table U:
+T, Sequence: 0, Type: AFTER DELETE, Active
+drop database;

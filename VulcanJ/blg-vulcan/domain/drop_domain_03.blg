@@ -4,5 +4,5 @@ DROP DOMAIN test;
 Statement failed, SQLCODE = -607
 
 unsuccessful metadata update
--Column not found
+-Domain not found
 DROP DATABASE;

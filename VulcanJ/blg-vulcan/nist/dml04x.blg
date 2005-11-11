@@ -1,0 +1,371 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+INPUT ddl/input/base-tab.sql;
+CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+INSERT INTO WORKS VALUES  ('E1','P1',40);
+INSERT INTO WORKS VALUES  ('E1','P2',20);
+INSERT INTO WORKS VALUES  ('E1','P3',80);
+INSERT INTO WORKS VALUES  ('E1','P4',20);
+INSERT INTO WORKS VALUES  ('E1','P5',12);
+INSERT INTO WORKS VALUES  ('E1','P6',12);
+INSERT INTO WORKS VALUES  ('E2','P1',40);
+INSERT INTO WORKS VALUES  ('E2','P2',80);
+INSERT INTO WORKS VALUES  ('E3','P2',20);
+INSERT INTO WORKS VALUES  ('E4','P2',20);
+INSERT INTO WORKS VALUES  ('E4','P4',40);
+INSERT INTO WORKS VALUES  ('E4','P5',80);
+INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+INSERT INTO STAFF3 SELECT * FROM STAFF;
+INSERT INTO UPUNIQ VALUES(1,'A');
+INSERT INTO UPUNIQ VALUES(2,'B');
+INSERT INTO UPUNIQ VALUES(3,'C');
+INSERT INTO UPUNIQ VALUES(4,'D');
+INSERT INTO UPUNIQ VALUES(6,'F');
+INSERT INTO UPUNIQ VALUES(8,'H');
+COMMIT WORK;
+-- from dml041
+-- TEST:0212 Enforcement of CHECK clause in nested views!
+
+ CREATE VIEW V_WORKS1 AS SELECT * FROM WORKS WHERE HOURS > 15 WITH CHECK OPTION;
+CREATE VIEW V_WORKS2 AS SELECT * FROM V_WORKS1 WHERE EMPNUM = 'E1' OR EMPNUM = 'E6';
+CREATE VIEW V_WORKS3 AS SELECT * FROM V_WORKS2 WHERE PNUM = 'P2' OR PNUM = 'P7' WITH CHECK OPTION;
+INSERT INTO V_WORKS2 VALUES('E9','P7',13);
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint  on view or table V_WORKS1
+-- PASS:0212 If ERROR, view check constraint, 0 rows inserted?
+
+ INSERT INTO V_WORKS2 VALUES('E7','P4',95);
+-- PASS:0212 If 1 row is inserted?
+
+ INSERT INTO V_WORKS3 VALUES('E8','P2',85);
+-- PASS:0212 If either 1 row is inserted OR ?
+-- PASS:0212 If ERROR, view check constraint, 0 rows inserted?
+-- NOTE:0212 Vendor interpretation follows
+-- NOTE:0212 Insertion of row means: outer check option does not imply
+-- NOTE:0212 inner check options
+
+-- NOTE:0212 Failure to insert means: outer check option implies
+-- NOTE:0212 inner check options
+
+ INSERT INTO V_WORKS3 VALUES('E1','P7',90);
+-- PASS:0212 If 1 row is inserted?
+
+ INSERT INTO V_WORKS3 VALUES('E9','P2',10);
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint  on view or table V_WORKS1
+-- PASS:0212 If ERROR, view check constraint, 0 rows inserted?
+
+ SELECT COUNT(*) FROM WORKS WHERE EMPNUM = 'E9';
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:0212 If 1 count = 0?
+
+ SELECT COUNT(*) FROM WORKS WHERE HOURS > 85;
+
+       COUNT 
+============ 
+
+           2 
+
+-- PASS:0212 If 1 count = 2?
+
+
+-- from dml042
+-- TEST:0213 FIPS sizing -- 100 columns in a row!
+-- FIPS sizing TEST
+
+ CREATE TABLE T100(C1 CHAR(2),C2 CHAR(2),C3 CHAR(2),C4 CHAR(2), C5 CHAR(2),C6 CHAR(2),C7 CHAR(2),C8 CHAR(2), C9 CHAR(2),C10 CHAR(2),C11 CHAR(2),C12 CHAR(2), C13 CHAR(2),C14 CHAR(2),C15 CHAR(2),C16 CHAR(2), C17 CHAR(2),C18 CHAR(2),C19 CHAR(2),C20 CHAR(2), C21 CHAR(2),C22 CHAR(2),C23 CHAR(2),C24 CHAR(2), C25 CHAR(2),C26 CHAR(2),C27 CHAR(2),C28 CHAR(2), C29 CHAR(2),C30 CHAR(2),C31 CHAR(2),C32 CHAR(2), C33 CHAR(2),C34 CHAR(2),C35 CHAR(2),C36 CHAR(2), C37 CHAR(2),C38 CHAR(2),C39 CHAR(2),C40 CHAR(2), C41 CHAR(2),C42 CHAR(2),C43 CHAR(2),C44 CHAR(2), C45 CHAR(2),C46 CHAR(2),C47 CHAR(2),C48 CHAR(2), C49 CHAR(2),C50 CHAR(2),C51 CHAR(2),C52 CHAR(2), C53 CHAR(2),C54 CHAR(2),C55 CHAR(2),C56 CHAR(2), C57 CHAR(2),C58 CHAR(2),C59 CHAR(2),C60 CHAR(2), C61 CHAR(2),C62 CHAR(2),C63 CHAR(2),C64 CHAR(2), C65 CHAR(2),C66 CHAR(2),C67 CHAR(2),C68 CHAR(2), C69 CHAR(2),C70 CHAR(2),C71 CHAR(2),C72 CHAR(2), C73 CHAR(2),C74 CHAR(2),C75 CHAR(2),C76 CHAR(2), C77 CHAR(2),C78 CHAR(2),C79 CHAR(2),C80 CHAR(2), C81 CHAR(2),C82 CHAR(2),C83 CHAR(2),C84 CHAR(2), C85 CHAR(2),C86 CHAR(2),C87 CHAR(2),C88 CHAR(2), C89 CHAR(2),C90 CHAR(2),C91 CHAR(2),C92 CHAR(2), C93 CHAR(2),C94 CHAR(2),C95 CHAR(2),C96 CHAR(2), C97 CHAR(2),C98 CHAR(2),C99 CHAR(2),C100 CHAR(2));
+INSERT INTO T100(C1,C21,C41,C61,C81,C100) VALUES(' 1','21','41','61','81','00');
+-- PASS:0213 If 1 row is inserted?
+
+ SELECT C1,C21,C41,C61,C81,C100 FROM T100;
+
+C1     C21    C41    C61    C81    C100   
+====== ====== ====== ====== ====== ====== 
+
+ 1     21     41     61     81     00     
+
+-- PASS:0213 If C1 = ' 1' and C100 = '00' ?
+
+
+-- from dml043
+-- TEST:0214 FIPS sizing -- 2000-byte row!
+-- FIPS sizing TEST
+
+ CREATE TABLE T2000(STR110 CHAR(110),STR120 CHAR(120), STR130 CHAR(130),STR140 CHAR(140), STR150 CHAR(150),STR160 CHAR(160), STR170 CHAR(170),STR180 CHAR(180), STR190 CHAR(190),STR200 CHAR(200), STR210 CHAR(210),STR216 CHAR(216));
+INSERT INTO T2000(STR110,STR200,STR216) VALUES ('STR11111111111111111111111111111111111111111111111', 'STR22222222222222222222222222222222222222222222222', 'STR66666666666666666666666666666666666666666666666');
+-- PASS:0214 If 1 row is inserted?
+ UPDATE T2000 SET STR140 = 'STR44444444444444444444444444444444444444444444444';
+-- PASS:0214 If 1 row is updated?
+ UPDATE T2000 SET STR180 = 'STR88888888888888888888888888888888888888888888888';
+-- PASS:0214 If 1 row is updated?
+ SELECT STR110,STR180,STR216 FROM T2000;
+
+STR110                                                                                                         STR180                                                                                                                                                                               STR216                                                                                                                                                                                                                   
+=============================================================================== =============================================================================== =============================================================================== 
+
+STR11111111111111111111111111111111111111111111111                                                             STR88888888888888888888888888888888888888888888888                                                                                                                                   STR66666666666666666666666666666666666666666666666                                                                                                                                                                       
+
+-- PASS:0214 If STR180 = ?
+-- PASS:0214 'STR88888888888888888888888888888888888888888888888'?
+-- PASS:0214 If STR216 = ?
+-- PASS:0214 'STR66666666666666666666666666666666666666666666666'?
+
+
+-- from dml044
+-- TEST:0215 FIPS sizing -- 6 columns in a UNIQUE constraint!
+-- FIPS sizing TEST
+
+ CREATE TABLE T8(COL1 CHAR(2) NOT NULL,COL2 CHAR(4) NOT NULL, COL3 CHAR(6) NOT NULL,COL4 CHAR(8) NOT NULL, COL5 CHAR(10) NOT NULL,COL6 CHAR(12) NOT NULL, COL7 CHAR(14),COL8 CHAR(16), UNIQUE(COL1,COL2,COL3,COL4,COL5,COL6));
+INSERT INTO T8 VALUES('th','seco','third3','fourth_4','fifth_colu', 'sixth_column','seventh_column','last_column_of_t');
+-- PASS:0215 If 1 row is inserted?
+
+ INSERT INTO T8 VALUES('th','seco','third3','fourth_4','fifth_colu', 'sixth_column','column_seventh','column_eighth_la');
+Statement failed, SQLCODE = -803
+
+violation of PRIMARY or UNIQUE KEY constraint "INTEG_22" on table "T8"
+-- PASS:0215 If ERROR, unique constraint, 0 rows inserted?
+
+ SELECT COL1,COL2,COL3,COL4,COL5,COL6,COL7,COL8 FROM T8;
+
+COL1   COL2   COL3   COL4     COL5       COL6         COL7           COL8             
+====== ====== ====== ======== ========== ============ ============== ================ 
+
+th     seco   third3 fourth_4 fifth_colu sixth_column seventh_column last_column_of_t 
+
+-- PASS:0215 If COL1 = 'th'?
+
+
+-- TEST:0216 FIPS sizing -- 120 bytes in a UNIQUE constraint!
+-- FIPS sizing TEST
+
+ CREATE TABLE T4(STR110 CHAR(110) NOT NULL, NUM6   NUMERIC(6) NOT NULL, COL3   CHAR(10),COL4 CHAR(20), UNIQUE(STR110,NUM6));
+INSERT INTO T4 VALUES ('This test is trying to test the limit on the total length of an index', -123456, 'which is','not less than 120');
+-- PASS:0216 If 1 row is inserted?
+ INSERT INTO T4 VALUES ('This test is trying to test the limit on the total length of an index', -123456,'which is','not less than 120');
+Statement failed, SQLCODE = -803
+
+violation of PRIMARY or UNIQUE KEY constraint "INTEG_25" on table "T4"
+-- PASS:0216 If ERROR, unique constraint, 0 rows inserted?
+ SELECT STR110 FROM T4;
+
+STR110                                                                                                         
+=============================================================================== 
+
+This test is trying to test the limit on the total length of an index                                          
+
+-- PASS:0216 If STR110 starts with 'This test is trying to test the '?
+-- PASS:0216 and ends with 'limit on the total length of an index'?
+
+
+-- from dml045
+-- TEST:0218 FIPS sizing -- 6 columns in GROUP BY!
+-- FIPS sizing TEST
+
+ CREATE TABLE T12(COL1 CHAR(1), COL2 CHAR(2), COL3 CHAR(4), COL4 CHAR(6), COL5 CHAR(8), COL6 CHAR(10), COL7 CHAR(20), COL8 CHAR(30), COL9 CHAR(40), COL10 CHAR(50), COL11 INTEGER, COL12 INTEGER);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','0101010101', '2020...20','3030...30','4040...40','5050...50',44,48);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '2020...20','3030...30','4040...40','5050...50',11,12);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '2020...20','3030...30','4040...40','5050...50',22,24);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','0101010101', '2020...20','3030...30','4040...40','5050...50',33,36);
+SELECT COUNT(*) FROM  T12;
+
+       COUNT 
+============ 
+
+           4 
+
+-- PASS:0218 If count = 4?
+
+ SELECT COL6,SUM(COL11),MAX(COL12) FROM T12 GROUP BY COL1,COL5,COL3,COL6,COL2,COL4 ORDER BY COL6 DESC;
+
+COL6                         SUM          MAX 
+========== ===================== ============ 
+
+1010101010                    33           24 
+0101010101                    77           48 
+
+-- PASS:0218 If 2 rows are selected and second COL6 = 0101010101 and ?
+-- PASS:0218 second SUM(COL11) = 77 and second MAX(COL12) = 48?
+
+
+ROLLBACK;
+-- TEST:0219 FIPS sizing -- 120 bytes in GROUP BY!
+-- FIPS sizing TEST
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',111,112);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888889','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',333,336);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888889','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',444,448);
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',222,224);
+SELECT COUNT(*) FROM  T12;
+
+       COUNT 
+============ 
+
+           4 
+
+-- PASS:0219 If count = 4?
+ SELECT COL5,SUM(COL11),MAX(COL12) FROM T12 GROUP BY COL9,COL5,COL7,COL4,COL3,COL8 ORDER BY COL5 DESC;
+
+COL5                       SUM          MAX 
+======== ===================== ============ 
+
+88888889                   777          448 
+88888888                   333          224 
+
+-- PASS:0219 If 2 rows are selected ?
+-- PASS:0219 If row #1 COL5=88888889, SUM(COL11)=777, MAX(COL12)=448?
+-- PASS:0219 If row #2 COL5=88888888, SUM(COL11)=333, MAX(COL12)=224?
+
+ROLLBACK;
+-- from dml046
+-- TEST:0218 FIPS sizing -- 6 columns in GROUP BY!
+-- FIPS sizing TEST
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','0101010101', '2020...20','3030...30','4040...40','5050...50',44,48);
+-- PASS:0218 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '2020...20','3030...30','4040...40','5050...50',11,12);
+-- PASS:0218 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '2020...20','3030...30','4040...40','5050...50',22,24);
+-- PASS:0218 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','0101010101', '2020...20','3030...30','4040...40','5050...50',33,36);
+-- PASS:0218 If 1 row is inserted?
+
+ SELECT COUNT(*) FROM  T12;
+
+       COUNT 
+============ 
+
+           4 
+
+-- PASS:0218 If count = 4?
+
+ SELECT COL6,SUM(COL11),MAX(COL12) FROM T12 GROUP BY COL1,COL5,COL3,COL6,COL2,COL4 ORDER BY COL6 DESC;
+
+COL6                         SUM          MAX 
+========== ===================== ============ 
+
+1010101010                    33           24 
+0101010101                    77           48 
+
+-- PASS:0218 If 2 rows are selected and second COL6 = 0101010101 and ?
+-- PASS:0218 second SUM(COL11) = 77 and second MAX(COL12) = 48?
+
+ROLLBACK;
+INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',111,112);
+-- PASS:0219 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888889','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',333,336);
+-- PASS:0219 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888889','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',444,448);
+-- PASS:0219 If 1 row is inserted?
+
+ INSERT INTO T12 VALUES('1','22','4444','666666','88888888','1010101010', '20202020202020202020','303030303030303030303030303030', '4040404040404040404040404040404040404040', '5050...50',222,224);
+-- PASS:0219 If 1 row is inserted?
+
+ SELECT COUNT(*) FROM  T12;
+
+       COUNT 
+============ 
+
+           4 
+
+-- PASS:0219 If count = 4?
+
+ SELECT COL5,SUM(COL11),MAX(COL12) FROM T12 GROUP BY COL9,COL5,COL7,COL4,COL3,COL8 ORDER BY COL5 DESC;
+
+COL5                       SUM          MAX 
+======== ===================== ============ 
+
+88888889                   777          448 
+88888888                   333          224 
+
+-- PASS:0219 If 2 rows are selected ?
+-- PASS:0219 If row #1 COL5=88888889, SUM(COL11)=777, MAX(COL12)=448?
+-- PASS:0219 If row #2 COL5=88888888, SUM(COL11)=333, MAX(COL12)=224?
+
+ROLLBACK;
+-- from dml047
+-- TEST:0222 FIPS sizing -- Length(240) of a character string!
+-- FIPS sizing TEST
+-- NOTE:0222 Literal length is only 78
+ 
+ CREATE TABLE T240(STR240 CHAR(240));
+INSERT INTO T240 VALUES('Now is the time for all good men and women to come to the aid of their country');
+-- PASS:0222 If 1 row is inserted?
+
+SELECT * FROM T240;
+
+STR240                                                                                                                                                                                                                                           
+=============================================================================== 
+
+Now is the time for all good men and women to come to the aid of their country                                                                                                                                                                   
+
+-- PASS:0222 If STR240 starts with 'Now is the time for all good men'?
+-- PASS:0222 and ends 'and women to come to the aid of their country'?
+
+-- from dml049
+-- TEST:0225 FIPS sizing -- ten tables in FROM clause!
+-- FIPS sizing TEST
+
+ CREATE TABLE TEMP_S (EMPNUM  CHAR(3), GRADE DECIMAL(4), CITY CHAR(15));
+CREATE TABLE WORKS1(EMPNUM    CHAR(3) NOT NULL, PNUM    CHAR(3) NOT NULL, HOURS   DECIMAL(5), UNIQUE(EMPNUM, PNUM));
+INSERT INTO TEMP_S SELECT EMPNUM,GRADE,CITY FROM STAFF WHERE GRADE > 11;
+INSERT INTO STAFF1 SELECT * FROM STAFF;
+INSERT INTO WORKS1 SELECT * FROM WORKS;
+INSERT INTO STAFF4 SELECT * FROM STAFF;
+INSERT INTO PROJ1 SELECT * FROM PROJ;
+SELECT STAFF.EMPNUM,PROJ.PNUM,WORKS.HOURS, STAFF3.GRADE,STAFF4.CITY,WORKS1.HOURS, TEMP_S.GRADE,PROJ1.PNUM,STAFF1.GRADE, UPUNIQ.COL2 FROM   STAFF,PROJ,WORKS,STAFF3,STAFF4,WORKS1, TEMP_S,PROJ1,STAFF1,UPUNIQ WHERE  STAFF.EMPNUM = WORKS.EMPNUM    AND PROJ.PNUM = WORKS.PNUM         AND STAFF3.EMPNUM = WORKS.EMPNUM   AND STAFF4.EMPNUM = WORKS.EMPNUM   AND WORKS1.EMPNUM = WORKS.EMPNUM   AND WORKS1.PNUM = WORKS.PNUM       AND TEMP_S.EMPNUM = WORKS.EMPNUM   AND PROJ1.PNUM = WORKS.PNUM        AND STAFF1.EMPNUM = WORKS.EMPNUM   AND UPUNIQ.COL2 = 'A' ORDER BY 1, 2;
+
+EMPNUM PNUM          HOURS        GRADE CITY                   HOURS        GRADE PNUM          GRADE COL2   
+====== ====== ============ ============ =============== ============ ============ ====== ============ ====== 
+
+E1     P1               40           12 Deale                     40           12 P1               12 A      
+E1     P2               20           12 Deale                     20           12 P2               12 A      
+E1     P3               80           12 Deale                     80           12 P3               12 A      
+E1     P4               20           12 Deale                     20           12 P4               12 A      
+E1     P5               12           12 Deale                     12           12 P5               12 A      
+E1     P6               12           12 Deale                     12           12 P6               12 A      
+E3     P2               20           13 Vienna                    20           13 P2               13 A      
+E4     P2               20           12 Deale                     20           12 P2               12 A      
+E4     P4               40           12 Deale                     40           12 P4               12 A      
+E4     P5               80           12 Deale                     80           12 P5               12 A      
+
+-- PASS:0225 If 10 rows are selected ?
+-- PASS:0225 If first STAFF.EMPNUM='E1',PROJ.PNUM='P1',WORKS.HOURS=40?
+-- PASS:0225 If last STAFF.EMPNUM='E4',PROJ.PNUM='P5',WORKS.HOURS=80?
+
+ROLLBACK WORK;
+DROP DATABASE;

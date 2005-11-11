@@ -1,0 +1,80 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+CREATE TABLE STAFF11 (EMPNUM CHAR(3) NOT NULL PRIMARY KEY, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), CHECK (GRADE NOT IN (5,22) AND EMPNAME NOT LIKE 'T%'));
+INSERT INTO STAFF11VALUES('E1','Thomas',0,'Deale');
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 27
+-'E1'
+INSERT INTO STAFF11 VALUES('E2','Tom',22,'Newyork');
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint INTEG_3 on view or table STAFF11
+INSERT INTO STAFF11 VALUES('E3','Susan',11,'Hawaii');
+SELECT COUNT(*) FROM STAFF11;
+
+       COUNT 
+============ 
+
+           1 
+
+CREATE TABLE STAFF12 (EMPNUM    CHAR(3) NOT NULL,EMPNAME  CHAR(20),GRADE DECIMAL(4),CITY   CHAR(15),PRIMARY KEY (EMPNUM),CHECK (NOT GRADE IN (5,22)AND NOT EMPNAME LIKE 'T%'));
+INSERT INTO STAFF12 VALUES('E1','Thomas',0,'Deale');
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint INTEG_6 on view or table STAFF12
+INSERT INTO STAFF12 VALUES('E2','Tom',22,'Newyork'); 
+Statement failed, SQLCODE = -297
+
+Operation violates CHECK constraint INTEG_6 on view or table STAFF12
+INSERT INTO STAFF12 VALUES('E3','Susan',11,'Hawaii');
+SELECT COUNT(*) FROM STAFF12;
+
+       COUNT 
+============ 
+
+           1 
+
+CREATE TABLE STAFF15 (EMPNUM CHAR(3), EMPNAME  CHAR(20) NOT NULL, GRADE DECIMAL(4), CITY CHAR(15));
+INSERT INTO STAFF15 VALUES('E1','Alice',52,'Deale');
+SELECT COUNT(*) FROM STAFF15;
+
+       COUNT 
+============ 
+
+           1 
+
+INSERT INTO STAFF15 VALUES('E2',NULL,52,'Newyork');
+Statement failed, SQLCODE = -625
+
+validation error for column EMPNAME, value "*** null ***"
+SELECT COUNT(*) FROM STAFF15;
+
+       COUNT 
+============ 
+
+           1 
+
+DELETE FROM STAFF15;
+INSERT INTO STAFF15 VALUES('E1','Alice',52,'Deale');
+SELECT COUNT(*) FROM STAFF15;
+
+       COUNT 
+============ 
+
+           1 
+
+INSERT INTO STAFF15(EMPNUM,GRADE,CITY) VALUES('E2',52,'Newyork'); 
+Statement failed, SQLCODE = -625
+
+validation error for column EMPNAME, value "*** null ***"
+SELECT COUNT(*) FROM STAFF15;
+
+       COUNT 
+============ 
+
+           1 
+
+DROP DATABASE;

@@ -1,0 +1,57 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+COMMIT WORK;
+
+-- NO_TEST:0496 SQLSTATE 22002: data exception/null, value, no indic.!
+
+ CREATE TABLE HH (SMALLTEST  SMALLINT);
+ INSERT INTO STAFF VALUES ('E6','Earl Brown',11,'Claggetsville Maryland');
+-- PASS:0498 If ERROR, data exception/string right trunc.?
+-- PASS:0498 If 0 rows inserted OR SQLSTATE = 22001 OR SQLCODE < 0?
+
+ INSERT INTO STAFF VALUES ('E7','Ella Brown',12,'Claggetsville Maryland');
+-- PASS:0498 If ERROR, data exception/string right trunc.?
+-- PASS:0498 If 0 rows inserted OR SQLSTATE = 22001 OR SQLCODE < 0?
+
+ SELECT COUNT(*) FROM STAFF;
+-- PASS:0498 If count = 5?
+
+ROLLBACK WORK;
+
+ DELETE FROM HH;
+ INSERT INTO HH VALUES (3);
+ INSERT INTO HH VALUES (NULL);
+
+ SELECT AVG(SMALLTEST) FROM HH;
+-- PASS:0500 If WARNING, null value eliminated in set function?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+ UPDATE STAFF SET GRADE = NULL WHERE GRADE = 13;
+
+ SELECT AVG(GRADE) FROM STAFF WHERE CITY = 'Vienna';
+-- PASS:0500 If WARNING, null value eliminated in set function?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+ SELECT SUM(DISTINCT GRADE) FROM STAFF;
+-- PASS:0500 If WARNING, null value eliminated in set function?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+ INSERT INTO HH SELECT MAX(GRADE) FROM STAFF;
+-- PASS:0500 If WARNING, null value eliminated in set function?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+ DELETE FROM HH WHERE SMALLTEST < (SELECT MIN(GRADE) FROM STAFF WHERE CITY = 'Vienna');
+-- PASS:0500 If WARNING, null value eliminated in set function?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+ SELECT CITY, COUNT(DISTINCT GRADE) FROM STAFF GROUP BY CITY ORDER BY CITY DESC;
+-- PASS:0500 If 3 rows are selected with the following order?
+-- PASS:0500 CITY COUNT(DISTINCT GRADE)?
+-- PASS:0500 'Vienna' 1?
+-- PASS:0500 'Deale' 1?
+-- PASS:0500 'Akron' 0?
+-- PASS:0500 OR SQLSTATE = 01003?
+
+DROP DATABASE;

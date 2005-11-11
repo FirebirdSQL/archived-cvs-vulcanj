@@ -1,0 +1,57 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb';
+/*---------------------------------------------*/
+/* Create a table with computed field.         */
+/*---------------------------------------------*/
+create table t0 (a integer, af computed by (a*3));
+insert into t0(a) values(10);
+/*---------------------------------------------*/
+/* Create a table with nested computed field.  */
+/*---------------------------------------------*/
+create table t1 (a integer, af computed by (a*4), afaf computed by (af*5));
+insert into t1(a) values(11);
+/*---------------------------------------------------------------------*/
+/* Now alter table and drop the field which is used in computed field. */
+/* It shouldn't allow you to drop the field.                           */
+/*---------------------------------------------------------------------*/
+alter table t0 drop a;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-cannot delete
+-COLUMN A
+-there are 1 dependencies
+show table t0;
+A                               INTEGER Nullable 
+AF                              Computed by: (a*3)
+select * from t0;
+
+           A                    AF 
+============ ===================== 
+
+          10                    30 
+
+/*---------------------------------------------------------------------*/
+/* Now alter table and drop the computed field which is used in other  */
+/* computed field.                                                     */ 
+/* It shouldn't allow you to drop the field.                           */
+/*---------------------------------------------------------------------*/
+alter table t1 drop af;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-cannot delete
+-COLUMN AF
+-there are 1 dependencies
+show table t1;
+A                               INTEGER Nullable 
+AF                              Computed by: (a*4)
+AFAF                            Computed by: (af*5)
+select * from t1;
+
+           A                    AF                  AFAF 
+============ ===================== ===================== 
+
+          11                    44                   220 
+
+drop database;

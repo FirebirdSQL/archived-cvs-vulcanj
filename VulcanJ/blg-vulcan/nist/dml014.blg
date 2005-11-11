@@ -1,0 +1,16 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+-- TEST:0044 AVG function - empty result NULL value!
+ CREATE TABLE TEMP_S (EMPNUM  CHAR(3), GRADE DECIMAL(4), CITY CHAR(15));
+DELETE FROM TEMP_S;
+SELECT AVG(GRADE) FROM   TEMP_S;
+
+                  AVG 
+===================== 
+
+               <null> 
+
+-- PASS:0044 If AVG(GRADE) is NULL?
+
+DROP DATABASE;

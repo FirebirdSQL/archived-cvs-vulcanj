@@ -1,0 +1,244 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII; 
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+-- tests from the xts_74x series. 
+-- 6/21/2006.
+
+-- TEST:7040 COUNT(ALL <column name>) with Nulls in column!
+ CREATE TABLE EMPTY740 (COL_1   CHAR(10), COL_2   VARCHAR(5), COL_3 NUMERIC(5), COL_4   NUMERIC(6), COL_5 TIME);
+SELECT COUNT(ALL COL_1) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0?
+ SELECT COUNT(COL_2) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0?
+ SELECT COUNT(COL_3) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0?
+ SELECT COUNT(COL_4) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0?
+ SELECT COUNT(ALL COL_5) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0?
+ INSERT INTO EMPTY740 VALUES('NICKOS','NICK',NULL,116,TIME'09:30:30');
+INSERT INTO EMPTY740  VALUES('MARIA',NULL,NULL,NULL,TIME'15:43:52');
+INSERT INTO EMPTY740  VALUES('KILLER','BUCK',NULL,127,TIME'15:43:52');
+INSERT INTO EMPTY740  VALUES('JOYCE',NULL,NULL,17,TIME'12:53:13');
+INSERT INTO EMPTY740  VALUES('ANGIE','TREE',NULL,7,TIME'16:29:22');
+SELECT COUNT(COL_1) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           5 
+
+-- PASS:7040 If COUNT = 5?
+
+ SELECT COUNT(ALL COL_2) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           3 
+
+-- PASS:7040 If COUNT = 3 and ?
+-- PASS:7040 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL COL_3) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7040 If COUNT = 0 and ?
+-- PASS:7040 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL COL_4) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           4 
+
+-- PASS:7040 If COUNT = 4 and ?
+-- PASS:7040 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL COL_5) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           5 
+
+-- PASS:7040 If COUNT = 5 and ?
+-- PASS:7040 WARNING - null value eliminated in set function ?
+
+ROLLBACK; 
+DROP TABLE EMPTY740;
+-- TEST:7041 COUNT(ALL NULLIF...) with generated Nulls!
+
+ CREATE TABLE EMPTY740 (COL_1   CHAR(10), COL_2   VARCHAR(5), COL_3 NUMERIC(5), COL_4   DECIMAL(6), COL_5 TIME);
+INSERT INTO EMPTY740 VALUES('NICKOS','NICK',NULL,116,'18:00:00');
+INSERT INTO EMPTY740  VALUES('MARIA',NULL,NULL,NULL,'12:00:00');
+INSERT INTO EMPTY740  VALUES('KILLER','BUCK',NULL,127,'09:30:30');
+INSERT INTO EMPTY740  VALUES('JOYCE',NULL,NULL,17,'15:43:52');
+INSERT INTO EMPTY740  VALUES('ANGIE','TREE',NULL,7,'12:53:13');
+INSERT INTO EMPTY740  VALUES('BUCK','BUCK',NULL,12,'16:29:22');
+SELECT COUNT(ALL NULLIF ('Nickos','Nickos   ')) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           0 
+
+-- PASS:7041 If COUNT = 0 and ?
+-- PASS:7041 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL NULLIF (COL_1,'JANET')) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           6 
+
+-- PASS:7041 If COUNT = 6?
+
+ SELECT COUNT(ALL NULLIF ('NICKOS',COL_1)) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           5 
+
+-- PASS:7041 If COUNT = 5 and ?
+-- PASS:7041 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL NULLIF (COL_2,COL_1)) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           3 
+
+-- PASS:7041 If COUNT = 3 and ?
+-- PASS:7041 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL NULLIF (COL_4,COL_3)) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           5 
+
+-- PASS:7041 If COUNT = 5 and ?
+-- PASS:7041 WARNING - null value eliminated in set function ?
+
+ SELECT COUNT(ALL NULLIF (COL_5,TIME'12:00:00')) FROM EMPTY740;
+
+       COUNT 
+============ 
+
+           5 
+
+-- PASS:7041 If COUNT = 5 and ?
+-- PASS:7041 WARNING - null value eliminated in set function ?
+
+ DROP TABLE EMPTY740;
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-object EMPTY740 is in use 
+-- TEST:7042 COUNT ALL <literal>!
+
+ CREATE TABLE CL_DATA_TYPE (CL_CHAR CHAR(10), CL_NUM NUMERIC, CL_DEC DECIMAL, CL_REAL REAL);
+INSERT INTO CL_DATA_TYPE VALUES ('GEORGE',1,10,100);
+INSERT INTO CL_DATA_TYPE VALUES ('NICK',2,20,200);
+INSERT INTO CL_DATA_TYPE VALUES ('PAUL',3,30,300);
+INSERT INTO CL_DATA_TYPE VALUES ('PETER',4,40,400);
+INSERT INTO CL_DATA_TYPE VALUES ('KEVIN',5,50,500);
+INSERT INTO CL_DATA_TYPE VALUES ('JASON',6,60,600);
+SELECT COUNT(ALL 115.5), COUNT(ALL 'ATHINA'), COUNT(ALL 255), COUNT(*) FROM CL_DATA_TYPE;
+
+       COUNT        COUNT        COUNT        COUNT 
+============ ============ ============ ============ 
+
+           6            6            6            6 
+
+-- PASS:7042 If COUNTs are 6, 6, 6, 6?
+
+ INSERT INTO CL_DATA_TYPE VALUES(NULL,55,225,10);
+INSERT INTO CL_DATA_TYPE VALUES(NULL,15,140,NULL);
+SELECT COUNT(*),COUNT(ALL 119), COUNT(ALL 'GIORGOS') , COUNT(CL_CHAR), COUNT(CL_REAL) FROM CL_DATA_TYPE;
+
+       COUNT        COUNT        COUNT        COUNT        COUNT 
+============ ============ ============ ============ ============ 
+
+           8            8            8            6            7 
+
+-- PASS:7042 If COUNTs are 8, 8, 8, 6, 7?
+-- PASS:7042 If WARNING - null value eliminated in set function?
+
+ INSERT INTO CL_DATA_TYPE VALUES(NULL,0,0,NULL);
+SELECT COUNT(*), COUNT(ALL 1000), COUNT(ALL 'STEFOS'), COUNT(CL_CHAR),COUNT(CL_REAL) FROM CL_DATA_TYPE;
+
+       COUNT        COUNT        COUNT        COUNT        COUNT 
+============ ============ ============ ============ ============ 
+
+           9            9            9            6            7 
+
+-- PASS:7042 If COUNTs = 9, 9, 9, 6, 7?
+-- PASS:7042 If WARNING - null value eliminated in set function?
+
+
+-- following tests require information schema
+
+-- testXts_744 : skipped!
+-- TEST:7044 Presence of SQL_CHARACTER in CHARACTER_SETS view!
+
+-- testXts_745 : skipped!
+-- TEST:7045 Presence of ASCII_GRAPHIC in CHARACTER_SETS view!
+
+-- testXts_746 : skipped!
+-- TEST:7046 Presence of LATIN1 in CHARACTER_SETS view!
+
+-- testXts_747 : skipped!
+-- TEST:7047 Presence of ASCII FULL in CHARACTER_SETS view!
+
+-- testXts_748 : skipped!
+-- TEST:7048 Named constraint in column definition in schema definition!
+
+-- testXts_749 : skipped!
+-- TEST:7049 Named table constraint in table definition!
+
+-- testXts_750 : skipped!
+-- TEST:7050 Named domain constraint! (visible in information schema)
+
+
+DROP DATABASE;

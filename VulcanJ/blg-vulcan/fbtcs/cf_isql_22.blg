@@ -1,0 +1,15 @@
+Use CONNECT or CREATE DATABASE to specify a database
+set echo;
+       T                                      V                              
+
+       V                               
+A                               INTEGER Nullable 
+View Source:
+==== ======
+ select a from t
+A                               INTEGER Nullable 
+A                               INTEGER Nullable 
+View Source:
+==== ======
+ select a from t
+A                               INTEGER Nullable 

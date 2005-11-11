@@ -1,0 +1,1 @@
+This folder contains tests that were added as part of vulcan development. They include regression tests for some defects we found, along with tests of new features.

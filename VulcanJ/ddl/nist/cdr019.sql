@@ -1,0 +1,30 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/sun-tab3.sql;
+INPUT ddl/input/sun-tab3-refresh.sql;
+ INSERT INTO EMP VALUES (41,'Tom','China Architecture', 20,'Architecture',040553);
+ INSERT INTO DEPT VALUES (20,'Architecture','Richard');
+ INSERT INTO EMP VALUES (41,'Tom','China Architecture', 20,'Architecture',040553);
+ SELECT COUNT(*)  FROM EMP WHERE ENO = 41; 
+
+INPUT ddl/input/sun-tab3-refresh.sql;
+ DELETE FROM EMP WHERE ENO = 21;
+ DELETE FROM EXPERIENCE WHERE EXP_NAME = 'Tom' AND BTH_DATE = 040523; 
+ DELETE FROM EMP WHERE ENO = 21;
+ SELECT COUNT(*)  FROM EMP WHERE ENO = 21;
+
+INPUT ddl/input/sun-tab3-refresh.sql;
+ UPDATE EMP SET ENAME = 'Thomas' WHERE ENO = 21; 
+ UPDATE EMP SET DNAME = 'Agriculture' WHERE  ENO = 21; 
+ UPDATE EMP SET DNAME = 'Education' WHERE  ENO = 21;
+ SELECT COUNT(*) FROM EMP WHERE DNO = 12 AND DNAME = 'Education' AND ENO = 21 AND ENAME = 'Tom';
+
+INPUT ddl/input/sun-tab3-refresh.sql;
+ UPDATE EMP SET ENAME = 'Thomas' WHERE ENO = 21;
+ INSERT INTO EMP VALUES (30,'Thomas','Languages & Operating System', 12,'Computer',040523); 
+ UPDATE EXPERIENCE SET EXP_NAME = 'Thomas' WHERE EXP_NAME = 'Tom' AND BTH_DATE = 040523; 
+ DELETE FROM EMP WHERE  ENO = 21;
+ SELECT COUNT(*) FROM EMP WHERE DNO = 12 AND ENO = 21 AND ENAME = 'Tom'; 
+
+DROP DATABASE;

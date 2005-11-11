@@ -1,0 +1,18 @@
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/sun-tab2.sql;
+INPUT ddl/input/sun-tab2-refresh.sql;
+ SELECT COUNT(*) FROM SIZ1_P WHERE S1 = 'E1' AND S2 = 'TTS' AND S3 = 1;
+ UPDATE SIZ1_P SET S2 = 'TTT' WHERE S1 = 'E1' AND S2 = 'TTS' AND S3 = 1;
+ SELECT COUNT(*) FROM SIZ1_P WHERE S1 = 'E1' AND S2 = 'TTT' AND S3 = 1;
+
+INPUT ddl/input/sun-tab2-refresh.sql;
+ UPDATE SIZ1_F SET F1 = 'E9' WHERE F1 = 'E2';
+ SELECT COUNT(*) FROM SIZ1_F WHERE F1 = 'E2'; 
+
+INPUT ddl/input/sun-tab2-refresh.sql;
+ UPDATE SIZ1_F SET F1 = 'E1' WHERE F1 = 'E2' AND F6 = 'RRR'; 
+ SELECT COUNT(*) FROM SIZ1_F WHERE F1 = 'E1';
+
+DROP DATABASE;
