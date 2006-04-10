@@ -1,0 +1,15 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- s0284777
+-- VULCAN ERROR MESSAGE ON DROP TABLE CASCADE
+
+CREATE DATABASE 'test.fdb' ;
+create table t3 (i integer);
+drop table t3 cascade;
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 15
+-cascade
+SHOW TABLE t3;
+I                               INTEGER Nullable 
+DROP DATABASE;

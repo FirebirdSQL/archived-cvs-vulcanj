@@ -1,0 +1,24 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0287716
+-- FIREBIRD STRANGE ALTER TABLE BEHAVIOR 
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' ;
+RECREATE TABLE foo ( i INTEGER );
+INSERT INTO foo VALUES (2000000000);
+-- Now try to alter the column to be a varchar
+-- Should err, VARCHAR(5) can't hold '2000000000'
+ALTER TABLE foo ALTER i TYPE VARCHAR(5);
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-New size specified for column I must be at least 11 characters.
+-- Should err, VARCHAR(5) can't hold '2000000000'
+ALTER TABLE foo ALTER i TYPE VARCHAR(9);
+Statement failed, SQLCODE = -607
+
+unsuccessful metadata update
+-New size specified for column I must be at least 11 characters.
+-- show have column I as integer
+show table foo;
+I                               INTEGER Nullable 
+drop database;

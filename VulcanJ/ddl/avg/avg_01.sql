@@ -1,8 +1,0 @@
-CREATE DATABASE 'test.fdb' ;
-CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
-                   text VARCHAR(32));
-INSERT INTO test VALUES(5,null);
-
-SELECT AVG(id) FROM test;
-
-DROP DATABASE;

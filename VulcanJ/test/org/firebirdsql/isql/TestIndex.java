@@ -58,4 +58,7 @@ processISQLInput ("ddl/index/create_index_12.sql", blgDir+"/index/create_index_1
 public void testCreate_index_13() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/index/create_index_13.sql", blgDir+"/index/create_index_13.blg", "output/index/create_index_13.output");
 }
+public void testIndex_bad_results() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/index/index_bad_results.sql", blgDir+"/index/index_bad_results.blg", "output/index/index_bad_results.output");
+}
 }

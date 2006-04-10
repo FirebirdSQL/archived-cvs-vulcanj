@@ -62,12 +62,11 @@ on
 -- PASS:0835 If 1 row selected and value is 'on '?
 
  SELECT SUBSTRING (CITY FROM 4 FOR -1) FROM STAFF WHERE EMPNAME = 'Ed';
+Statement failed, SQLCODE = -104
 
-SUBSTRING       
-=============== 
-Statement failed, SQLCODE = -802
-
-arithmetic exception, numeric overflow, or string truncation
+SQL error code = -104
+-Token unknown - line 3, char 36
+--
 -- PASS:0835 If ERROR, substring error, 0 rows selected?
 
  INSERT INTO MOREGRUB VALUES ('Pretzels', 1);

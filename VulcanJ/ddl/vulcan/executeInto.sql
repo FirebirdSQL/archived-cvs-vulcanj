@@ -112,4 +112,28 @@ EXECUTE BLOCK RETURNS (L INTEGER) AS BEGIN
 END ^
 set term ; ^
 
+
+-- S0319724
+-- THUP: XYTHOS IS ENCOUNTERING A SYNTAX ERROR WHEN TRYING TO PREPARE AN EXECUTE BLOCK
+recreate table refresh (index_name char(40), refresh_ts timestamp);
+commit;
+
+set term ^;
+EXECUTE BLOCK AS
+DECLARE VARIABLE L_INDEX VARCHAR(100);
+DECLARE VARIABLE L_SQL VARCHAR(200);
+BEGIN
+FOR SELECT RDB$INDEX_NAME FROM RDB$INDICES INTO :L_INDEX DO
+BEGIN
+L_SQL = 'SET statistics INDEX ' || L_INDEX || ';';
+EXECUTE STATEMENT :L_SQL;
+L_SQL = 'insert into refresh (index_name, refresh_ts) values ( ''' || L_INDEX || ''', CURRENT_TIME);';
+EXECUTE STATEMENT :L_SQL;
+END
+END ^
+
+set term ;^
+
+select index_name from refresh;
+
 drop database ;

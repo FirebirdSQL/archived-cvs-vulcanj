@@ -14,8 +14,7 @@ commit;
 select i,
    case when i = 1
    then 'one'
-   else (select rdb$relation_id
-      from rdb$database)
+   else (select i from onerow)
    end
    from t1;
    

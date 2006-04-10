@@ -1,65 +1,108 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb';
-set echo;
+create table ONEROW (i integer);
+insert into ONEROW values (1);
+commit;
+-- I am a comment
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+/* BEGIN */
+-- I am a comment
+select * from onerow;
 
-           <null>             128 <null>                          NONE                            
+           I 
+============ 
 
+           1 
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+/* END */
 
-           <null>             128 <null>                          NONE                            
+/* BEGIN */
+-- comment with unclosed 'quoted string
+select * from onerow;
 
+           I 
+============ 
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+           1 
 
-           <null>             128 <null>                          NONE                            
+/* END */
 
+/* BEGIN */
+-- comment with unclosed "quoted string
+select * from onerow;
+
+           I 
+============ 
+
+           1 
+
+/* END */
+
+/* BEGIN */
+-- I am a comment;
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
 -Unexpected end of command
+select * from onerow;
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+           I 
+============ 
 
-           <null>             128 <null>                          NONE                            
+           1 
 
+/* END */
+
+/* BEGIN with unclosed "quoted */
+-- I am a comment;
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
 -Unexpected end of command
+select * from onerow;
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+           I 
+============ 
 
-           <null>             128 <null>                          NONE                            
+           1 
 
+/* END */
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+select * /*
+comment
+*/
+from onerow;
 
-           <null>             128 <null>                          NONE                            
+           I 
+============ 
 
+           1 
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+select * 
+/* comment */
+from onerow;
 
-           <null>             128 <null>                          NONE                            
+           I 
+============ 
 
+           1 
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+select * 
+-- comment
+from onerow;
 
-           <null>             128 <null>                          NONE                            
+           I 
+============ 
 
+           1 
 
-  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS              RDB$CHARACTER_SET_NAME          
-================= =============== =============================== =============================== 
+/*
+Comment
+*/ select * from onerow;
 
-           <null>             128 <null>                          NONE                            
+           I 
+============ 
 
+           1 
+
+drop database;

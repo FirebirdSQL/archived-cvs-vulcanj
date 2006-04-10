@@ -40,6 +40,9 @@ processISQLInput ("ddl/table/alter_table_10.sql", blgDir+"/table/alter_table_10.
 public void testAlter_table_11() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/table/alter_table_11.sql", blgDir+"/table/alter_table_11.blg", "output/table/alter_table_11.output");
 }
+public void testAlter_table_error() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/alter_table_error.sql", blgDir+"/table/alter_table_error.blg", "output/table/alter_table_error.output");
+}
 public void testCreate_table_01() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/table/create_table_01.sql", blgDir+"/table/create_table_01.blg", "output/table/create_table_01.output");
 }
@@ -60,5 +63,20 @@ processISQLInput ("ddl/table/create_table_06.sql", blgDir+"/table/create_table_0
 }
 public void testCreate_table_07() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/table/create_table_07.sql", blgDir+"/table/create_table_07.blg", "output/table/create_table_07.output");
+}
+public void testCreate_table_08() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/create_table_08.sql", blgDir+"/table/create_table_08.blg", "output/table/create_table_08.output");
+}
+public void testCreate_table_09() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/create_table_09.sql", blgDir+"/table/create_table_09.blg", "output/table/create_table_09.output");
+}
+public void testCreate_table_10() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/create_table_10.sql", blgDir+"/table/create_table_10.blg", "output/table/create_table_10.output");
+}
+public void testCreate_table_11() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/create_table_11.sql", blgDir+"/table/create_table_11.blg", "output/table/create_table_11.output");
+}
+public void testTable_limit() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/table/table_limit.sql", blgDir+"/table/table_limit.blg", "output/table/table_limit.output");
 }
 }

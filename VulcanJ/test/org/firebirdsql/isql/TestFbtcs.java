@@ -82,4 +82,10 @@ processISQLInput ("ddl/fbtcs/cf_isql_27.sql", blgDir+"/fbtcs/cf_isql_27.blg", "o
 public void testCf_isql_28() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/fbtcs/cf_isql_28.sql", blgDir+"/fbtcs/cf_isql_28.blg", "output/fbtcs/cf_isql_28.output");
 }
+public void testDsql_domain_04() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/fbtcs/dsql_domain_04.sql", blgDir+"/fbtcs/dsql_domain_04.blg", "output/fbtcs/dsql_domain_04.output");
+}
+public void testProc_cast6_isql() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/fbtcs/proc_cast6_isql.sql", blgDir+"/fbtcs/proc_cast6_isql.blg", "output/fbtcs/proc_cast6_isql.output");
+}
 }

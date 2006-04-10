@@ -1,6 +1,0 @@
-Use CONNECT or CREATE DATABASE to specify a database
-CREATE DATABASE 'test.fdb'  USER 'test' PASSWORD 'test';
-Statement failed, SQLCODE = -902
-
-Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
-DROP DATABASE;

@@ -1,0 +1,25 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- Defect S0284783
+-- VULCAN HANDLING OF SUBSTRING() 
+
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+create table t4 (city char(20)); 
+insert into t4 values ('raleigh'); 
+select substring (city from 4 for -1) from t4; 
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 35
+--
+select substring (city from 0 for 2) from t4; 
+Statement failed, SQLCODE = -842
+
+SQL error code = -842
+-Positive value expected
+select substring (city from 4 for 0) from t4; 
+Statement failed, SQLCODE = -842
+
+SQL error code = -842
+-Positive value expected
+drop database;

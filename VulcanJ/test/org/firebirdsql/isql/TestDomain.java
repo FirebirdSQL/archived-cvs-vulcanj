@@ -148,6 +148,9 @@ processISQLInput ("ddl/domain/create_domain_41.sql", blgDir+"/domain/create_doma
 public void testCreate_domain_42() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/domain/create_domain_42.sql", blgDir+"/domain/create_domain_42.blg", "output/domain/create_domain_42.output");
 }
+public void testCreate_domain_43() throws SQLException, InterruptedException, IOException {
+processISQLInput ("ddl/domain/create_domain_43.sql", blgDir+"/domain/create_domain_43.blg", "output/domain/create_domain_43.output");
+}
 public void testDrop_domain_01() throws SQLException, InterruptedException, IOException {
 processISQLInput ("ddl/domain/drop_domain_01.sql", blgDir+"/domain/drop_domain_01.blg", "output/domain/drop_domain_01.output");
 }

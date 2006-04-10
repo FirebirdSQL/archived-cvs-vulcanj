@@ -1,0 +1,121 @@
+C:\workspace\VulcanJ>bash fbmust.sh
+beginning fbmust tests...
+................................................................................
+..
+   diff detected! : diff/create_domain_42.diff
+....
+   diff detected! : diff/drop_domain_03.diff
+.......................
+   diff detected! : diff/cf_isql_16.diff
+.......
+   diff detected! : diff/cf_isql_26.diff
+.
+   diff detected! : diff/cf_isql_27.diff
+.
+   diff detected! : diff/cf_isql_28.diff
+.
+   diff detected! : diff/dsql_domain_04.diff
+.......................
+   diff detected! : diff/index_bad_results.diff
+....
+   diff detected! : diff/cdr004.diff
+..............................
+   diff detected! : diff/dml011.diff
+........
+   diff detected! : diff/dml020.diff
+..
+   diff detected! : diff/dml022.diff
+..
+   diff detected! : diff/dml023NullsAreEqualForDistinct.diff
+.
+   diff detected! : diff/dml023NullsSortTogetherInOrderBy.diff
+.
+   diff detected! : diff/dml024.diff
+.....
+   diff detected! : diff/dml03x.diff
+.
+   diff detected! : diff/dml04x.diff
+.
+   diff detected! : diff/dml05x.diff
+.
+   diff detected! : diff/dml060.diff
+..
+   diff detected! : diff/dml062.diff
+.......
+   diff detected! : diff/dml075.diff
+...
+   diff detected! : diff/dml079.diff
+.............
+   diff detected! : diff/dml112.diff
+...........
+   diff detected! : diff/dml144.diff
+..
+   diff detected! : diff/dml148.diff
+.....
+   diff detected! : diff/dml158.diff
+.......
+   diff detected! : diff/dml175.diff
+.
+   diff detected! : diff/dml176.diff
+......................................
+   diff detected! : diff/yts76x.diff
+...
+   diff detected! : diff/yts8xx.diff
+..........
+   diff detected! : diff/create_procedure_09.diff
+.....
+   diff detected! : diff/FirebirdNullsSortFirst.diff
+.............
+   diff detected! : diff/alter_table_error.diff
+........
+   diff detected! : diff/create_table_08.diff
+..
+   diff detected! : diff/create_table_10.diff
+.
+   diff detected! : diff/create_table_11.diff
+.
+   diff detected! : diff/table_limit.diff
+........................
+   diff detected! : diff/bigint.diff
+.
+   diff detected! : diff/double.diff
+..........
+   diff detected! : diff/alter_numeric.diff
+.
+   diff detected! : diff/autoCommit.diff
+........
+   diff detected! : diff/executeBlock.diff
+.
+   diff detected! : diff/executeInto.diff
+.
+   diff detected! : diff/factorial.diff
+..
+   diff detected! : diff/fblimits.diff
+.
+   diff detected! : diff/index_assert.diff
+.
+   diff detected! : diff/keyword.diff
+....
+   diff detected! : diff/portal_sp.diff
+..
+   diff detected! : diff/quote_keywords.diff
+..
+   diff detected! : diff/set_tran.diff
+.
+   diff detected! : diff/sp_null.diff
+.
+   diff detected! : diff/substring_bug.diff
+..
+   diff detected! : diff/unicode_hang.diff
+.
+   diff detected! : diff/utf16_003.diff
+.
+   diff detected! : diff/utf32_003.diff
+.
+   diff detected! : diff/xythos_sp.diff
+
+395 tests were executed. 56 failed.
+Output files are in ./output, diff files are in ./diff
+Tests took 1740 seconds.
+
+C:\workspace\VulcanJ>

@@ -1,0 +1,13 @@
+-- S0305596
+-- Defect title: ICRP: FIREBIRD DOESN'T PARSE INTEGERS VERY CLOSE TO 2^63 CORRECTLY. 
+
+set names ascii;
+create database 'test.fdb';
+
+create table c (col1 bigint);
+insert into c values(9223372036854775807);
+insert into c values(-9223372036854775808);
+commit;
+
+select * from c;
+drop database;

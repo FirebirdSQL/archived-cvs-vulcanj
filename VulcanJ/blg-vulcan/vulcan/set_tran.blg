@@ -1,0 +1,53 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- 
+-- Defect S0321244
+-- SET TRAN CAUSES ERROR IN ISQL 
+--
+
+set names ascii;
+create database 'test.fdb';
+-- do some work
+recreate table foo (i integer not null);
+insert into foo values (1);
+set transaction wait isolation level read committed; 
+Rolling back work.
+show table foo;
+I                               INTEGER Not Null 
+-- pass
+select * from foo;
+-- no rows;
+insert into foo values (1);
+commit;
+select * from foo;
+
+           I 
+============ 
+
+           1 
+
+-- 1 row
+
+create table lock (c char(20)) ; 
+set transaction wait isolation level read committed reserving lock for shared write; 
+Rolling back work.
+insert into lock values ('test');
+commit;
+set transaction w1;
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-Token unknown - line 1, char 17
+-w1
+-- named transaction fails in ISQL
+commit;
+set transaction wait isolation level read committed; 
+commit;
+select * from foo;
+
+           I 
+============ 
+
+           1 
+
+-- 1 row;
+drop database;

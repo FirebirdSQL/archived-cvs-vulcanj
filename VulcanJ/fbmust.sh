@@ -11,8 +11,10 @@ function process_dir {
       if [ -d "$f" ]; then
          # skip processing of special directories
          # echo directory processing..
-         # echo ${f##.*/}
-         if [ ${f##./ddl/} != input ] && [ ${f##./ddl/} != draft ]; then
+         mydir=${f##*ddl/}
+         mydir=${mydir##*/}
+         # echo dir is ${mydir}
+         if [ ${mydir} != input ] && [ ${mydir} != draft ] && [ ${mydir} != security ] && [ ${mydir} != CVS ]; then
             process_dir "$f"
          fi
       else
@@ -23,66 +25,55 @@ function process_dir {
              else
                 echo -n '.'
              fi
-             # f is ./ddl/avg/avg_01.sql
-             # myfile holds the file name + suffix
-             myfile=${f##.*/}
+             # f can be /net/bin/u/bioliv/VulcanJ/ddl/cast/cast_01.sql
+             # f can also be ./ddl/cast/cast_01.sql
+             
+             # myfile is file w/o path info
+             myfile=${f##*/}
 
-             # transform ./ddl/avg/avg_01.sql to
-             #    /net/txt/u/bioliv/VulcanJ/blg-vulcan/avg/avg_01.blg
+             blgfile=${f%%ddl*}${blgdir}${f##*ddl}
+             blgfile=${blgfile%.*}.blg
+             outfile=${f%%ddl*}${outdir}${f##*ddl}
+             outfile=${outfile%.*}.output
+             difffile=${f%%ddl*}diff/${myfile%.*}.diff
+             # echo outfile $outfile
+             # echo blgfile $blgfile
+             # echo difffile $difffile
+             # echo
 
-             # change the suffix
-             blgfile=${f%.sql}.blg
-             # remove the ./dll/ and add correct prefix
-             # blgfile=${blgfile##.*ddl}
-             # add the correct prefix
-             blgfile=${prefix}blg-vulcan${blgfile##.*ddl}
-
-             # change the suffix
-             outfile=${f%.sql}.output
-             #outfile=${prefix}output${outfile##.*ddl}
-             outfile=${prefix}output${outfile##.*ddl}
-             difffile=${prefix}diff/${myfile%.sql}.diff
-
-             #echo outfile $outfile
-             #echo blgfile $blgfile
-             #echo difffile $difffile
-             #echo
-
-             outdir=${outfile%/*}
              if [ ! -e "$outdir" ]; then
                 if [ $verbose = true ]; then
                    echo creating directory "$outdir"
                 fi
                 mkdir "$outdir"
              fi
-             #echo "$outdir"
-             #echo blg file is "$blgfile", output file is "$outfile"
              if [ -e test.fdb ]; then
                 rm test.fdb
              fi
 
-             if [ $mvs = true ]; then
-                rm -f "$outfile" "$outfile"_ascii
-                isql -i "$f" -o "$outfile"_ascii -m -e
-                iconv -f ISO8859-1 -t IBM-1047 "$outfile"_ascii > "$outfile"
+             rm -f "$outfile" "$outfile"
+             if [ $time_each_test = true ]; then
+                st=`date '+%s.%N'`
+                isql -i "$f" -o "$outfile" -m -e
+                en=`date '+%s.%N'`
+                echo "$f","$st","$en" >> timings.txt
              else
-                rm -f "$outfile" "$outfile"
-                if [ $time_each_test = true ]; then
-                   st=`date '+%s.%N'`
-                   isql -i "$f" -o "$outfile" -m -e
-                   en=`date '+%s.%N'`
-                   echo "$f","$st","$en" >> timings.txt
-                else
-                   isql -i "$f" -o "$outfile" -m -e
-                fi
+                isql -i "$f" -o "$outfile" -m -e
              fi
 
              let numTests=$numTests+1
              rm -f new.txt old.txt
-             sed -f filter.sed "$outfile" > new.txt
-             sed -f filter.sed "$blgfile" > old.txt
-             # diff -b "$blgfile" "$outfile" > "$difffile"
-             diff -bB old.txt new.txt > "$difffile"
+             if [ ${outfile%%/bin*} = /net ]; then
+                outfile=/net/txt${outfile#/net/bin*}
+                blgfile=/net/txt${blgfile#/net/bin*}
+                difffile=/net/txt${difffile#/net/bin*}
+                # echo fixed ${outfile}
+                # echo fixed ${blgfile}
+             fi
+             sed -f ${filter} "$outfile" > new.txt
+             sed -f ${filter} "$blgfile" > old.txt
+             diff -b old.txt new.txt > "$difffile"
+             # exit 1 
              if [ ! -s "$difffile" ]; then
                 rm -f "$difffile"
              else
@@ -96,17 +87,13 @@ function process_dir {
    done
 }
 
-diffdir=./diff
-sqldir=./ddl
-outdir=./output
-blg=./blg-vulcan
-# prefix=/net/txt/u/bioliv/VulcanJ/
-prefix=./
-
-# clean out old diff files, quietly
+filter=filter.sed
+diffdir=diff
+sqldir=ddl
+outdir=output
+blgdir=blg-vulcan
 numTests=0
 failedTests=0
-mvs=false
 verbose=false
 start_tm=0
 end_tm=0
@@ -116,20 +103,26 @@ echo "beginning fbmust tests..."
 
 while [ -n "$(echo $1 | grep '-')" ]; do
    case $1 in
+      -b ) blgdir="$2"
+           shift
+           ;;
       -d ) sqldir="$2"
            shift
            ;;
-      -o ) outdir="$2"
+      -s ) filter="$2"
            shift
            ;;
       -v ) verbose='true'
            ;;
       -t ) time_each_test='true'
            ;;
-      -m ) mvs='true'
-           ;;
       *  ) echo 'usage: fbmust [-v] [-m] [-d directory] [-o directory]'
-           echo 'example: fbmust -v -d ./ddl/nist'
+           echo 'example: '
+           echo '   fbmust -v -d ./ddl/nist'
+           echo 'mvs example:'
+           echo '   cd /net/txt/u/bioliv/VulcanJ'
+           echo '   /net/txt/u/bioliv/VulcanJ/fbmust.sh -v -d /net/bin/u/bioliv/fbmust/ddl -s /net/txt/u/bioliv/fbmust/ddl/filter.sed'
+
            exit 1
    esac
    shift
@@ -156,6 +149,7 @@ if [ $verbose = true ]; then
    echo sqldir: "$sqldir"
 fi
 
+# clean out old diff files, quietly
 rm -f timings.txt
 start_tm=`date '+%s'`
 rm -f "$diffdir"/*

@@ -11,17 +11,16 @@ commit;
 select i,
    case when i = 1
    then 'one'
-   else (select rdb$relation_id
-      from rdb$database)
+   else (select i from onerow)
    end
    from t1;
 
-           I CASE   
-============ ====== 
+           I CASE        
+============ =========== 
 
-           1 one    
-           2 130    
-           3 130    
+           1 one         
+           2 1           
+           3 1           
 
 select i,
    case when i = (select i from onerow)

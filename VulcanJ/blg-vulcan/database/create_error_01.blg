@@ -1,0 +1,22 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- test cases in which we should get errors on the create database command.
+
+set names ascii;
+CREATE DATABASE 'z:test.fdb';
+Statement failed, SQLCODE = -902
+
+I/O error for file "Z:\test.fdb.lck"
+-Error while trying to create file
+-operating system directive CreateFile failed
+-The system cannot find the path specified.
+
+-- file name isn't quoted
+create database f.fdb user 'sysdba' password 'masterkey';
+Statement failed, SQLCODE = -104
+
+SQL error code = -104
+-unsuccessful metadata update
+-expected quoted filename encountered F
+-- shouldn't have to drop, should be no database. :)
+
+drop database;

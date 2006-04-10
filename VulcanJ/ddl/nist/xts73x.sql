@@ -26,7 +26,7 @@ COMMIT;
  CREATE TABLE "lngIDENTIFIER% .,()" (TNUM double precision);
 -- PASS:7030 If table created successfully?
 
- select rdb$relation_name from rdb$relations where rdb$relation_name not like 'RDB$%';
+ select rdb$relation_name from rdb$relations where rdb$relation_name not like 'RDB$%' and rdb$relation_name not like 'SAS$%';
 -- PASS:7030 If 5 rows are selected in following order?
 --                     table_name
 --                     ==========

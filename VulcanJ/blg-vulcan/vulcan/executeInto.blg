@@ -118,4 +118,79 @@ END ^
            4 
 
 set term ; ^
+-- S0319724
+-- THUP: XYTHOS IS ENCOUNTERING A SYNTAX ERROR WHEN TRYING TO PREPARE AN EXECUTE BLOCK
+recreate table refresh (index_name char(40), refresh_ts timestamp);
+commit;
+set term ^;
+EXECUTE BLOCK AS
+DECLARE VARIABLE L_INDEX VARCHAR(100);
+DECLARE VARIABLE L_SQL VARCHAR(200);
+BEGIN
+FOR SELECT RDB$INDEX_NAME FROM RDB$INDICES INTO :L_INDEX DO
+BEGIN
+L_SQL = 'SET statistics INDEX ' || L_INDEX || ';';
+EXECUTE STATEMENT :L_SQL;
+L_SQL = 'insert into refresh (index_name, refresh_ts) values ( ''' || L_INDEX || ''', CURRENT_TIME);';
+EXECUTE STATEMENT :L_SQL;
+END
+END ^
+set term ;^
+select index_name from refresh;
+
+INDEX_NAME                               
+======================================== 
+
+RDB$INDEX_0                              
+RDB$INDEX_1                              
+RDB$INDEX_2                              
+RDB$INDEX_3                              
+RDB$INDEX_4                              
+RDB$INDEX_5                              
+RDB$INDEX_6                              
+RDB$INDEX_7                              
+RDB$INDEX_8                              
+RDB$INDEX_9                              
+RDB$INDEX_10                             
+RDB$INDEX_11                             
+RDB$INDEX_12                             
+RDB$INDEX_13                             
+RDB$INDEX_14                             
+RDB$INDEX_15                             
+RDB$INDEX_16                             
+RDB$INDEX_17                             
+RDB$INDEX_18                             
+RDB$INDEX_19                             
+
+INDEX_NAME                               
+======================================== 
+RDB$INDEX_20                             
+RDB$INDEX_21                             
+RDB$INDEX_22                             
+RDB$INDEX_23                             
+RDB$INDEX_24                             
+RDB$INDEX_25                             
+RDB$INDEX_26                             
+RDB$INDEX_27                             
+RDB$INDEX_28                             
+RDB$INDEX_29                             
+RDB$INDEX_30                             
+RDB$INDEX_31                             
+RDB$INDEX_32                             
+RDB$INDEX_33                             
+RDB$INDEX_34                             
+RDB$INDEX_35                             
+RDB$INDEX_36                             
+RDB$INDEX_37                             
+RDB$INDEX_38                             
+RDB$INDEX_39                             
+
+INDEX_NAME                               
+======================================== 
+RDB$INDEX_40                             
+RDB$INDEX_41                             
+RDB$INDEX_42                             
+RDB$INDEX_43                             
+RDB$INDEX_44                             
+
 drop database ;
