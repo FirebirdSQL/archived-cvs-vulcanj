@@ -4,6 +4,6 @@ CREATE DOMAIN INT AS VARCHAR(32);
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 15
--INT
+CREATE DOMAIN INT AS VARCHAR(32)
+              ^ unknown token
 DROP DATABASE;

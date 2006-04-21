@@ -6,8 +6,8 @@ INSERT INTO STAFF11VALUES('E1','Thomas',0,'Deale');
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 27
--'E1'
+INSERT INTO STAFF11VALUES('E1','Thomas',0,'Deale')
+                          ^ unknown token
 INSERT INTO STAFF11 VALUES('E2','Tom',22,'Newyork');
 Statement failed, SQLCODE = -297
 

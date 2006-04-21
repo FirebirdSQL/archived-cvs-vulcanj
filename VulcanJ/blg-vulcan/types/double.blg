@@ -12,8 +12,8 @@ insert into dp_test values(11000000000000000000);
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 28
--1
+insert into dp_test values(11000000000000000000)
+                           ^ unknown token
 insert into dp_test values(110000000000000000.00);
 insert into dp_test values(110000000000.00000000);
 select * from dp_test;

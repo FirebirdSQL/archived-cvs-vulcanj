@@ -706,8 +706,9 @@ SYSDBA
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 2, char 2
--*
+-- from dml059
+ * TEST:0257 SELECT MAX, MIN (COL1 + or - COL2)!
+ ^ unknown token
 -- PASS:0257 If 1 row is inserted?
  INSERT INTO VTABLE VALUES(100,111,1112,113,115);
 -- PASS:0257 If 1 row is inserted?

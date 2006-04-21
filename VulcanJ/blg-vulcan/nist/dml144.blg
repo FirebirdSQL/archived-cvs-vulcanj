@@ -65,8 +65,10 @@ on
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 3, char 36
---
+-- PASS:0835 If 1 row selected and value is 'on '?
+
+ SELECT SUBSTRING (CITY FROM 4 FOR -1) FROM STAFF WHERE EMPNAME = 'Ed'
+                                   ^ unknown token
 -- PASS:0835 If ERROR, substring error, 0 rows selected?
 
  INSERT INTO MOREGRUB VALUES ('Pretzels', 1);

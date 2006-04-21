@@ -51,45 +51,17 @@ E9
 
 -- PASS:7534 If MGR = E9?
 
- DROP TABLE STAFFC;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFFC is in use 
+ COMMIT;
+DROP TABLE STAFFC;
 -- TEST:7535 CASE expression with searched WHEN!
  CREATE TABLE STAFFc (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), MGR CHAR(3), UNIQUE (EMPNUM));
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--Table STAFFC already exists
 INSERT INTO STAFFc VALUES ('E1','Alice',12,'Deale',NULL);
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E2','Betty',10,'Vienna','E1');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E3','Carmen',13,'Vienna','E2');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E4','Don',12,'Deale','E2');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E5','Don',12,'Deale','E1');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E6','Tom',14,'Gettysburg','E5');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 INSERT INTO STAFFc VALUES ('E7','Kingdom',18,'Gettysburg','E7');
-Statement failed, SQLCODE = -803
-
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFFC"
 CREATE TABLE STAFFd (EMPNUM CHAR(3) NOT NULL, GRADE DECIMAL(4), MGR CHAR(3));
 INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN 23 WHEN GRADE = 14 THEN 24 WHEN GRADE = 12 THEN 22 END, CASE WHEN MGR = 'E2' THEN 'E6' WHEN MGR = 'E1' THEN 'E7'ELSE 'E4' END FROM STAFFc;
 -- PASS:7535 If insert statement completed successfully?
@@ -99,7 +71,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           0 
+           3 
 
 -- PASS:7535 If COUNT = 3?
 
@@ -108,7 +80,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           0 
+           1 
 
 -- PASS:7535 If COUNT = 1?
 
@@ -117,7 +89,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           0 
+           1 
 
 -- PASS:7535 If COUNT = 1?
 
@@ -126,7 +98,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           7 
+           2 
 
 -- PASS:7535 If COUNT = 2?
 
@@ -135,7 +107,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           0 
+           2 
 
 -- PASS:7535 If COUNT = 2?
 
@@ -144,7 +116,7 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           0 
+           2 
 
 -- PASS:7535 If COUNT = 2?
 
@@ -153,21 +125,13 @@ INSERT INTO STAFFd (EMPNUM, GRADE, MGR) SELECT EMPNUM, CASE WHEN GRADE = 13 THEN
        COUNT 
 ============ 
 
-           7 
+           3 
 
 -- PASS:7535 If COUNT = 3?
 
-
- DROP TABLE STAFFC;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFFC is in use 
+ COMMIT;
+DROP TABLE STAFFC;
 DROP TABLE STAFFD;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFFD is in use 
 -- TEST:7518 <query expression> with INTERSECT CORRESPONDING!
 
  CREATE TABLE STAFF_CTS (  PNUM   CHAR(3), CITY   CHAR(15), GRADE  DECIMAL(4), EMPNAME CHAR(20));
@@ -204,30 +168,25 @@ SELECT COUNT (*) FROM STAFF_CTS2;
 
 -- PASS:7518 If COUNT = 5?
 
- INSERT INTO ET(col2, col3, col4) SELECT distinct empname, grade, city FROM staff_cts  cts WHERE EXISTS ( SELECT 1 FROM staff_cts2 cts2 WHERE (cts.empname = cts2.empname and cts.grade=cts2.grade and cts.city=cts2.city))
+ INSERT INTO ET(col2, col3, col4) SELECT distinct empname, grade, city FROM staff_cts  cts WHERE EXISTS ( SELECT 1 FROM staff_cts2 cts2 WHERE (cts.empname = cts2.empname and cts.grade=cts2.grade and cts.city=cts2.city));
 -- PASS:7518 If insert completed successfully?
 
  SELECT col2, col3, col4  FROM ET ORDER BY col3, col4;
-Statement failed, SQLCODE = -104
 
-SQL error code = -104
--Token unknown - line 6, char 2
--SELECT
+COL2                         COL3 COL4            
+==================== ============ =============== 
+
+Betty                          10 Vienna          
+Don                            12 Deale           
+Carmen                         13 Vienna          
+
 -- PASS:7518 If 3 rows are selected in the following order?
 -- PASS:7518 If Betty 10 Vienna?
 -- PASS:7518 If Don 12 Deale?
 -- PASS:7518 If Carmen 13 Vienna?
  
- DROP TABLE STAFF_CTS;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFF_CTS is in use 
-DROP TABLE STAFF;
-Statement failed, SQLCODE = -607
-
-SQL error code = -607
--table/view STAFF does not exist
+ COMMIT;
+DROP TABLE STAFF_CTS;
 DROP TABLE ET;
 -- TEST:7519 <query expression> with UNION ALL CORRESPONDING BY!
 
@@ -289,15 +248,8 @@ SELECT COUNT (*) FROM STAFFb;
           60        45000 
           70        40000 
 
+COMMIT;
 DROP TABLE ET;
 DROP TABLE STAFFB;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFFB is in use 
 DROP TABLE STAFFA;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFFA is in use 
 DROP DATABASE;

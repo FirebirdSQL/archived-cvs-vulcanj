@@ -247,8 +247,8 @@ fail("Violation of Foreign Key constrain");
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 1
--fail
+fail("Violation of Foreign Key constrain")
+^ unknown token
 ALTER TABLE CHANGG DROP NAAM RESTRICT; 
 Statement failed, SQLCODE = -607
 

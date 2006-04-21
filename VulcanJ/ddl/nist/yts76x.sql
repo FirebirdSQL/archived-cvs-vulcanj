@@ -27,6 +27,8 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  SELECT MGR FROM STAFFc WHERE EMPNUM = 'E6';
 -- PASS:7534 If MGR = E9?
 
+ COMMIT;
+ 
  DROP TABLE STAFFC;
 
 
@@ -66,6 +68,7 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  SELECT COUNT (*) FROM STAFFd WHERE MGR = 'E4';
 -- PASS:7535 If COUNT = 3?
 
+ COMMIT;
 
  DROP TABLE STAFFC;
  DROP TABLE STAFFD;
@@ -94,7 +97,7 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  SELECT COUNT (*) FROM STAFF_CTS;
 -- PASS:7518 If COUNT = 5?
 
- INSERT INTO ET(col2, col3, col4) SELECT distinct empname, grade, city FROM staff_cts  cts WHERE EXISTS ( SELECT 1 FROM staff_cts2 cts2 WHERE (cts.empname = cts2.empname and cts.grade=cts2.grade and cts.city=cts2.city))
+ INSERT INTO ET(col2, col3, col4) SELECT distinct empname, grade, city FROM staff_cts  cts WHERE EXISTS ( SELECT 1 FROM staff_cts2 cts2 WHERE (cts.empname = cts2.empname and cts.grade=cts2.grade and cts.city=cts2.city));
 -- PASS:7518 If insert completed successfully?
 
  SELECT col2, col3, col4  FROM ET ORDER BY col3, col4;
@@ -103,8 +106,9 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 -- PASS:7518 If Don 12 Deale?
 -- PASS:7518 If Carmen 13 Vienna?
  
+ COMMIT;
+ 
  DROP TABLE STAFF_CTS;
- DROP TABLE STAFF;
  DROP TABLE ET;
 
 
@@ -144,6 +148,9 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 -- PASS:7519 If COUNT = 12?
 
  SELECT hours, salary FROM STAFFB UNION SELECT hours, salary FROM STAFFA;
+
+ COMMIT;
+ 
  DROP TABLE ET;
  DROP TABLE STAFFB;
  DROP TABLE STAFFA;

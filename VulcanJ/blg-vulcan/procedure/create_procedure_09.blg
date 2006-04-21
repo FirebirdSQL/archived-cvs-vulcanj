@@ -8,7 +8,9 @@ END ^
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 3, char 3
--COMMIT
+CREATE PROCEDURE test RETURNS(id INT)AS
+BEGIN
+  COMMIT;
+  ^ unknown token
 SET TERM ;^
 DROP DATABASE;

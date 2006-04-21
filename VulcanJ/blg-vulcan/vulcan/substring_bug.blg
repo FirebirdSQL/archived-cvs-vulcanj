@@ -10,8 +10,8 @@ select substring (city from 4 for -1) from t4;
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 35
---
+select substring (city from 4 for -1) from t4
+                                  ^ unknown token
 select substring (city from 0 for 2) from t4; 
 Statement failed, SQLCODE = -842
 
