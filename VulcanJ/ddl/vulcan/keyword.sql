@@ -5,7 +5,7 @@ set names ascii;
 
 create database 'test.fdb';
 
-CREATE table Foundation_xtension (objname  VARCHAR(20) CHARACTER SET UTF16, "VALUE" VARCHAR(20) CHARACTER SET UTF16, id VARCHAR(20) CHARACTER SET UTF16, deleted int);
+CREATE table Foundation_xtension (objname  VARCHAR(20) CHARACTER SET ISO8859_1, "VALUE" VARCHAR(20) CHARACTER SET ISO8859_1, id VARCHAR(20) CHARACTER SET ISO8859_1, deleted int);
 
 SELECT * FROM Foundation_xtension
    WHERE

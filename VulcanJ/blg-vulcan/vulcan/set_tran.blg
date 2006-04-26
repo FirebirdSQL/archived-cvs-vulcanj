@@ -36,8 +36,8 @@ set transaction w1;
 Statement failed, SQLCODE = -104
 
 SQL error code = -104
--Token unknown - line 1, char 17
--w1
+set transaction w1
+                ^ unknown token
 -- named transaction fails in ISQL
 commit;
 set transaction wait isolation level read committed; 
