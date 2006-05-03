@@ -40,12 +40,19 @@ function process_dir {
              # echo blgfile $blgfile
              # echo difffile $difffile
              # echo
+             
+             # strip off ddl/ from front
+             myoutdir=${f#ddl/*}
+             # strip off file name from end
+             myoutdir=${myoutdir%%/*}
+             
+             myoutdir=${outdir}/${myoutdir}
 
-             if [ ! -e "$outdir" ]; then
+             if [ ! -e "${myoutdir}" ]; then
                 if [ $verbose = true ]; then
-                   echo creating directory "$outdir"
+                   echo creating directory "${myoutdir}"
                 fi
-                mkdir "$outdir"
+                mkdir "${myoutdir}"
              fi
              if [ -e test.fdb ]; then
                 rm test.fdb
@@ -72,7 +79,14 @@ function process_dir {
              fi
              sed -f ${filter} "$outfile" > new.txt
              sed -f ${filter} "$blgfile" > old.txt
-             diff -b old.txt new.txt > "$difffile"
+             
+             if [ $OSTYPE = "cygwin" ]; then
+               # cygwin's diff has nice -b and -w options we can use
+             	diff -bBw old.txt new.txt > "$difffile"
+             else
+             	diff -b old.txt new.txt > "$difffile"
+             fi
+             
              # exit 1 
              if [ ! -s "$difffile" ]; then
                 rm -f "$difffile"
@@ -116,7 +130,12 @@ while [ -n "$(echo $1 | grep '-')" ]; do
            ;;
       -t ) time_each_test='true'
            ;;
-      *  ) echo 'usage: fbmust [-v] [-m] [-d directory] [-o directory]'
+      *  ) echo 'usage: fbmust [-b directory] [-d directory] [-s filter] [-v]'
+           echo '   -b benchmark log directory (default is blg-vulcan)'
+           echo '   -d test directory (default is ./ddl)'
+           echo '   -s filter file (default is ./filter.sed)'
+           echo '   -v verbose'
+           echo ''
            echo 'example: '
            echo '   fbmust -v -d ./ddl/nist'
            echo 'mvs example:'

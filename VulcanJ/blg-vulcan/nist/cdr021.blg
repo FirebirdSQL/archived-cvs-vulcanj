@@ -66,30 +66,39 @@ INSERT INTO WORKS_P VALUES  ('E3','P2',20);
 INSERT INTO WORKS_P VALUES  ('E4','P2',20);
 INSERT INTO WORKS_P VALUES  ('E4','P4',40);
 INSERT INTO WORKS_P VALUES  ('E4','P5',80);
-INPUT ddl/input/sul-tab1.sql;
-Unable to open ddl/input/sul-tab1.sql
-INPUT ddl/input/sul-tab1-refresh.sql;
-Unable to open ddl/input/sul-tab1-refresh.sql
-DELETE FROM STAFF_P WHERE EMPNUM='E1';
+commit;
+-- TEST:0378 (ref. acr. sch.) delete P.K and corr. F.K e.!
+ DELETE FROM STAFF_P WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
 
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
-SELECT EMPNUM FROM STAFF_P WHERE EMPNUM = 'E1'; 
+-- PASS:0378 If RI ERROR, children exist, 0 rows deleted?
+
+ SELECT EMPNUM FROM STAFF_P WHERE EMPNUM = 'E1'; 
 
 EMPNUM 
 ====== 
 
 E1     
 
-UPDATE STAFF_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2';
+-- PASS:0378 If 1 row selected and EMPNUM = E1?
+
+ ROLLBACK WORK;
+-- TEST:0379 (ref. acr. sch.) update P.K and corr. F.K e.!
+ UPDATE STAFF_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2';
 Statement failed, SQLCODE = -530
 
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
-SELECT COUNT(*) FROM STAFF_P WHERE EMPNUM = 'E2';
+-- PASS:0379 If RI ERROR, children exist, 0 rows updated?
+
+ SELECT COUNT(*) FROM STAFF_P WHERE EMPNUM = 'E2';
 
        COUNT 
 ============ 
 
            1 
 
+-- PASS:0379 If count = 1?
+
+ ROLLBACK WORK;
 DROP DATABASE;

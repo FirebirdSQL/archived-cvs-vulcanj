@@ -351,31 +351,18 @@ INSERT INTO STAFF VALUES('S','Dana%ELFT',14,'D%S%%%%%%%%%%%%');
  DELETE FROM STAFF;
 INSERT INTO STAFF VALUES('   ','Dana%ELFT',14,'D%0%%%%%%%%%%%%');
 -- PASS:7009 If 1 row inserted successfully?
-   
-   
+
+ROLLBACK;   
 -- following test was form xts_703
 -- TEST:7010 UNIQUE predicate, single table, all values distinct!
    
  drop table staff;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object STAFF is in use 
 CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--Table STAFF already exists
 INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
 INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
 INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
 INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
 INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
-DROP TABLE STAFFc;
-Statement failed, SQLCODE = -607
-
-SQL error code = -607
--table/view STAFFC does not exist
 CREATE TABLE STAFFc (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), MGR CHAR(3), UNIQUE (EMPNUM));
 SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
 
@@ -401,7 +388,6 @@ SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
 EMPNUM        GRADE 
 ====== ============ 
 
-                 14 
 E2               10 
 
 -- PASS:7011 If EMPNUM = E2?
@@ -416,7 +402,7 @@ E2               10
 
 -- PASS:7011 If COUNT = 4?
 
-   DELETE FROM STAFFc;
+ DELETE FROM STAFFc;
 INSERT INTO STAFFc VALUES ('E1','Alice',12,'Deale',NULL);
 INSERT INTO STAFFc VALUES ('E2','Betty',10,'Vienna','E1');
 INSERT INTO STAFFc VALUES ('E3','Carmen',13,'Vienna','E2');
@@ -424,19 +410,22 @@ INSERT INTO STAFFc VALUES ('E4','Don',12,'Deale','E2');
 INSERT INTO STAFFc VALUES ('E5','Don',12,'Deale','E1');
 INSERT INTO STAFFc VALUES ('E6','Tom',14,'Gettysburg','E5');
 INSERT INTO STAFFc VALUES ('E7','Kingdom',18,'Gettysburg','E7');
-INSERT INTO STAFFC (EMPNUM,EMPNAME,GRADE,CITY) VALUES('E9','Terry',13,NULL);
+--
+-- begin test 7012
+--
+ INSERT INTO STAFFC (EMPNUM,EMPNAME,GRADE,CITY) VALUES('E9','Terry',13,NULL);
 -- PASS:7012 If 1 row inserted successfully?
 
  INSERT INTO STAFFC (EMPNUM,EMPNAME,GRADE,CITY) VALUES('E8','Nick',13,NULL);
 -- PASS:7012 If 1 row inserted successfully?
 
--- TODO: Couldn't recode this to work against Firebird...
+-- UNIQUE not supported in Firebird SQL
 -- SELECT COUNT(*) FROM STAFFC AS X 
 --   WHERE UNIQUE(SELECT CITY, MGR FROM STAFFC AS Y 
 --     WHERE X.GRADE = Y.GRADE);
 -- PASS:7012 If COUNT = 9?
 
--- TODO: Couldn't recode this to work against Firebird...
+-- UNIQUE not supported in Firebird SQL
 -- SELECT COUNT(*) FROM STAFFC AS X
 -- WHERE NOT UNIQUE(SELECT GRADE, CITY FROM STAFFC AS Y 
 -- WHERE X.GRADE = Y.GRADE);

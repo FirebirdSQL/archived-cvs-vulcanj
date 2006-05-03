@@ -170,11 +170,8 @@ SELECT COUNT(ALL NULLIF ('Nickos','Nickos   ')) FROM EMPTY740;
 -- PASS:7041 If COUNT = 5 and ?
 -- PASS:7041 WARNING - null value eliminated in set function ?
 
- DROP TABLE EMPTY740;
-Statement failed, SQLCODE = -607
-
-unsuccessful metadata update
--object EMPTY740 is in use 
+ROLLBACK; 
+DROP TABLE EMPTY740;
 -- TEST:7042 COUNT ALL <literal>!
 
  CREATE TABLE CL_DATA_TYPE (CL_CHAR CHAR(10), CL_NUM NUMERIC, CL_DEC DECIMAL, CL_REAL REAL);

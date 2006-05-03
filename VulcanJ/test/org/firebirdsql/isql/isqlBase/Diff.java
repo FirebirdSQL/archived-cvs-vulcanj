@@ -140,7 +140,8 @@ public class Diff {
 	String[] stringsToEat = {"C:\\\\WINNT\\\\SYSTEM32\\\\TEST.G00",
 			"C:\\\\CYGWIN\\\\HOME\\\\VULCANJ\\\\TEST.G00",
 			"Number of DB pages allocated = [0-9]*",
-			" -2.488355210669293e\\+39*", "-2.488355210669293e\\+039*",
+			"e\\+0",
+			"e\\+",
 			"Transaction - oldest active = [0-9]*",
 			"Transaction - oldest snapshot = [0-9]*",
 			"Transaction - Next = [0-9]*", "TEST\\s*[0-9]:[0-9[a-f]]{3}.*",
@@ -226,7 +227,7 @@ public class Diff {
 			// wbo now ignore blank lines (length == 0)
 			if (linebuffer.length() > 0) {
 				for (int i = 0; i < stringsToEat.length; i++) {
-					linebuffer = linebuffer.replaceAll(stringsToEat[i], ".");
+					linebuffer = linebuffer.replaceAll(stringsToEat[i], ".").trim();
 				}
 				storeline(linebuffer, pinfo);
 			}

@@ -78,6 +78,8 @@ ROLLBACK;
 -- PASS:7041 If COUNT = 5 and ?
 -- PASS:7041 WARNING - null value eliminated in set function ?
 
+ROLLBACK; 
+
  DROP TABLE EMPTY740;
 
 
