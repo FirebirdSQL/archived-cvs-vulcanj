@@ -76,14 +76,14 @@ E1               80
 
  INSERT INTO DOMAIN_VIEW VALUES('E2', 'P4', 80);
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table DOMAIN_VIEW
+-At trigger 'CHECK_2'
 -- PASS:0204 If 0 rows are inserted - Violation of check option?
 
  INSERT INTO DOMAIN_VIEW VALUES('E5', 'P5', 20);
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table DOMAIN_VIEW
+-At trigger 'CHECK_2'
 -- PASS:0204 If 0 rows are inserted - Violation of check option?
 
  SELECT COUNT(*) FROM DOMAIN_VIEW;

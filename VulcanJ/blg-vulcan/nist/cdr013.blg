@@ -32,7 +32,6 @@ UPDATE PROJ_M SET MGR = 'E4' WHERE PNUM = 'P4';
 UPDATE PROJ_M SET MGR = 'E4' WHERE PNUM = 'P5';
 UPDATE STAFF_M SET EMPNUM = 'E9' WHERE EMPNUM = 'E2'; 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_5" on table "PROJ_M"
 SELECT COUNT(*) FROM STAFF_M WHERE EMPNUM = 'E2';
 
@@ -43,7 +42,6 @@ SELECT COUNT(*) FROM STAFF_M WHERE EMPNUM = 'E2';
 
 UPDATE PROJ_M SET MGR = 'E9' WHERE MGR = 'E3';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_5" on table "PROJ_M"
 SELECT COUNT(*) FROM PROJ_M WHERE MGR = 'E3';
 
@@ -62,7 +60,6 @@ SELECT COUNT(*) FROM PROJ_M WHERE MGR = 'E5';
 
 INSERT INTO STAFF_M VALUES('E8','Alice',12,'Deale','P9');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_6" on table "STAFF_M"
 SELECT COUNT(*) FROM STAFF_M WHERE PRI_WK = 'P9';
 

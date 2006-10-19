@@ -15,12 +15,10 @@ CREATE TABLE STAFFz
   ( EMPNUM CHAR(3) REFERENCES STAFF3(EMPNUM),
     SALARY DECIMAL(6) CHECK (SALARY > 0));
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
--could not find UNIQUE INDEX with specified columns
+-could not find UNIQUE or PRIMARY KEY constraint with specified columns
 drop table staffz;
 Statement failed, SQLCODE = -607
-
 SQL error code = -607
 -table/view STAFFZ does not exist
 drop table staff3;

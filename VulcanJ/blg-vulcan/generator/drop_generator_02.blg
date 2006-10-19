@@ -10,7 +10,6 @@ END ^
 SET TERM ;^
 DROP GENERATOR test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -GENERATOR TEST

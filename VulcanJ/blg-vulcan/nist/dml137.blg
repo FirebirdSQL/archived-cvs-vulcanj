@@ -13,9 +13,8 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 CREATE TABLE DROPPABLE ( C1 INT NOT NULL PRIMARY KEY REFERENCES UNDROPPABLE, C2 INT, CHECK (C1 < C2));
 DROP TABLE UNDROPPABLE ; 
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -ERASE RDB$RELATION_CONSTRAINTS failed
 -action cancelled by trigger (1) to preserve data integrity
--Cannot delete PRIMARY KEY being used in FOREIGN KEY definition.               
+-Cannot delete PRIMARY KEY being used in FOREIGN KEY definition.
 DROP DATABASE;

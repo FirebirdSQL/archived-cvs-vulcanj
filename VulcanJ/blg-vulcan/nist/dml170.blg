@@ -53,7 +53,6 @@ INSERT INTO T0880 VALUES (0, 1);
 INSERT INTO T0880 VALUES (1, 2);
 INSERT INTO T0880 VALUES (1, 2);
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "It was the best of times; it wa" on table "T0880"
 -- PASS:0880 If ERROR - integrity constraint violation?
 

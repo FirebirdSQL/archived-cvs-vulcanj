@@ -34,7 +34,6 @@ insert into lock values ('test');
 commit;
 set transaction w1;
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 set transaction w1
                 ^ unknown token

@@ -5,7 +5,6 @@ recreate table elmer("VALUE" int);
 -- next line should fail, value needs to be quoted.
 delete from elmer where value = ?;                                              
 Statement failed, SQLCODE = -901
-
 SQL error code = -901
 -Illegal use of keyword VALUE
 -- this line should pass.
@@ -13,7 +12,6 @@ delete from elmer where "VALUE" = 3;
 -- this line should fail
 delete from elmer where "VALUE" = ?;
 Statement failed, SQLCODE = -804
-
 SQL error code = -804
 -SQLDA missing or incorrect version, or incorrect number/type of variables
 recreate table fudd ("FROM" char(20) ); 

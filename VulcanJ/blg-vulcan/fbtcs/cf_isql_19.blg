@@ -41,7 +41,6 @@ select * from onerow;
 /* BEGIN */
 -- I am a comment;
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 -Unexpected end of command
 select * from onerow;
@@ -56,7 +55,6 @@ select * from onerow;
 /* BEGIN with unclosed "quoted */
 -- I am a comment;
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 -Unexpected end of command
 select * from onerow;

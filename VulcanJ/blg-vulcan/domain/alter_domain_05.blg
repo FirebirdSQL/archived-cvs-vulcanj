@@ -3,7 +3,6 @@ CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN test VARCHAR(63);
 ALTER DOMAIN notexists DROP CONSTRAINT;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Domain not found
 DROP DATABASE;

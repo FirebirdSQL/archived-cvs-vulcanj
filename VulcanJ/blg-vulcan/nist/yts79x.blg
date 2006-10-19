@@ -53,7 +53,6 @@ Alice
 
  SELECT EMPNAME FROM STAFF WHERE (SELECT EMPNUM FROM WORKS WHERE PNUM = 'P4') = EMPNUM;
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 -- PASS:7530 If ERROR - cardinality violation?
 
@@ -80,7 +79,6 @@ INSERT INTO TW VALUES ('h',4);
 INSERT INTO TW VALUES ('i',5);
 SELECT DISTINCT A, (SELECT D FROM TW WHERE E = TV.A) FROM TV, TW WHERE 1 < (SELECT COUNT (*) FROM TV, TW WHERE A = TV.A AND A = E);
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 -- PASS:7559 If ERROR - cardinality violation?
 

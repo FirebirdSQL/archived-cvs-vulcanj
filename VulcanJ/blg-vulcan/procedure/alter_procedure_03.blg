@@ -6,7 +6,6 @@ BEGIN
   id=2;
 END ^
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Procedure TEST not found
 SET TERM ;^

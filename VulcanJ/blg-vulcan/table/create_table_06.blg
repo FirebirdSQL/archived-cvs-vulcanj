@@ -5,7 +5,6 @@ CREATE TABLE test(
  c1 INTEGER
 );
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -STORE RDB$RELATION_FIELDS failed
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"

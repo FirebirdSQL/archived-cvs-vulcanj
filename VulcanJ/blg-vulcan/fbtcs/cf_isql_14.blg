@@ -10,7 +10,6 @@ insert into t0(a) values(10);
 /*---------------------------------------------------------------*/
 insert into t0(af) values(11);
 Statement failed, SQLCODE = -151
-
 attempted update of read-only column
 select * from t0;
 
@@ -24,7 +23,6 @@ select * from t0;
 /*---------------------------------------------------------------*/
 update t0 set af = 99 where a = 10;
 Statement failed, SQLCODE = -151
-
 attempted update of read-only column
 select * from t0;
 
@@ -40,7 +38,6 @@ select * from t0;
 create table t5 (af computed by (1+2));
 insert into t5 values(10);
 Statement failed, SQLCODE = -151
-
 attempted update of read-only column
 drop database;
 exit;

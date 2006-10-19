@@ -17,7 +17,6 @@ insert into river2 (i, r1) values (1, 'Neuse');
 commit;
 insert into river2 (i, r1) values (2, 'Mississippi');
 Statement failed, SQLCODE = -625
-
 validation error for column R1, value "Mississippi"
 select * from river2;
 

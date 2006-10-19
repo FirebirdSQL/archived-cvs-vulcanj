@@ -54,7 +54,6 @@ COMMIT;
 
  INSERT INTO STAFF1(EMPNAME,GRADE,CITY) VALUES('Carmen',40,'Boston'); 
 Statement failed, SQLCODE = -625
-
 validation error for column EMPNUM, value "*** null ***"
 -- PASS:0148 If ERROR, NOT NULL constraint, 0 rows inserted?
 -- NOTE:0148 Not Null Column EMPNUM is missing.

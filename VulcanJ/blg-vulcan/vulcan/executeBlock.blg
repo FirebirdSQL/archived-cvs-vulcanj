@@ -49,7 +49,6 @@ execute block returns (a int)
            A 
 ============ 
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "T"
 set term ;^
 -- should return no rows - previous EB insert was bad because of PK violation;

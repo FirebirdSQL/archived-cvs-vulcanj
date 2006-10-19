@@ -10,7 +10,7 @@ CREATE TABLE PARENT (
     PARENT_DATE  TIMESTAMP);
 -- Try to get back all of the rows starting with 'NIÑ':
 select * from parent where parent_name like _UNICODE_FSS 'NIÑ%';
-Statement failed, SQLCODE = -413
-
-conversion error from string "NIÑ%"
+Statement failed, SQLCODE = -802
+arithmetic exception, numeric overflow, or string truncation
+-Cannot transliterate character between character sets
 drop database;

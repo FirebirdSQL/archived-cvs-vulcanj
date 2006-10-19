@@ -63,7 +63,6 @@ P6
 PNUM   
 ====== 
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 -- PASS:0104 If ERROR, SELECT returns more than 1 row in subquery?
 -- PASS:0104 If 0 rows are selected?

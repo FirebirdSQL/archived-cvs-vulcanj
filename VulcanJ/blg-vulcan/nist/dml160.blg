@@ -55,7 +55,6 @@ CREATE TABLE DINNER_CLUB ( LOC_ID DEC (7) NOT NULL, DINNER DINNERTIME);
 INSERT INTO DINNER_CLUB VALUES (0, TIME '17:30:00'); 
 INSERT INTO DINNER_CLUB VALUES (2, TIME '19:30:00');
 Statement failed, SQLCODE = -625
-
 validation error for column DINNER, value "19:30:00.0000"
 -- PASS:0860 If ERROR - integrity constraint violation?
 

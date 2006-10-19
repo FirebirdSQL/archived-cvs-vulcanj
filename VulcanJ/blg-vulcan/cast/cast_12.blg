@@ -5,6 +5,5 @@ SELECT CAST('9:11:60' AS TIME) FROM rdb$Database;
          CAST 
 ============= 
 Statement failed, SQLCODE = -413
-
 conversion error from string "9:11:60"
 DROP DATABASE;

@@ -17,7 +17,6 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  CREATE VIEW NAMGRP1 AS
   SELECT * FROM NAMES1 NATURAL JOIN GROUPS1;
 Statement failed, SQLCODE = -901
-
 feature is not supported
 -- PASS:0591 If view is created?
 
@@ -36,7 +35,6 @@ SELECT EMPNUM
   WHERE NAME = 'KERI'
   AND GRP = 10;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP1
@@ -48,7 +46,6 @@ SQL error code = -204
   WHERE NAME = 'MARY'
   AND GRP = 20;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP1
@@ -67,7 +64,6 @@ SQL error code = -204
   OR GRP IS NULL
   OR EMPNUM IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP1
@@ -98,7 +94,6 @@ DROP TABLE NAMES1;
    CREATE VIEW NAMGRP2 AS
   SELECT * FROM NAMES2 INNER JOIN GROUPS2 USING (EMPNUM);
 Statement failed, SQLCODE = -901
-
 feature is not supported
 -- PASS:0592 If view is created?
 
@@ -106,7 +101,6 @@ feature is not supported
   SELECT * FROM NAMES2 JOIN GROUPS2
     USING (EMPNUM) WHERE EMPNUM > 0;
 Statement failed, SQLCODE = -901
-
 feature is not supported
 -- PASS:0592 If view is created?
 
@@ -125,7 +119,6 @@ SELECT EMPNUM
   WHERE NAME = 'KERI'
   AND GRP = 10;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP2
@@ -137,7 +130,6 @@ SQL error code = -204
   WHERE NAME = 'MARY'
   AND GRP = 20;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP2
@@ -156,7 +148,6 @@ SQL error code = -204
   OR GRP IS NULL
   OR EMPNUM IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP2
@@ -168,7 +159,6 @@ SQL error code = -204
   WHERE NAME = 'MARY'
   AND GRP = 20;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NMGRP2
@@ -184,7 +174,6 @@ SQL error code = -204
   OR GRP IS NULL
   OR EMPNUM IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NMGRP2
@@ -215,7 +204,6 @@ DROP TABLE NAMES2;
    CREATE VIEW NAMGRP3 AS
   SELECT * FROM NAMES3 LEFT OUTER JOIN GROUPS3 USING (EMPNUM);
 Statement failed, SQLCODE = -901
-
 feature is not supported
 -- PASS:0593 If view is created?
 
@@ -241,7 +229,6 @@ SELECT COUNT(*)
   AND NAME = 'KERI'
   AND GRP = 10;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -254,7 +241,6 @@ SQL error code = -204
   AND NAME = 'MARY'
   AND GRP = 20;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -267,7 +253,6 @@ SQL error code = -204
   AND NAME = 'HARRY'
   AND GRP IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -280,7 +265,6 @@ SQL error code = -204
   AND NAME = 'LARRY'
   AND GRP IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -293,7 +277,6 @@ SQL error code = -204
   AND NAME = 'BARRY'
   AND GRP IS NULL;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -303,7 +286,6 @@ SQL error code = -204
    SELECT COUNT(*)
   FROM NAMGRP3;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP3
@@ -383,7 +365,6 @@ SQL error code = -204
    ROLLBACK WORK;
 DROP TABLE NAMES3;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -COLUMN EMPNUM
@@ -392,7 +373,6 @@ unsuccessful metadata update
 
    DROP TABLE GROUPS3;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -COLUMN EMPNUM
@@ -416,7 +396,6 @@ unsuccessful metadata update
    CREATE VIEW NAMGRP4 AS
   SELECT * FROM NAMES4 RIGHT OUTER JOIN GROUPS4 USING (EMPNUM);
 Statement failed, SQLCODE = -901
-
 feature is not supported
 -- PASS:0594 If view is created?
 
@@ -454,7 +433,6 @@ INSERT INTO GROUPS4 VALUES (0, 10);
   AND NAME = 'KERI'
   AND GRP = 10;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP4
@@ -467,7 +445,6 @@ SQL error code = -204
   AND NAME = 'MARY'
   AND GRP = 20;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP4
@@ -480,7 +457,6 @@ SQL error code = -204
   AND NAME IS NULL
   AND GRP = 30;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP4
@@ -493,7 +469,6 @@ SQL error code = -204
   AND NAME IS NULL
   AND GRP = 40;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP4
@@ -503,7 +478,6 @@ SQL error code = -204
    SELECT COUNT(*)
   FROM NAMGRP4;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NAMGRP4

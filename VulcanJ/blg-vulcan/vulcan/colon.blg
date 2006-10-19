@@ -24,7 +24,6 @@ FROM USER_DATA ud
 JOIN IDENTITY ident on ud.OWNER_IDENTITY_ID = ident.IDENTITY_ID
 WHERE ud.BASE_DATA_ID = :OBJECT_ID;
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -OBJECT_ID

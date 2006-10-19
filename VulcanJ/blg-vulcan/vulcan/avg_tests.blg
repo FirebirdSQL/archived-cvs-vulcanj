@@ -74,7 +74,6 @@ SELECT AVG(2100000000*id) FROM test;
                   AVG 
 ===================== 
 Statement failed, SQLCODE = -901
-
 Integer overflow.  The result of an integer operation caused the most significant bit of the result to carry.
 rollback;
 drop table test;

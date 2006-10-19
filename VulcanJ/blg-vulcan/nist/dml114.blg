@@ -117,12 +117,10 @@ INSERT INTO FEAT16 VALUES (1, 10);
 INSERT INTO FEAT16 VALUES (2, 20); 
 INSERT INTO FEAT16 VALUES (1, 30); 
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_17" on table "FEAT16"
 --  PASS:0641 If ERROR, unique constraint, 0 rows inserted?
  INSERT INTO FEAT16 VALUES (3, 20);
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_18" on table "FEAT16"
 --  PASS:0641 If ERROR, unique constraint, 0 rows inserted?
  INSERT INTO FEAT16 VALUES (3, NULL);
@@ -132,23 +130,19 @@ INSERT INTO BARNO VALUES (1, 'A', 10, 'a');
 INSERT INTO BARNO VALUES (2, 'A', 20, 'a');
 INSERT INTO BARNO VALUES (1, 'A', 30, 'a');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_22" on table "BARNO"
 --  PASS:0641 If ERROR, unique constraint, 0 rows inserted?
  INSERT INTO BARNO VALUES (3, 'A', 20, 'a');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_21" on table "BARNO"
 --  PASS:0641 If ERROR, unique constraint, 0 rows inserted?
  INSERT INTO BARNO VALUES (3, NULL, 30, 'a');
 Statement failed, SQLCODE = -625
-
 validation error for column P2, value "*** null ***"
 --  PASS:0641 If ERROR, PRIMARY KEY constraint, 0 rows inserted?
 --  PASS:0641 OR ERROR, NOT NULL constraint, 0 rows inserted?
  INSERT INTO BARNO VALUES (3, NULL, 30, 'b');
 Statement failed, SQLCODE = -625
-
 validation error for column P2, value "*** null ***"
 --  PASS:0641 If ERROR, PRIMARY KEY constraint, 0 rows inserted?
 --  PASS:0641 OR ERROR, NOT NULL constraint, 0 rows inserted?
@@ -156,7 +150,6 @@ validation error for column P2, value "*** null ***"
 -- PASS:0641 If 1 row is inserted?
  INSERT INTO BARNO VALUES (3, 'B', 30, NULL);
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_21" on table "BARNO"
 --  test doc says this should pass, but we already have a value of
 --  30, null for x1, x2 in the database. I think it should fail. It

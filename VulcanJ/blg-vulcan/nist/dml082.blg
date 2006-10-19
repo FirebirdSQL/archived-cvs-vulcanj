@@ -53,7 +53,6 @@ SELECT COUNT(*) FROM STAFF WHERE CITY LIKE '%XX%X_%' ESCAPE 'XX';
        COUNT 
 ============ 
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0492 If ERROR, data exception/invalid escape char?
 -- PASS:0492 0 rows selected OR SQLSTATE = 22019 OR SQLCODE < 0?
@@ -72,7 +71,6 @@ Invalid ESCAPE sequence
        COUNT 
 ============ 
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0492 If ERROR, data exception/invalid escape char?
 -- PASS:0492 0 rows selected OR SQLSTATE = 22019 OR SQLCODE < 0?
@@ -98,7 +96,6 @@ SELECT COUNT(*) FROM CPBASE WHERE JUNK1 LIKE 'P%X%%X' ESCAPE 'X';
        COUNT 
 ============ 
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0493 If ERROR, data exception/invalid escape seq.?
 -- PASS:0493 0 rows selected OR SQLSTATE = 22025 OR SQLCODE < 0?
@@ -114,7 +111,6 @@ Invalid ESCAPE sequence
 
  INSERT INTO STAFF SELECT 'E12','ff',KC,'gg' FROM CPBASE WHERE JUNK1 LIKE '%X%%Xd_' ESCAPE 'X';
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0493 If ERROR, data exception/invalid escape seq.?
 -- PASS:0493 0 rows inserted OR SQLSTATE = 22025 OR SQLCODE < 0?
@@ -124,7 +120,6 @@ Invalid ESCAPE sequence
 
  UPDATE CPBASE SET KC = -1 WHERE JUNK1 LIKE '%?X%' ESCAPE '?';
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0493 If ERROR, data exception/invalid escape seq.?
 -- PASS:0493 0 rows updated OR SQLSTATE = 22025 OR SQLCODE < 0?
@@ -134,7 +129,6 @@ Invalid ESCAPE sequence
 
  DELETE FROM CPBASE WHERE JUNK1 LIKE '_e%&u%' ESCAPE '&';
 Statement failed, SQLCODE = -105
-
 Invalid ESCAPE sequence
 -- PASS:0493 If ERROR, data exception/invalid escape seq.?
 -- PASS:0493 0 rows deleted OR SQLSTATE = 22025 OR SQLCODE < 0?
@@ -175,7 +169,6 @@ INSERT INTO HH VALUES (10);
 
  INSERT INTO HH VALUES (100000);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0494 If 1 row is inserted?
 -- PASS:0494 OR ERROR, data exception/numeric value out of range?
@@ -183,7 +176,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  INSERT INTO HH VALUES (1000000);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0494 If 1 row is inserted?
 -- PASS:0494 OR ERROR, data exception/numeric value out of range?
@@ -203,8 +195,8 @@ CREATE TABLE BASE_WCOV (C1 INT);
 CREATE VIEW WCOV AS SELECT * FROM BASE_WCOV WHERE C1 > 0 WITH CHECK OPTION;
 INSERT INTO WCOV VALUES (0);
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table WCOV
+-At trigger 'CHECK_6'
 -- PASS:0505 If ERROR, with check option violation?
 -- PASS:0505 0 rows inserted OR SQLSTATE = 44000 OR SQLCODE < 0?
 
@@ -213,8 +205,8 @@ Operation violates CHECK constraint  on view or table WCOV
 
  UPDATE WCOV SET C1 = -C1 WHERE C1 = 75;
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table WCOV
+-At trigger 'CHECK_5'
 -- PASS:0505 If ERROR, with check option violation?
 -- PASS:0505 0 rows updated OR SQLSTATE = 44000 OR SQLCODE < 0?
 

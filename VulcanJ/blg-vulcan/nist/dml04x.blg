@@ -54,8 +54,8 @@ CREATE VIEW V_WORKS2 AS SELECT * FROM V_WORKS1 WHERE EMPNUM = 'E1' OR EMPNUM = '
 CREATE VIEW V_WORKS3 AS SELECT * FROM V_WORKS2 WHERE PNUM = 'P2' OR PNUM = 'P7' WITH CHECK OPTION;
 INSERT INTO V_WORKS2 VALUES('E9','P7',13);
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table V_WORKS1
+-At trigger 'CHECK_2'
 -- PASS:0212 If ERROR, view check constraint, 0 rows inserted?
 
  INSERT INTO V_WORKS2 VALUES('E7','P4',95);
@@ -76,8 +76,8 @@ Operation violates CHECK constraint  on view or table V_WORKS1
 
  INSERT INTO V_WORKS3 VALUES('E9','P2',10);
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table V_WORKS1
+-At trigger 'CHECK_2'
 -- PASS:0212 If ERROR, view check constraint, 0 rows inserted?
 
  SELECT COUNT(*) FROM WORKS WHERE EMPNUM = 'E9';
@@ -151,7 +151,6 @@ INSERT INTO T8 VALUES('th','seco','third3','fourth_4','fifth_colu', 'sixth_colum
 
  INSERT INTO T8 VALUES('th','seco','third3','fourth_4','fifth_colu', 'sixth_column','column_seventh','column_eighth_la');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_22" on table "T8"
 -- PASS:0215 If ERROR, unique constraint, 0 rows inserted?
 
@@ -173,7 +172,6 @@ INSERT INTO T4 VALUES ('This test is trying to test the limit on the total lengt
 -- PASS:0216 If 1 row is inserted?
  INSERT INTO T4 VALUES ('This test is trying to test the limit on the total length of an index', -123456,'which is','not less than 120');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_25" on table "T4"
 -- PASS:0216 If ERROR, unique constraint, 0 rows inserted?
  SELECT STR110 FROM T4;

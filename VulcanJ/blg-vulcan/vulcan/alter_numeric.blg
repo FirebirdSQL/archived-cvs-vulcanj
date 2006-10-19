@@ -9,7 +9,6 @@ create database 'test.fdb' user 'sysdba' password 'masterkey'
 create table tt (n numeric(11,0) );
 alter table tt alter n type integer;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Cannot change datatype for N.  Conversion from base type BIGINT to INTEGER is not supported.
 -- Statement failed, SQLCODE = -607

@@ -69,7 +69,6 @@ INSERT INTO WORKS_P VALUES  ('E4','P5',80);
 -- TEST:0380 (ref. acr. sch.) insert F.K and no corr. P.K!
  INSERT INTO WORKS_P VALUES ('E9','P2',20); 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
 -- PASS:0380 If RI ERROR, parent missing, 0 rows inserted?
  
@@ -85,7 +84,6 @@ violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
 -- TEST:0381 (ref. acr. sch.) update F.K to no P.K corr.!
  UPDATE WORKS_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2'; 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
 -- PASS:0381 If RI ERROR, parent missing, 0 rows updated?
 

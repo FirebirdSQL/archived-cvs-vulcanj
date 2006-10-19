@@ -16,7 +16,6 @@ SELECT * FROM Foundation_xtension
    AND
    "DELETED" =0;
 Statement failed, SQLCODE = -901
-
 SQL error code = -901
 -Illegal use of keyword VALUE
 drop database;

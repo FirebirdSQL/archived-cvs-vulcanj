@@ -51,14 +51,12 @@ COMMIT WORK;
  CREATE TABLE HH (SMALLTEST  SMALLINT);
 INSERT INTO STAFF VALUES ('E6','Earl Brown',11,'Claggetsville Maryland');
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0498 If ERROR, data exception/string right trunc.?
 -- PASS:0498 If 0 rows inserted OR SQLSTATE = 22001 OR SQLCODE < 0?
 
  INSERT INTO STAFF VALUES ('E7','Ella Brown',12,'Claggetsville Maryland');
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0498 If ERROR, data exception/string right trunc.?
 -- PASS:0498 If 0 rows inserted OR SQLSTATE = 22001 OR SQLCODE < 0?

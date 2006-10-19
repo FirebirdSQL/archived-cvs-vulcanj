@@ -3,7 +3,6 @@ CREATE DATABASE 'test.fdb' ;
 CREATE ROLE test;
 CREATE ROLE test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -SQL role TEST already exists
 DROP DATABASE;

@@ -93,8 +93,8 @@ SELECT COUNT(*) FROM STAFF WHERE GRADE=130;
 
 UPDATE TEMP_SS SET GRADE = 11;
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table TEMP_SS
+-At trigger 'CHECK_1'
 -- PASS:0036 If ERROR, view check constraint, 0 rows updated?
 
 DROP DATABASE;

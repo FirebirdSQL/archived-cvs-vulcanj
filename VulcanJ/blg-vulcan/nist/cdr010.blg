@@ -48,7 +48,6 @@ SELECT COUNT(*) FROM STAFF_C WHERE MGR = 'E1';
 delete from staff_c where empnum = 'e8';
 DELETE FROM STAFF_C WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "STAFF_C"
 SELECT EMPNUM FROM STAFF_C WHERE EMPNUM = 'E1';
 

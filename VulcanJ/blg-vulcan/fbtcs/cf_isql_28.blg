@@ -36,7 +36,6 @@ insert into TEST values (6);
 commit;
 update TEST set id=-1 where id=1;
 Statement failed, SQLCODE = -508
-
 no current record for fetch operation
 rollback;
 /* error */

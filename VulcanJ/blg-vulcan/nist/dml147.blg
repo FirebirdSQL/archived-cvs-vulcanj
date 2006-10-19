@@ -13,7 +13,6 @@ CREATE TABLE NOT_THERE (C1 CHAR (10));
  ROLLBACK;
 INSERT INTO NOT_THERE VALUES ('1234567890');
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NOT_THERE
@@ -25,7 +24,6 @@ SQL error code = -204
 ROLLBACK;
 SELECT COUNT (*) FROM NOT_HERE;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -NOT_HERE
@@ -37,7 +35,6 @@ SQL error code = -204
 ROLLBACK;
 SELECT COUNT (*) FROM USIG WHERE NUL IS NULL;
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -NUL

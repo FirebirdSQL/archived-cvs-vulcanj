@@ -50,7 +50,6 @@ COMMIT WORK;
 
  UPDATE UPUNIQ SET NUMKEY = NUMKEY + 1;
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_15" on table "UPUNIQ"
 -- PASS:0124 If 0 rows updated?
  SELECT COUNT(*),SUM(NUMKEY) FROM UPUNIQ;

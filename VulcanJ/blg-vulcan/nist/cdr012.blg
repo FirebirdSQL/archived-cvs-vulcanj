@@ -42,7 +42,6 @@ SELECT COUNT(*) FROM PROJ_M WHERE MGR = 'E5';
 delete from proj_m where pNum in ('p7', 'p8');
 DELETE FROM STAFF_M WHERE EMPNUM='E2';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_5" on table "PROJ_M"
 SELECT EMPNUM FROM STAFF_M WHERE EMPNUM = 'E2';
 

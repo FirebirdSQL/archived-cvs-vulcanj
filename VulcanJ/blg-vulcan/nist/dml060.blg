@@ -173,8 +173,8 @@ E3     P4               50
           SET EMPNUM = 'E9'
           WHERE PNUM = 'P2';
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table SUBSP
+-At trigger 'CHECK_1'
 -- PASS:0265 If ERROR, view check constraint, 0 rows are updated?
  
      SELECT * FROM WORKS;
@@ -236,7 +236,6 @@ E3     P4               50
           SET PNUM = 'P6'
           WHERE EMPNUM = 'E3';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0266 If ERROR, unique constraint, 0 rows updated?
 
@@ -312,7 +311,6 @@ INSERT INTO WORKS1 VALUES ('P6','P1',36);
 UPDATE WORKS1
        SET PNUM = EMPNUM, EMPNUM = PNUM;
 Statement failed, SQLCODE = -803
-
 attempt to store duplicate value (visible to active transactions) in unique index "WORKS1_IND"
 -- PASS:0267 If 36 rows are updated?
 

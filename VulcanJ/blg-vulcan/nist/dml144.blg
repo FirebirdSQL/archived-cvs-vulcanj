@@ -63,7 +63,6 @@ on
 
  SELECT SUBSTRING (CITY FROM 4 FOR -1) FROM STAFF WHERE EMPNAME = 'Ed';
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 -- PASS:0835 If 1 row selected and value is 'on '?
 

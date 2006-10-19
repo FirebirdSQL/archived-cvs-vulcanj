@@ -5,7 +5,6 @@ CREATE TABLE t( a INTEGER NOT NULL,
               );
 ALTER INDEX RDB$PRIMARY1 INACTIVE;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Index column not found
 DROP DATABASE;

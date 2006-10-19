@@ -65,7 +65,6 @@ COMMIT;
 
  INSERT INTO PROJ1(PNUM,PNAME,PTYPE) VALUES('P10','SDP','Test'); 
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_10" on table "PROJ1"
 -- PASS:0149 If ERROR, unique constraint, 0 rows inserted?
 

@@ -13,7 +13,6 @@ BEGIN
   new.text='altered trigger';
 END ^
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -NEW.TEXT

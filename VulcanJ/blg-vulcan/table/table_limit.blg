@@ -7,7 +7,6 @@ create database 'test.fdb' user 'sysdba' password 'masterkey'
 -- 64k is too big, will fail
 create table foo (c1 varchar(20000), c2 varchar(20000), c3 varchar(20000), c4 varchar(5524) );
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -new record size of 65536 bytes is too big
 -TABLE FOO

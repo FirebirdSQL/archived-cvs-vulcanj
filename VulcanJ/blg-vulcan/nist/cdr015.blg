@@ -303,7 +303,6 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 UPDATE SIZ1_P SET S1 = 'E9' WHERE S1 = 'E1' AND S2 = 'TTS' AND S3 =1;
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "SIZ1_F"
 SELECT COUNT(*) FROM SIZ1_P WHERE S1 = 'E1' AND S2 = 'TTS' AND S3 =1;
 

@@ -161,11 +161,9 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 INSERT INTO SIZ2_F1 VALUES ('  E','AAA');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_31" on table "SIZ2_F1"
 INSERT INTO SIZ2_F10 VALUES (9,'AAB');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_49" on table "SIZ2_F10"
 SELECT COUNT(*) FROM SIZ2_F10;
 
@@ -309,7 +307,6 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 DELETE FROM SIZ2_P WHERE P1 = '  A';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_31" on table "SIZ2_F1"
 SELECT P1 FROM SIZ2_P WHERE P1 = '  A';
 
@@ -453,11 +450,9 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 UPDATE SIZ2_P SET P1 = '  Z' WHERE P1 = '  A';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_31" on table "SIZ2_F1"
 UPDATE SIZ2_P SET P10 = 100 WHERE P10 = 8;
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_49" on table "SIZ2_F10"
 SELECT COUNT(*) FROM SIZ2_P WHERE P1 = '  A';
 
@@ -475,7 +470,6 @@ SELECT COUNT(*) FROM SIZ2_P WHERE P1 = '  A';
 
 UPDATE SIZ2_P SET P1 = 'B  ' WHERE P1 = '  A';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_31" on table "SIZ2_F1"
 SELECT COUNT(*) FROM SIZ2_P WHERE P1 = '  A';
 
@@ -486,7 +480,6 @@ SELECT COUNT(*) FROM SIZ2_P WHERE P1 = '  A';
 
 UPDATE SIZ2_F1 SET F1 = '  Z' WHERE F1 = '  A'; 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_31" on table "SIZ2_F1"
 SELECT COUNT(*) FROM SIZ2_F1 WHERE F1 = '  A';
 
@@ -630,7 +623,6 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 UPDATE SIZ3_P5 SET F1 = 10 * 10 / 20 - 10 + 16 WHERE  F1 = 5;
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_75" on table "SIZ3_F"
 SELECT COUNT(*) FROM SIZ3_P5 WHERE F1 = 11;
 

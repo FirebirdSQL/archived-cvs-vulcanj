@@ -6,7 +6,6 @@ CREATE DATABASE 'test.fdb' ;
 create table t3 (i integer);
 drop table t3 cascade;
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 drop table t3 cascade
               ^ unknown token

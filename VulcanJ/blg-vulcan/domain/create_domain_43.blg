@@ -8,7 +8,6 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 -- is misspelled.
 create domain bb integer  check (vlaue > 0 and value <= 1) ;
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -VLAUE

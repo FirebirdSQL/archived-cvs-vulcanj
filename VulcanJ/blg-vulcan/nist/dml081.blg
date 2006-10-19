@@ -76,7 +76,6 @@ COMMIT WORK;
        COUNT 
 ============ 
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 --  PASS:0488 If ERROR, cardinality violation, 0 rows selected?
 --  PASS:0488 OR SQLSTATE = 21000 OR SQLCODE < 0?
@@ -105,7 +104,6 @@ SELECT COUNT(*) FROM STAFF WHERE EMPNAME = 'Fidel' AND 16/GRADE > 2;
        COUNT 
 ============ 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  selected?
@@ -116,7 +114,6 @@ arithmetic exception, numeric overflow, or string truncation
                       
 ===================== 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  selected?
@@ -127,7 +124,6 @@ arithmetic exception, numeric overflow, or string truncation
        COUNT 
 ============ 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  selected?
@@ -138,7 +134,6 @@ arithmetic exception, numeric overflow, or string truncation
        COUNT 
 ============ 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  selected?
@@ -146,7 +141,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  UPDATE STAFF SET GRADE = GRADE/0 WHERE GRADE = 12;
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  updated?
@@ -154,7 +148,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  INSERT INTO STAFF SELECT 'X','Y',HOURS/0,'z' FROM WORKS WHERE PNUM = 'P6';
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0490 If ERROR, data exception/division by zero, 0 rows
 --  inserted?

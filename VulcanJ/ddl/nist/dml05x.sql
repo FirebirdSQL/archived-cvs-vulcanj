@@ -477,7 +477,6 @@ SELECT COL1, MAX(COL2) FROM VTABLE
 				HAVING MAX(COL2) > ANY (SELECT GRADE FROM STAFF) 
 				AND MAX(COL2) < SOME (SELECT HOURS FROM WORKS) 
 				ORDER BY COL1;
--- this didn't work before
 -- PASS:0259 If 1 row is selected and COL1 = 10 and MAX(COL2) = 20?
 
 

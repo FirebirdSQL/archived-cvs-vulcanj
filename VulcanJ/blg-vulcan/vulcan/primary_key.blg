@@ -6,9 +6,8 @@ Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb'; 
 create table t2 (c char(20) primary key); 
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
--Column: C not defined as NOT NULL - cannot be used in PRIMARY KEY/UNIQUE constraint definition
+-Column: C not defined as NOT NULL - cannot be used in PRIMARY KEY constraint definition
 -- create table should fail, because c is NULLABLE
 
 drop database;

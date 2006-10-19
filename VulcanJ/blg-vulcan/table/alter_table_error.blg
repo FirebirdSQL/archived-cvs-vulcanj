@@ -9,13 +9,11 @@ INSERT INTO foo VALUES (2000000000);
 -- Should err, VARCHAR(5) can't hold '2000000000'
 ALTER TABLE foo ALTER i TYPE VARCHAR(5);
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -New size specified for column I must be at least 11 characters.
 -- Should err, VARCHAR(5) can't hold '2000000000'
 ALTER TABLE foo ALTER i TYPE VARCHAR(9);
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -New size specified for column I must be at least 11 characters.
 -- show have column I as integer

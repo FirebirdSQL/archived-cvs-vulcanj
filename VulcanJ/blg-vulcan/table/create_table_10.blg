@@ -13,9 +13,8 @@ insert into t values (1, 'text');
 recreate table t (i integer not null primary key,
    c char(10) );
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
--object T is in use 
+-object T is in use
 commit;
 -- recreate table t (i integer not null primary key, c char(10) );
 drop database;

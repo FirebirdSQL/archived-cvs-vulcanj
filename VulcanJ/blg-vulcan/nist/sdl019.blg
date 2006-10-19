@@ -61,7 +61,6 @@ COMMIT;
 --  PASS:0155 If count = 12?
  INSERT INTO WORKS SELECT 'E3',PNUM,100 FROM PROJ;
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0155 If ERROR, unique constraint, 0 rows inserted?
  SELECT COUNT(*) FROM WORKS;

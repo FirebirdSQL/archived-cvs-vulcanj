@@ -88,7 +88,6 @@ A
 
  INSERT INTO UPUNIQ VALUES (555666777);
 Statement failed, SQLCODE = -804
-
 SQL error code = -804
 -Count of read-write columns does not equal count of values
 -- PASS:0503 If ERROR, syntax error or access rule violation?
@@ -104,7 +103,6 @@ A
 
 SELECT COL2 FROM UPUPUP WHERE NUMKEY = 1;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -UPUPUP
@@ -115,7 +113,6 @@ SQL error code = -204
  UPDATE UPUNIQ SET COL2 = 'xx';
 UPDATE UPUPUP SET COL2 = 'xx';
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -UPUPUP
@@ -126,7 +123,6 @@ SQL error code = -204
  DELETE FROM UPUNIQ;
 DELETE FROM UPUPUP;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -UPUPUP
@@ -137,7 +133,6 @@ SQL error code = -204
  INSERT INTO UPUNIQ VALUES (9,'M');
 INSERT INTO UPUPUP VALUES (9,'M');
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -UPUPUP
@@ -156,7 +151,6 @@ SQL error code = -204
 
  SELECT COUNT(*) FROM STAFF WHERE GRADE < (SELECT MAX(HOURS) FROM WORKS) OR    GRADE > (SELECT MAX(NUMKEY) FROM UPUPUP) OR    GRADE + 100 > (SELECT MIN(HOURS) FROM WORKS);
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -UPUPUP

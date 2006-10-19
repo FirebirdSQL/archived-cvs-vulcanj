@@ -161,7 +161,6 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 INSERT INTO SIZ1_P VALUES('E1','TTT',1,'SSS',10,'RRR','HHH','ZZZ',6);
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_7" on table "SIZ1_P"
 SELECT COUNT(*) FROM SIZ1_P WHERE S1 = 'E1';
 
@@ -172,7 +171,6 @@ SELECT COUNT(*) FROM SIZ1_P WHERE S1 = 'E1';
 
 INSERT INTO SIZ1_F VALUES('E1','TTT',1,'SSS',19,'RRS','TTT',5,6);
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "SIZ1_F"
 SELECT COUNT(*) FROM SIZ1_F WHERE F6 = 'RRS';
 

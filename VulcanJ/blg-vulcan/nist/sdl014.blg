@@ -66,7 +66,6 @@ SELECT COUNT(*)FROM  WORKS1;
 
  INSERT INTO WORKS1 VALUES('E1','P2',80);
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_18" on table "WORKS1"
 -- PASS:0150 If ERROR, unique constraint, 0 rows inserted?
 -- NOTE:0150 Duplicates for (EMPNUM, PNUM) are not allows.

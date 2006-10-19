@@ -2,7 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 DROP DOMAIN test;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Domain not found
 DROP DATABASE;

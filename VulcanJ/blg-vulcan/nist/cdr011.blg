@@ -39,7 +39,6 @@ INSERT INTO STAFF_C VALUES('E6','Tom',14,'Gettysburg','E5');
 INSERT INTO STAFF_C VALUES('E7','Kingdom',18,'Gettysburg','E7');
 INSERT INTO STAFF_C VALUES('E8','Alice',12,'Deale','E9');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "STAFF_C"
 SELECT COUNT(*) FROM STAFF_C WHERE MGR = 'E9';
 
@@ -50,7 +49,6 @@ SELECT COUNT(*) FROM STAFF_C WHERE MGR = 'E9';
 
 UPDATE STAFF_C SET EMPNUM='E9' WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "STAFF_C"
 SELECT EMPNUM FROM STAFF_C WHERE EMPNUM = 'E1';
 
@@ -61,7 +59,6 @@ E1
 
 UPDATE STAFF_C SET EMPNUM = 'E5' WHERE EMPNUM = 'E6';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_8" on table "STAFF_C"
 SELECT COUNT(*) FROM STAFF_C WHERE EMPNUM ='E6';
 
@@ -72,7 +69,6 @@ SELECT COUNT(*) FROM STAFF_C WHERE EMPNUM ='E6';
 
 UPDATE STAFF_C SET MGR= 'E9' WHERE MGR = 'E1';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_9" on table "STAFF_C"
 SELECT COUNT(*) FROM STAFF_C WHERE MGR = 'E1';
 

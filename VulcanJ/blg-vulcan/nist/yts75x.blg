@@ -39,13 +39,11 @@ DROP DOMAIN CHARDOMAIN;
 
  INSERT INTO shorttab VALUES (2,3);
 Statement failed, SQLCODE = -625
-
 validation error for column DOMCOL, value "3"
 -- PASS:7502 If ERROR - integrity constraint violation?
  
  INSERT INTO shorttab VALUES (3, 123456789);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:7502 If ERROR -integrity const. violation or ?
 -- PASS:7502 numeric value out of range ?
@@ -113,19 +111,16 @@ DROP TABLE shorttab;
 
  INSERT INTO def_chk VALUES (2,'a',3);
 Statement failed, SQLCODE = -625
-
 validation error for column D_CHK, value "2"
 -- PASS:7506 If ERROR - integrity constraint violation?
  
  INSERT INTO def_chk VALUES (3,'z',3);
 Statement failed, SQLCODE = -625
-
 validation error for column E_CHK, value "z"
 -- PASS:7506 If ERROR - integrity constraint violation?
  
  INSERT INTO def_chk VALUES (3,'a',1);
 Statement failed, SQLCODE = -625
-
 validation error for column F_CHK, value "1"
 -- PASS:7506 If ERROR - integrity constraint violation?
 
@@ -164,7 +159,6 @@ c                38
 
  INSERT INTO dom_chk VALUES ('z', 101);
 Statement failed, SQLCODE = -625
-
 validation error for column COL1, value "z"
 -- PASS:7507 If ERROR - integrity constraint violation?
 
@@ -179,7 +173,6 @@ validation error for column COL1, value "z"
 
  UPDATE dom_chk SET col1 = 'q' WHERE col2 = 38;
 Statement failed, SQLCODE = -625
-
 validation error for column COL1, value "q"
 -- PASS:7507 If ERROR - integrity constraint violation?
 
@@ -203,13 +196,11 @@ CREATE DOMAIN smint INTEGER CHECK (1<= VALUE and 100 >= VALUE);
 CREATE TABLE dom_chk (col1 atom, col2 atom);
 INSERT INTO dom_chk VALUES ('<', 100);
 Statement failed, SQLCODE = -413
-
 conversion error from string "100"
 -- PASS:7508 If ERROR - integrity constraint violation?
 
  INSERT INTO dom_chk VALUES ('a', 101);
 Statement failed, SQLCODE = -413
-
 conversion error from string "101"
 -- PASS:7508 If ERROR - integrity constraint violation?
 

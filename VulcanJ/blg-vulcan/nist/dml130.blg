@@ -17,7 +17,6 @@ FOO               0123456789
 
  INSERT INTO CH1 VALUES ('FOO', 'F', 'LITTLETOOLONG');
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0678 If ERROR, string data, right truncation, 0 rows
  --  selected?

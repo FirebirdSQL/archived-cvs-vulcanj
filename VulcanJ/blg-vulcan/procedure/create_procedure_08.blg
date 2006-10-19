@@ -12,7 +12,6 @@ BEGIN
   SUSPEND;
 END ^
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Procedure TEST already exists
 SET TERM ;^

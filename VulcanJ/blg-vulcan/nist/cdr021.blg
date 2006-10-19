@@ -70,7 +70,6 @@ commit;
 -- TEST:0378 (ref. acr. sch.) delete P.K and corr. F.K e.!
  DELETE FROM STAFF_P WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
 -- PASS:0378 If RI ERROR, children exist, 0 rows deleted?
 
@@ -87,7 +86,6 @@ E1
 -- TEST:0379 (ref. acr. sch.) update P.K and corr. F.K e.!
  UPDATE STAFF_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
 -- PASS:0379 If RI ERROR, children exist, 0 rows updated?
 

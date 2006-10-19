@@ -57,13 +57,11 @@ select (select ROW_NUM from factorial(i,1)) as RN from onerow ;
           RN 
 ============ 
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 select (select RESULT from factorial(i,1)) as RS from onerow ;
 
           RS 
 ============ 
 Statement failed, SQLCODE = -811
-
 multiple rows in singleton select
 drop database ;

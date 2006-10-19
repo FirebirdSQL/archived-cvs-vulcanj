@@ -50,7 +50,6 @@ COMMIT WORK;
 
  CREATE TABLE STAFF1 (EMPNUM    CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15));
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Table STAFF1 already exists
 SELECT SUM(HOURS), MAX(HOURS) FROM STAFF, WORKS;

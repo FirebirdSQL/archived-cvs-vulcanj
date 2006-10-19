@@ -64,9 +64,9 @@ recreate table dst_test (i integer);
 insert into dst_test values (101); 
 execute procedure DynamicSampleTwo('dst_test');
 Statement failed, SQLCODE = -836
-
 exception 1
 -Overflow in dst_test
+-At procedure 'DYNAMICSAMPLETWO'
 SET TERM ^;
 CREATE PROCEDURE DynamicSampleOne (Pname VARCHAR(100))
 AS 

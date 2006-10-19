@@ -118,7 +118,6 @@ CREATE VIEW CHANGGVIEW AS SELECT * FROM CHANGG;
 -- PASS:0625 If view is created?
  ALTER TABLE CHANGG DROP NAAM RESTRICT; 
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Column NAAM from table CHANGG is referenced in view CHANGGVIEW                     
 -- PASS:0625 If ERROR, view references NAAM?
@@ -128,7 +127,6 @@ INSERT INTO CHANGG VALUES ('QUEEG', 33);
 INSERT INTO CHANGG VALUES ('BESSIE', 106);
 SELECT COUNT(*) FROM CHANGG WHERE DIVORCES IS NULL; 
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -DIVORCES
@@ -146,7 +144,6 @@ SQL error code = -206
 -- PASS:0625 If value is 106?
  SELECT MAX(NUMBRR) FROM CHANGGVIEW;
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -NUMBRR
@@ -181,7 +178,7 @@ SELECT AGE, NUMBRR, DIVORCES FROM CHANGG WHERE NAAM = 'RUDOLPH';
          AGE NUMBRR          DIVORCES 
 ============ =========== ============ 
 
-          33 738-47-1847            0 
+          33 738-47-1847       <null> 
 
 -- PASS:0625 If 1 row selected with values 33, 738-47-1847, NULL ?
  SELECT AGE, NUMBRR, DIVORCES FROM CHANGG WHERE NAAM = 'GOOBER';
@@ -214,7 +211,6 @@ SELECT AGE, NUMBRR, DIVORCES FROM CHANGG WHERE NAAM = 'RUDOLPH';
 -- PASS:0625 If column is dropped?
  SELECT COUNT(*) FROM CHANGG WHERE AGE > 30; 
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -AGE
@@ -222,7 +218,6 @@ SQL error code = -206
 -- PASS:0625 If ERROR, column does not exist?
  SELECT COUNT(*) FROM CHANGG WHERE DIVORCES IS NULL; 
 Statement failed, SQLCODE = -206
-
 SQL error code = -206
 -Column unknown
 -DIVORCES
@@ -241,21 +236,19 @@ CREATE TABLE REFERENCE_CHANGG ( NAAM CHAR (14) NOT NULL PRIMARY KEY REFERENCES C
 -- PASS:0625 If table is created?
  INSERT INTO REFERENCE_CHANGG VALUES ('NO SUCH NAAM');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_5" on table "REFERENCE_CHANGG"
 fail("Violation of Foreign Key constrain");
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 fail("Violation of Foreign Key constrain")
 ^ unknown token
 ALTER TABLE CHANGG DROP NAAM RESTRICT; 
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -ERASE RDB$RELATION_FIELDS failed
 -action cancelled by trigger (1) to preserve data integrity
--Cannot delete PRIMARY KEY being used in FOREIGN KEY definition.               
+-Cannot delete PRIMARY KEY being used in FOREIGN KEY definition.
+-At trigger 'RDB$TRIGGER_23'
 -- PASS:0625 If ERROR, referential constraint exists?
 
 -- TEST:0631 Datetimes in a <default clause>!

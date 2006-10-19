@@ -103,20 +103,18 @@ ROLLBACK;
 -- TEST:0272 Statement rollback for integrity!
  UPDATE WORKS SET EMPNUM = 'E7' WHERE EMPNUM = 'E1' OR EMPNUM = 'E4';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0272 If ERROR, unique constraint, 0 rows updated?
 
  INSERT INTO WORKS SELECT 'E3',PNUM,17 FROM PROJ;
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0272 If ERROR, unique constraint, 0 rows inserted?
 
  UPDATE V_WORKS1 SET HOURS = HOURS - 9;
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table V_WORKS1
+-At trigger 'CHECK_1'
 -- PASS:0272 If ERROR, view check constraint, 0 rows updated?
 
  SELECT COUNT(*) FROM WORKS WHERE EMPNUM = 'E7' OR HOURS = 31 OR HOURS = 17;

@@ -3,7 +3,7 @@
 
 CREATE DATABASE 'test.fdb';
 CREATE GENERATOR GEN_TEST1;
-SET GENERATOR GEN_TEST1 TO 0;
+SET GENERATOR GEN_TEST1 TO 4294967298 ;
 CREATE GENERATOR GEN_TEST2;
 SET GENERATOR GEN_TEST2 TO 0;
 SET TERM ^ ;
@@ -17,6 +17,8 @@ begin
   for 
     select rdb$generator_name
     from rdb$generators 
+-- for fb2 system tables have 0's, not nulls. Use this WHERE clause:
+--    where coalesce(rdb$system_flag, 0) = 0
     where rdb$system_flag is null 
     into :gen_name do
   begin
@@ -30,3 +32,4 @@ show procedures;
 
 connect 'test.fdb';
 execute procedure rpl$generator_values;
+drop database;

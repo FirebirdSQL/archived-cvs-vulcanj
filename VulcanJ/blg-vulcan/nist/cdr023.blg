@@ -75,7 +75,6 @@ CREATE TABLE ACR_SCH_F(F1 DECIMAL(4), F2 CHAR(4), FOREIGN KEY (F1) REFERENCES AC
  INSERT INTO ACR_SCH_F VALUES(1,'DOG');
 INSERT INTO ACR_SCH_F VALUES(2,'PIG');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_28" on table "ACR_SCH_F"
 -- PASS:0382 If RI ERROR, parent missing, 0 rows inserted?
 

@@ -8,7 +8,6 @@ CREATE TABLE fk( a INTEGER NOT NULL,
               );
 ALTER INDEX RDB$FOREIGN2 INACTIVE;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Index column not found
 DROP DATABASE;

@@ -161,11 +161,9 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 INSERT INTO SIZ3_F VALUES ('  F','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,100,'TTT');
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_80" on table "SIZ3_F"
 SELECT COUNT(*) FROM SIZ3_F;
 
@@ -309,7 +307,6 @@ INSERT INTO SIZ3_F VALUES ('  C','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,8,'TTT');
 DELETE FROM SIZ3_P1 WHERE F1 = '  A';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
 SELECT F1 FROM SIZ3_P1 WHERE F1 = '  A';
 
@@ -320,11 +317,9 @@ F1
 
 UPDATE SIZ3_P1 SET F1 = '  Z' WHERE F1 = '  A'; 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
 UPDATE SIZ3_P10 SET F1 = 100 WHERE F1 = 8; 
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_80" on table "SIZ3_F"
 SELECT COUNT(*) FROM SIZ3_P1 WHERE F1 = '  A';
 
@@ -342,7 +337,6 @@ SELECT COUNT(*) FROM SIZ3_P1 WHERE F1 = '  A';
 
 UPDATE SIZ3_P1 SET F1 = '  B'WHERE F1 = '  A';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_51" on table "SIZ3_P1"
 SELECT COUNT(*) FROM SIZ3_P1 WHERE F1 = '  A';
 
@@ -353,7 +347,6 @@ SELECT COUNT(*) FROM SIZ3_P1 WHERE F1 = '  A';
 
 UPDATE SIZ3_F SET P1 = '  Z' WHERE P1 = '  A';
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
 SELECT COUNT(*) FROM SIZ3_F WHERE P1 = '  A';
 

@@ -2,7 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN INT AS VARCHAR(32);
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 CREATE DOMAIN INT AS VARCHAR(32)
               ^ unknown token

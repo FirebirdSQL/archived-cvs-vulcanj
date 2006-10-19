@@ -57,7 +57,6 @@ DELETE FROM P1;
 DELETE FROM FOUR_TYPES;
 INSERT INTO P1 VALUES (100000);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0497 If 1 row is inserted?
 -- PASS:0497 OR ERROR, data exception/numeric value out of range?
@@ -65,7 +64,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  INSERT INTO P1 VALUES (-1000000);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0497 If 1 row is inserted?
 -- PASS:0497 OR ERROR, data exception/numeric value out of range?
@@ -79,7 +77,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  UPDATE P1 SET NUMTEST = NUMTEST + 100000 WHERE NUMTEST = 9;
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0497 If 1 row is updated?
 --  PASS:0497 OR ERROR, data exception/numeric value out of range?
@@ -87,7 +84,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  UPDATE P1 SET NUMTEST = ((1 + NUMTEST) * 100000) WHERE NUMTEST = 100009 OR NUMTEST IN (SELECT GRADE - 4 FROM STAFF);
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0497 If 1 row is updated?
 --  PASS:0497 OR ERROR, data exception/numeric value out of range?
@@ -95,7 +91,6 @@ arithmetic exception, numeric overflow, or string truncation
 
  UPDATE P1 SET NUMTEST = NUMTEST * 200000 WHERE NUMTEST = -9;
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 --  PASS:0497 If 1 row is updated?
 --  PASS:0497 OR ERROR, data exception/numeric value out of range?
@@ -107,7 +102,6 @@ SELECT T_DECIMAL / .000000001 FROM FOUR_TYPES WHERE T_CHAR = 'X';
                       
 ===================== 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 -- PASS:0497 If 1 row is selected and T_DECIMAL = 1.1112222E+16 ?
 -- PASS:0497 OR ERROR, data exception/numeric value out of range?

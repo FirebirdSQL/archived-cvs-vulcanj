@@ -146,7 +146,6 @@ SELECT COUNT(*) FROM LUSER_DATA;
 
  DELETE FROM ALL_USER_IDS;
 Statement failed, SQLCODE = -530
-
 violation of FOREIGN KEY constraint "INTEG_30" on table "AUDIT_RECORDS"
 -- PASS:0645 If RI ERROR, children exist, 0 rows deleted?
 
@@ -165,7 +164,6 @@ DROP TABLE AUDIT_RECORDS ;
 
 DROP TABLE LUSERS ;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -ERASE RDB$RELATION_FIELDS failed
 -action cancelled by trigger (1) to preserve data integrity

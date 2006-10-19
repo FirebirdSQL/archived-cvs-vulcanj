@@ -65,8 +65,8 @@ INSERT INTO STAFFV2 VALUES('E6','Ling',15,'Xian');
 
  INSERT INTO STAFFV2 VALUES('E7','Gallagher',10,'Rockville');
 Statement failed, SQLCODE = -297
-
 Operation violates CHECK constraint  on view or table STAFFV2
+-At trigger 'CHECK_2'
 -- PASS:0152 If ERROR, view check constraint, 0 rows inserted?
 
  SELECT COUNT(*) FROM STAFFV2;

@@ -6,7 +6,6 @@ commit;
 drop table foo;
 select * from foo;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Table unknown
 -FOO
@@ -24,7 +23,6 @@ commit;
 drop procedure test;
 execute procedure test;
 Statement failed, SQLCODE = -204
-
 SQL error code = -204
 -Procedure unknown
 -TEST
@@ -39,7 +37,6 @@ commit;
 drop external function ascii_val;
 select ascii_val(A) from (select 'a' as A from rdb$database);
 Statement failed, SQLCODE = -804
-
 SQL error code = -804
 -Function unknown
 -ASCII_VAL

@@ -31,11 +31,9 @@ SELECT COUNT(*) FROM NO_DUCK;
 
 INSERT INTO NO_DUCK SELECT 22.22, CAST (C1 AS FLOAT), 0, C1 FROM ECCO;
 Statement failed, SQLCODE = -413
-
 conversion error from string "NL"
 INSERT INTO NO_DUCK SELECT 22.22, 2.222E1, CAST (C1 AS INT), 'QUACK!' FROM ECCO;
 Statement failed, SQLCODE = -413
-
 conversion error from string "NL"
 SELECT CAST (CAST (3 AS DEC (5, 3)) AS CHAR (5))  FROM ECCO; 
 
@@ -73,7 +71,6 @@ SELECT CAST (-GOOSE AS CHAR (5)) FROM NO_DUCK;
 CAST   
 ====== 
 Statement failed, SQLCODE = -413
-
 conversion error from string "-12.00"
 UPDATE NO_DUCK SET ALBATROSS = 0.0;
 SELECT CAST (-ALBATROSS AS CHAR (5)) FROM NO_DUCK;
@@ -129,7 +126,6 @@ SELECT CAST (ALBATROSS AS CHAR (4)) FROM NO_DUCK;
 CAST   
 ====== 
 Statement failed, SQLCODE = -802
-
 arithmetic exception, numeric overflow, or string truncation
 SELECT CAST (NULL AS CHAR (10)), GOOSE FROM NO_DUCK WHERE SEAGULL = 0 UNION SELECT OSPREY, CAST (SEAGULL AS NUMERIC (4, 2)) FROM NO_DUCK WHERE GOOSE > 10000; 
 

@@ -55,7 +55,6 @@ COMMIT;
 
 SELECT PTYPE, CITY, SUM (BUDGET), COUNT(*) FROM PROJ GROUP BY CITY ORDER BY CITY;
 Statement failed, SQLCODE = -104
-
 SQL error code = -104
 -Invalid expression in the select list (not contained in either an aggregate function or the GROUP BY clause)
 -- PASS:0454 If either 3, 4, or 6 rows are selected?

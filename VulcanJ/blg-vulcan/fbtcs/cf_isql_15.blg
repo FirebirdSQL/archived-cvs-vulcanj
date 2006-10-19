@@ -5,7 +5,6 @@ create database 'test.fdb';
 /*-----------------------------------------------------------------------------*/
 create table t0 (a integer, af computed by (non_exist_udf(a)));
 Statement failed, SQLCODE = -804
-
 SQL error code = -804
 -Function unknown
 -NON_EXIST_UDF

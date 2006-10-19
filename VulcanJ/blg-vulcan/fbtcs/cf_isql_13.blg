@@ -16,7 +16,6 @@ insert into t1(a) values(11);
 /*---------------------------------------------------------------------*/
 alter table t0 drop a;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -COLUMN A
@@ -38,7 +37,6 @@ select * from t0;
 /*---------------------------------------------------------------------*/
 alter table t1 drop af;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -cannot delete
 -COLUMN AF
