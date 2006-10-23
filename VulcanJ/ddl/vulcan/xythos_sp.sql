@@ -28,4 +28,3 @@ END
 SET TERM ; ^
 
 drop database;
-z
