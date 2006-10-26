@@ -98,9 +98,12 @@ end
 commit^
 set term ;^
 select * from c;
-Statement failed, SQLCODE = -104
-invalid request BLR at offset 21
--Input parameter mismatch for procedure C
+
+                    D 
+===================== 
+
+            12345.678 
+
 set term ^;
 -- do the singleton form ...
 EXECUTE BLOCK RETURNS (L INTEGER) AS BEGIN
