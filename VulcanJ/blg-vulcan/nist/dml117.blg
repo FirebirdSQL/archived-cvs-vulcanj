@@ -163,12 +163,6 @@ DROP TABLE AUDIT_RECORDS ;
 -- PASS:0645 If table is dropped?
 
 DROP TABLE LUSERS ;
-Statement failed, SQLCODE = -607
-unsuccessful metadata update
--ERASE RDB$RELATION_FIELDS failed
--action cancelled by trigger (1) to preserve data integrity
--Cannot delete column being used in an Integrity Constraint.
--- drop won't work in FB until all integrity constraints are removed.
 -- PASS:0645 If table is dropped?
 
 DROP DATABASE;

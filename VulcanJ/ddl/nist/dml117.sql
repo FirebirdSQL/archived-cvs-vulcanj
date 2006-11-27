@@ -79,7 +79,6 @@ COMMIT;
 -- PASS:0645 If table is dropped?
 
 DROP TABLE LUSERS ;
--- drop won't work in FB until all integrity constraints are removed.
 -- PASS:0645 If table is dropped?
 
 DROP DATABASE;

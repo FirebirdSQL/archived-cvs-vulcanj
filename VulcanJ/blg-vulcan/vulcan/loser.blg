@@ -1,0 +1,22 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect S0315902
+-- TABLE CORRUPTED WHEN RECREATE FAILS
+
+create database 'test.fdb';
+create table imaloserbaby (clientid integer, description varchar(20) );
+insert into imaloserbaby values (1, 'test');
+commit;
+alter table imaloserbaby alter clientid to ci;
+-- show table should show column CI.
+show table imaloserbaby;
+CI                              INTEGER Nullable 
+DESCRIPTION                     VARCHAR(20) Nullable 
+-- now for the real test. column header should say CI, not CLIENTID.
+select * from imaloserbaby;
+
+          CI DESCRIPTION          
+============ ==================== 
+
+           1 test                 
+
+drop database;
