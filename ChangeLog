@@ -1,3 +1,213 @@
+2006-11-27	verbguy
+	* VulcanJ/blg-vulcan/nist/dml117.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/droppable.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/loser.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/recreate_pk_exception.blg 1.1:
+	* VulcanJ/ddl/nist/dml117.sql 1.2:
+	* VulcanJ/ddl/vulcan/droppable.sql 1.1:
+	* VulcanJ/ddl/vulcan/loser.sql 1.1:
+	* VulcanJ/ddl/vulcan/recreate_pk_exception.sql 1.1:
+		new benchmarks for Dmitry's recent fixes.
+
+2006-10-26	verbguy
+	* VulcanJ/blg-vulcan/procedure/simple_sp.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/executeInto.blg 1.5:
+	* VulcanJ/ddl/procedure/simple_sp.sql 1.1:
+		rebench test cases that have stored procedures with 0 input 
+		parameters
+
+2006-10-23	verbguy
+	* VulcanJ/blg-vulcan/vulcan/executeInto.blg 1.4:
+	* VulcanJ/blg-vulcan/vulcan/xythos_sp.blg 1.2:
+	* VulcanJ/ddl/vulcan/xythos_sp.sql 1.3:
+		update benchmark logs after Dmitry's fix for stored procedure 
+		input parameters.
+
+2006-10-19	verbguy
+	* VulcanJ/blg-vulcan/cast/cast_03.blg 1.2:
+	* VulcanJ/blg-vulcan/cast/cast_09.blg 1.2:
+	* VulcanJ/blg-vulcan/cast/cast_12.blg 1.2:
+	* VulcanJ/blg-vulcan/database/alter_database_03.blg 1.2:
+	* VulcanJ/blg-vulcan/domain/alter_domain_05.blg 1.2:
+	* VulcanJ/blg-vulcan/domain/create_domain_41.blg 1.2:
+	* VulcanJ/blg-vulcan/domain/create_domain_42.blg 1.3:
+	* VulcanJ/blg-vulcan/domain/create_domain_43.blg 1.2:
+	* VulcanJ/blg-vulcan/domain/drop_domain_02.blg 1.2:
+	* VulcanJ/blg-vulcan/domain/drop_domain_03.blg 1.3:
+	* VulcanJ/blg-vulcan/exception/create_exception_03.blg 1.2:
+	* VulcanJ/blg-vulcan/exception/drop_exception_02.blg 1.2:
+	* VulcanJ/blg-vulcan/exception/drop_exception_03.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_11.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_13.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_14.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_15.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_16.blg 1.3:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_19.blg 1.3:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_26.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_27.blg 1.3:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_28.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_31.blg 1.1:
+	* VulcanJ/blg-vulcan/fbtcs/dsql_domain_04.blg 1.2:
+	* VulcanJ/blg-vulcan/fbtcs/proc_cast6_isql.blg 1.2:
+	* VulcanJ/blg-vulcan/generator/drop_generator_02.blg 1.2:
+	* VulcanJ/blg-vulcan/generator/drop_generator_03.blg 1.2:
+	* VulcanJ/blg-vulcan/index/alter_index_04.blg 1.2:
+	* VulcanJ/blg-vulcan/index/alter_index_05.blg 1.2:
+	* VulcanJ/blg-vulcan/index/create_index_10.blg 1.2:
+	* VulcanJ/blg-vulcan/index/create_index_12.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr001.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr002.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr003.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr004.blg 1.3:
+	* VulcanJ/blg-vulcan/nist/cdr005.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr006.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr007.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr008.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr009.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr010.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr011.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr012.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr013.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr014.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr015.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr016.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr017.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr018.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr019.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr021.blg 1.3:
+	* VulcanJ/blg-vulcan/nist/cdr022.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr023.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr026.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr028.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/cdr031.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml009.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml011.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml023.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml026.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml027.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml03x.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml04x.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml05x.blg 1.3:
+	* VulcanJ/blg-vulcan/nist/dml060.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml061.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml069.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml073.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml075.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml077.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml081.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml082.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml083.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml084.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml086.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml091.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml104.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml112.blg 1.3:
+	* VulcanJ/blg-vulcan/nist/dml114.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml117.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml130.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml137.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml141.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml144.blg 1.4:
+	* VulcanJ/blg-vulcan/nist/dml147.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml149.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml160.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml170.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/dml182.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/flg008.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl012.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl013.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl014.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl016.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl019.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/sdl025.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/xts75x.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/yts75x.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/yts79x.blg 1.2:
+	* VulcanJ/blg-vulcan/procedure/alter_procedure_03.blg 1.2:
+	* VulcanJ/blg-vulcan/procedure/create_procedure_08.blg 1.2:
+	* VulcanJ/blg-vulcan/procedure/create_procedure_09.blg 1.3:
+	* VulcanJ/blg-vulcan/role/create_role_02.blg 1.2:
+	* VulcanJ/blg-vulcan/security/create_page_sizes.blg 1.2:
+	* VulcanJ/blg-vulcan/security/create_schema_01.blg 1.2:
+	* VulcanJ/blg-vulcan/table/alter_table_error.blg 1.2:
+	* VulcanJ/blg-vulcan/table/create_table_05.blg 1.2:
+	* VulcanJ/blg-vulcan/table/create_table_06.blg 1.2:
+	* VulcanJ/blg-vulcan/table/create_table_07.blg 1.2:
+	* VulcanJ/blg-vulcan/table/create_table_08.blg 1.3:
+	* VulcanJ/blg-vulcan/table/create_table_09.blg 1.2:
+	* VulcanJ/blg-vulcan/table/create_table_10.blg 1.2:
+	* VulcanJ/blg-vulcan/table/table_limit.blg 1.2:
+	* VulcanJ/blg-vulcan/trigger/alter_trigger_16.blg 1.2:
+	* VulcanJ/blg-vulcan/trigger/alter_trigger_17.blg 1.2:
+	* VulcanJ/blg-vulcan/types/double.blg 1.3:
+	* VulcanJ/blg-vulcan/view/create_view_03.blg 1.2:
+	* VulcanJ/blg-vulcan/view/create_view_04.blg 1.2:
+	* VulcanJ/blg-vulcan/view/create_view_08.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/alter_numeric.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/autoCommit.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/avg_tests.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/check_constraint_s0302147.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/colon.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/duplicate_index.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/executeBlock.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/executeInto.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/factorial.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/fblimits.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/index_assert.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/kerries_fk_bug.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/keyword.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/maxColumnsPerGroupBy.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/maxColumnsPerOrderBy.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/max_tables_per_select_s0341813.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/pk_drop_prob_s0366698.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/primary_key.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/quote_keywords.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/set_tran.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/sing_select.blg 1.1:
+	* VulcanJ/blg-vulcan/vulcan/substring_bug.blg 1.3:
+	* VulcanJ/blg-vulcan/vulcan/unassigned_code.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/unicode_hang.blg 1.2:
+	* VulcanJ/create_test_users.sql 1.1:
+	* VulcanJ/ddl/fbtcs/cf_isql_27.sql 1.3:
+	* VulcanJ/ddl/fbtcs/cf_isql_31.sql 1.1:
+	* VulcanJ/ddl/nist/dml05x.sql 1.2:
+	* VulcanJ/ddl/vulcan/duplicate_index.sql 1.1:
+	* VulcanJ/ddl/vulcan/kerries_fk_bug.sql 1.1:
+	* VulcanJ/ddl/vulcan/maxColumnsPerGroupBy.sql 1.1:
+	* VulcanJ/ddl/vulcan/maxColumnsPerOrderBy.sql 1.1:
+	* VulcanJ/ddl/vulcan/max_tables_per_select_s0341813.sql 1.1:
+	* VulcanJ/ddl/vulcan/pk_drop_prob_s0366698.sql 1.1:
+	* VulcanJ/ddl/vulcan/sing_select.sql 1.1:
+	* VulcanJ/ddl/vulcan/xythos_sp.sql 1.2:
+	* VulcanJ/vulcan_secure.conf 1.1:
+		new benchmark logs for vulcan and some new tests cases. Most of 
+		these changes are due to PSQL stack trace feature now in Vulcan.
+
+2006-05-03	verbguy
+	* VulcanJ/blg-vulcan/nist/cdr021.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/xts70x.blg 1.2:
+	* VulcanJ/blg-vulcan/nist/xts74x.blg 1.2:
+	* VulcanJ/ddl/nist/cdr021.sql 1.2:
+	* VulcanJ/ddl/nist/xts70x.sql 1.2:
+	* VulcanJ/ddl/nist/xts74x.sql 1.2:
+	* VulcanJ/fbmust.sh 1.3:
+	* VulcanJ/filter.sed 1.3:
+	* VulcanJ/test/org/firebirdsql/isql/isqlBase/Diff.java 1.3:
+		fix problem reported by Paul R. with output subdirectories not 
+		properly created. Also corrected and rebenched several test 
+		cases against Vulcan.
+
+2006-04-26	verbguy
+	* VulcanJ/blg-vulcan/fbtcs/cf_isql_27.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/keyword.blg 1.2:
+	* VulcanJ/blg-vulcan/vulcan/set_tran.blg 1.2:
+	* VulcanJ/ddl/fbtcs/cf_isql_27.sql 1.2:
+	* VulcanJ/ddl/vulcan/keyword.sql 1.2:
+		Revise benchmark logs for vulcan tests. This revision is mostly 
+		about character set differences between private vulcan and SF 
+		vulcan's handling of UTF16/UTF32. More "unknown token" changes, 
+		too.
+
 2006-04-21	verbguy
 	* VulcanJ/blg-vulcan/domain/create_domain_42.blg 1.2:
 	* VulcanJ/blg-vulcan/fbtcs/cf_isql_16.blg 1.2:
