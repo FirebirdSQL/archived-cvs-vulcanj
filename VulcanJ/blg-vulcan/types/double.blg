@@ -14,7 +14,15 @@ SQL error code = -104
 insert into dp_test values(11000000000000000000)
                            ^ unknown token
 insert into dp_test values(110000000000000000.00);
+Statement failed, SQLCODE = -104
+SQL error code = -104
+insert into dp_test values(110000000000000000.00)
+                           ^ unknown token
 insert into dp_test values(110000000000.00000000);
+Statement failed, SQLCODE = -104
+SQL error code = -104
+insert into dp_test values(110000000000.00000000)
+                           ^ unknown token
 select * from dp_test;
 
                       X 
@@ -23,7 +31,5 @@ select * from dp_test;
  1.100000000000000e+016 
  1.100000000000000e+017 
  1.100000000000000e+018 
- 1.100000000000000e+017 
-      110000000000.0000 
 
 drop database;
