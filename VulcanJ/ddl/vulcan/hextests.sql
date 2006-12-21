@@ -109,14 +109,31 @@ rollback;
 -- test cases suggested by adriano
 --
 
-recreate table testy (i integer) ; 
-insert into testy values ('01') ;
+recreate table testy (i integer, bi bigint) ; 
+insert into testy (i) values ('01') ;
 
 -- insert should pass, just like previous insert
-insert into testy values ('0x0101') ;
+insert into testy (i) values ('0x0101') ;
 
--- select should return 2 rows
+-- insert should pass
+insert into testy (i) values ('0xDEADBEEF') ;
+
+-- insert should pass
+insert into testy (i) values ('0xdeadbeef') ;
+
+-- this insert should fail, invalid hex constant
+insert into testy (i) values ('0xABCQQ');
+
+-- select should return 4 rows
 select * from testy;
 
+-- now some BIGINT tests
+
+insert into testy (bi) values ('0xDEADBEEF');
+insert into testy (bi) values ('0x8000000000000000');
+insert into testy (bi) values ('0x7FFFFFFFFFFFFFFF');
+
+-- select should return 3 rows
+select * from testy where bi is not null;
 
 drop database;
