@@ -17,6 +17,6 @@ CREATE INDEX INDEXEXISTS ON TABLEEXISTS(COL);
 CREATE INDEX INDEXEXISTS ON TABLEEXISTS(COL);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
--STORE RDB$INDICES failed
+-Index INDEXEXISTS already exists
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_5"
 drop database ;

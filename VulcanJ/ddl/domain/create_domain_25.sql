@@ -1,4 +1,4 @@
-CREATE DATABASE 'test.fdb' ;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 
 CREATE DOMAIN test NATIONAL CHAR VARYING(32765) [30,30,30];
 SHOW DOMAIN test;

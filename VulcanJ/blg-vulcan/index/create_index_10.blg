@@ -5,6 +5,6 @@ CREATE INDEX test ON t(a);
 CREATE INDEX test ON t(a);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
--STORE RDB$INDICES failed
+-Index TEST already exists
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_5"
 DROP DATABASE;

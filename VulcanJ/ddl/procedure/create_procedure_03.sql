@@ -1,4 +1,4 @@
-CREATE DATABASE 'test.fdb' ;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 
 SET TERM ^;
 CREATE PROCEDURE test RETURNS( 

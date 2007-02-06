@@ -1,0 +1,21 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0360390
+-- PARAMETER DESCRIBED AS DECIMAL, NOT NUMERIC, FOR TIME ELAPSED CALCULATION
+set names ascii;
+create database 'test.fdb';
+set sqlda_display on;
+select current_timestamp - current_timestamp from rdb$database;
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+
+OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
+01: sqltype: 580 INT64              sqlscale: -9 sqlsubtype: 1 sqllen: 8
+  :  name: (0)  alias: (0)
+  : table: (0)  owner: (0)
+
+                      
+===================== 
+
+          0.000000000 
+
+drop database;

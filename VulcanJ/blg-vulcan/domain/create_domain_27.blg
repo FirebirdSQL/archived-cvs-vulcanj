@@ -1,5 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
-CREATE DATABASE 'test.fdb' ;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 CREATE DOMAIN test BLOB SUB_TYPE 1;
 SHOW DOMAIN test;
 TEST                            BLOB segment 80, subtype TEXT Nullable

@@ -1,5 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
-CREATE DATABASE 'test.fdb' ;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 SET TERM ^;
 CREATE PROCEDURE test( 
   p1 SMALLINT, p2 INTEGER, p3 FLOAT, p4 DOUBLE PRECISION, p5 DECIMAL(9,3), p6 NUMERIC(10,4),
@@ -29,5 +29,5 @@ P8                                INPUT TIME
 P9                                INPUT TIMESTAMP 
 P10                               INPUT CHAR(40) 
 P11                               INPUT VARCHAR(60) 
-P12                               INPUT CHAR(70)  CHARACTER SET ISO8859_1
+P12                               INPUT CHAR(70) 
 DROP DATABASE;

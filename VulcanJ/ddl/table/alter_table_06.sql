@@ -1,4 +1,4 @@
-CREATE DATABASE 'test.fdb' ;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 CREATE TABLE test( id INTEGER NOT NULL);
 
 ALTER TABLE test ALTER id TYPE VARCHAR(32);

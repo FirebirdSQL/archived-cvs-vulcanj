@@ -119,8 +119,8 @@ SELECT COUNT(*) FROM WORKS WHERE EMPNUM='E9';
 
                       
 ===================== 
-Statement failed, SQLCODE = -802
-arithmetic exception, numeric overflow, or string truncation
+Statement failed, SQLCODE = -901
+Division by zero exception
 -- PASS:0122 If ERROR Number not Divisible by Zero?
 
 -- TEST:0123 Evaluation order of expression!
