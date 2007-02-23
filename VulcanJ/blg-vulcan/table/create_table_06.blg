@@ -6,6 +6,6 @@ CREATE TABLE test(
 );
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
--STORE RDB$RELATION_FIELDS failed
+-Column C1 already exists
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
 DROP DATABASE;

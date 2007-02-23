@@ -1,6 +1,8 @@
 Use CONNECT or CREATE DATABASE to specify a database
 -- S0341813
 -- MAXIMUM NUMBER OF TABLES PER SELECT STATEMENT
+set names ascii;
+set sqlstate on;
 create database 'test.fdb';
 recreate table test (i integer);
 create index test_i on test(i); 
@@ -279,6 +281,8 @@ select test.i from test
    inner join test as t255 on t255.i = test.i
 
    ;
-Statement failed, SQLCODE = -104
+Statement failed, SQLCODE = -104, SQLSTATE = 54001
 invalid request BLR at offset 5509
 -Too many Contexts of Relation/Procedure/Views. Maximum allowed is 255
+drop database;
+quit;

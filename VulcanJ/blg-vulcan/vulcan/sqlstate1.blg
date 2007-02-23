@@ -1,0 +1,67 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- new test cases for sqlstate
+-- tests are not exhaustive, but hopefully provide good coverage
+set names ascii;
+set sqlstate on;
+create database 'test.fdb';
+create table test (i integer);
+insert into test values (1);
+insert into test values (2);
+commit;
+-- cardinality, 21000
+select * from test where i = (select * from test) ;
+
+           I 
+============ 
+Statement failed, SQLCODE = -811, SQLSTATE = 21000
+multiple rows in singleton select
+-- domain not found, 42000 - syntax error or access violation
+drop domain NO_SUCH_DOMAIN;
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
+unsuccessful metadata update
+-Domain not found
+-- generator not found, 42000
+drop generator NO_SUCH_GEN;
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
+unsuccessful metadata update
+-Generator NO_SUCH_GEN not found
+-- duplicate index, 42S11
+create table idx_test (i integer);
+create index i1 on idx_test (i);
+create index i1 on idx_test (i);
+Statement failed, SQLCODE = -607, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index I1 already exists
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_5"
+-- column already exists, 42S21
+create table test_add_column (i integer);
+alter table test_add_column add i integer;
+Statement failed, SQLCODE = -607, SQLSTATE = 42S21
+unsuccessful metadata update
+-Column I already exists
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+-- column not found, 42S22
+select boogie from rdb$database;
+Statement failed, SQLCODE = -206, SQLSTATE = 42S22
+SQL error code = -206
+-Column unknown
+-BOOGIE
+-At line 2, column 15.
+create index i_nf on test(NO_COL) ;
+Statement failed, SQLCODE = -607, SQLSTATE = 42S22
+unsuccessful metadata update
+-Unknown columns in index I_NF
+alter table test drop NO_COL;
+Statement failed, SQLCODE = -607, SQLSTATE = 42S22
+unsuccessful metadata update
+-Column NO_COL not found
+-- table not found 42S02 - verify SQLCODE, too, please.
+drop table NOSUCHTABLE;
+Statement failed, SQLCODE = -607, SQLSTATE = 42S02
+Table NOSUCHTABLE does not exist
+-- view not found 42S02 - verify SQLCODE, too, please.
+drop view NOSUCHVIEW;
+Statement failed, SQLCODE = -607, SQLSTATE = 42S02
+View NOSUCHVIEW does not exist
+drop database;
+quit;

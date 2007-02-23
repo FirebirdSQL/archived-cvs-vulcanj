@@ -2,8 +2,9 @@
 -- NEED BETTER ERROR MESSAGE FOR MAXIMUM # OF COLUMNS IN ORDER BY CLAUSE
 
 set names ascii;
-
+set sqlstate on;
 create database 'test.fdb';
+
 
 recreate table test (
    i000 integer,

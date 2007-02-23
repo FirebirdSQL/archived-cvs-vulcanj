@@ -3,6 +3,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- NEED BETTER ERROR MESSAGE FOR MAXIMUM # OF COLUMNS IN ORDER BY CLAUSE
 
 set names ascii;
+set sqlstate on;
 create database 'test.fdb';
 recreate table test (
    i000 integer,
@@ -705,8 +706,9 @@ i253,
 i254,
 i255
 ;
-Statement failed, SQLCODE = -104
+Statement failed, SQLCODE = -104, SQLSTATE = 54011
 SQL error code = -104
 -Invalid command
 -invalid ORDER BY clause
+-cannot sort on more than 255 items
 drop database;

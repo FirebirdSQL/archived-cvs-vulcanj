@@ -19,8 +19,7 @@ unsuccessful metadata update
 -could not find UNIQUE or PRIMARY KEY constraint with specified columns
 drop table staffz;
 Statement failed, SQLCODE = -607
-SQL error code = -607
--table/view STAFFZ does not exist
+Table STAFFZ does not exist
 drop table staff3;
 CREATE TABLE PROJ_MAN
 (P_REF   CHAR(3) NOT NULL UNIQUE,

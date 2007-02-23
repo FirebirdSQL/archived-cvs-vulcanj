@@ -1,7 +1,8 @@
 Use CONNECT or CREATE DATABASE to specify a database
 -- S0385573
 -- DI STUDIO ISSUES WITH FOREIGN KEYS 
-
+set names ascii;
+set sqlstate on;
 create database 'test.fdb';
 create table product_list (
    product_id bigint not null primary key,
@@ -17,7 +18,7 @@ create table kbdiscounttgt (
    discount double precision not null);
 alter table KBDISCOUNTTGT
    add foreign key (PRODUCT_ID) references PRODUCT_LIST;
-Statement failed, SQLCODE = -607
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
 unsuccessful metadata update
 -partner index segment no 1 has incompatible data type
 drop database;

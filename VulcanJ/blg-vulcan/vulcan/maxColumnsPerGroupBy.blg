@@ -4,6 +4,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 set names ascii;
 create database 'test.fdb';
+set sqlstate on;
 recreate table test (
    i000 integer,
    i001 integer,
@@ -702,7 +703,8 @@ i252,
 i253,
 i254,
 i255;
-Statement failed, SQLCODE = -104
+Statement failed, SQLCODE = -104, SQLSTATE = 54011
 SQL error code = -104
 -Invalid command
+-cannot group on more than 255 items
 drop database;
