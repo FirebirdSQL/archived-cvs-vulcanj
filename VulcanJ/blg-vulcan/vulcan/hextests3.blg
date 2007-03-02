@@ -21,11 +21,19 @@ insert into testy (bi) values ('0xDEADBEEF');
 insert into testy (bi) values ('   0xDEADBEEF');
 -- we now allow spaces in between too
 insert into testy (bi) values ('   0xDEAD BEEF');
+Statement failed, SQLCODE = -413
+conversion error from string "   0xDEAD BEEF"
 -- this is the same, but different
 insert into testy (bi) values ('0xDEAD BEEF');
+Statement failed, SQLCODE = -413
+conversion error from string "0xDEAD BEEF"
 -- max length is 16 hex digits
 insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF ');
+Statement failed, SQLCODE = -413
+conversion error from string "0xDEAD BEEF DEAD BEEF "
 insert into testy (bi) values (' 0xDEAD BEEF DEAD BEEF ');
+Statement failed, SQLCODE = -413
+conversion error from string " 0xDEAD BEEF DEAD BEEF "
 -- should get 6 rows
 select * from testy;
 
@@ -34,10 +42,6 @@ select * from testy;
 
       <null>            3735928559 
       <null>            3735928559 
-      <null>            3735928559 
-      <null>            3735928559 
-      <null>  -2401053088876216593 
-      <null>  -2401053088876216593 
 
 -- invalid case, too long
 insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF B');

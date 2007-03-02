@@ -25,7 +25,7 @@ rollback;
 -- string is too big, 01004
 create table big_str (c char(2) );
 insert into big_str values ('test');
-Statement failed, SQLCODE = -802, SQLSTATE = 01004
+Statement failed, SQLCODE = -802, SQLSTATE = 22001
 arithmetic exception, numeric overflow, or string truncation
 rollback;
 -- object is in use, 42000
