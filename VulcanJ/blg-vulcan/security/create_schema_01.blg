@@ -1,6 +1,7 @@
 Use CONNECT or CREATE DATABASE to specify a database
+set names ascii;
 -- CREATE SCHEMA is an alias for CREATE DATABASE;
-CREATE SCHEMA 'test.fdb' ;
+CREATE SCHEMA 'test.fdb' default character set iso8859_1;
 SHOW DATABASE;
 Database: test.fdb
         Owner: SYSDBA                         
@@ -13,5 +14,5 @@ Transaction - oldest active = 1
 Transaction - oldest snapshot = 1 
 Transaction - Next = 4 
 ODS = 11.0
-Default Character set: NONE                           
+Default Character set: ISO8859_1                      
 DROP DATABASE;

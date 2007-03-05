@@ -3780,7 +3780,7 @@ public class TestDml4 extends NistTestBase {
 			// PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 		}
@@ -3795,7 +3795,7 @@ public class TestDml4 extends NistTestBase {
 			// PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 
@@ -3811,7 +3811,7 @@ public class TestDml4 extends NistTestBase {
 			fail();
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 		}
@@ -3827,7 +3827,7 @@ public class TestDml4 extends NistTestBase {
 			// PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 		}
@@ -3842,7 +3842,7 @@ public class TestDml4 extends NistTestBase {
 			// PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 		}
@@ -3858,7 +3858,7 @@ public class TestDml4 extends NistTestBase {
 			// PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
 		} catch (SQLException sqle) {
 			if (DB_DIALECT.equalsIgnoreCase("firebirdsql")) {
-				assertEquals(335544321, sqle.getErrorCode());
+				assertEquals(335544778, sqle.getErrorCode());
 				assertEquals("HY000", sqle.getSQLState());
 			}
 		}

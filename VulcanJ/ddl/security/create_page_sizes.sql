@@ -1,8 +1,6 @@
 -- test valid page sizes, including default
-
-
--- default is 4k
-CREATE DATABASE 'test.fdb' ;
+set names ascii;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
 SHOW DATABASE;
 
 DROP DATABASE;
