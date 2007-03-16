@@ -124,7 +124,6 @@ UPUNIQ
 
  CREATE VIEW LONGIDENTIFIERSAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEFFFFFFFFFFGGGGGGGGGGHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJKKKKKKKKKKAAAAAAAA as select * from vtable;
 Statement failed, SQLCODE = -607
-
 unsuccessful metadata update
 -Name longer than database column size
 -- PASS:7031 If view created successfully?

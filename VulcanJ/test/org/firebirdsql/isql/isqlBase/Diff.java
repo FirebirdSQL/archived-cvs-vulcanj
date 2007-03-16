@@ -140,8 +140,6 @@ public class Diff {
 	String[] stringsToEat = {"C:\\\\WINNT\\\\SYSTEM32\\\\TEST.G00",
 			"C:\\\\CYGWIN\\\\HOME\\\\VULCANJ\\\\TEST.G00",
 			"Number of DB pages allocated = [0-9]*",
-			"e\\+0",
-			"e\\+",
 			"Transaction - oldest active = [0-9]*",
 			"Transaction - oldest snapshot = [0-9]*",
 			"Transaction - Next = [0-9]*", "TEST\\s*[0-9]:[0-9[a-f]]{3}.*",

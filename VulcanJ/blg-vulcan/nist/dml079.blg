@@ -51,14 +51,12 @@ COMMIT WORK;
  UPDATE STAFF SET EMPNUM = 'e2' WHERE EMPNUM = 'E4';
 INSERT INTO STAFF(EMPNUM) VALUES ('E1');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFF"
 INSERT INTO STAFF(EMPNUM) VALUES ('e1');
 -- PASS:0451 If ERROR, unique constraint, 0 rows inserted?
 
  UPDATE STAFF SET EMPNUM = 'E1' WHERE EMPNUM = 'e1';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_2" on table "STAFF"
 -- PASS:0451 If ERROR, unique constraint, 0 rows updated?
 
@@ -83,14 +81,12 @@ e1     <null>                     <null> <null>
 -- PASS:0451 If 1 row inserted?
  INSERT INTO WORKS (EMPNUM,PNUM) VALUES ('E1','P2');
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0451 If ERROR, unique constraint, 0 rows inserted?
  INSERT INTO WORKS (EMPNUM,PNUM) VALUES ('e1', 'P2');
 -- PASS:0451 If 1 row inserted?
  UPDATE WORKS SET EMPNUM = 'E1' WHERE PNUM = 'P5' AND EMPNUM = 'E4';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0451 If ERROR, unique constraint, 0 rows updated?
 
@@ -99,7 +95,6 @@ violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 
  UPDATE WORKS SET PNUM = 'P4' WHERE PNUM = 'P2' AND EMPNUM = 'E4';
 Statement failed, SQLCODE = -803
-
 violation of PRIMARY or UNIQUE KEY constraint "INTEG_13" on table "WORKS"
 -- PASS:0451 If ERROR, unique constraint, 0 rows updated?
 
