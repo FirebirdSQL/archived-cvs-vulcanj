@@ -9,5 +9,5 @@ create table testme (i integer) ;
 alter table testme alter BOGUS to NEWNAME ;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
--column BOGUS does not exist in table/view TESTME
+-Column BOGUS not found
 drop database;
