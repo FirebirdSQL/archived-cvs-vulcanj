@@ -1,0 +1,40 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect S0410647
+-- SAS CRASH WHEN INSERTING EXTREMELY LARGE VALUE VIA PROC TSSQL
+set names ascii;
+set sqlstate on;
+create database 'test.fdb';
+create table test (col1 double precision);
+-- works
+insert into test values (1.79769313486231570E+308);
+-- too big, should err
+insert into "TEST" ( "COL1" ) values ( 1.79769313486232e+308 ) ;
+Statement failed, SQLCODE = -802, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+commit;
+select * from test;
+
+                   COL1 
+======================= 
+
+ 1.797693134862316e+308 
+
+commit;
+-- this did crash
+select  -2.488355210669293e+39 from rdb$database;
+
+                        
+======================= 
+
+ -2.488355210669293e+39 
+
+-- exponent should now print as e+39 instead of e+039 on windows
+select cast ('-2.488355210669293e+39' as double precision) from rdb$database;
+
+                   CAST 
+======================= 
+
+ -2.488355210669293e+39 
+
+drop database;
+quit;

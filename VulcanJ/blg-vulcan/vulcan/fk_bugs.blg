@@ -1,0 +1,13 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0394715
+-- INCORRECT ERROR WHEN TRYING TO ADD FOREIGN KEY
+set names ascii;
+create database 'test.fdb'; 
+create table "TKTS1" ("COL1" int, "COL2" int);
+-- should fail with descriptive error
+create table "TKTS2" ("COL1" int, "COL2" int, foreign key("COL2")
+     references "TKTS1" ("COL1"));
+Statement failed, SQLCODE = -607
+unsuccessful metadata update
+-could not find UNIQUE or PRIMARY KEY constraint with specified columns
+drop database;

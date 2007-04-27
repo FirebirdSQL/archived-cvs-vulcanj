@@ -11,11 +11,12 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- 2005/11/28
 --
 set names ascii;
+set sqlstate on;
 create database 'test.fdb'; 
 -- should get "new record size of 65536 bytes is too big"
 recreate table bigrow (c1 char(30000),
    c2 char(30000), c3 char(5532) );
-Statement failed, SQLCODE = -607
+Statement failed, SQLCODE = -607, SQLSTATE = 54000
 unsuccessful metadata update
 -new record size of 65536 bytes is too big
 -TABLE BIGROW
@@ -27,7 +28,7 @@ insert into bigrow values ('hi', 'there', 'mom' );");
 -- select is now too big, and will fail
 -- with "Implementation limit exceeded"
 select * from bigrow; 
-Statement failed, SQLCODE = -104
+Statement failed, SQLCODE = -104, SQLSTATE = 54000
 invalid request BLR at offset 38
 -Implementation limit exceeded
 -block size exceeds implementation restriction
@@ -113,18 +114,18 @@ alter table lotsa_columns
    add constraint pk_lotsa_columns
    primary key (i1,i2,i3,i4,i5,i6,i7,i8,i9,
    i10,i11,i12,i13,i14,i15,i16,i17); 
-Statement failed, SQLCODE = -607
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
 unsuccessful metadata update
 -too many keys defined for index PK_LOTSA_COLUMNS
 -- ...and the drop should fail.
 alter table lotsa_columns drop constraint pk_lotsa_columns;
-Statement failed, SQLCODE = -607
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
 unsuccessful metadata update
 -CONSTRAINT PK_LOTSA_COLUMNS does not exist.
 -- here is another way to do it, all in 1 statement. This will fail (17 columns for PK).
 recreate table lots_columns (i1 integer not null, i2 integer not null, i3 integer not null, i4 integer not null, i5 integer not null, i6 integer not null, i7 integer not null , i8 integer not null , i9 integer not null , i10 integer not null , i11 integer not null , i12 integer not null , i13 integer not null , i14 integer not null , i15 integer not null , i16 integer not null , i17 integer not null,
    primary key (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16, i17) );
-Statement failed, SQLCODE = -607
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
 unsuccessful metadata update
 -too many keys defined for index RDB$PRIMARY1
 drop database;
