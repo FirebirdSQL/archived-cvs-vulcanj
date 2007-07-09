@@ -125,7 +125,7 @@ UPUNIQ
  CREATE VIEW LONGIDENTIFIERSAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEFFFFFFFFFFGGGGGGGGGGHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJKKKKKKKKKKAAAAAAAA as select * from vtable;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
--Name longer than database column size
+-Table name LONGIDENTIFIERSAAAAABBBBBBBBBBCC... is too long. Limit is 32 characters
 -- PASS:7031 If view created successfully?
 -- this fails for firebird. 6/21/2005.
 
