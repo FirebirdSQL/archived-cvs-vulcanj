@@ -8,6 +8,7 @@ AS
 BEGIN
   new.text=new.text||'tg1 ';
 END ^
+
 ALTER TRIGGER tg AS
 BEGIN
   old.text='altered trigger';
@@ -17,5 +18,9 @@ SQL error code = -206
 -Column unknown
 -OLD.TEXT
 -At line 3, column 7.
+After line 9 in file ddl/trigger/alter_trigger_16.sql
+
 SET TERM ;^
+
 DROP DATABASE;
+

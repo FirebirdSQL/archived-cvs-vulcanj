@@ -4,9 +4,11 @@ Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
 set sqlstate on;
 create database 'test.fdb';
+
 recreate table test (i integer);
 create index test_i on test(i); 
 commit;
+
 select test.i from test
    inner join test as t1 on t1.i = test.i
    inner join test as t2 on t2.i = test.i
@@ -284,5 +286,7 @@ select test.i from test
 Statement failed, SQLCODE = -104, SQLSTATE = 54001
 invalid request BLR at offset 5509
 -Too many Contexts of Relation/Procedure/Views. Maximum allowed is 255
+After line 9 in file ddl/vulcan/max_tables_per_select_s0341813.sql
+
 drop database;
 quit;

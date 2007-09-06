@@ -1,0 +1,35 @@
+Use CONNECT or CREATE DATABASE to specify a database
+
+-- s0452168
+-- backport of fix for core-1389
+create database 'test.fdb';
+create table tab (col integer not null);
+create index index1 on tab(col);
+
+insert into tab values (1);
+insert into tab values (3);
+insert into tab values (2);
+
+commit;
+
+SET PLAN ON;
+
+SELECT FIRST 1 COL FROM TAB ORDER BY 1 ASC;
+
+PLAN (TAB ORDER INDEX1)
+
+         COL 
+============ 
+           1 
+
+SELECT MIN(COL) FROM TAB;
+
+PLAN (TAB ORDER INDEX1)
+
+         MIN 
+============ 
+           1 
+
+
+DROP DATABASE;
+QUIT;

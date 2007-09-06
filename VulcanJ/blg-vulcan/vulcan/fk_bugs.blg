@@ -3,11 +3,16 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- INCORRECT ERROR WHEN TRYING TO ADD FOREIGN KEY
 set names ascii;
 create database 'test.fdb'; 
+
 create table "TKTS1" ("COL1" int, "COL2" int);
+
 -- should fail with descriptive error
 create table "TKTS2" ("COL1" int, "COL2" int, foreign key("COL2")
      references "TKTS1" ("COL1"));
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -could not find UNIQUE or PRIMARY KEY constraint with specified columns
+After line 6 in file ddl/vulcan/fk_bugs.sql
+
+
 drop database;

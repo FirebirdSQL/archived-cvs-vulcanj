@@ -4,13 +4,17 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 set names iso8859_1;
 create database 'test.fdb';
+
 CREATE TABLE PARENT (
     PARENT_ID    INTEGER NOT NULL,
     PARENT_NAME  VARCHAR(200) CHARACTER SET UNICODE_FSS,
     PARENT_DATE  TIMESTAMP);
+
 -- Try to get back all of the rows starting with 'NIÑ':
 select * from parent where parent_name like _UNICODE_FSS 'NIÑ%';
 Statement failed, SQLCODE = -802
 arithmetic exception, numeric overflow, or string truncation
 -Cannot transliterate character between character sets
+After line 10 in file ddl/vulcan/unicode_hang.sql
+
 drop database;

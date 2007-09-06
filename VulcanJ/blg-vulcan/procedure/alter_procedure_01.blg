@@ -5,6 +5,7 @@ CREATE PROCEDURE test RETURNS (id INTEGER)AS
 BEGIN
   id=1;
 END ^
+
 /*
 Tested command:
 */
@@ -19,4 +20,6 @@ EXECUTE PROCEDURE test;
 ============ 
            2 
 
+
 DROP DATABASE;
+

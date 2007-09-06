@@ -4,17 +4,22 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 create database 'test.fdb' user 'sysdba' password 'masterkey'
    page_size=2048;
+
 -- 64k is too big, will fail
 create table foo (c1 varchar(20000), c2 varchar(20000), c3 varchar(20000), c4 varchar(5524) );
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -new record size of 65536 bytes is too big
 -TABLE FOO
+After line 5 in file ddl/table/table_limit.sql
+
 -- but 1 bytes less is ok
 create table foo (c1 varchar(20000), c2 varchar(20000), c3 varchar(20000), c4 varchar(5523) );
+
 show table foo;
 C1                              VARCHAR(20000) Nullable 
 C2                              VARCHAR(20000) Nullable 
 C3                              VARCHAR(20000) Nullable 
 C4                              VARCHAR(5523) Nullable 
+
 drop database;

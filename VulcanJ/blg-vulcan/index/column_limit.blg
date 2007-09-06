@@ -1,6 +1,7 @@
 Use CONNECT or CREATE DATABASE to specify a database
 -- s0368916: NEED A BETTER ERROR MESSAGE FOR MORE THAN TKTS_MAX_COLUMNS_IN_INDEX
 set names ascii;
+
 create database 'test.fdb';
 create table test (
    i1 integer,
@@ -20,13 +21,17 @@ create table test (
    i15 integer,
    i16 integer,
    i17 integer);
+
 -- 16 columns is ok
 create index i1 on test (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10,
    i11, i12, i13, i14, i15, i16);
+
 -- 17 columns is just wrong
 create index i2 on test (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10,
    i11, i12, i13, i14, i15, i16, i17);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -too many keys defined for index I2
+After line 26 in file ddl/index/column_limit.sql
+
 drop database;

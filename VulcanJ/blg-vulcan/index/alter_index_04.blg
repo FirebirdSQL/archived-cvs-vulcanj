@@ -3,8 +3,12 @@ CREATE DATABASE 'test.fdb' ;
 CREATE TABLE t( a INTEGER NOT NULL,
                 CONSTRAINT pkindx PRIMARY KEY(a)
               );
+
 ALTER INDEX RDB$PRIMARY1 INACTIVE;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Index column not found
+After line 4 in file ddl/index/alter_index_04.sql
+
 DROP DATABASE;
+

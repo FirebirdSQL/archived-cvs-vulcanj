@@ -1,78 +1,80 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
-CREATE TABLE STAFF13 (EMPNUM    CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (NOT EMPNAME IS NULL) );
-INSERT INTO STAFF13 VALUES('E1','Alice',36,'Deale');
-SELECT COUNT(*) FROM STAFF13;
+
+ CREATE TABLE STAFF13 (EMPNUM    CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (NOT EMPNAME IS NULL) );
+ INSERT INTO STAFF13 VALUES('E1','Alice',36,'Deale');
+ SELECT COUNT(*) FROM STAFF13;
 
        COUNT 
 ============ 
-
            1 
 
-INSERT INTO STAFF13 VALUES('E2',NULL,36,'Newyork');
+ INSERT INTO STAFF13 VALUES('E2',NULL,36,'Newyork');
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_3 on view or table STAFF13
 -At trigger 'CHECK_1'
-SELECT COUNT(*) FROM STAFF13;
+After line 6 in file ddl/nist/cdr003.sql
+ SELECT COUNT(*) FROM STAFF13;
 
        COUNT 
 ============ 
-
            1 
 
-CREATE TABLE STAFF9 (EMPNUM CHAR(3) NOT NULL PRIMARY KEY, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), CHECK (EMPNAME NOT LIKE 'T%'));
-INSERT INTO STAFF9 VALUES('E1','Thomas',0,'Deale');
+ CREATE TABLE STAFF9 (EMPNUM CHAR(3) NOT NULL PRIMARY KEY, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), CHECK (EMPNAME NOT LIKE 'T%'));
+ INSERT INTO STAFF9 VALUES('E1','Thomas',0,'Deale');
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_6 on view or table STAFF9
 -At trigger 'CHECK_3'
-INSERT INTO STAFF9 VALUES('E2','Tom',22,'Newyork');
+After line 9 in file ddl/nist/cdr003.sql
+ INSERT INTO STAFF9 VALUES('E2','Tom',22,'Newyork');
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_6 on view or table STAFF9
 -At trigger 'CHECK_3'
-INSERT INTO STAFF9 VALUES('E3','Susan',11,'Hawaii');
-SELECT COUNT(*) FROM STAFF9;
+After line 10 in file ddl/nist/cdr003.sql
+ INSERT INTO STAFF9 VALUES('E3','Susan',11,'Hawaii');
+ SELECT COUNT(*) FROM STAFF9;
 
        COUNT 
 ============ 
-
            1 
 
-CREATE TABLE STAFF10 (EMPNUM    CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE NOT IN (5,22)));
-INSERT INTO STAFF10 VALUES('E1','Thomas',5,'Deale');
+ CREATE TABLE STAFF10 (EMPNUM    CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE NOT IN (5,22)));
+ INSERT INTO STAFF10 VALUES('E1','Thomas',5,'Deale');
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_9 on view or table STAFF10
 -At trigger 'CHECK_5'
-INSERT INTO STAFF10 VALUES('E2','Tom',22,'Newyork');
+After line 14 in file ddl/nist/cdr003.sql
+ INSERT INTO STAFF10 VALUES('E2','Tom',22,'Newyork');
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_9 on view or table STAFF10
 -At trigger 'CHECK_5'
-INSERT INTO STAFF10 VALUES('E3','Susan',11,'Hawaii');
-SELECT COUNT(*) FROM STAFF10;
+After line 15 in file ddl/nist/cdr003.sql
+ INSERT INTO STAFF10 VALUES('E3','Susan',11,'Hawaii');
+ SELECT COUNT(*) FROM STAFF10;
 
        COUNT 
 ============ 
-
            1 
 
-CREATE TABLE STAFF5 (EMPNUM    CHAR(3) NOT NULL,EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE > 0 AND GRADE < 20));
-INSERT INTO STAFF5 VALUES('R9','Alice',15,'Deale');
-SELECT COUNT(*) FROM STAFF5;
+ CREATE TABLE STAFF5 (EMPNUM    CHAR(3) NOT NULL,EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE > 0 AND GRADE < 20));
+ INSERT INTO STAFF5 VALUES('R9','Alice',15,'Deale');
+ SELECT COUNT(*) FROM STAFF5;
 
        COUNT 
 ============ 
-
            1 
 
-UPDATE STAFF5 SET GRADE = 10 * 10 / 5 + 1 WHERE EMPNUM = 'R9';
+ UPDATE STAFF5 SET GRADE = 10 * 10 / 5 + 1 WHERE EMPNUM = 'R9';
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint INTEG_12 on view or table STAFF5
 -At trigger 'CHECK_8'
-SELECT COUNT(*) FROM STAFF5 WHERE GRADE = 15;
+After line 21 in file ddl/nist/cdr003.sql
+ SELECT COUNT(*) FROM STAFF5 WHERE GRADE = 15;
 
        COUNT 
 ============ 
-
            1 
+
 
 DROP DATABASE;

@@ -1,9 +1,13 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE EXCEPTION test 'A1';
+
 CREATE EXCEPTION test 'message to show';
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -DEFINE EXCEPTION failed
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_23"
+After line 2 in file ddl/exception/create_exception_03.sql
+
 DROP DATABASE;
+

@@ -12,17 +12,21 @@ commit;
 create domain dom04e as varchar(25)
   check (value in (select river from river_states));
 commit;
+
 create table river2 (i integer, r1 dom04e);
 insert into river2 (i, r1) values (1, 'Neuse');
 commit;
+
 insert into river2 (i, r1) values (2, 'Mississippi');
 Statement failed, SQLCODE = -625
 validation error for column R1, value "Mississippi"
+After line 17 in file ddl/fbtcs/dsql_domain_04.sql
+
 select * from river2;
 
            I R1                        
 ============ ========================= 
-
            1 Neuse                     
+
 
 drop database ;

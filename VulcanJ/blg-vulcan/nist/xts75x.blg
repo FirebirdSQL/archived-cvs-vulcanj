@@ -1,7 +1,9 @@
 Use CONNECT or CREATE DATABASE to specify a database
-SET NAMES ASCII; 
-CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+  SET NAMES ASCII; 
+  CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 COMMIT WORK;
+
 -- tests from the xts_75x series. 
 -- 6/21/2006.
 
@@ -12,8 +14,8 @@ COMMIT WORK;
 -- Can't add a NOT NULL constraint to a column once it's been created in
 -- Firebird, so we have to do this up front.
  CREATE TABLE TAB752a (COL1 NUMERIC(5) not null, COL2 CHAR(15) NOT NULL UNIQUE, COL3 CHAR(15));
-CREATE TABLE TAB752b  (C1 NUMERIC(5) not null PRIMARY KEY, C2 CHAR(15), C3 CHAR(15));
-ALTER TABLE TAB752a ADD PRIMARY KEY (COL1);
+ CREATE TABLE TAB752b  (C1 NUMERIC(5) not null PRIMARY KEY, C2 CHAR(15), C3 CHAR(15));
+ ALTER TABLE TAB752a ADD PRIMARY KEY (COL1);
 -- PASS:7052 If table altered successfully?
 
  ALTER TABLE TAB752b ADD CONSTRAINT TA752b_FKEY FOREIGN KEY(C2) REFERENCES TAB752a(COL2);
@@ -26,14 +28,18 @@ ALTER TABLE TAB752a ADD PRIMARY KEY (COL1);
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint COL3_CHECK on view or table TAB752A
 -At trigger 'CHECK_1'
+After line 23 in file ddl/nist/xts75x.sql
 -- PASS:7052 If ERROR - integrity constraint violation?
 
 ROLLBACK WORK;
-DROP TABLE TAB752b;
-DROP TABLE TAB752a;
+
+ DROP TABLE TAB752b;
+ DROP TABLE TAB752a;
+ 
+ 
 -- TEST:7053 ALTER TABLE ADD COLUMN WITH <data type>!
  CREATE TABLE TAB753 (COL1 double precision, COL2 CHAR(10), COL3 CHAR(10));
-ALTER TABLE TAB753 ADD  COL4 NUMERIC(7);
+ ALTER TABLE TAB753 ADD  COL4 NUMERIC(7);
 -- PASS:7053 If table altered successfully?
 
  ALTER TABLE TAB753 ADD COL5 CHAR(7);
@@ -49,7 +55,6 @@ ALTER TABLE TAB753 ADD  COL4 NUMERIC(7);
 
                    COL1 COL2       COL3               COL4 COL5    
 ======================= ========== ========== ============ ======= 
-
       1000.000000000000 PHONE      NICKOS            12000 blue    
       1001.000000000000 HULME      CHEADLE           12001 velvet  
 
@@ -58,7 +63,10 @@ ALTER TABLE TAB753 ADD  COL4 NUMERIC(7);
 -- PASS:7053 If 1001 HULME CHEADLE 12001 velvet?
 
 ROLLBACK WORK;
-DROP TABLE TAB753;
+
+ DROP TABLE TAB753;
+
+
 -- TEST:7054 ALTER TABLE ADD COLUMN WITH domain and constraint!
  CREATE DOMAIN DOM6138 AS INTEGER CHECK (VALUE > 1000 and VALUE < 2000);
 -- PASS:7054 If domain created successfully?
@@ -76,22 +84,27 @@ DROP TABLE TAB753;
 Statement failed, SQLCODE = -297
 Operation violates CHECK constraint C3DOM_CHECK on view or table TAB754
 -At trigger 'CHECK_3'
+After line 69 in file ddl/nist/xts75x.sql
 -- PASS:7054 If ERROR - integrity constraint violation?
 
  INSERT INTO TAB754 VALUES(1001,767,0);
 Statement failed, SQLCODE = -625
 validation error for column COLDOM, value "0"
+After line 72 in file ddl/nist/xts75x.sql
 -- PASS:7054 If ERROR - integrity constraint violation?
 
 ROLLBACK WORK;
-DROP TABLE TAB754;
-DROP DOMAIN DOM6138;
+
+ DROP TABLE TAB754;
+ DROP DOMAIN DOM6138;
+
+
 -- TEST:7055 ALTER TABLE DROP COLUMN RESTRICT!
 -- Firebird doesn't support the RESTRICT clause. 6/20/2005
 
  CREATE TABLE TAB755a (COL1  NUMERIC(7) not null PRIMARY KEY, COL2  CHAR(10), ENAME CHAR(25));
-CREATE TABLE TAB755b (COL_1    NUMERIC(7), COL_LEKTIKO1 CHAR(10), FOREIGN KEY(COL_1) REFERENCES TAB755a(COL1));
-ALTER TABLE TAB755b DROP  COL_LEKTIKO1;  
+ CREATE TABLE TAB755b (COL_1    NUMERIC(7), COL_LEKTIKO1 CHAR(10), FOREIGN KEY(COL_1) REFERENCES TAB755a(COL1));
+ ALTER TABLE TAB755b DROP  COL_LEKTIKO1;  
 -- PASS:7055 If table altered successfully?
 
  ALTER TABLE TAB755a DROP  COL1;
@@ -101,6 +114,7 @@ unsuccessful metadata update
 -action cancelled by trigger (1) to preserve data integrity
 -Cannot delete PRIMARY KEY being used in FOREIGN KEY definition.
 -At trigger 'RDB$TRIGGER_23'
+After line 89 in file ddl/nist/xts75x.sql
 -- PASS:7055 If ERROR - syntax error or access rule violation?
 
  DROP TABLE TAB755b ;
@@ -117,18 +131,18 @@ unsuccessful metadata update
 -- PASS:7056 If domain created successfully?
 
  CREATE TABLE TAB756a (T756a_COL1 NUMERIC(3) NOT NULL PRIMARY KEY, DNAME CHAR(15), LOC CHARDOMAIN UNIQUE);
-CREATE TABLE TAB756b (T756b_COL_1 NUMERIC(5) NOT NULL PRIMARY KEY, ENAME CHAR(15) NOT NULL, FOREIGN KEY(ENAME) REFERENCES TAB756a(LOC));
-CREATE VIEW V_756a AS SELECT LOC,DNAME FROM TAB756a;
-CREATE VIEW V_756b AS SELECT LOC,T756a_COL1 FROM TAB756a;
-ALTER TABLE TAB756a DROP LOC ;
+ CREATE TABLE TAB756b (T756b_COL_1 NUMERIC(5) NOT NULL PRIMARY KEY, ENAME CHAR(15) NOT NULL, FOREIGN KEY(ENAME) REFERENCES TAB756a(LOC));
+ CREATE VIEW V_756a AS SELECT LOC,DNAME FROM TAB756a;
+ CREATE VIEW V_756b AS SELECT LOC,T756a_COL1 FROM TAB756a;
+ ALTER TABLE TAB756a DROP LOC ;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Column LOC from table TAB756A is referenced in view V_756A                         
-select COUNT(*)  from rdb$relation_fields where rdb$relation_name = 'TAB756A' AND RDB$FIELD_NAME = 'LOC';
+After line 111 in file ddl/nist/xts75x.sql
+ select COUNT(*)  from rdb$relation_fields where rdb$relation_name = 'TAB756A' AND RDB$FIELD_NAME = 'LOC';
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7056 If COUNT = 0?
@@ -137,7 +151,6 @@ select COUNT(*)  from rdb$relation_fields where rdb$relation_name = 'TAB756A' AN
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7056 If COUNT = 0?
@@ -146,15 +159,16 @@ select COUNT(*)  from rdb$relation_fields where rdb$relation_name = 'TAB756A' AN
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7056 If COUNT = 0?
 
 ROLLBACK WORK;
-DROP VIEW V_756A; 
-DROP VIEW V_756B;
-DROP TABLE TAB756b ;
-DROP TABLE TAB756a ;
-DROP DOMAIN CHARDOMAIN ;
+
+ DROP VIEW V_756A; 
+ DROP VIEW V_756B;
+ DROP TABLE TAB756b ;
+ DROP TABLE TAB756a ;
+ DROP DOMAIN CHARDOMAIN ;
+
 DROP DATABASE;

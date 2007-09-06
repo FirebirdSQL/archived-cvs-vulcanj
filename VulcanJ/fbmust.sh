@@ -61,11 +61,11 @@ function process_dir {
              rm -f "$outfile" "$outfile"
              if [ $time_each_test = true ]; then
                 st=`date '+%s.%N'`
-                isql -i "$f" -o "$outfile" -m -e
+                isql -i "$f" -o "$outfile" -m -m2 -e
                 en=`date '+%s.%N'`
                 echo "$f","$st","$en" >> timings.txt
              else
-                isql -i "$f" -o "$outfile" -m -e
+                isql -i "$f" -o "$outfile" -m -m2 -e
              fi
 
              let numTests=$numTests+1

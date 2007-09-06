@@ -9,7 +9,11 @@ commit;
 
 -- hello world test
 insert into HEXTEST_HW (x) values (x'48454c4c4f20574f524c44');
+-- this is binary
 select * from HEXTEST_HW;
+-- now with cast as ascii
+select cast (x as char(20) character set ascii) from hextest_hw ;
+
 rollback;
 
 -- test for null values

@@ -4,6 +4,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 create table t4 (city char(20)); 
 insert into t4 values ('raleigh'); 
 select substring (city from 4 for -1) from t4; 
@@ -11,12 +12,18 @@ Statement failed, SQLCODE = -104
 SQL error code = -104
 select substring (city from 4 for -1) from t4
                                   ^ unknown token
+After line 8 in file ddl/vulcan/substring_bug.sql
+
 select substring (city from 0 for 2) from t4; 
 Statement failed, SQLCODE = -842
 SQL error code = -842
 -Positive value expected
+After line 9 in file ddl/vulcan/substring_bug.sql
+
 select substring (city from 4 for 0) from t4; 
 Statement failed, SQLCODE = -842
 SQL error code = -842
 -Positive value expected
+After line 11 in file ddl/vulcan/substring_bug.sql
+
 drop database;

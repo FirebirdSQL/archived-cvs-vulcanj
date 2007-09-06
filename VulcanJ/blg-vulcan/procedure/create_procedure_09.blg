@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 CREATE PROCEDURE test RETURNS(id INT)AS
 BEGIN
@@ -11,5 +12,9 @@ CREATE PROCEDURE test RETURNS(id INT)AS
 BEGIN
   COMMIT;
   ^ unknown token
+After line 3 in file ddl/procedure/create_procedure_09.sql
 SET TERM ;^
+
+
 DROP DATABASE;
+

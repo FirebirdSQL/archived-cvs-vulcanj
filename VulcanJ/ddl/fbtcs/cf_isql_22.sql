@@ -1,6 +1,4 @@
-
-set echo;
-
+set names ascii;
 CREATE DATABASE 'test.fdb';
 
 create table t(a int);

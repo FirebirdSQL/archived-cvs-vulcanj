@@ -2,8 +2,12 @@ Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN test SMALLINT;
 CREATE TABLE tb( id test);
+
 DROP DOMAIN test;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -column TEST is used in table TB (local name ID) and cannot be dropped
+After line 3 in file ddl/domain/drop_domain_02.sql
+
 DROP DATABASE;
+

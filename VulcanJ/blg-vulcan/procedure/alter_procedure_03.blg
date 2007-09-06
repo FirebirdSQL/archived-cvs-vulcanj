@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 ALTER PROCEDURE test RETURNS (id INTEGER)AS
 BEGIN
@@ -8,5 +9,9 @@ END ^
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Procedure TEST not found
+After line 3 in file ddl/procedure/alter_procedure_03.sql
 SET TERM ;^
+
+
 DROP DATABASE;
+

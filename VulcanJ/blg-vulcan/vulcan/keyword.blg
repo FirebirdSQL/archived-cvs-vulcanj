@@ -3,8 +3,11 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- VULCAN CORE DUE TO USE OF RESERVED WORD IN FUNCTION 
 
 set names ascii;
+
 create database 'test.fdb';
+
 CREATE table Foundation_xtension (objname  VARCHAR(20) CHARACTER SET ISO8859_1, "VALUE" VARCHAR(20) CHARACTER SET ISO8859_1, id VARCHAR(20) CHARACTER SET ISO8859_1, deleted int);
+
 SELECT * FROM Foundation_xtension
    WHERE
    ( ( upper ( objname ) = upper ( 'ServerClassIdentifier')
@@ -18,4 +21,6 @@ SELECT * FROM Foundation_xtension
 Statement failed, SQLCODE = -901
 SQL error code = -901
 -Illegal use of keyword VALUE
+After line 8 in file ddl/vulcan/keyword.sql
+   
 drop database;

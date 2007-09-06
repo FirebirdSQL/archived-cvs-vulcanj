@@ -1,11 +1,14 @@
 Use CONNECT or CREATE DATABASE to specify a database
-SET NAMES ASCII; 
-CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
-COMMIT WORK;
+  SET NAMES ASCII; 
+  CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+ COMMIT WORK;
+
 -- TEST:7002 NULLIF producing non-NULL!
 
  CREATE TABLE STAFFb (SALARY DECIMAL(6), EMPNAME CHAR(20), HOURS INTEGER, PNUM CHAR(3), CITY CHAR(15), SEX CHAR);
-INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
+
+   INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
 -- PASS:7002 If 1 row inserted?
 
    INSERT INTO STAFFb VALUES(15000,'Nickos',20000,'P6','Nickos','M');
@@ -31,7 +34,6 @@ INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
 
 EMPNAME                      CASE 
 ==================== ============ 
-
 Nickos                     <null> 
 George                      10010 
 Gregory                     10001 
@@ -51,7 +53,6 @@ Gregory                     10001
 
 CASE                       SALARY 
 ==================== ============ 
-
 Kilroy                      10000 
 <null>                      10005 
 Gregory                     10001 
@@ -64,13 +65,15 @@ Gregory                     10001
 -- PASS:7002 If   Gregory           10001  ?
 
    ROLLBACK WORK;
-CREATE TABLE TEMP1426 
+
+   CREATE TABLE TEMP1426 
          (SALARY DECIMAL(6),
           EMPNAME CHAR(20));
 -- PASS:7002 If table created successfully?
 
    COMMIT WORK;
-INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
+
+   INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
 -- PASS:7002 If 1 row inserted?
 
    INSERT INTO STAFFb VALUES(15000,'Nickos',20000,'P6','Nickos','M');
@@ -99,7 +102,6 @@ INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
 
       SALARY EMPNAME              
 ============ ==================== 
-
        10000 George               
       <null> Kilroy               
        10000 Nickos               
@@ -112,8 +114,11 @@ INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
 -- PASS:7002 If     Nickos         10000  ?
 
    ROLLBACK WORK;
-DROP TABLE TEMP1426;
+
+   DROP TABLE TEMP1426;
 -- PASS:7002 If table dropped successfully?
 
    COMMIT WORK;
+
+
 DROP DATABASE;

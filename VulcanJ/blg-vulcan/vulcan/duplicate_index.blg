@@ -1,22 +1,32 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+		
 CREATE TABLE TABLEEXISTS (COL CHAR(10));
+		
 INSERT INTO TABLEEXISTS VALUES('Hello');
 -- this should fail, in use
 CREATE INDEX INDEXEXISTS ON TABLEEXISTS(COL);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -object TABLEEXISTS is in use
-commit; 
+After line 6 in file ddl/vulcan/duplicate_index.sql
+
+commit;	
+		
 CREATE VIEW VIEWEXISTS AS SELECT * FROM TABLEEXISTS;
+
 commit;
+
 -- this should pass
 CREATE INDEX INDEXEXISTS ON TABLEEXISTS(COL);
+
 -- this should fail, duplicate entry
 CREATE INDEX INDEXEXISTS ON TABLEEXISTS(COL);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Index INDEXEXISTS already exists
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_5"
+After line 17 in file ddl/vulcan/duplicate_index.sql
+
 drop database ;

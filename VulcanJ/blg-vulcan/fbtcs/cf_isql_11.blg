@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*-----------------------------------------*/
 /* Computed field using non-existing field */
 /*-----------------------------------------*/
@@ -8,7 +9,9 @@ Statement failed, SQLCODE = -206
 SQL error code = -206
 -Column unknown
 -B
--At line 4, column 45.
+-At line 1, column 45.
+After line 1 in file ddl/fbtcs/cf_isql_11.sql
+
 /*--------------------------------------------*/
 /* Computed field using not yet defined field */
 /*--------------------------------------------*/
@@ -17,7 +20,9 @@ Statement failed, SQLCODE = -206
 SQL error code = -206
 -Column unknown
 -A
--At line 4, column 34.
+-At line 1, column 34.
+After line 6 in file ddl/fbtcs/cf_isql_11.sql
+
 show tables;
 There are no tables in this database
 drop database;

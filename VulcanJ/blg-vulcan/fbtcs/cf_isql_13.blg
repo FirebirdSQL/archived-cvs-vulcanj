@@ -1,15 +1,18 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*---------------------------------------------*/
 /* Create a table with computed field.         */
 /*---------------------------------------------*/
 create table t0 (a integer, af computed by (a*3));
 insert into t0(a) values(10);
+
 /*---------------------------------------------*/
 /* Create a table with nested computed field.  */
 /*---------------------------------------------*/
 create table t1 (a integer, af computed by (a*4), afaf computed by (af*5));
 insert into t1(a) values(11);
+
 /*---------------------------------------------------------------------*/
 /* Now alter table and drop the field which is used in computed field. */
 /* It shouldn't allow you to drop the field.                           */
@@ -20,6 +23,7 @@ unsuccessful metadata update
 -cannot delete
 -COLUMN A
 -there are 1 dependencies
+After line 13 in file ddl/fbtcs/cf_isql_13.sql
 show table t0;
 A                               INTEGER Nullable 
 AF                              Computed by: (a*3)
@@ -27,8 +31,8 @@ select * from t0;
 
            A                    AF 
 ============ ===================== 
-
           10                    30 
+
 
 /*---------------------------------------------------------------------*/
 /* Now alter table and drop the computed field which is used in other  */
@@ -41,6 +45,7 @@ unsuccessful metadata update
 -cannot delete
 -COLUMN AF
 -there are 1 dependencies
+After line 21 in file ddl/fbtcs/cf_isql_13.sql
 show table t1;
 A                               INTEGER Nullable 
 AF                              Computed by: (a*4)
@@ -49,7 +54,7 @@ select * from t1;
 
            A                    AF                  AFAF 
 ============ ===================== ===================== 
-
           11                    44                   220 
+
 
 drop database;

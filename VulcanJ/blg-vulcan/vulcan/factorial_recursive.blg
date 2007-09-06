@@ -1,6 +1,7 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 -- this implementation of factorial uses recursion
 
 set terminator ^;
@@ -20,12 +21,13 @@ CREATE PROCEDURE factorial(number INTEGER, mode INTEGER) RETURNS (result INTEGER
        SUSPEND;
    END^
 set terminator ;^
+
 select * from factorial (5,1); 
 
       RESULT 
 ============ 
-
          120 
+
 
 execute procedure factorial (5,1);
 
@@ -33,4 +35,5 @@ execute procedure factorial (5,1);
 ============ 
          120 
 
+   
 drop database ;

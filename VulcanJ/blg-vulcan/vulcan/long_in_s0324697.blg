@@ -3,15 +3,17 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- VULCAN: LARGE IN CLAUSE CAUSES STACK OVERFLOW
 
 create database 'test.fdb'; 
+
 recreate table foo (id varchar(17)); 
 insert into foo values ('test'); 
 commit;
+
 select * from foo;
 
 ID                
 ================= 
-
 test              
+
 
 select * from foo                                                               
 where                                                                           
@@ -497,5 +499,11 @@ where
 'A5QU7QSL.AT000ZWH',                                                            
 'A5QU7QSL.AT000ZWG','A5QU7QSL.AT000ZWF','A5QU7QSL.AT000ZWE','A5QU7QSL.AT000ZWD')
 );                      
+Statement failed, SQLCODE = -901
+SQL error code = -901
+-Implementation limit exceeded
+-Expression too complex; compiler exceeded 1347 levels of recursion
+After line 10 in file ddl/vulcan/long_in_s0324697.sql
+
 drop database ;
 quit;

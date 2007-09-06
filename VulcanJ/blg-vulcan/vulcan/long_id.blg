@@ -3,18 +3,21 @@ set names ascii;
 -- s0363759 identifier is too long in fb2
 
 create database 'test.fdb'; 
+
 -- this create table statement fails, since column name > 31 characters
 create table test1 (test567890test567890test567890test567890 integer);
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Name longer than database column size
+After line 4 in file ddl/vulcan/long_id.sql
+
 create table fred (i integer);
 insert into fred values (1);
 select i as test567890test567890test567890test567890 from fred;
 
 TEST567890TEST567890TEST567890TEST567890 
 ======================================== 
-
                                        1 
+
 
 drop database;

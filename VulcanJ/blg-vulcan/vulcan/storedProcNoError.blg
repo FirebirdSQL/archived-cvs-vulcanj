@@ -3,6 +3,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- EXECUTE STATEMENT EATS PARSING ERROR
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 set terminator ^;
 create procedure testa AS
 DECLARE VARIABLE Sql VARCHAR(30000); BEGIN
@@ -10,6 +11,8 @@ Sql = 'CREATE TABLE test1 ( i integer ) ;';
 EXECUTE STATEMENT Sql;
 end; ^
 set terminator ;^
+
+
 set terminator ^;
 create procedure create_test_table AS
 DECLARE VARIABLE Sql VARCHAR(30000);
@@ -27,13 +30,18 @@ EXECUTE STATEMENT Sql;
 END; ^
 set terminator ;^
 commit;
+
 execute procedure testa;
+
 execute procedure create_test_table;
 Statement failed, SQLCODE = -104
 Dynamic SQL Error
 -SQL error code = -104
 -Token unknown - line 1, column 81
 -integer
+At line 34 in file ddl/vulcan/storedProcNoError.sql
 show tables;
 There are no tables in this database
+
 drop database;
+

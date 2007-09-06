@@ -446,6 +446,8 @@ recreate table test (
    i398 integer,
    i399 integer )
 ;
+
+
 select i000,i001,i002 from test group by
 i000,
 i001,
@@ -707,4 +709,7 @@ Statement failed, SQLCODE = -104, SQLSTATE = 54011
 SQL error code = -104
 -Invalid command
 -cannot group on more than 255 items
+After line 447 in file ddl/vulcan/maxColumnsPerGroupBy.sql
+
+
 drop database;

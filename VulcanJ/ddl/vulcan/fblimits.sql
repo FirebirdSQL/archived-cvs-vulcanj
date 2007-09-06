@@ -22,7 +22,7 @@ recreate table bigrow (c1 char(30000),
    c2 char(30000), c3 char(5531) );
 
 -- insert will succeed
-insert into bigrow values ('hi', 'there', 'mom' );"); 
+insert into bigrow values ('hi', 'there', 'mom' );
 
 -- select is now too big, and will fail
 -- with "Implementation limit exceeded"
@@ -35,7 +35,7 @@ recreate table bigrow (c1 char(30000),
    c2 char(30000), c3 char(5514) );
 
 -- this insert will pass
-insert into bigrow values ('hi', 'there', 'mom' );"); 
+insert into bigrow values ('hi', 'there', 'mom' );
 
 -- this select is just big enough to pass.
 select * from bigrow; 

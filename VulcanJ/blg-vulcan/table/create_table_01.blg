@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' default character set iso8859_1;
+
 /*
 Tested command:
 */
@@ -48,8 +49,10 @@ C16                             CHAR(200) Nullable
 C17                             VARCHAR(1600) Nullable 
 C18                             VARCHAR(16000) Nullable 
 C19                             VARCHAR(16000) Nullable 
-C20                             BLOB segment 80, subtype UNKNOWN CHARACTER SET NONE Nullable 
+C20                             BLOB segment 80, subtype BINARY CHARACTER SET NONE Nullable 
 C21                             BLOB segment 80, subtype TEXT Nullable 
-C22                             BLOB segment 512, subtype UNKNOWN CHARACTER SET NONE Nullable 
+C22                             BLOB segment 512, subtype BINARY CHARACTER SET NONE Nullable 
 C23                             BLOB segment 1024, subtype TEXT Nullable 
+
 DROP DATABASE;
+

@@ -6,6 +6,7 @@ BEGIN
   ID=4;
   SUSPEND;
 END ^
+
 CREATE PROCEDURE test RETURNS(id INT)AS
 BEGIN
   ID=5;
@@ -14,5 +15,8 @@ END ^
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Procedure TEST already exists
+After line 7 in file ddl/procedure/create_procedure_08.sql
 SET TERM ;^
+
 DROP DATABASE;
+

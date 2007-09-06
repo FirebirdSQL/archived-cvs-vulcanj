@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*-----------------------------------------------------------------------------*/
 /* Create a table with computed field which is defined using non-existing UDF. */
 /*-----------------------------------------------------------------------------*/
@@ -8,5 +9,7 @@ Statement failed, SQLCODE = -804
 SQL error code = -804
 -Function unknown
 -NON_EXIST_UDF
+After line 1 in file ddl/fbtcs/cf_isql_15.sql
+
 drop database;
 exit;

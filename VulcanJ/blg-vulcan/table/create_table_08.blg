@@ -3,12 +3,16 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- VULCAN ERROR MESSAGE ON DROP TABLE CASCADE
 
 CREATE DATABASE 'test.fdb' ;
+
 create table t3 (i integer);
 drop table t3 cascade;
 Statement failed, SQLCODE = -104
 SQL error code = -104
 drop table t3 cascade
               ^ unknown token
+After line 6 in file ddl/table/create_table_08.sql
+
 SHOW TABLE t3;
 I                               INTEGER Nullable 
+
 DROP DATABASE;

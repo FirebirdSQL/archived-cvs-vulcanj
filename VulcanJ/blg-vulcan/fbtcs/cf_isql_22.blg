@@ -1,15 +1,23 @@
 Use CONNECT or CREATE DATABASE to specify a database
-set echo;
-       T                                      V                              
+set names ascii;
+CREATE DATABASE 'test.fdb';
 
+create table t(a int);
+create view v as select a from t;
+
+show tables;
+       T                               
+show views;
        V                               
+show table v;
+There is no table V in this database
+show table t;
+A                               INTEGER Nullable 
+show view v;
 A                               INTEGER Nullable 
 View Source:
 ==== ======
  select a from t
-A                               INTEGER Nullable 
-A                               INTEGER Nullable 
-View Source:
-==== ======
- select a from t
-A                               INTEGER Nullable 
+show view t;
+There is no view T in this database
+drop database;

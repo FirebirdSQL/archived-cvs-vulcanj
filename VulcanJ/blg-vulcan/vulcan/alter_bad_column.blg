@@ -3,11 +3,15 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- sigaccess on alter table with bogus column name
 
 set names ascii;
+
 create database 'test.fdb';
 create table testme (i integer) ;
+
 -- should get error message "local column BOGUS not found"
 alter table testme alter BOGUS to NEWNAME ;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Column BOGUS not found
+After line 7 in file ddl/vulcan/alter_bad_column.sql
+
 drop database;

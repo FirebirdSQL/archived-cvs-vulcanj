@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' USER 'SYSDBA' PASSWORD 'masterkey';
+
 set echo;
 UID                             (DM_ID) BIGINT Not Null 
 DESCRIPTION                     VARCHAR(80) Nullable 
@@ -12,3 +13,4 @@ ITEMS_TR0, Sequence: 0, Type: BEFORE INSERT, Active
 ITEMS_TR2, Sequence: 2, Type: AFTER INSERT, Active
 Statement failed, SQLCODE = -204
 Too many Contexts of Relation/Procedure/Views. Maximum allowed is 255
+After line 65 in file ddl/fbtcs/cf_isql_31.sql

@@ -11,4 +11,6 @@ where sum(rdb$relation_id) = 0;
 Statement failed, SQLCODE = -104
 SQL error code = -104
 -Cannot use an aggregate function in a WHERE clause, use HAVING instead
+After line 4 in file ddl/vulcan/core_855.sql
+
 drop database;

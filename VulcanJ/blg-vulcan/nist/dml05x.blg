@@ -1,63 +1,70 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 INPUT ddl/input/base-tab.sql;
-CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
-CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
-CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
-CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
-CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
-CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
-CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
-INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
-INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
-INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
-INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
-INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
-INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
-INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
-INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
-INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
-INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
-INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
-INSERT INTO WORKS VALUES  ('E1','P1',40);
-INSERT INTO WORKS VALUES  ('E1','P2',20);
-INSERT INTO WORKS VALUES  ('E1','P3',80);
-INSERT INTO WORKS VALUES  ('E1','P4',20);
-INSERT INTO WORKS VALUES  ('E1','P5',12);
-INSERT INTO WORKS VALUES  ('E1','P6',12);
-INSERT INTO WORKS VALUES  ('E2','P1',40);
-INSERT INTO WORKS VALUES  ('E2','P2',80);
-INSERT INTO WORKS VALUES  ('E3','P2',20);
-INSERT INTO WORKS VALUES  ('E4','P2',20);
-INSERT INTO WORKS VALUES  ('E4','P4',40);
-INSERT INTO WORKS VALUES  ('E4','P5',80);
-INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
-INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
-INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
-INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
-INSERT INTO STAFF3 SELECT * FROM STAFF;
-INSERT INTO UPUNIQ VALUES(1,'A');
-INSERT INTO UPUNIQ VALUES(2,'B');
-INSERT INTO UPUNIQ VALUES(3,'C');
-INSERT INTO UPUNIQ VALUES(4,'D');
-INSERT INTO UPUNIQ VALUES(6,'F');
-INSERT INTO UPUNIQ VALUES(8,'H');
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
 COMMIT WORK;
-CREATE TABLE T4(STR110 CHAR(110) NOT NULL,
+
+  CREATE TABLE T4(STR110 CHAR(110) NOT NULL,
                 NUM6   NUMERIC(6) NOT NULL,
                 COL3   CHAR(10),COL4 CHAR(20));
-CREATE UNIQUE INDEX T4_IND ON T4(STR110,NUM6);
+  CREATE UNIQUE INDEX T4_IND ON T4(STR110,NUM6);
+
 COMMIT WORK;
+
 -- from dml050
 -- TEST:0226 FIPS sizing - 10 tables in SQL statement!
  SELECT EMPNUM, EMPNAME FROM STAFF WHERE EMPNUM IN (SELECT EMPNUM  FROM WORKS WHERE PNUM IN (SELECT PNUM  FROM PROJ WHERE PTYPE IN (SELECT PTYPE  FROM PROJ WHERE PNUM IN (SELECT PNUM  FROM WORKS WHERE EMPNUM IN (SELECT EMPNUM  FROM WORKS WHERE PNUM IN (SELECT PNUM   FROM PROJ WHERE PTYPE IN (SELECT PTYPE  FROM PROJ WHERE CITY IN (SELECT CITY  FROM STAFF WHERE EMPNUM IN (SELECT EMPNUM  FROM WORKS WHERE HOURS = 20 AND PNUM = 'P2' )))))))));
 
 EMPNUM EMPNAME              
 ====== ==================== 
-
 E1     Alice                
 E2     Betty                
 E3     Carmen               
@@ -66,13 +73,13 @@ E4     Don
 -- PASS:0226 If 4 rows selected excluding EMPNUM='E5', EMPNAME='Ed'?
 
 ROLLBACK;
+
 -- from dml051
 -- TEST:0227 BETWEEN predicate with character string values!
  SELECT PNUM FROM   PROJ WHERE  PNAME BETWEEN 'A' AND 'F';
 
 PNUM   
 ====== 
-
 P2     
 
 -- PASS:0227 If PNUM = 'P2'?
@@ -81,7 +88,6 @@ P2
 
 PNUM   
 ====== 
-
 P2     
 
 -- PASS:0227 If PNUM = 'P2'?
@@ -90,7 +96,6 @@ P2
 
 CITY            
 =============== 
-
 Akron           
 
 -- PASS:0228 If CITY = 'Akron'?
@@ -99,12 +104,12 @@ Akron
 
 CITY            
 =============== 
-
 Akron           
 
 -- PASS:0228 If CITY = 'Akron'?
 
 ROLLBACK;
+
 -- from dml052
 -- TEST:0229 Case-sensitive LIKE predicate!
  INSERT INTO STAFF VALUES('E6','ALICE',11,'Gaithersburg');
@@ -113,7 +118,6 @@ ROLLBACK;
 
 EMPNAME              
 ==================== 
-
 Alice                
 
 -- PASS:0229 If 1 row is returned and EMPNAME = 'Alice' (not 'ALICE')?
@@ -121,7 +125,6 @@ Alice
 
 EMPNAME              
 ==================== 
-
 ALICE                
 
 -- PASS:0229 If 1 row is returned and EMPNAME = 'ALICE' (not 'Alice')?
@@ -129,7 +132,7 @@ ALICE
 -- from dml053
 -- TEST:0233 Table as multiset of rows - INSERT duplicate VALUES()!
  CREATE TABLE TEMP_S (EMPNUM  CHAR(3), GRADE DECIMAL(4), CITY CHAR(15));
-INSERT INTO TEMP_S VALUES('E1',11,'Deale');
+ INSERT INTO TEMP_S VALUES('E1',11,'Deale');
 -- PASS:0233 If 1 row is inserted?
  INSERT INTO TEMP_S VALUES('E1',11,'Deale');
 -- PASS:0233 If 1 row is inserted?
@@ -137,23 +140,22 @@ INSERT INTO TEMP_S VALUES('E1',11,'Deale');
 
        COUNT 
 ============ 
-
            2 
 
 -- PASS:0233 If count = 2?
 
 ROLLBACK;
+
 -- from dml055
 -- TEST:0243 FIPS sizing - precision of SMALLINT >= 4!
  CREATE TABLE HH (SMALLTEST  SMALLINT);
-INSERT INTO HH VALUES(9999);
+ INSERT INTO HH VALUES(9999);
 -- PASS:0243 If 1 row is inserted?
 
  SELECT COUNT(*) FROM HH WHERE SMALLTEST = 9999;
 
        COUNT 
 ============ 
-
            1 
 
 -- should be 1
@@ -165,24 +167,23 @@ INSERT INTO HH VALUES(9999);
 
 SMALLTEST 
 ========= 
-
     -9999 
 
 -- PASS:0243 If SMALLTEST = -9999?
 
 
 ROLLBACK;
+
 -- TEST:0244 FIPS sizing - precision of INTEGER >= 9!
 -- FIPS sizing TEST
  CREATE TABLE EE (INTTEST     INTEGER);
-INSERT INTO EE VALUES(999999999);
+ INSERT INTO EE VALUES(999999999);
 -- PASS:0244 If 1 row is inserted?
 
  SELECT INTTEST FROM EE WHERE INTTEST = 999999999;
 
      INTTEST 
 ============ 
-
    999999999 
 
 -- PASS:0244 If INTTEST = 999999999?
@@ -194,7 +195,6 @@ INSERT INTO EE VALUES(999999999);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0244 If count = 1?
@@ -204,14 +204,13 @@ INSERT INTO EE VALUES(999999999);
 -- FIPS sizing TEST
 
  CREATE TABLE PP_15 (NUMTEST  DECIMAL(15,15));
-INSERT INTO PP_15 VALUES(.123456789012345);
+ INSERT INTO PP_15 VALUES(.123456789012345);
 -- PASS:0245 If 1 row is inserted?
 
  SELECT NUMTEST FROM PP_15;
 
               NUMTEST 
 ===================== 
-
     0.123456789012345 
 
 -- PASS:0245 If NUMTEST = 0.123456789012345?
@@ -220,7 +219,6 @@ INSERT INTO PP_15 VALUES(.123456789012345);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0245 If count = 1?
@@ -235,7 +233,6 @@ INSERT INTO PP_15 VALUES(.123456789012345);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0245 If count = 1?
@@ -245,14 +242,13 @@ INSERT INTO PP_15 VALUES(.123456789012345);
 -- FIPS sizing TEST
 
  CREATE TABLE T100(C1 CHAR(2),C2 CHAR(2),C3 CHAR(2),C4 CHAR(2), C5 CHAR(2),C6 CHAR(2),C7 CHAR(2),C8 CHAR(2), C9 CHAR(2),C10 CHAR(2),C11 CHAR(2),C12 CHAR(2), C13 CHAR(2),C14 CHAR(2),C15 CHAR(2),C16 CHAR(2), C17 CHAR(2),C18 CHAR(2),C19 CHAR(2),C20 CHAR(2), C21 CHAR(2),C22 CHAR(2),C23 CHAR(2),C24 CHAR(2), C25 CHAR(2),C26 CHAR(2),C27 CHAR(2),C28 CHAR(2), C29 CHAR(2),C30 CHAR(2),C31 CHAR(2),C32 CHAR(2), C33 CHAR(2),C34 CHAR(2),C35 CHAR(2),C36 CHAR(2), C37 CHAR(2),C38 CHAR(2),C39 CHAR(2),C40 CHAR(2), C41 CHAR(2),C42 CHAR(2),C43 CHAR(2),C44 CHAR(2), C45 CHAR(2),C46 CHAR(2),C47 CHAR(2),C48 CHAR(2), C49 CHAR(2),C50 CHAR(2),C51 CHAR(2),C52 CHAR(2), C53 CHAR(2),C54 CHAR(2),C55 CHAR(2),C56 CHAR(2), C57 CHAR(2),C58 CHAR(2),C59 CHAR(2),C60 CHAR(2), C61 CHAR(2),C62 CHAR(2),C63 CHAR(2),C64 CHAR(2), C65 CHAR(2),C66 CHAR(2),C67 CHAR(2),C68 CHAR(2), C69 CHAR(2),C70 CHAR(2),C71 CHAR(2),C72 CHAR(2), C73 CHAR(2),C74 CHAR(2),C75 CHAR(2),C76 CHAR(2), C77 CHAR(2),C78 CHAR(2),C79 CHAR(2),C80 CHAR(2), C81 CHAR(2),C82 CHAR(2),C83 CHAR(2),C84 CHAR(2), C85 CHAR(2),C86 CHAR(2),C87 CHAR(2),C88 CHAR(2), C89 CHAR(2),C90 CHAR(2),C91 CHAR(2),C92 CHAR(2), C93 CHAR(2),C94 CHAR(2),C95 CHAR(2),C96 CHAR(2), C97 CHAR(2),C98 CHAR(2),C99 CHAR(2),C100 CHAR(2));
-INSERT INTO T100 VALUES('ZA','ZB','CA','ZC','ZD','AA','ZE','ZF','BA','ZG', 'YA','YB','CB','YC','YD','AB','YE','YF','BB','YG', 'XA','XB','CC','XC','XD','AC','XE','XF','BC','XG', 'UA','UB','CD','UC','UD','AD','UE','UF','BD','UG', 'VA','VB','CE','VC','VD','AE','VE','VF','BE','VG', 'WA','WB','CF','WC','WD','AF','WE','WF','BF','WG', 'LA','LB','CG','LC','LD','AG','LE','LF','BG','LG', 'MA','MB','CH','MC','MD','AH','ME','MF','BH','MG', 'NA','NB','CI','NC','ND','AI','NE','NF','BI','NG', 'OA','OB','CJ','OC','OD','AJ','OE','OF','BJ','OG');
+ INSERT INTO T100 VALUES('ZA','ZB','CA','ZC','ZD','AA','ZE','ZF','BA','ZG', 'YA','YB','CB','YC','YD','AB','YE','YF','BB','YG', 'XA','XB','CC','XC','XD','AC','XE','XF','BC','XG', 'UA','UB','CD','UC','UD','AD','UE','UF','BD','UG', 'VA','VB','CE','VC','VD','AE','VE','VF','BE','VG', 'WA','WB','CF','WC','WD','AF','WE','WF','BF','WG', 'LA','LB','CG','LC','LD','AG','LE','LF','BG','LG', 'MA','MB','CH','MC','MD','AH','ME','MF','BH','MG', 'NA','NB','CI','NC','ND','AI','NE','NF','BI','NG', 'OA','OB','CJ','OC','OD','AJ','OE','OF','BJ','OG');
 -- PASS:0246 If 1 row is inserted?
 
  SELECT C6, C16, C26, C36, C46, C56, C66, C76, C86, C96, C100 FROM T100 WHERE C1 = 'ZA' AND C2 = 'ZB';
 
 C6     C16    C26    C36    C46    C56    C66    C76    C86    C96    C100   
 ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== 
-
 AA     AB     AC     AD     AE     AF     AG     AH     AI     AJ     OG     
 
 -- PASS:0246 If C6 = 'AA', C16 = 'AB', C26 = 'AC', C36 = 'AD' ?
@@ -260,7 +256,7 @@ AA     AB     AC     AD     AE     AF     AG     AH     AI     AJ     OG
 -- PASS:0246 If C86 = 'AI', C96 = 'AJ', C100 = 'OG' ?
 
  DELETE FROM T100;
-INSERT INTO T100 VALUES('ZA','ZB','CA','ZC','ZD','AA','ZE','ZF','BA','ZG', 'YA','YB','CB','YC','YD','AB','YE','YF','BB','YG', 'XA','XB','CC','XC','XD','AC','XE','XF','BC','XG', 'UA','UB','CD','UC','UD','AD','UE','UF','BD','UG', 'VA','VB','CE','VC','VD','AE','VE','VF','BE','VG', 'WA','WB','CF','WC','WD','AF','WE','WF','BF','WG', 'LA','LB','CG','LC','LD','AG','LE','LF','BG','LG', 'MA','MB','CH','MC','MD','AH','AE','AF','BH','BG', 'NA','NB','CI','NC','ND','AI','NE','NF','BI','NG', 'OA','OB','CJ','OC','OD','AJ','OE','OF','BJ','OG');
+ INSERT INTO T100 VALUES('ZA','ZB','CA','ZC','ZD','AA','ZE','ZF','BA','ZG', 'YA','YB','CB','YC','YD','AB','YE','YF','BB','YG', 'XA','XB','CC','XC','XD','AC','XE','XF','BC','XG', 'UA','UB','CD','UC','UD','AD','UE','UF','BD','UG', 'VA','VB','CE','VC','VD','AE','VE','VF','BE','VG', 'WA','WB','CF','WC','WD','AF','WE','WF','BF','WG', 'LA','LB','CG','LC','LD','AG','LE','LF','BG','LG', 'MA','MB','CH','MC','MD','AH','AE','AF','BH','BG', 'NA','NB','CI','NC','ND','AI','NE','NF','BI','NG', 'OA','OB','CJ','OC','OD','AJ','OE','OF','BJ','OG');
 -- PASS:0247 If 1 row is inserted?
 
  UPDATE T100 SET C5 = 'BA', C10 = 'ZP', C15 = 'BB', C20 = 'YP', C25 = 'BC', C30 = 'XP', C35 = 'BD', C40 = 'UP', C45 = 'BE', C50 = 'VP', C55 = 'BF', C60 = 'WP', C65 = 'BG', C70 = 'LP', C75 = 'BH', C80 = 'MP', C85 = 'BI', C90 = 'NP', C95 = 'BJ', C100 = 'OP';
@@ -270,7 +266,6 @@ INSERT INTO T100 VALUES('ZA','ZB','CA','ZC','ZD','AA','ZE','ZF','BA','ZG', 'YA',
 
 C5     C20    C35    C40    C55    C60    C75    C80    C90    C95    C100   
 ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== ====== 
-
 BA     YP     BD     UP     BF     WP     BH     MP     NP     BJ     OP     
 
 -- PASS:0247 If C5 = 'BA', C35 = 'BD', C55 = 'BF', C75 = 'BH' ?
@@ -281,15 +276,14 @@ BA     YP     BD     UP     BF     WP     BH     MP     NP     BJ     OP
 --TEST:0248 FIPS sizing - binary precision of FLOAT >= 20!
 
  CREATE TABLE GG (REALTEST     REAL);
-CREATE TABLE II (DOUBLETEST  DOUBLE PRECISION);
-CREATE TABLE JJ (FLOATTEST  FLOAT);
-INSERT INTO JJ VALUES(0.1048575);
+ CREATE TABLE II (DOUBLETEST  DOUBLE PRECISION);
+ CREATE TABLE JJ (FLOATTEST  FLOAT);
+ INSERT INTO JJ VALUES(0.1048575);
 -- PASS:0248 If 1 row is inserted?
  SELECT FLOATTEST FROM JJ;
 
      FLOATTEST 
 ============== 
-
     0.10485750 
 
 -- PASS:0248 If FLOATTEST = 0.1048575 ?
@@ -299,20 +293,19 @@ INSERT INTO JJ VALUES(0.1048575);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0248 If count = 1?
 
  DELETE FROM JJ;
-INSERT INTO JJ VALUES(-0.1048575);
+
+ INSERT INTO JJ VALUES(-0.1048575);
 -- PASS:0248 If 1 row is inserted?
 
  SELECT FLOATTEST FROM JJ;
 
      FLOATTEST 
 ============== 
-
    -0.10485750 
 
 -- PASS:0248 If FLOATTEST = -0.1048575 ?
@@ -322,7 +315,6 @@ INSERT INTO JJ VALUES(-0.1048575);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0248 If count = 1?
@@ -334,7 +326,6 @@ INSERT INTO JJ VALUES(-0.1048575);
 
       REALTEST 
 ============== 
-
     0.10485750 
 
 -- PASS:0249 If REALTEST = 0.1048575 ?
@@ -344,20 +335,18 @@ INSERT INTO JJ VALUES(-0.1048575);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0249 If count = 1?
 
  DELETE FROM GG;
-INSERT INTO GG VALUES(-0.1048575);
+ INSERT INTO GG VALUES(-0.1048575);
 -- PASS:0249 If 1 row is inserted?
 
  SELECT REALTEST FROM GG;
 
       REALTEST 
 ============== 
-
    -0.10485750 
 
 -- PASS:0249 If REALTEST = -0.1048575 ?
@@ -367,12 +356,12 @@ INSERT INTO GG VALUES(-0.1048575);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0249 If count = 1?
 
 ROLLBACK;
+
 -- TEST:0250 FIPS sizing - bin. precision of DOUBLE >= 30!
 -- FIPS sizing TEST
 
@@ -383,7 +372,6 @@ ROLLBACK;
 
              DOUBLETEST 
 ======================= 
-
      0.1073741823000000 
 
 -- PASS:0250 If DOUBLETEST = 0.1073741823 ?
@@ -393,20 +381,18 @@ ROLLBACK;
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0250 If count = 1?
 
  DELETE FROM II;
-INSERT INTO II VALUES(-0.1073741823);
+ INSERT INTO II VALUES(-0.1073741823);
 -- PASS:0250 If 1 row is inserted?
 
  SELECT DOUBLETEST FROM II;
 
              DOUBLETEST 
 ======================= 
-
     -0.1073741823000000 
 
 -- PASS:0250 If DOUBLETEST = -0.1073741823 ?
@@ -416,7 +402,6 @@ INSERT INTO II VALUES(-0.1073741823);
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0250 If count = 1?
@@ -438,7 +423,6 @@ INSERT INTO II VALUES(-0.1073741823);
 
        COUNT 
 ============ 
-
            5 
 
 -- PASS:0251 If count = 5?
@@ -453,11 +437,13 @@ INSERT INTO II VALUES(-0.1073741823);
 -- PASS:0251 If 1 row is updated?
 
      COMMIT WORK;
-DELETE FROM STAFF1;
+
+     DELETE FROM STAFF1;
 -- PASS:0251 If 6 rows are deleted?
 
 -- verify
      ROLLBACK WORK;
+
 -- verify previous commit
      SELECT COUNT(*)
           FROM STAFF1
@@ -465,14 +451,14 @@ DELETE FROM STAFF1;
 
        COUNT 
 ============ 
-
            4 
 
 -- PASS:0251 If count = 4?
 
 -- restore
      DELETE FROM STAFF1;
-COMMIT WORK;
+     COMMIT WORK;
+
 -- END TEST >>> 0251 <<< END TEST
 
 -- ***************************************************************
@@ -487,7 +473,8 @@ COMMIT WORK;
 -- PASS:0252 If 5 rows are inserted?
 
      COMMIT WORK;
-INSERT INTO STAFF1 VALUES('E10','Tom',50,'London');
+
+     INSERT INTO STAFF1 VALUES('E10','Tom',50,'London');
 -- PASS:0252 If 1 row is inserted?
 
      UPDATE STAFF1
@@ -500,20 +487,21 @@ INSERT INTO STAFF1 VALUES('E10','Tom',50,'London');
 -- PASS:0252 If 1 row is deleted?
 
      ROLLBACK WORK;
+
 -- verify     
      SELECT SUM(GRADE)
           FROM STAFF1;
 
                   SUM 
 ===================== 
-
                    60 
 
 -- PASS:0252 If SUM(GRADE) = 60?
 
 -- restore
      DELETE FROM STAFF1;
-COMMIT WORK;
+     COMMIT WORK;
+
 -- END TEST >>> 0252 <<< END TEST
 
 -- ****************************************************************
@@ -526,7 +514,6 @@ COMMIT WORK;
 
       NUMKEY 
 ============ 
-
            8 
            6 
            4 
@@ -572,13 +559,13 @@ COMMIT WORK;
 
          MAX          MIN 
 ============ ============ 
-
            9            2 
 
 -- PASS:0253 If MAX(NUMKEY) = 9 AND MIN(NUMKEY) = 2?
 
 -- restore
      ROLLBACK WORK;
+
 -- END TEST >>> 0253 <<< END TEST
 
 -- **************************************************************
@@ -604,13 +591,13 @@ COMMIT WORK;
 
 CITY            
 =============== 
-
 Design          
 
 -- PASS:0254 If CITY = 'Design'?
 
 -- restore
      ROLLBACK WORK;
+
 -- END TEST >>> 0254 <<< END TEST
 
 -- **************************************************************
@@ -632,7 +619,6 @@ Design
 
 STR110                                                                                                         
 =============================================================================== 
-
 SYSDBA                                                                                                         
 
 -- PASS:0255 If STR110 = 'HU'?
@@ -653,13 +639,13 @@ SYSDBA
 
 STR110                                                                                                         
 =============================================================================== 
-
 SYSDBA                                                                                                         
 
 -- PASS:0255 If STR110 = 'HU'?
 
 -- restore
      ROLLBACK WORK;
+       
 -- END TEST >>> 0255 <<< END TEST
 
 -- ***************************************************************
@@ -694,20 +680,20 @@ SYSDBA
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:0256 If count = 0?
 
      ROLLBACK WORK;
+
 -- from dml059
  * TEST:0257 SELECT MAX, MIN (COL1 + or - COL2)!
  INSERT INTO VTABLE VALUES(10,11,12,13,15);
 Statement failed, SQLCODE = -104
 SQL error code = -104
--- from dml059
- * TEST:0257 SELECT MAX, MIN (COL1 + or - COL2)!
- ^ unknown token
+* TEST:0257 SELECT MAX, MIN (COL1 + or - COL2)!
+^ unknown token
+After line 441 in file ddl/nist/dml05x.sql
 -- PASS:0257 If 1 row is inserted?
  INSERT INTO VTABLE VALUES(100,111,1112,113,115);
 -- PASS:0257 If 1 row is inserted?
@@ -716,7 +702,6 @@ SQL error code = -104
 
         COL1                   MAX                   MIN 
 ============ ===================== ===================== 
-
            0                     3                     1 
           10                    50                    10 
          100                  1223                   100 
@@ -738,7 +723,6 @@ SQL error code = -104
 
         COL1                   SUM 
 ============ ===================== 
-
          100                613728 
         1000             -12000000 
 
@@ -754,14 +738,13 @@ SQL error code = -104
 -- PASS:0259 If 1 row is inserted?
 
 SELECT COL1, MAX(COL2) FROM VTABLE
-    GROUP BY COL1 
-    HAVING MAX(COL2) > ANY (SELECT GRADE FROM STAFF) 
-    AND MAX(COL2) < SOME (SELECT HOURS FROM WORKS) 
-    ORDER BY COL1;
+				GROUP BY COL1 
+				HAVING MAX(COL2) > ANY (SELECT GRADE FROM STAFF) 
+				AND MAX(COL2) < SOME (SELECT HOURS FROM WORKS) 
+				ORDER BY COL1;
 
         COL1          MAX 
 ============ ============ 
-
           10           20 
 
 -- PASS:0259 If 1 row is selected and COL1 = 10 and MAX(COL2) = 20?
@@ -777,7 +760,6 @@ SELECT COL1, MAX(COL2) FROM VTABLE
 
         COL1          MAX 
 ============ ============ 
-
           10           20 
 
 -- PASS:0260 If 1 row is selected and COL1 = 10 and MAX(COL2) = 20?
@@ -788,7 +770,6 @@ SELECT COL1, MAX(COL2) FROM VTABLE
 
                   SUM 
 ===================== 
-
                  1030 
 
 -- PASS:0264 If SUM(COL1) = 1000?
@@ -796,10 +777,10 @@ SELECT COL1, MAX(COL2) FROM VTABLE
 
                   SUM 
 ===================== 
-
                  1540 
 
 -- PASS:0264 If SUM(COL1) = 1110?
 
 ROLLBACK WORK;
+
 DROP DATABASE;

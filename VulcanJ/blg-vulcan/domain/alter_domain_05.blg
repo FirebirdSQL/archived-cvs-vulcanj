@@ -1,8 +1,12 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN test VARCHAR(63);
+
 ALTER DOMAIN notexists DROP CONSTRAINT;
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Domain not found
+After line 2 in file ddl/domain/alter_domain_05.sql
+
 DROP DATABASE;
+

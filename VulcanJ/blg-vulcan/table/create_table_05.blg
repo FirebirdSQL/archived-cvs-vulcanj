@@ -3,6 +3,7 @@ CREATE DATABASE 'test.fdb' ;
 CREATE TABLE test(
  c1 SMALLINT
 );
+
 CREATE TABLE test(
  c1 SMALLINT,
  c2 INTEGER
@@ -10,4 +11,7 @@ CREATE TABLE test(
 Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Table TEST already exists
+After line 4 in file ddl/table/create_table_05.sql
+
 DROP DATABASE;
+

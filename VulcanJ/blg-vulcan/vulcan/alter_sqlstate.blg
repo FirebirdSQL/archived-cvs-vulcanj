@@ -1,17 +1,24 @@
 Use CONNECT or CREATE DATABASE to specify a database
 -- S0363296 ALTER TABLE ERROR MESSAGE / SQLSTATE ISSUES
 create database 'test.fdb'; 
+
 create table t (i integer);
+
 set SQLSTATE ON;
+
 -- column XYZ not present. should be 42S22, column not found
 alter table t drop xyz;
 Statement failed, SQLCODE = -607, SQLSTATE = 42S22
 unsuccessful metadata update
 -Column XYZ not found
+After line 6 in file ddl/vulcan/alter_sqlstate.sql
+
 -- again column XYZ not present, but this is a modify operation
 -- again 42S22
 alter table t alter xyz type integer;
 Statement failed, SQLCODE = -607, SQLSTATE = 42S22
 unsuccessful metadata update
 -Column XYZ not found
+After line 9 in file ddl/vulcan/alter_sqlstate.sql
+
 drop database;

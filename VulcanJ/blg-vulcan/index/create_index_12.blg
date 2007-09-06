@@ -8,7 +8,11 @@ INSERT INTO t VALUES(2);
 INSERT INTO t VALUES(3);
 INSERT INTO t VALUES(4);
 COMMIT;
+
 CREATE UNIQUE INDEX test ON t(a);
 Statement failed, SQLCODE = -803
 attempt to store duplicate value (visible to active transactions) in unique index "TEST"
+After line 9 in file ddl/index/create_index_12.sql
+
 DROP DATABASE;
+

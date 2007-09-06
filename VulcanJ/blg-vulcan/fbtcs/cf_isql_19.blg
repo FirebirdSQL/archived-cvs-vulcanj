@@ -1,8 +1,10 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb';
+
 create table ONEROW (i integer);
 insert into ONEROW values (1);
 commit;
+
 -- I am a comment
 
 /* BEGIN */
@@ -11,7 +13,6 @@ select * from onerow;
 
            I 
 ============ 
-
            1 
 
 /* END */
@@ -22,7 +23,6 @@ select * from onerow;
 
            I 
 ============ 
-
            1 
 
 /* END */
@@ -33,35 +33,26 @@ select * from onerow;
 
            I 
 ============ 
-
            1 
 
 /* END */
 
 /* BEGIN */
 -- I am a comment;
-Statement failed, SQLCODE = -104
-SQL error code = -104
--Unexpected end of command
 select * from onerow;
 
            I 
 ============ 
-
            1 
 
 /* END */
 
 /* BEGIN with unclosed "quoted */
 -- I am a comment;
-Statement failed, SQLCODE = -104
-SQL error code = -104
--Unexpected end of command
 select * from onerow;
 
            I 
 ============ 
-
            1 
 
 /* END */
@@ -73,8 +64,8 @@ from onerow;
 
            I 
 ============ 
-
            1 
+
 
 select * 
 /* comment */
@@ -82,8 +73,8 @@ from onerow;
 
            I 
 ============ 
-
            1 
+
 
 select * 
 -- comment
@@ -91,8 +82,8 @@ from onerow;
 
            I 
 ============ 
-
            1 
+
 
 /*
 Comment
@@ -100,7 +91,7 @@ Comment
 
            I 
 ============ 
-
            1 
+
 
 drop database;

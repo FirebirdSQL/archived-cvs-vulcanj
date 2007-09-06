@@ -5,6 +5,8 @@ Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
 set sqlstate on;
 create database 'test.fdb';
+
+
 recreate table test (
    i000 integer,
    i001 integer,
@@ -447,6 +449,16 @@ recreate table test (
    i399 integer )
    
    ;
+
+
+
+
+
+
+
+
+
+
 select * from test
 order by
 i000,
@@ -711,4 +723,6 @@ SQL error code = -104
 -Invalid command
 -invalid ORDER BY clause
 -cannot sort on more than 255 items
+After line 450 in file ddl/vulcan/maxColumnsPerOrderBy.sql
+
 drop database;

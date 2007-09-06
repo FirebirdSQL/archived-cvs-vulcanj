@@ -113,7 +113,7 @@ public class ISQLTestBase extends TestCase {
 		f.delete();
 
 		Runtime rt = Runtime.getRuntime();
-		Process proc = rt.exec("isql -u sysdba -p masterkey -m -e -i "
+		Process proc = rt.exec("isql -u sysdba -p masterkey -m -m2 -e -i "
 				+ inputFile + " -o " + outputFile);
 
 		// any error message?
