@@ -1,62 +1,61 @@
 Use CONNECT or CREATE DATABASE to specify a database
-SET NAMES ASCII; 
-CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+  SET NAMES ASCII; 
+  CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 -- tests from the xts_70x series. 
 -- 6/21/2006.
 
- -- TEST:7001 NULLIF producing NULL!
+	-- TEST:7001 NULLIF producing NULL!
  CREATE TABLE STAFFb (SALARY DECIMAL(6), EMPNAME CHAR(20), HOURS INTEGER, PNUM CHAR(3), CITY CHAR(15), SEX CHAR);
-INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
-INSERT INTO STAFFb VALUES(15000,'Nickos',20000,'P6','Nickos','M');
-INSERT INTO STAFFb VALUES(NULL,'Nickos',NULL,'P5','Rhodes','M');
-INSERT INTO STAFFb VALUES(10010,'George',NULL,'P7','Georgia','M');
-INSERT INTO STAFFb VALUES(10005,NULL,30000,'P8',NULL,'M');
-INSERT INTO STAFFb VALUES(10001,'Gregory',12000,'P9',NULL,'M');
-SELECT SALARY, EMPNAME, HOURS, CITY FROM STAFFb WHERE NULLIF(SALARY,HOURS) IS NULL ORDER BY EMPNAME; 
+ INSERT INTO STAFFb VALUES(10000,'Kilroy',10000,'P4','Athens','M');
+ INSERT INTO STAFFb VALUES(15000,'Nickos',20000,'P6','Nickos','M');
+ INSERT INTO STAFFb VALUES(NULL,'Nickos',NULL,'P5','Rhodes','M');
+ INSERT INTO STAFFb VALUES(10010,'George',NULL,'P7','Georgia','M');
+ INSERT INTO STAFFb VALUES(10005,NULL,30000,'P8',NULL,'M');
+ INSERT INTO STAFFb VALUES(10001,'Gregory',12000,'P9',NULL,'M');
+ SELECT SALARY, EMPNAME, HOURS, CITY FROM STAFFb WHERE NULLIF(SALARY,HOURS) IS NULL ORDER BY EMPNAME; 
 
       SALARY EMPNAME                     HOURS CITY            
 ============ ==================== ============ =============== 
-
        10000 Kilroy                      10000 Athens          
       <null> Nickos                     <null> Rhodes          
 
--- PASS:7001 If 2 rows are selected with the following order?
- --             SALARY EMPNAME HOURS CITY
- --             ====== ======= ===== ====
- -- PASS:7001 10000 Kilroy 10000 Athens?
- -- PASS:7001 NULL Nickos NULL Rhodes?
+	-- PASS:7001 If 2 rows are selected with the following order?
+	--             SALARY EMPNAME HOURS CITY
+	--             ====== ======= ===== ====
+	-- PASS:7001 10000 Kilroy 10000 Athens?
+	-- PASS:7001 NULL Nickos NULL Rhodes?
  SELECT SALARY,PNUM,HOURS,NULLIF(EMPNAME,CITY) FROM STAFFb WHERE EMPNAME = CITY OR EMPNAME IS NULL ORDER BY PNUM;
 
       SALARY PNUM          HOURS CASE                 
 ============ ====== ============ ==================== 
-
        15000 P6            20000 <null>               
        10005 P8            30000 <null>               
 
--- PASS:7001 If 2 rows are selected with the following order?
- --             SALARY PNUM HOURS NULLIF(EMPNAME,CITY)
- --             ====== ==== ===== ====================
- -- PASS:7001 15000 P6 20000 NULL?
- -- PASS:7001 10005 P8 30000 NULL?
+	-- PASS:7001 If 2 rows are selected with the following order?
+	--             SALARY PNUM HOURS NULLIF(EMPNAME,CITY)
+	--             ====== ==== ===== ====================
+	-- PASS:7001 15000 P6 20000 NULL?
+	-- PASS:7001 10005 P8 30000 NULL?
  SELECT SUM(NULLIF(NULLIF(SALARY,10000),20000)) as MySum FROM STAFFb; 
 
                 MYSUM 
 ===================== 
-
                 45016 
 
--- todo: per comments, the result should have been 195016, but I get
- -- 45016, and that seems correct. Why the discrepancy?
+	-- todo: per comments, the result should have been 195016, but I get
+	-- 45016, and that seems correct. Why the discrepancy?
 
- -- PASS:7001 If SUM = 195016?
+	-- PASS:7001 If SUM = 195016?
 
 
 ROLLBACK;
-CREATE TABLE ECCO (C1 CHAR(2));
-CREATE TABLE T4 (STR110 CHAR(110) NOT NULL, NUM6 NUMERIC(6) NOT NULL, COL3 CHAR(10), COL4 CHAR(20), UNIQUE(STR110,NUM6));
-INSERT INTO ECCO VALUES ('NL');
+ CREATE TABLE ECCO (C1 CHAR(2));
+ CREATE TABLE T4 (STR110 CHAR(110) NOT NULL, NUM6 NUMERIC(6) NOT NULL, COL3 CHAR(10), COL4 CHAR(20), UNIQUE(STR110,NUM6));
+ INSERT INTO ECCO VALUES ('NL');
 COMMIT;
-INSERT INTO T4
+ 
+   INSERT INTO T4
       VALUES
       ('This is the first compound character literal.',1,NULL,NULL);
 -- PASS:7004 If 1 row inserted successfully?
@@ -82,7 +81,6 @@ INSERT INTO T4
 
        COUNT 
 ============ 
-
            2 
 
 -- PASS:7004 If COUNT = 2?
@@ -95,7 +93,6 @@ INSERT INTO T4
 
         NUM6 
 ============ 
-
            2 
 
 -- PASS:7004 If NUM6 = 2?
@@ -125,7 +122,6 @@ INSERT INTO T4
 
         NUM6 
 ============ 
-
            2 
 
 -- PASS:7004 If NUM6 = 2?
@@ -138,7 +134,6 @@ INSERT INTO T4
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7004 If sum of this COUNT and the next COUNT = 3?
@@ -151,7 +146,6 @@ INSERT INTO T4
 
        COUNT 
 ============ 
-
            3 
 
 -- PASS:7004 If sum of this COUNT and the previous COUNT = 3?
@@ -167,7 +161,6 @@ INSERT INTO T4
 
         NUM6 
 ============ 
-
            2 
 
 -- PASS:7004 If NUM6 = 2?
@@ -180,6 +173,7 @@ INSERT INTO T4
 -- PASS:7004 If 0 rows selected - no data condition?
 
    ROLLBACK WORK;
+
 -- END TEST >>> 7004 <<< END TEST
 -- *********************************************
 
@@ -220,7 +214,6 @@ INSERT INTO T4
 
 STR110                                                                                                         COL4                 
 =============================================================================== ==================== 
-
 This is the first fragment of a compound character literal, and this is the second part.                       Compound literal.    
 
 -- PASS:7005 If STR110 = 'This is the first fragment of a compound
@@ -231,7 +224,6 @@ This is the first fragment of a compound character literal, and this is the seco
 
 STR110                                                                                                         
 =============================================================================== 
-
 This is a compound character literal, in the second table row.                                                 
 
 -- PASS:7005 If STR110 = 'This is a compound character literal, in
@@ -243,13 +235,13 @@ This is a compound character literal, in the second table row.
 
 STR110                                                                                                         
 =============================================================================== 
-
 This is a compound character literal, in the third table row.                                                  
 
 -- PASS:7005 If STR110 = 'This is a compound character literal, in 
 --                        the third table row.'?
 
    ROLLBACK WORK;
+
 -- END TEST >>> 7005 <<< END TEST
 -- *********************************************
 
@@ -270,7 +262,6 @@ This is a compound character literal, in the third table row.
 
 CONCATENATION                                                    CONCATENATION                                                                                               
 ================================================================ =============================================================================== 
-
 First fragment of a compound character literal, and second part. This is the first fragment of a compound character literal, this is the second, and this is the third part. 
 
 -- PASS:7006 If 1st value = 'First fragment of a compound character 
@@ -280,6 +271,10 @@ First fragment of a compound character literal, and second part. This is the fir
 --                         this is the third part.'?
 
    ROLLBACK WORK;
+
+
+
+
 -- Notes: Test of LIKE operator, with ESCAPE clause, including zero-length
 -- ESCAPE clause. xts_702
 -- 
@@ -288,16 +283,15 @@ First fragment of a compound character literal, and second part. This is the fir
    
    
  CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
-INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
-INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
-INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
-INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
-SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
 
        COUNT 
 ============ 
-
            5 
 
 -- PASS:7007 If COUNT = 5?
@@ -306,7 +300,6 @@ SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7007 If COUNT = 0?
@@ -315,7 +308,6 @@ SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
 
        COUNT 
 ============ 
-
            5 
 
 -- PASS:7007 If COUNT = 5?
@@ -326,7 +318,6 @@ SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
 
        COUNT 
 ============ 
-
            5 
 
 -- PASS:7008 If COUNT = 5?
@@ -338,37 +329,37 @@ SELECT COUNT(*) FROM STAFF WHERE  'Alice' LIKE 'Alice';
 
        COUNT 
 ============ 
-
            1 
 
 -- PASS:7008 If COUNT = 1?
 
  DELETE FROM STAFF;
-INSERT INTO STAFF VALUES('S','Dana%ELFT',14,'D%S%%%%%%%%%%%%');
+ INSERT INTO STAFF VALUES('S','Dana%ELFT',14,'D%S%%%%%%%%%%%%');
 -- PASS:7008 If 1 row inserted successfully?
 
 -- TEST:7009 LIKE with zero-length escape!
  DELETE FROM STAFF;
-INSERT INTO STAFF VALUES('   ','Dana%ELFT',14,'D%0%%%%%%%%%%%%');
+ INSERT INTO STAFF VALUES('   ','Dana%ELFT',14,'D%0%%%%%%%%%%%%');
 -- PASS:7009 If 1 row inserted successfully?
 
 ROLLBACK;   
+   
 -- following test was form xts_703
 -- TEST:7010 UNIQUE predicate, single table, all values distinct!
    
  drop table staff;
-CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
-INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
-INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
-INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
-INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
-CREATE TABLE STAFFc (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), MGR CHAR(3), UNIQUE (EMPNUM));
-SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+
+ CREATE TABLE STAFFc (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), MGR CHAR(3), UNIQUE (EMPNUM));
+ SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7010 If COUNT = 0?
@@ -378,7 +369,6 @@ SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
 
        COUNT 
 ============ 
-
            0 
 
 -- PASS:7011 If COUNT = 0?
@@ -387,7 +377,6 @@ SELECT COUNT(*) FROM STAFF WHERE SINGULAR(SELECT * FROM STAFF);
 
 EMPNUM        GRADE 
 ====== ============ 
-
 E2               10 
 
 -- PASS:7011 If EMPNUM = E2?
@@ -397,19 +386,19 @@ E2               10
 
        COUNT 
 ============ 
-
            4 
 
 -- PASS:7011 If COUNT = 4?
 
  DELETE FROM STAFFc;
-INSERT INTO STAFFc VALUES ('E1','Alice',12,'Deale',NULL);
-INSERT INTO STAFFc VALUES ('E2','Betty',10,'Vienna','E1');
-INSERT INTO STAFFc VALUES ('E3','Carmen',13,'Vienna','E2');
-INSERT INTO STAFFc VALUES ('E4','Don',12,'Deale','E2');
-INSERT INTO STAFFc VALUES ('E5','Don',12,'Deale','E1');
-INSERT INTO STAFFc VALUES ('E6','Tom',14,'Gettysburg','E5');
-INSERT INTO STAFFc VALUES ('E7','Kingdom',18,'Gettysburg','E7');
+ INSERT INTO STAFFc VALUES ('E1','Alice',12,'Deale',NULL);
+ INSERT INTO STAFFc VALUES ('E2','Betty',10,'Vienna','E1');
+ INSERT INTO STAFFc VALUES ('E3','Carmen',13,'Vienna','E2');
+ INSERT INTO STAFFc VALUES ('E4','Don',12,'Deale','E2');
+ INSERT INTO STAFFc VALUES ('E5','Don',12,'Deale','E1');
+ INSERT INTO STAFFc VALUES ('E6','Tom',14,'Gettysburg','E5');
+ INSERT INTO STAFFc VALUES ('E7','Kingdom',18,'Gettysburg','E7');
+
 --
 -- begin test 7012
 --
@@ -432,4 +421,5 @@ INSERT INTO STAFFc VALUES ('E7','Kingdom',18,'Gettysburg','E7');
 -- PASS:7012 If COUNT = 3?
 
 ROLLBACK; 
+
 DROP DATABASE;

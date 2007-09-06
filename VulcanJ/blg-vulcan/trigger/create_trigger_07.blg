@@ -1,6 +1,7 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE tb(id INT);
+
 SET TERM ^;
 CREATE TRIGGER test FOR tb INACTIVE AFTER DELETE AS
 BEGIN
@@ -16,4 +17,6 @@ BEGIN
   old.id=1;
 END
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 DROP DATABASE;
+

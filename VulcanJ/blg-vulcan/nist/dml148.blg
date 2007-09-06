@@ -1,64 +1,70 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 INPUT ddl/input/base-tab.sql;
-CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
-CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
-CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
-CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
-CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
-CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
-CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
-CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
-INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
-INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
-INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
-INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
-INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
-INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
-INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
-INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
-INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
-INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
-INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
-INSERT INTO WORKS VALUES  ('E1','P1',40);
-INSERT INTO WORKS VALUES  ('E1','P2',20);
-INSERT INTO WORKS VALUES  ('E1','P3',80);
-INSERT INTO WORKS VALUES  ('E1','P4',20);
-INSERT INTO WORKS VALUES  ('E1','P5',12);
-INSERT INTO WORKS VALUES  ('E1','P6',12);
-INSERT INTO WORKS VALUES  ('E2','P1',40);
-INSERT INTO WORKS VALUES  ('E2','P2',80);
-INSERT INTO WORKS VALUES  ('E3','P2',20);
-INSERT INTO WORKS VALUES  ('E4','P2',20);
-INSERT INTO WORKS VALUES  ('E4','P4',40);
-INSERT INTO WORKS VALUES  ('E4','P5',80);
-INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
-INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
-INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
-INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
-INSERT INTO STAFF3 SELECT * FROM STAFF;
-INSERT INTO UPUNIQ VALUES(1,'A');
-INSERT INTO UPUNIQ VALUES(2,'B');
-INSERT INTO UPUNIQ VALUES(3,'C');
-INSERT INTO UPUNIQ VALUES(4,'D');
-INSERT INTO UPUNIQ VALUES(6,'F');
-INSERT INTO UPUNIQ VALUES(8,'H');
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
 COMMIT;
+
 -- TEST:0844 Outer join predicates !
  CREATE TABLE SEVEN_TYPES ( T_INT INTEGER, T_CHAR CHAR(10), T_SMALL SMALLINT, T_DECIMAL DECIMAL(10,2), T_REAL REAL, T_FLOAT FLOAT, T_DOUBLE DOUBLE PRECISION);
-INSERT INTO SEVEN_TYPES VALUES (1, 'E1',-11, 2, 3, 4, 5);
-INSERT INTO SEVEN_TYPES VALUES (2, 'E2', -5, 13, 33,-444, -55);
-INSERT INTO SEVEN_TYPES VALUES (3, 'E6', -3,-222,333, 44, 555);
-INSERT INTO SEVEN_TYPES VALUES (12,'DUP', 0, 0, -1, 1,1E+1);
-INSERT INTO SEVEN_TYPES VALUES (12,'DUP', 0, 0, -1, 1,1E+1);
--- NOTE:0844 BETWEEN predicate
+ INSERT INTO SEVEN_TYPES VALUES (1, 'E1',-11, 2, 3, 4, 5);
+ INSERT INTO SEVEN_TYPES VALUES (2, 'E2', -5, 13, 33,-444, -55);
+ INSERT INTO SEVEN_TYPES VALUES (3, 'E6', -3,-222,333, 44, 555);
+ INSERT INTO SEVEN_TYPES VALUES (12,'DUP', 0, 0, -1, 1,1E+1);
+ INSERT INTO SEVEN_TYPES VALUES (12,'DUP', 0, 0, -1, 1,1E+1);
+ 
+ -- NOTE:0844 BETWEEN predicate
  SELECT EMPNAME, CITY, T_DECIMAL FROM STAFF LEFT OUTER JOIN SEVEN_TYPES ON -GRADE / 11 BETWEEN T_REAL AND T_DECIMAL ORDER BY EMPNAME; 
 
 EMPNAME              CITY                        T_DECIMAL 
 ==================== =============== ===================== 
-
 Alice                Deale                            0.00 
 Alice                Deale                            0.00 
 Betty                Vienna                           0.00 
@@ -70,7 +76,7 @@ Don                  Deale                            0.00
 Ed                   Akron                            0.00 
 Ed                   Akron                            0.00 
 
--- PASS:0844 If 6 rows selected with ordered rows and column values ?
+ -- PASS:0844 If 6 rows selected with ordered rows and column values ?
 -- PASS:0844 Alice Deale NULL ?
 -- PASS:0844 Betty Vienna 0 ?
 -- PASS:0844 Betty Vienna 0 ?
@@ -84,7 +90,6 @@ Ed                   Akron                            0.00
 
        T_INT T_CHAR     EMPNAME              EMPNUM        GRADE 
 ============ ========== ==================== ====== ============ 
-
       <null> <null>     Alice                E1               12 
            2 E2         Betty                E2               10 
       <null> <null>     Carmen               E3               13 
@@ -103,7 +108,6 @@ Ed                   Akron                            0.00
 
 PNUM         BUDGET        HOURS EMPNUM 
 ====== ============ ============ ====== 
-
 P1            10000       <null> <null> 
 P2            30000           80 E2     
 P3            30000           80 E1     
@@ -124,7 +128,6 @@ P6            50000       <null> <null>
 
 CITY            EMPNAME              PNAME                      BUDGET 
 =============== ==================== ==================== ============ 
-
 Akron           Ed                   <null>                     <null> 
 Deale           Alice                SDP                         20000 
 Deale           Alice                PAYR                        50000 
@@ -145,7 +148,6 @@ Vienna          Carmen               <null>                     <null>
 
 CITY            EMPNAME              PNAME                      BUDGET 
 =============== ==================== ==================== ============ 
-
 Akron           Ed                   <null>                     <null> 
 Deale           Alice                SDP                         20000 
 Deale           Alice                PAYR                        50000 
@@ -165,7 +167,6 @@ Vienna          Carmen               <null>                     <null>
 
        T_INT        T_INT 
 ============ ============ 
-
            2            1 
            3            2 
       <null>            3 
@@ -186,7 +187,6 @@ Vienna          Carmen               <null>                     <null>
 
        GRADE        T_FLOAT                T_DOUBLE 
 ============ ============== ======================= 
-
           10     -444.00000      -55.00000000000000 
           12         <null>                  <null> 
           12         <null>                  <null> 

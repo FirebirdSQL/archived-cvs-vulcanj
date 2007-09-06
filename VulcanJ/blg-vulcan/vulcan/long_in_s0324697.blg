@@ -502,7 +502,7 @@ where
 Statement failed, SQLCODE = -901
 SQL error code = -901
 -Implementation limit exceeded
--Expression too complex; compiler exceeded 1347 levels of recursion
+-Expression too complex; compiler exceeded 1356 levels of recursion
 After line 10 in file ddl/vulcan/long_in_s0324697.sql
 
 drop database ;

@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*
 ** Syntax test cases - Valid Arithmetic operations on
 ** SMALLINT, NUMERIC, DECIMAL, FLOAT, DOUBLE PRECISION
@@ -19,16 +20,16 @@ select 'Passed 1(s) - Insert' from t0_s where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(s) - Insert 
+
 
 update t0_s set i = 99 where i = 2;
 select 'Passed 1(s) - Update' from t0_s where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(s) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+i) */
@@ -43,16 +44,16 @@ select 'Passed 2(s) - Insert' from t5_s where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(s) - Insert 
+
 
 update t5_s set i = 99 where i = 2;
 select 'Passed 2(s) - Update' from t5_s where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(s) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+1) */
@@ -67,16 +68,16 @@ select 'Passed 3(s) - Insert' from t10_s where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(s) - Insert 
+
 
 update t10_s set i = 99 where i = 2;
 select 'Passed 3(s) - Update' from t10_s where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(s) - Update 
+
 
 /* DECIMAL: */
 /*-----------------*/
@@ -92,16 +93,16 @@ select 'Passed 1(d) - Insert' from t0_d where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(d) - Insert 
+
 
 update t0_d set i = 99 where i = 2;
 select 'Passed 1(d) - Update' from t0_d where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(d) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+i) */
@@ -116,16 +117,16 @@ select 'Passed 2(d) - Insert' from t5_d where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(d) - Insert 
+
 
 update t5_d set i = 99.0 where i = 2.0;
 select 'Passed 2(d) - Update' from t5_d where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(d) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+1) */
@@ -140,16 +141,16 @@ select 'Passed 3(d) - Insert' from t10_d where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(d) - Insert 
+
 
 update t10_d set i = 99.0 where i = 2.0;
 select 'Passed 3(d) - Update' from t10_d where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(d) - Update 
+
 
 /* NUMERIC: */
 /*-----------------*/
@@ -165,16 +166,16 @@ select 'Passed 1(n) - Insert' from t0_n where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(n) - Insert 
+
 
 update t0_n set i = 99.0 where i = 2.0;
 select 'Passed 1(n) - Update' from t0_n where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(n) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+i) */
@@ -189,16 +190,16 @@ select 'Passed 2(n) - Insert' from t5_n where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(n) - Insert 
+
 
 update t5_n set i = 99.0 where i = 2.0;
 select 'Passed 2(n) - Update' from t5_n where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(n) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+1) */
@@ -213,16 +214,16 @@ select 'Passed 3(n) - Insert' from t10_n where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(n) - Insert 
+
 
 update t10_n set i = 99.0 where i = 2.0;
 select 'Passed 3(n) - Update' from t10_n where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(n) - Update 
+
 
 /* FLOAT: */
 /*-----------------*/
@@ -238,16 +239,16 @@ select 'Passed 1(f) - Insert' from t0_f where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(f) - Insert 
+
 
 update t0_f set i = 99.0 where i = 2.0;
 select 'Passed 1(f) - Update' from t0_f where j = i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 1(f) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+i) */
@@ -262,16 +263,16 @@ select 'Passed 2(f) - Insert' from t5_f where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(f) - Insert 
+
 
 update t5_f set i = 99.0 where i = 2.0;
 select 'Passed 2(f) - Update' from t5_f where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 2(f) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+1) */
@@ -286,16 +287,16 @@ select 'Passed 3(f) - Insert' from t10_f where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(f) - Insert 
+
 
 update t10_f set i = 99.0 where i = 2.0;
 select 'Passed 3(f) - Update' from t10_f where j = i+i having count(*) = 2;
 
                      
 ==================== 
-
 Passed 3(f) - Update 
+
 
 /* DOUBLE PRECISION: */
 /*-----------------*/
@@ -311,16 +312,16 @@ select 'Passed 1(dp) - Insert' from t0_dp where j = i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 1(dp) - Insert 
+
 
 update t0_dp set i = 99.0 where i = 2.0;
 select 'Passed 1(dp) - Update' from t0_dp where j = i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 1(dp) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+i) */
@@ -335,16 +336,16 @@ select 'Passed 2(dp) - Insert' from t5_dp where j = i+i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 2(dp) - Insert 
+
 
 update t5_dp set i = 99.0 where i = 2.0;
 select 'Passed 2(dp) - Update' from t5_dp where j = i+i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 2(dp) - Update 
+
 
 /*-------------------*/
 /* Computed by (i+1) */
@@ -359,16 +360,16 @@ select 'Passed 3(dp) - Insert' from t10_dp where j = i+i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 3(dp) - Insert 
+
 
 update t10_dp set i = 99.0 where i = 2.0;
 select 'Passed 3(dp) - Update' from t10_dp where j = i+i having count(*) = 2;
 
                       
 ===================== 
-
 Passed 3(dp) - Update 
+
 
 drop database;
 exit;

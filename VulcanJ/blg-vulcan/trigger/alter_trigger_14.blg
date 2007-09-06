@@ -8,10 +8,12 @@ AS
 BEGIN
   new.text=new.text||'tg1 ';
 END ^
+
 ALTER TRIGGER tg AS
 BEGIN
   new.text='altered trigger';
 END ^
+
 SET TERM ;^
 SHOW TRIGGER tg;
 
@@ -22,4 +24,6 @@ BEGIN
   new.text='altered trigger';
 END
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 DROP DATABASE;
+

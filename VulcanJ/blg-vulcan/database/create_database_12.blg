@@ -5,7 +5,8 @@ SELECT RDB$CHARACTER_SET_NAME FROM rdb$Database;
 
 RDB$CHARACTER_SET_NAME          
 =============================== 
-
 NONE                            
 
+
 DROP DATABASE;
+

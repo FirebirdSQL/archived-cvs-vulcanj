@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 SET TERM ^;
 CREATE PROCEDURE test RETURNS(id INT)AS
 BEGIN
@@ -22,4 +23,6 @@ END
 =============================================================================
 Parameters:
 ID                                OUTPUT INTEGER 
+
 DROP DATABASE;
+

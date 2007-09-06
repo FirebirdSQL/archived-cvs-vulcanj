@@ -1,9 +1,12 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE test( id INTEGER NOT NULL);
+
 ALTER TABLE test ADD CONSTRAINT pk PRIMARY KEY(id);
 SHOW TABLE test;
 ID                              INTEGER Not Null 
 CONSTRAINT PK:
   Primary key (ID)
+
 DROP DATABASE;
+

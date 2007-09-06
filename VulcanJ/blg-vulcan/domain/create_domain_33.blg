@@ -1,7 +1,10 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
+
 CREATE DOMAIN test VARCHAR(32) DEFAULT NULL;
 SHOW DOMAIN test;
 TEST                            VARCHAR(32) Nullable
                                 DEFAULT NULL
+
 DROP DATABASE;
+

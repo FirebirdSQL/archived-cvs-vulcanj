@@ -8,8 +8,9 @@ select * from foo order by col NULLS LAST;
 
 COL        
 ========== 
-
 1          
 <null>     
 
+
 DROP DATABASE;
+

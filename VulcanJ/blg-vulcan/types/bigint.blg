@@ -4,15 +4,16 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 set names ascii;
 create database 'test.fdb';
+
 create table c (col1 bigint);
 insert into c values(9223372036854775807);
 insert into c values(-9223372036854775808);
 commit;
+
 select * from c;
 
                  COL1 
 ===================== 
-
   9223372036854775807 
  -9223372036854775808 
 

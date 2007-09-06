@@ -1,12 +1,14 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 -- TEST:0832 FIPS Flagger - CREATE INDEX!
 -- FIPS Flagger Test.  Support for this feature is not required.
 -- If supported, this feature must be flagged as an extension to the standard.
 
  CREATE TABLE USIG (C1 INT, C_1 INT);
-CREATE INDEX II1 ON USIG(C1);
+
+ CREATE INDEX II1 ON USIG(C1);
 -- PASS:0832 If index created?
 -- NOTE:0832 Shows support for CREATE INDEX extension
 
@@ -17,7 +19,9 @@ CREATE INDEX II1 ON USIG(C1);
  SHOW TABLE USIG;
 C1                              INTEGER Nullable 
 C_1                             INTEGER Nullable 
-SHOW INDEX;
+ 
+ SHOW INDEX;
 II1 INDEX ON USIG(C1) 
 II2 UNIQUE INDEX ON USIG(C_1) 
+ 
 DROP DATABASE;

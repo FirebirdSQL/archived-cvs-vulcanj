@@ -1,6 +1,7 @@
 Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
 -- you can now use SEQUENCE as a synonym for GENERATOR
 
 create sequence party_key;
@@ -10,8 +11,12 @@ show generators;
 Generator ACCOUNT_KEY, current value is 0
 Generator ID, current value is 0
 Generator PARTY_KEY, current value is 0
+
 create table test_table (id integer not null primary key, c char(20) ); 
+
+
 set terminator ^;
+
 create trigger test_table_pk for test_table
  active before insert position 0
  as 
@@ -19,6 +24,8 @@ create trigger test_table_pk for test_table
     if (new.id is null) then
        new.id=gen_id(id,1);
  end^
+
+
 create procedure populate_test_table AS
 declare variable i integer =1; BEGIN
 while (i <= 255) DO BEGIN
@@ -28,11 +35,11 @@ END
 END; ^
 set terminator ;^
 execute procedure populate_test_table; 
+
 select id, c from test_table rows 10; 
 
           ID C                    
 ============ ==================== 
-
            1 text string 1        
            2 text string 2        
            3 text string 3        
@@ -43,5 +50,6 @@ select id, c from test_table rows 10;
            8 text string 8        
            9 text string 9        
           10 text string 10       
+
 
 drop database ;

@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*
 ** Test case which defines computed field on more than one column
 */
@@ -18,8 +19,8 @@ select 'Passed 1 - Insert' from t0 where a_b = a*b having count(*) = 2;
 
                   
 ================= 
-
 Passed 1 - Insert 
+
 
 update t0 set a = 12, b = 12 where a = 10;
 update t0 set a = 13         where a = 11;
@@ -27,8 +28,8 @@ select 'Passed 1 - Update' from t0 where a_b = a*b having count(*) = 2;
 
                   
 ================= 
-
 Passed 1 - Update 
+
 
 /*---------------------*/
 /* Computed by (a*b/c) */
@@ -45,8 +46,8 @@ select 'Passed 2 - Insert' from t5 where a_b_c = a*b/c having count(*) = 2;
 
                   
 ================= 
-
 Passed 2 - Insert 
+
 
 update t5 set a = 12, b = 12, c = 12 where a = 10;
 update t5 set a = 13                 where a = 11;
@@ -54,8 +55,8 @@ select 'Passed 2 - Update' from t5 where a_b_c = a*b/c having count(*) = 2;
 
                   
 ================= 
-
 Passed 2 - Update 
+
 
 /*----------------------*/
 /* Computed by (a/10*b) */
@@ -71,8 +72,8 @@ select 'Passed 3 - Insert' from t10 where a_b_const = a/10*b having count(*) = 2
 
                   
 ================= 
-
 Passed 3 - Insert 
+
 
 update t10 set a = 12, b = 12 where a = 10;
 update t10 set a = 13         where a = 11;
@@ -80,8 +81,8 @@ select 'Passed 3 - Update' from t10 where a_b_const = a/10*b having count(*) = 2
 
                   
 ================= 
-
 Passed 3 - Update 
+
 
 drop database;
 exit;

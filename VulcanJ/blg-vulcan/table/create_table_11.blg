@@ -4,7 +4,10 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 create database 'test.fdb' user 'sysdba' password 'masterkey'
    page_size=16834 default character set iso8859_1;
+
 create table foo ( bar int not null not null );
+
 show table foo;
 BAR                             INTEGER Not Null 
+
 drop database;

@@ -6,12 +6,14 @@ INSERT INTO tb VALUES(10);
 INSERT INTO tb VALUES(10);
 INSERT INTO tb VALUES(null);
 COMMIT;
+
 DELETE FROM test WHERE id=10;
 SELECT * FROM tb;
 
           ID 
 ============ 
-
       <null> 
 
+
 DROP DATABASE;
+

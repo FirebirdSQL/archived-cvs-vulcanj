@@ -2,6 +2,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 set list on;
+
 /* varchar(255) as primary key didn't work in FB 1.5, but should now. */
 /* index was too big... */
 
@@ -10,11 +11,13 @@ show table t;
 V                               VARCHAR(255) Not Null 
 CONSTRAINT INTEG_2:
   Primary key (V)
+
 REcreate table t (i integer, v varchar(255)); 
 create index index1 on t(v); 
 show table t; 
 I                               INTEGER Nullable 
 V                               VARCHAR(255) Nullable 
+
 /* insert some data */
 set terminator ^;
 create procedure populate_t AS
@@ -792,6 +795,7 @@ V                               text string 254
 
 I                               1
 V                               text string 255
+
 
 
 drop database ;

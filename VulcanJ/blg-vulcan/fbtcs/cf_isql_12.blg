@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*---------------------------------------------*/
 /* Computed field using another computed field */
 /*---------------------------------------------*/
@@ -9,8 +10,8 @@ select * from t3;
 
            A                    AF                  AFAF 
 ============ ===================== ===================== 
-
           10                    30                    60 
+
 
 drop database;
 exit;

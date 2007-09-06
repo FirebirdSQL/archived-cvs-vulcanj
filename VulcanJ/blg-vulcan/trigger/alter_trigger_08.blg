@@ -9,6 +9,7 @@ BEGIN
   old.id=1;
 END ^
 SET TERM ;^
+
 ALTER TRIGGER tg AFTER DELETE;
 SHOW TRIGGER tg;
 
@@ -19,4 +20,6 @@ BEGIN
   old.id=1;
 END
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 DROP DATABASE;
+

@@ -1,5 +1,6 @@
 Use CONNECT or CREATE DATABASE to specify a database
 create database 'test.fdb';
+
 /*
 ** Syntax test cases - Valid Date operations
 */
@@ -19,8 +20,8 @@ select 'Passed 1 - Insert' from t0 where dc = d having count(*) = 4;
 
                   
 ================= 
-
 Passed 1 - Insert 
+
 
 /*----------------------------------------------------------------*/
 /* Note: Using cast() to convert 'today' first to a date literal. */
@@ -35,8 +36,8 @@ select 'Passed 1 - Update' from t0 where dc = d having count(*) = 4;
 
                   
 ================= 
-
 Passed 1 - Update 
+
 
 /*---------------------*/
 /* Computed by (d + 1) */
@@ -53,16 +54,16 @@ select 'Passed 2 - Insert' from t5 where dc = d + 1 having count(*) = 4;
 
                   
 ================= 
-
 Passed 2 - Insert 
+
 
 update t5 set d = cast('today' as date) + 5 where d = 'today';
 select 'Passed 2 - Update' from t5 where dc = d + 1 having count(*) = 4;
 
                   
 ================= 
-
 Passed 2 - Update 
+
 
 /*---------------------*/
 /* Computed by (d - 1) */
@@ -79,16 +80,16 @@ select 'Passed 3 - Insert' from t10 where dc = d - 1 having count(*) = 4;
 
                   
 ================= 
-
 Passed 3 - Insert 
+
 
 update t10 set d = cast('today' as date) - 5 where d = 'today';
 select 'Passed 3 - Update' from t10 where dc = d - 1 having count(*) = 4;
 
                   
 ================= 
-
 Passed 3 - Update 
+
 
 /*-----------------------*/
 /* Computed by ('today') */
@@ -105,16 +106,16 @@ select 'Passed 4 - Insert' from t15 where dc = 'today' having count(*) = 4;
 
                   
 ================= 
-
 Passed 4 - Insert 
+
 
 update t15 set d = cast('today' as date) + 5 where d = 'today';
 select 'Passed 4 - Update' from t15 where dc = 'today' having count(*) = 4;
 
                   
 ================= 
-
 Passed 4 - Update 
+
 
 /*---------------------------*/
 /* Computed by ('today' + 1) */
@@ -131,16 +132,16 @@ select 'Passed 5 - Insert' from t20 where dc = cast ('today' as date) + 1 having
 
                   
 ================= 
-
 Passed 5 - Insert 
+
 
 update t20 set d = cast('today' as date) + 5 where d = 'today';
 select 'Passed 5 - Update' from t20 where dc = cast ('today' as date) + 1 having count(*) = 4;
 
                   
 ================= 
-
 Passed 5 - Update 
+
 
 /*-----------------------*/
 /* Computed by (d1 - d2) */
@@ -157,16 +158,16 @@ select 'Passed 6 - Insert' from t25 where date_diff = d_end - d_start having cou
 
                   
 ================= 
-
 Passed 6 - Insert 
+
 
 update t25 set d_end = cast('today' as date) + 5 where d_start = 'today';
 select 'Passed 6 - Update' from t25 where date_diff = d_end - d_start having count(*) = 3;
 
                   
 ================= 
-
 Passed 6 - Update 
+
 
 drop database;
 exit;

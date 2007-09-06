@@ -1,7 +1,10 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE DOMAIN test SMALLINT;
+
 DROP DOMAIN test;
 SHOW DOMAIN test;
 There is no domain TEST in this database
+
 DROP DATABASE;
+

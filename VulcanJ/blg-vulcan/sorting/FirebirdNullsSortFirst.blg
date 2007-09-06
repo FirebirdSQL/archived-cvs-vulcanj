@@ -8,8 +8,9 @@ select * from foo order by col NULLS FIRST;
 
 COL        
 ========== 
-
 <null>     
 1          
 
+
 DROP DATABASE;
+

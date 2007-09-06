@@ -1,7 +1,10 @@
 Use CONNECT or CREATE DATABASE to specify a database
 CREATE DATABASE 'test.fdb' ;
 CREATE TABLE t( a INTEGER, b INT, c INT, d INT);
+
 CREATE INDEX test ON t(a,b,c,d);
 SHOW INDEX test;
 TEST INDEX ON T(A, B, C, D) 
+
 DROP DATABASE;
+
