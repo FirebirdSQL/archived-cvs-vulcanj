@@ -2,22 +2,51 @@ Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
 -- s0363759 identifier is too long in fb2
 
-create database 'test.fdb'; 
+create database 'test.fdb';
+
+set sqlstate on;
+
+-- this create table statement fails, since table name > 31 characters
+create table test567890test567890test567890test567890 (i integer);
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
+unsuccessful metadata update
+-Table name TEST567890TEST567890TEST567890T... is too long. Limit is 31 characters
+After line 6 in file ddl/vulcan/long_id.sql
 
 -- this create table statement fails, since column name > 31 characters
 create table test1 (test567890test567890test567890test567890 integer);
-Statement failed, SQLCODE = -607
-unsuccessful metadata update
--Name longer than database column size
-After line 4 in file ddl/vulcan/long_id.sql
+Statement failed, SQLCODE = -104, SQLSTATE = 42000
+SQL error code = -104
+-Column name TEST567890TEST567890TEST567890T... is too long. Limit is 31 characters
+After line 9 in file ddl/vulcan/long_id.sql
 
 create table fred (i integer);
 insert into fred values (1);
+
+-- this select will fail, since column is unknown.
+select test567890test567890test567890test567890 from fred;
+Statement failed, SQLCODE = -206, SQLSTATE = 42S22
+SQL error code = -206
+-Column unknown
+-TEST567890TEST567890TEST567890TEST567890
+-At line 1, column 49.
+After line 15 in file ddl/vulcan/long_id.sql
+
+-- but a long alias is ok? Seems fishy
 select i as test567890test567890test567890test567890 from fred;
 
 TEST567890TEST567890TEST567890TEST567890 
 ======================================== 
                                        1 
 
+
+-- wbo: TODO this should say column name too long, but gives old message.
+-- wbo: that's because the new column is a string, not a MetaName
+-- "Name longer than database column size"
+alter table fred alter column i to test567890test567890test567890test567890;
+Statement failed, SQLCODE = -607, SQLSTATE = 42000
+unsuccessful metadata update
+-Name longer than database column size
+After line 21 in file ddl/vulcan/long_id.sql
 
 drop database;

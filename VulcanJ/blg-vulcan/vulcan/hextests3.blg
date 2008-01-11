@@ -6,13 +6,15 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 create table dptest (d double precision);
 insert into dptest values ('1.3e+07');
 insert into dptest values ('1. 3e + 0 7');
+Statement failed, SQLCODE = -413
+conversion error from string "1. 3e + 0 7"
+After line 6 in file ddl/vulcan/hextests3.sql
 
 -- should be 2 values
 select * from dptest;
 
                       D 
 ======================= 
-      13000000.00000000 
       13000000.00000000 
 
 
