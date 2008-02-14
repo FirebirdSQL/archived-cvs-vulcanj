@@ -227,6 +227,7 @@ GOOBER
  INSERT INTO REFERENCE_CHANGG VALUES ('NO SUCH NAAM');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_5" on table "REFERENCE_CHANGG"
+-Foreign key reference target does not exist
 After line 101 in file ddl/nist/dml112.sql
 			fail("Violation of Foreign Key constrain");
 Statement failed, SQLCODE = -104

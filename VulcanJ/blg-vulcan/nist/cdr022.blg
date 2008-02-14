@@ -74,6 +74,7 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  INSERT INTO WORKS_P VALUES ('E9','P2',20); 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key reference target does not exist
 After line 2 in file ddl/nist/cdr022.sql
 -- PASS:0380 If RI ERROR, parent missing, 0 rows inserted?
  
@@ -89,6 +90,7 @@ After line 2 in file ddl/nist/cdr022.sql
  UPDATE WORKS_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2'; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key reference target does not exist
 After line 11 in file ddl/nist/cdr022.sql
 -- PASS:0381 If RI ERROR, parent missing, 0 rows updated?
 

@@ -76,6 +76,7 @@ commit;
  DELETE FROM STAFF_P WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 6 in file ddl/nist/cdr021.sql
 -- PASS:0378 If RI ERROR, children exist, 0 rows deleted?
 
@@ -94,6 +95,7 @@ E1
  UPDATE STAFF_P SET EMPNUM = 'E9' WHERE EMPNUM = 'E2';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 16 in file ddl/nist/cdr021.sql
 -- PASS:0379 If RI ERROR, children exist, 0 rows updated?
 

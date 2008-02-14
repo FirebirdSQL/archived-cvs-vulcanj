@@ -313,6 +313,7 @@ INPUT ddl/input/sun-tab2-refresh.sql;
  UPDATE SIZ1_F SET F1 = 'E9' WHERE F1 = 'E2';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_9" on table "SIZ1_F"
+-Foreign key reference target does not exist
 After line 8 in file ddl/nist/cdr016.sql
  SELECT COUNT(*) FROM SIZ1_F WHERE F1 = 'E2'; 
 

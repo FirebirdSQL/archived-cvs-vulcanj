@@ -81,6 +81,7 @@ After line 11 in file ddl/nist/cdr009.sql
  UPDATE STAFF3 SET EMPNUM = 'E9' WHERE EMPNUM = 'E2';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_20" on table "WORKS3"
+-Foreign key references are present for the record
 After line 19 in file ddl/nist/cdr009.sql
  SELECT COUNT(*) FROM STAFF3 WHERE EMPNUM = 'E2';
 
@@ -117,6 +118,7 @@ After line 26 in file ddl/nist/cdr009.sql
  UPDATE WORKS3 SET EMPNUM = 'E9' WHERE EMPNUM = 'E2'; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_20" on table "WORKS3"
+-Foreign key reference target does not exist
 After line 34 in file ddl/nist/cdr009.sql
  SELECT COUNT(*) FROM WORKS3 WHERE EMPNUM = 'E2';
 

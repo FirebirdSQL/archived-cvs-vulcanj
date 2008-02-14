@@ -17,10 +17,12 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  INSERT INTO T6 VALUES ('AAAAAAAAAAAAAAAAAAAA', 'BBBBBBBBBBBBBBBBBBBB', 'CCCCCCCCCCCCCCCCCCCC', 'DDDDDDDDDDDDDDDDDDDD', 'EEEEEEEEEEEEEEEEEEEEEEE', 0);
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_10" on table "T6"
+-Foreign key reference target does not exist
 After line 15 in file ddl/nist/cdr031.sql
  INSERT INTO T118 VALUES ('Hamlet');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "T118"
+-Foreign key reference target does not exist
 After line 16 in file ddl/nist/cdr031.sql
 
 DROP DATABASE;

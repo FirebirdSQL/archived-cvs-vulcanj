@@ -35,6 +35,7 @@ INPUT ddl/input/sun-tab1.sql;
  UPDATE STAFF_M SET EMPNUM = 'E9' WHERE EMPNUM = 'E2'; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_5" on table "PROJ_M"
+-Foreign key references are present for the record
 After line 2 in file ddl/nist/cdr013.sql
  SELECT COUNT(*) FROM STAFF_M WHERE EMPNUM = 'E2';
 
@@ -45,6 +46,7 @@ After line 2 in file ddl/nist/cdr013.sql
  UPDATE PROJ_M SET MGR = 'E9' WHERE MGR = 'E3';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_5" on table "PROJ_M"
+-Foreign key reference target does not exist
 After line 7 in file ddl/nist/cdr013.sql
  SELECT COUNT(*) FROM PROJ_M WHERE MGR = 'E3';
 
@@ -62,6 +64,7 @@ After line 7 in file ddl/nist/cdr013.sql
  INSERT INTO STAFF_M VALUES('E8','Alice',12,'Deale','P9');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_6" on table "STAFF_M"
+-Foreign key reference target does not exist
 After line 11 in file ddl/nist/cdr013.sql
  SELECT COUNT(*) FROM STAFF_M WHERE PRI_WK = 'P9';
 

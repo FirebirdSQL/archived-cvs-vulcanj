@@ -50,6 +50,7 @@ INPUT ddl/input/sun-tab1.sql;
  DELETE FROM STAFF_C WHERE EMPNUM='E1';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_9" on table "STAFF_C"
+-Foreign key references are present for the record
 After line 15 in file ddl/nist/cdr010.sql
  SELECT EMPNUM FROM STAFF_C WHERE EMPNUM = 'E1';
 

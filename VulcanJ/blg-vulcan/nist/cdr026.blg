@@ -81,18 +81,21 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  INSERT INTO EXPERIENCE VALUES('Tom',052744,NULL,'Car Mechanic');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key reference target does not exist
 After line 14 in file ddl/nist/cdr026.sql
 -- PASS:0438 If RI ERROR, parent missing, 0 rows inserted?
 
  INSERT INTO EXPERIENCE VALUES('Yolanda',040523,NULL,'Car Mechanic');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key reference target does not exist
 After line 15 in file ddl/nist/cdr026.sql
 -- PASS:0438 If RI ERROR, parent missing, 0 rows inserted?
 
  INSERT INTO EXPERIENCE VALUES('Yolanda',062968,NULL,'Car Mechanic');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key reference target does not exist
 After line 18 in file ddl/nist/cdr026.sql
 -- PASS:0438 If RI ERROR, parent missing, 0 rows inserted?
 
@@ -120,10 +123,12 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  DELETE FROM STAFF_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 3 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM PROJ_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_19" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 4 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM ACR_SCH_P;
  INSERT INTO DEPT VALUES (12,'Computer','Charles');
@@ -217,6 +222,7 @@ After line 40 in file ddl/input/sun-tab3-refresh.sql
  UPDATE EXPERIENCE SET BTH_DATE = 040523 WHERE EXP_NAME = 'Lilian' AND DESCR = 'Soccer Player';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key reference target does not exist
 After line 37 in file ddl/nist/cdr026.sql
  UPDATE EXPERIENCE SET EXP_NAME = NULL WHERE DESCR = 'Photographer';
  UPDATE EXPERIENCE SET EXP_NAME = NULL ,BTH_DATE = NULL WHERE DESCR = 'Fashion Model'; 
@@ -225,6 +231,7 @@ After line 37 in file ddl/nist/cdr026.sql
  UPDATE EXPERIENCE SET EXP_NAME = 'Dick' , BTH_DATE = 020454 WHERE DESCR = 'Artist'; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key reference target does not exist
 After line 42 in file ddl/nist/cdr026.sql
  SELECT EXP_NAME, DESCR, BTH_DATE FROM EXPERIENCE ORDER BY EXP_NAME, BTH_DATE; 
 

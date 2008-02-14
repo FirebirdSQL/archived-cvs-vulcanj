@@ -80,6 +80,7 @@ COMMIT;
  INSERT INTO ACR_SCH_F VALUES(2,'PIG');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_28" on table "ACR_SCH_F"
+-Foreign key reference target does not exist
 After line 12 in file ddl/nist/cdr023.sql
 -- PASS:0382 If RI ERROR, parent missing, 0 rows inserted?
 

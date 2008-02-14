@@ -72,6 +72,7 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  INSERT INTO EMP VALUES (41,'Tom','China Architecture', 20,'Architecture',040553);
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_11" on table "EMP"
+-Foreign key reference target does not exist
 After line 2 in file ddl/nist/cdr019.sql
  INSERT INTO DEPT VALUES (20,'Architecture','Richard');
  INSERT INTO EMP VALUES (41,'Tom','China Architecture', 20,'Architecture',040553);
@@ -89,10 +90,12 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  DELETE FROM STAFF_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 3 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM PROJ_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_19" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 4 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM ACR_SCH_P;
  INSERT INTO DEPT VALUES (12,'Computer','Charles');
@@ -180,6 +183,7 @@ After line 40 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM EMP WHERE ENO = 21;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key references are present for the record
 After line 9 in file ddl/nist/cdr019.sql
  DELETE FROM EXPERIENCE WHERE EXP_NAME = 'Tom' AND BTH_DATE = 040523; 
  DELETE FROM EMP WHERE ENO = 21;
@@ -197,10 +201,12 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  DELETE FROM STAFF_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 3 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM PROJ_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_19" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 4 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM ACR_SCH_P;
  INSERT INTO DEPT VALUES (12,'Computer','Charles');
@@ -288,10 +294,12 @@ After line 40 in file ddl/input/sun-tab3-refresh.sql
  UPDATE EMP SET ENAME = 'Thomas' WHERE ENO = 21; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key references are present for the record
 After line 15 in file ddl/nist/cdr019.sql
  UPDATE EMP SET DNAME = 'Agriculture' WHERE  ENO = 21; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_12" on table "EMP"
+-Foreign key reference target does not exist
 After line 18 in file ddl/nist/cdr019.sql
  UPDATE EMP SET DNAME = 'Education' WHERE  ENO = 21;
  SELECT COUNT(*) FROM EMP WHERE DNO = 12 AND DNAME = 'Education' AND ENO = 21 AND ENAME = 'Tom';
@@ -308,10 +316,12 @@ INPUT ddl/input/sun-tab3-refresh.sql;
  DELETE FROM STAFF_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_18" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 3 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM PROJ_P;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_19" on table "WORKS_P"
+-Foreign key references are present for the record
 After line 4 in file ddl/input/sun-tab3-refresh.sql
  DELETE FROM ACR_SCH_P;
  INSERT INTO DEPT VALUES (12,'Computer','Charles');
@@ -399,6 +409,7 @@ After line 40 in file ddl/input/sun-tab3-refresh.sql
  UPDATE EMP SET ENAME = 'Thomas' WHERE ENO = 21;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_13" on table "EXPERIENCE"
+-Foreign key references are present for the record
 After line 21 in file ddl/nist/cdr019.sql
  INSERT INTO EMP VALUES (30,'Thomas','Languages & Operating System', 12,'Computer',040523); 
  UPDATE EXPERIENCE SET EXP_NAME = 'Thomas' WHERE EXP_NAME = 'Tom' AND BTH_DATE = 040523; 

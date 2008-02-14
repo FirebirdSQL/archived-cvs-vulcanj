@@ -27,6 +27,7 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
  INSERT INTO REFRESH VALUES ('cabbage');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_7" on table "REFRESH"
+-Foreign key reference target does not exist
 After line 15 in file ddl/nist/cdr028.sql
 -- PASS:0486 Consider BOTH current INSERT AND previous SELECT COUNT?
 -- PASS:0486 ( If ERROR, COUNT not selected ?

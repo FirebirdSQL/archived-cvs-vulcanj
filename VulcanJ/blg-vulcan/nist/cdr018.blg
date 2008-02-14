@@ -163,10 +163,12 @@ INPUT ddl/input/sun-tab2-refresh.sql;
  INSERT INTO SIZ3_F VALUES ('  F','  D',3,'  E',4,'  F','  G',5,6,7,'TTT');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
+-Foreign key reference target does not exist
 After line 2 in file ddl/nist/cdr018.sql
  INSERT INTO SIZ3_F VALUES ('  D','  E',4,'  F',5,'  G','  H',6,7,100,'TTT');
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_80" on table "SIZ3_F"
+-Foreign key reference target does not exist
 After line 6 in file ddl/nist/cdr018.sql
  SELECT COUNT(*) FROM SIZ3_F;
 
@@ -311,6 +313,7 @@ INPUT ddl/input/sun-tab2-refresh.sql;
  DELETE FROM SIZ3_P1 WHERE F1 = '  A';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
+-Foreign key references are present for the record
 After line 8 in file ddl/nist/cdr018.sql
  SELECT F1 FROM SIZ3_P1 WHERE F1 = '  A';
 
@@ -321,10 +324,12 @@ F1
  UPDATE SIZ3_P1 SET F1 = '  Z' WHERE F1 = '  A'; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
+-Foreign key references are present for the record
 After line 12 in file ddl/nist/cdr018.sql
  UPDATE SIZ3_P10 SET F1 = 100 WHERE F1 = 8; 
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_80" on table "SIZ3_F"
+-Foreign key references are present for the record
 After line 13 in file ddl/nist/cdr018.sql
  SELECT COUNT(*) FROM SIZ3_P1 WHERE F1 = '  A';
 
@@ -351,6 +356,7 @@ After line 16 in file ddl/nist/cdr018.sql
  UPDATE SIZ3_F SET P1 = '  Z' WHERE P1 = '  A';
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_71" on table "SIZ3_F"
+-Foreign key reference target does not exist
 After line 18 in file ddl/nist/cdr018.sql
  SELECT COUNT(*) FROM SIZ3_F WHERE P1 = '  A';
 

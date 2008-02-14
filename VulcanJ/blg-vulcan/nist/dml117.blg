@@ -147,6 +147,7 @@ COMMIT;
  DELETE FROM ALL_USER_IDS;
 Statement failed, SQLCODE = -530
 violation of FOREIGN KEY constraint "INTEG_30" on table "AUDIT_RECORDS"
+-Foreign key references are present for the record
 After line 61 in file ddl/nist/dml117.sql
 	-- PASS:0645 If RI ERROR, children exist, 0 rows deleted?
 
