@@ -3,11 +3,10 @@ SET NAMES ASCII;
 CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 
  CREATE TABLE STAFF11 (EMPNUM CHAR(3) NOT NULL PRIMARY KEY, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), CHECK (GRADE NOT IN (5,22) AND EMPNAME NOT LIKE 'T%'));
- INSERT INTO STAFF11VALUES('E1','Thomas',0,'Deale');
-Statement failed, SQLCODE = -104
-SQL error code = -104
-INSERT INTO STAFF11VALUES('E1','Thomas',0,'Deale')
-                          ^ unknown token
+ INSERT INTO STAFF11 VALUES('E1','Thomas',0,'Deale');
+Statement failed, SQLCODE = -297
+Operation violates CHECK constraint INTEG_3 on view or table STAFF11
+-At trigger 'CHECK_1'
 After line 4 in file ddl/nist/cdr004.sql
  INSERT INTO STAFF11 VALUES('E2','Tom',22,'Newyork');
 Statement failed, SQLCODE = -297

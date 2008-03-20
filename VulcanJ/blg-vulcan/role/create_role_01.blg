@@ -11,7 +11,7 @@ SELECT * FROM RDB$ROLES;
 
 RDB$ROLE_NAME                   RDB$OWNER_NAME                    RDB$DESCRIPTION RDB$SYSTEM_FLAG 
 =============================== =============================== ================= =============== 
-TEST                            SYSDBA                                     <null>          <null> 
+TEST                            SYSDBA                                     <null>               0 
 
 
 DROP DATABASE;
