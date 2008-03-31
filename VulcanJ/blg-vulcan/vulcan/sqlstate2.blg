@@ -61,7 +61,7 @@ drop table t;
 Statement failed, SQLCODE = -607, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--TABLE T
+-COLUMN I
 -there are 1 dependencies
 After line 35 in file ddl/vulcan/sqlstate2.sql
 
