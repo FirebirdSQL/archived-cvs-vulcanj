@@ -14,17 +14,17 @@ insert into t0(a) values('123456');
 insert into t0(a) values('aBcDeF');
 select 'Passed 1 - Insert' from t0 where upper_a = upper(a) having count(*) = 4;
 
-                  
-================= 
-Passed 1 - Insert 
+                                                    
+=================================================== 
+Passed 1 - Insert                                   
 
 
 update t0 set a = 'xyz' where a = 'abc';
 select 'Passed 1 - Update' from t0 where upper_a = upper(a) having count(*) = 4;
 
-                  
-================= 
-Passed 1 - Update 
+                                                    
+=================================================== 
+Passed 1 - Update                                   
 
 
 /*-----------------------------------*/
@@ -40,17 +40,17 @@ insert into t5(a) values('123456');
 insert into t5(a) values('aBcDeF');
 select 'Passed 2 - Insert' from t5 where upper_const = a || upper('upper()') having count(*) = 4;
 
-                  
-================= 
-Passed 2 - Insert 
+                                                    
+=================================================== 
+Passed 2 - Insert                                   
 
 
 update t5 set a = 'xyz' where a = 'abcdef';
 select 'Passed 2 - Update' from t5 where upper_const = a || upper('upper()') having count(*) = 4;
 
-                  
-================= 
-Passed 2 - Update 
+                                                    
+=================================================== 
+Passed 2 - Update                                   
 
 
 drop database;

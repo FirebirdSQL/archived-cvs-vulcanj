@@ -260,9 +260,9 @@ This is a compound character literal, in the third table row.
      ||' and this is the third part.'
               FROM   ECCO;
 
-CONCATENATION                                                    CONCATENATION                                                                                               
-================================================================ =============================================================================== 
-First fragment of a compound character literal, and second part. This is the first fragment of a compound character literal, this is the second, and this is the third part. 
+CONCATENATION                                                                                                                                                                                    CONCATENATION                                                                                                                                                                                                                                                                                                                     
+=============================================================================== =============================================================================== 
+First fragment of a compound character literal, and second part.                                                                                                                                 This is the first fragment of a compound character literal, this is the second, and this is the third part.                                                                                                                                                                                                                       
 
 -- PASS:7006 If 1st value = 'First fragment of a compound character 
 --                           literal, and second part.'?

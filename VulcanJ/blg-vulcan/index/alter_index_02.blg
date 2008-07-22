@@ -9,9 +9,9 @@ ALTER INDEX i ACTIVE;
 COMMIT;
 SELECT RDB$INDEX_NAME, RDB$INDEX_INACTIVE FROM RDB$INDICES WHERE RDB$INDEX_NAME='I';
 
-RDB$INDEX_NAME                  RDB$INDEX_INACTIVE 
-=============================== ================== 
-I                                                0 
+RDB$INDEX_NAME                                                                                RDB$INDEX_INACTIVE 
+=============================================================================== ================== 
+I                                                                                                              0 
 
 
 DROP DATABASE;

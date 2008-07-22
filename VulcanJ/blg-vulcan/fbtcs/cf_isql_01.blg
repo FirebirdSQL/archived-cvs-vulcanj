@@ -16,17 +16,17 @@ insert into t0(i) values(1);
 insert into t0(i) values(2);
 select 'Passed 1 - Insert' from t0 where j = i having count(*) = 2;
 
-                  
-================= 
-Passed 1 - Insert 
+                                                    
+=================================================== 
+Passed 1 - Insert                                   
 
 
 update t0 set i = 99 where i = 2;
 select 'Passed 1 - Update' from t0 where j = i having count(*) = 2;
 
-                  
-================= 
-Passed 1 - Update 
+                                                    
+=================================================== 
+Passed 1 - Update                                   
 
 
 /*-------------------*/
@@ -40,17 +40,17 @@ insert into t5(i) values(1);
 insert into t5(i) values(2);
 select 'Passed 2 - Insert' from t5 where j = i+i having count(*) = 2;
 
-                  
-================= 
-Passed 2 - Insert 
+                                                    
+=================================================== 
+Passed 2 - Insert                                   
 
 
 update t5 set i = 99 where i = 2;
 select 'Passed 2 - Update' from t5 where j = i+i having count(*) = 2;
 
-                  
-================= 
-Passed 2 - Update 
+                                                    
+=================================================== 
+Passed 2 - Update                                   
 
 
 /*-------------------*/
@@ -64,17 +64,17 @@ insert into t10(i) values(1);
 insert into t10(i) values(2);
 select 'Passed 3 - Insert' from t10 where j = i*i having count(*) = 2;
 
-                  
-================= 
-Passed 3 - Insert 
+                                                    
+=================================================== 
+Passed 3 - Insert                                   
 
 
 update t10 set i = 99 where i = 2;
 select 'Paseed 3 - Update' from t10 where j = i*i having count(*) = 2;
 
-                  
-================= 
-Paseed 3 - Update 
+                                                    
+=================================================== 
+Paseed 3 - Update                                   
 
 
 /*-------------------*/
@@ -88,17 +88,17 @@ insert into t15(i) values(1);
 insert into t15(i) values(2);
 select 'Passed 4 - Insert' from t15 where j = i/i having count(*) = 2;
 
-                  
-================= 
-Passed 4 - Insert 
+                                                    
+=================================================== 
+Passed 4 - Insert                                   
 
 
 update t15 set i = 99 where i = 2;
 select 'Passed 4 - Update' from t15 where j = i/i having count(*) = 2;
 
-                  
-================= 
-Passed 4 - Update 
+                                                    
+=================================================== 
+Passed 4 - Update                                   
 
 
 /*-------------------*/
@@ -112,17 +112,17 @@ insert into t20(i) values(1);
 insert into t20(i) values(2);
 select 'Passed 5 - Insert' from t20 where j = i+2 having count(*) = 2;
 
-                  
-================= 
-Passed 5 - Insert 
+                                                    
+=================================================== 
+Passed 5 - Insert                                   
 
 
 update t20 set i = 99 where i = 2;
 select 'Passed 5 - Update' from t20 where j = i+2 having count(*) = 2;
 
-                  
-================= 
-Passed 5 - Update 
+                                                    
+=================================================== 
+Passed 5 - Update                                   
 
 
 /*-------------------*/
@@ -136,17 +136,17 @@ insert into t25(i) values(1);
 insert into t25(i) values(2);
 select 'Passed 6 - Insert' from t25 where j = i*2 having count(*) = 2;
 
-                  
-================= 
-Passed 6 - Insert 
+                                                    
+=================================================== 
+Passed 6 - Insert                                   
 
 
 update t25 set i = 99 where i = 2;
 select 'Passed 6 - Update' from t25 where j = i*2 having count(*) = 2;
 
-                  
-================= 
-Passed 6 - Update 
+                                                    
+=================================================== 
+Passed 6 - Update                                   
 
 
 /*-------------------*/
@@ -160,17 +160,17 @@ insert into t30(i) values(1);
 insert into t30(i) values(2);
 select 'Passed 7 - Insert' from t30 where j = i/2 having count(*) = 2;
 
-                  
-================= 
-Passed 7 - Insert 
+                                                    
+=================================================== 
+Passed 7 - Insert                                   
 
 
 update t30 set i = 99 where i = 2;
 select 'Passed 7 - Update' from t30 where j = i/2 having count(*) = 2;
 
-                  
-================= 
-Passed 7 - Update 
+                                                    
+=================================================== 
+Passed 7 - Update                                   
 
 
 /*------------------*/
@@ -184,17 +184,17 @@ insert into t35(i) values(1);
 insert into t35(i) values(2);
 select 'Passed 8 - Insert' from t35 where j = -i having count(*) = 2;
 
-                  
-================= 
-Passed 8 - Insert 
+                                                    
+=================================================== 
+Passed 8 - Insert                                   
 
 
 update t35 set i = 99 where i = 2;
 select 'Passed 8 - Update' from t35 where j = -i having count(*) = 2;
 
-                  
-================= 
-Passed 8 - Update 
+                                                    
+=================================================== 
+Passed 8 - Update                                   
 
 
 /*------------------*/
@@ -209,17 +209,17 @@ insert into t40(i) values(1);
 insert into t40(i) values(2);
 select 'Passed 9 - Insert' from t40 where j = +i having count(*) = 2;
 
-                  
-================= 
-Passed 9 - Insert 
+                                                    
+=================================================== 
+Passed 9 - Insert                                   
 
 
 update t40 set i = 99 where i = 2;
 select 'Passed 9 - Update' from t40 where j = +i having count(*) = 2;
 
-                  
-================= 
-Passed 9 - Update 
+                                                    
+=================================================== 
+Passed 9 - Update                                   
 
 
 /*---------------------------*/
@@ -233,17 +233,17 @@ insert into t43(i) values(3);
 insert into t43(i) values(4);
 select 'Passed 9.1 - Insert' from t43 where j = i having count(*) = 2;
 
-                    
-=================== 
-Passed 9.1 - Insert 
+                                                          
+========================================================= 
+Passed 9.1 - Insert                                       
 
 
 update t43 set i = 99 where i = 4;
 select 'Passed 9.1 - Update' from t43 where j = i having count(*) = 2;
 
-                    
-=================== 
-Passed 9.1 - Update 
+                                                          
+========================================================= 
+Passed 9.1 - Update                                       
 
 
 /*-----------------*/
@@ -257,17 +257,17 @@ insert into t45(i) values(1);
 insert into t45(i) values(2);
 select 'Passed 10 - Insert' from t45 where j = 0 having count(*) = 2;
 
-                   
-================== 
-Passed 10 - Insert 
+                                                       
+====================================================== 
+Passed 10 - Insert                                     
 
 
 update t45 set i = 99 where i = 2;
 select 'Passed 10 - Update' from t45 where j = 0 having count(*) = 2;
 
-                   
-================== 
-Passed 10 - Update 
+                                                       
+====================================================== 
+Passed 10 - Update                                     
 
 
 /*---------------------------*/
@@ -281,17 +281,17 @@ insert into t50(i) values(1);
 insert into t50(i) values(2);
 select 'Passed 11 - Insert' from t50 where j = (4*2-4+4)/2 having count(*) = 2;
 
-                   
-================== 
-Passed 11 - Insert 
+                                                       
+====================================================== 
+Passed 11 - Insert                                     
 
 
 update t50 set i = 99 where i = 2;
 select 'Passed 11 - Update' from t50 where j = (4*2-4+4)/2 having count(*) = 2;
 
-                   
-================== 
-Passed 11 - Update 
+                                                       
+====================================================== 
+Passed 11 - Update                                     
 
 
 drop database;

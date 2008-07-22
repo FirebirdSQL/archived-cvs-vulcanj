@@ -76,17 +76,17 @@ COMMIT;
 
  select rdb$relation_name from rdb$relations where rdb$relation_name not like 'RDB$%' and rdb$relation_name not like 'SAS$%';
 
-RDB$RELATION_NAME               
-=============================== 
-STAFF                           
-STAFF1                          
-STAFF3                          
-STAFF4                          
-PROJ                            
-PROJ1                           
-WORKS                           
-VTABLE                          
-UPUNIQ                          
+RDB$RELATION_NAME                                                                             
+=============================================================================== 
+STAFF                                                                                         
+STAFF1                                                                                        
+STAFF3                                                                                        
+STAFF4                                                                                        
+PROJ                                                                                          
+PROJ1                                                                                         
+WORKS                                                                                         
+VTABLE                                                                                        
+UPUNIQ                                                                                        
 
 -- PASS:7030 If 5 rows are selected in following order?
 --                     table_name

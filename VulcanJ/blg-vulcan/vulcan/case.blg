@@ -33,11 +33,11 @@ select i,
    end
    from t1;
 
-           I CASE    
-============ ======= 
-           1 one     
-           2 not one 
-           3 not one 
+           I CASE                  
+============ ===================== 
+           1 one                   
+           2 not one               
+           3 not one               
 
 
 

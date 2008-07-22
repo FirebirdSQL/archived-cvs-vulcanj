@@ -7,9 +7,9 @@ ALTER DOMAIN test SET DEFAULT 'test string';
 COMMIT;
 SELECT RDB$FIELD_NAME FROM rdb$fields WHERE RDB$FIELD_NAME='TEST';
 
-RDB$FIELD_NAME                  
-=============================== 
-TEST                            
+RDB$FIELD_NAME                                                                                
+=============================================================================== 
+TEST                                                                                          
 
 
 DROP DATABASE;

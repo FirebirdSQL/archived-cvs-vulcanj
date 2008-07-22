@@ -83,12 +83,12 @@ COMMIT;
 -- PASS:0599 If view is created?
  SELECT * FROM ABOVE_AVERAGE ORDER BY COLUMN_1;
 
-COLUMN_1     COLUMN_2 COLUMN_3        
-======== ============ =============== 
-MAX             30000 Tampa           
-P2              30000 Vienna          
-P3              30000 Tampa           
-P6              50000 Deale           
+COLUMN_1      COLUMN_2 COLUMN_3        
+========= ============ =============== 
+MAX              30000 Tampa           
+P2               30000 Vienna          
+P3               30000 Tampa           
+P6               50000 Deale           
 
 -- PASS:0599 If 4 rows selected with ordered rows and column values: ?
 -- PASS:0599 MAX 30000 Tampa ?

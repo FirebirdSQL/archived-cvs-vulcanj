@@ -16,17 +16,17 @@ insert into t0(s) values('computed');
 insert into t0(s) values('(s)');
 select 'Passed 1 - Insert' from t0 where sc = s having count(*) = 2;
 
-                  
-================= 
-Passed 1 - Insert 
+                                                    
+=================================================== 
+Passed 1 - Insert                                   
 
 
 update t0 set s = 'by' where s = 'computed';
 select 'Passed 1 - Update' from t0 where sc = s having count(*) = 2;
 
-                  
-================= 
-Passed 1 - Update 
+                                                    
+=================================================== 
+Passed 1 - Update                                   
 
 
 /*--------------------*/
@@ -40,17 +40,17 @@ insert into t5(s) values('computed');
 insert into t5(s) values('(s)');
 select 'Passed 2 - Insert' from t5 where sc = s||s having count(*) = 2;
 
-                  
-================= 
-Passed 2 - Insert 
+                                                    
+=================================================== 
+Passed 2 - Insert                                   
 
 
 update t5 set s = 'by' where s = 'computed';
 select 'Passed 2 - Update' from t5 where sc = s||s having count(*) = 2;
 
-                  
-================= 
-Passed 2 - Update 
+                                                    
+=================================================== 
+Passed 2 - Update                                   
 
 
 /*-------------------*/
@@ -80,17 +80,17 @@ insert into t15(s) values('computed');
 insert into t15(s) values('(s||'' test'')');
 select 'Passed 4 - Insert' from t15 where sc = s||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 4 - Insert 
+                                                    
+=================================================== 
+Passed 4 - Insert                                   
 
 
 update t15 set s = 'by' where s = 'computed';
 select 'Passed 4 - Update' from t15 where sc = s||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 4 - Update 
+                                                    
+=================================================== 
+Passed 4 - Update                                   
 
 
 /*--------------------------*/
@@ -104,17 +104,17 @@ insert into t20(s) values('computed');
 insert into t20(s) values('(''test ''||s)');
 select 'Passed 5 - Insert' from t20 where sc = 'test '||s having count(*) = 2;
 
-                  
-================= 
-Passed 5 - Insert 
+                                                    
+=================================================== 
+Passed 5 - Insert                                   
 
 
 update t20 set s = 'by' where s = 'computed';
 select 'Passed 5 - Update' from t20 where sc = 'test '||s having count(*) = 2;
 
-                  
-================= 
-Passed 5 - Update 
+                                                    
+=================================================== 
+Passed 5 - Update                                   
 
 
 /*-----------------------------------*/
@@ -128,17 +128,17 @@ insert into t25(s) values('computed');
 insert into t25(s) values('(''test ''||s||'' test'')');
 select 'Passed 6 - Insert' from t25 where sc = 'test '||s||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 6 - Insert 
+                                                    
+=================================================== 
+Passed 6 - Insert                                   
 
 
 update t25 set s = 'by' where s = 'computed';
 select 'Passed 6 - Update' from t25 where sc = 'test '||s||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 6 - Update 
+                                                    
+=================================================== 
+Passed 6 - Update                                   
 
 
 /*----------------------*/
@@ -152,17 +152,17 @@ insert into t30(s) values('computed');
 insert into t30(s) values('(''test'')');
 select 'Passed 7 - Insert' from t30 where sc = 'test' having count(*) = 2;
 
-                  
-================= 
-Passed 7 - Insert 
+                                                    
+=================================================== 
+Passed 7 - Insert                                   
 
 
 update t30 set s = 'by' where s = 'computed';
 select 'Passed 7 - Update' from t30 where sc = 'test' having count(*) = 2;
 
-                  
-================= 
-Passed 7 - Update 
+                                                    
+=================================================== 
+Passed 7 - Update                                   
 
 
 /*--------------------------------*/
@@ -176,17 +176,17 @@ insert into t35(s) values('computed');
 insert into t35(s) values('(''test ''||'' test'')');
 select 'Passed 8 - Insert' from t35 where sc = 'test '||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 8 - Insert 
+                                                    
+=================================================== 
+Passed 8 - Insert                                   
 
 
 update t35 set s = 'by' where s = 'computed';
 select 'Passed 8 - Update' from t35 where sc = 'test '||' test' having count(*) = 2;
 
-                  
-================= 
-Passed 8 - Update 
+                                                    
+=================================================== 
+Passed 8 - Update                                   
 
 
 drop database;

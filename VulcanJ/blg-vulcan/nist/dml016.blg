@@ -70,22 +70,22 @@ SYSDBA                          PAYR
 -- TEST:0065 SELECT CHAR literal and term with numeric literal!
  SELECT 'USER',PNAME FROM PROJ;
 
-       PNAME                
-====== ==================== 
-USER   MXSS                 
-USER   CALM                 
-USER   SDP                  
-USER   SDP                  
-USER   IRM                  
-USER   PAYR                 
+             PNAME                
+============ ==================== 
+USER         MXSS                 
+USER         CALM                 
+USER         SDP                  
+USER         SDP                  
+USER         IRM                  
+USER         PAYR                 
 
 -- PASS:0065 If 6 rows are selected and first column is value 'USER'?
 
  SELECT PNUM,'BUDGET IN GRAMS IS ',BUDGET * 5 FROM PROJ WHERE PNUM = 'P1';
 
-PNUM                                             
-====== =================== ===================== 
-P1     BUDGET IN GRAMS IS                  50000 
+PNUM                                                                                   
+====== ========================================================= ===================== 
+P1     BUDGET IN GRAMS IS                                                        50000 
 
 -- PASS:0065 If values are 'P1', 'BUDGET IN GRAMS IS ', 50000?
 

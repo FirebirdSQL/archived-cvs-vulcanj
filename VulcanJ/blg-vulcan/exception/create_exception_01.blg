@@ -6,9 +6,9 @@ COMMIT;
 
 SELECT RDB$EXCEPTION_NAME, RDB$EXCEPTION_NUMBER, cast(RDB$MESSAGE as varchar(15)) FROM RDB$EXCEPTIONS;
 
-RDB$EXCEPTION_NAME              RDB$EXCEPTION_NUMBER CAST            
-=============================== ==================== =============== 
-TEST                                               1 message to show 
+RDB$EXCEPTION_NAME                                                                            RDB$EXCEPTION_NUMBER CAST            
+=============================================================================== ==================== =============== 
+TEST                                                                                                             1 message to show 
 
 
 DROP DATABASE;

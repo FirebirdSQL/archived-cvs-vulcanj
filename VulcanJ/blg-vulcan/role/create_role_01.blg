@@ -9,9 +9,9 @@ CREATE ROLE test;
 COMMIT;
 SELECT * FROM RDB$ROLES;
 
-RDB$ROLE_NAME                   RDB$OWNER_NAME                    RDB$DESCRIPTION RDB$SYSTEM_FLAG 
-=============================== =============================== ================= =============== 
-TEST                            SYSDBA                                     <null>               0 
+RDB$ROLE_NAME                                                                                 RDB$OWNER_NAME                                                                                  RDB$DESCRIPTION RDB$SYSTEM_FLAG 
+=============================================================================== =============================================================================== ================= =============== 
+TEST                                                                                          SYSDBA                                                                                                   <null>               0 
 
 
 DROP DATABASE;
