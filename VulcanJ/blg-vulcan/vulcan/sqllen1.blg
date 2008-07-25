@@ -12,13 +12,13 @@ select _UNICODE_FSS'abc' || c from david;
 INPUT  SQLDA version: 1 sqln: 10 sqld: 0
 
 OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
-01: sqltype: 449 VARYING   Nullable sqlscale: 0 sqlsubtype: 3 sqllen: 19
+01: sqltype: 449 VARYING   Nullable sqlscale: 0 sqlsubtype: 3 sqllen: 39
   :  name: (13)CONCATENATION  alias: (13)CONCATENATION
   : table: (0)  owner: (0)
 
-CONCATENATION       
-=================== 
-abctest             
+CONCATENATION                           
+======================================= 
+abctest                                 
 
 
 drop database;

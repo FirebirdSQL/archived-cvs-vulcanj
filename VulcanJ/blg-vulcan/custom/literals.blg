@@ -1,0 +1,27 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- DEFCT s0401304
+-- FIREBIRD SHOULD DEFAULT TEXT LITERALS TO UTF8
+
+set names UNICODE_FSS;
+
+create database 'test.fdb' default character set iso8859_1;
+
+set sqlda_display on;
+
+-- sqlsubtype should now be 3, unicode_fss
+select 'xyz' from rdb$database;
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+
+OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
+01: sqltype: 452 TEXT	  		 sqlscale: 0 sqlsubtype: 3 sqllen: 9
+  :  name: (0)  alias: (0)
+  : table: (0)  owner: (0)
+
+          
+========= 
+xyz       
+
+
+drop database;
+quit;

@@ -1,0 +1,98 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- Defect ID: S0289679
+-- Defect: FIREBIRD NEED WAY TO RETURN BOOKMARK/ROWID/DB_KEY FOR NEWLY INSERTED ROWS
+--
+
+set names ascii;
+create database 'test.fdb';
+create table silly (age integer, name char(10));
+SET TERM ^;
+--;
+-- Insert and return an integer;
+--;
+CREATE PROCEDURE insert_age
+   RETURNS(age_value integer)
+AS
+BEGIN
+   insert into silly values(1, 'Andy') returning age into :age_value;
+END ^
+SET TERM ;^
+execute procedure insert_age;
+
+   AGE_VALUE 
+============ 
+           1 
+
+insert into silly values(2, 'Barney') returning age;
+
+         AGE 
+============ 
+           2 
+
+--;
+-- Insert and return a character;
+--;
+SET TERM ^;
+CREATE PROCEDURE insert_name
+   RETURNS(name_value char(10))
+AS
+BEGIN
+   insert into silly values(3, 'AuntBee') returning name into :name_value;
+END ^
+SET TERM ;^
+execute procedure insert_name;
+
+NAME_VALUE 
+========== 
+AuntBee    
+
+insert into silly values(4, 'Opie') returning name;
+
+NAME       
+========== 
+Opie       
+
+select * from silly;
+
+         AGE NAME       
+============ ========== 
+
+           1 Andy       
+           2 Barney     
+           3 AuntBee    
+           4 Opie       
+
+SET TERM ^;
+CREATE PROCEDURE insert_dbkey
+   RETURNS(db_key char(8) character set ASCII)
+AS
+BEGIN
+   insert into silly values(5, 'Helen') returning rdb$db_key into :db_key;
+END ^
+SET TERM ;^
+execute procedure insert_dbkey;
+
+DB_KEY           
+================ 
+0000008100000005 
+
+insert into silly values(6, 'Floyd') returning rdb$db_key;
+
+DB_KEY           
+================ 
+0000008100000006 
+
+select age, name, rdb$db_key from silly;
+
+         AGE NAME       DB_KEY           
+============ ========== ================ 
+
+           1 Andy       0000008100000001 
+           2 Barney     0000008100000002 
+           3 AuntBee    0000008100000003 
+           4 Opie       0000008100000004 
+           5 Helen      0000008100000005 
+           6 Floyd      0000008100000006 
+
+drop database;

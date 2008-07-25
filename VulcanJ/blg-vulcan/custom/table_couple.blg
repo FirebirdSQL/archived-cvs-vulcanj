@@ -1,0 +1,382 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- tests for table coupling feature
+--
+-- usage notes:
+--  1) to add a coupling password, create a new database with the database file
+--     name set to 'file.fdb;sasopts=newdbpassword="newpassword"' 
+--  2) for multiple options, you can use parentheses and property/value pairs
+--     example: 'test.sdb;sasopts=(property="value",property2="value2")'
+--  3) if no coupling password is initially given, table coupling is not present
+
+create database 'test.sdb;sasopts=new_dbpassword="vulcanrules"' default character set iso8859_1;
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+-- it is normal for the show database command to have the "sasopts=..." string;
+-- appended.;
+
+show system;
+Tables:
+       RDB$BACKUP_HISTORY                     RDB$CHARACTER_SETS             
+       RDB$CHECK_CONSTRAINTS                  RDB$COLLATIONS                 
+       RDB$DATABASE                           RDB$DEPENDENCIES               
+       RDB$EXCEPTIONS                         RDB$FIELDS                     
+       RDB$FIELD_DIMENSIONS                   RDB$FILES                      
+       RDB$FILTERS                            RDB$FORMATS                    
+       RDB$FUNCTIONS                          RDB$FUNCTION_ARGUMENTS         
+       RDB$GENERATORS                         RDB$INDEX_SEGMENTS             
+       RDB$INDICES                            RDB$LOG_FILES                  
+       RDB$PAGES                              RDB$PROCEDURES                 
+       RDB$PROCEDURE_PARAMETERS               RDB$REF_CONSTRAINTS            
+       RDB$RELATIONS                          RDB$RELATION_CONSTRAINTS       
+       RDB$RELATION_FIELDS                    RDB$ROLES                      
+       RDB$SECURITY_CLASSES                   RDB$TRANSACTIONS               
+       RDB$TRIGGERS                           RDB$TRIGGER_MESSAGES           
+       RDB$TYPES                              RDB$USER_PRIVILEGES            
+       RDB$VIEW_RELATIONS                     SAS$METADATA                   
+
+Functions:
+show table sas$metadata;
+SAS$METADATA_ID                 CHAR(32) CHARACTER SET ASCII Nullable 
+SAS$METADATA_VALUE              CHAR(256) CHARACTER SET ASCII Nullable 
+
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+rollback work;
+drop database;
+-- now try with options specified in parentheses;
+create database 'test.sdb;sasopts=(new_dbpassword="vulcanrules")' default character set iso8859_1; 
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+select * from rdb$database;
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS                                                                            RDB$CHARACTER_SET_NAME                                                                        
+================= =============== =============================================================================== =============================================================================== 
+           <null>             129 <null>                                                                                        ISO8859_1                                                                                     
+
+-- should have 1 row;
+
+select * from sas$metadata;
+
+SAS$METADATA_ID                  SAS$METADATA_VALUE                                                                                                                                                                                                                                               
+================================ =============================================================================== 
+SAS$TRAND_VERSION                9.2                                                                                                                                                                                                                                                              
+SAS$COUPLING_PW                  msFJaHvmFTsHWvsnfWnfmfnTsbWGdJ                                                                                                                                                                                                                                   
+
+-- should have 1 row;
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+
+connect 'test.sdb';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 31 in file ddl/custom/table_couple.sql
+-- should fail, no coupling password supplied;
+
+connect 'test.sdb;sasopts=dbpassword="imaloser"';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 34 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=(dbpassword="imaloser",new_dbpassword="bigloser")';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 37 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"';
+-- should pass;
+
+connect 'test.sdb;sasopts=(dbpassword="vulcanrules",new_dbpassword="fred")'; 
+Rolling back work.
+-- connect and change password, should work.;
+
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 46 in file ddl/custom/table_couple.sql
+-- should now fail, that password has changed;
+
+connect 'test.sdb;sasopts=dbpassword="fred"';
+-- should pass with new password;
+
+drop database ;
+
+
+
+
+---;
+--- now try with SCKEY alias;
+---;
+create database 'test.sdb;sasopts=new_sckey="vulcanrules"' default character set iso8859_1;
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+-- it is normal for the show database command to have the "sasopts=..." string;
+-- appended.;
+
+show system;
+Tables:
+       RDB$BACKUP_HISTORY                     RDB$CHARACTER_SETS             
+       RDB$CHECK_CONSTRAINTS                  RDB$COLLATIONS                 
+       RDB$DATABASE                           RDB$DEPENDENCIES               
+       RDB$EXCEPTIONS                         RDB$FIELDS                     
+       RDB$FIELD_DIMENSIONS                   RDB$FILES                      
+       RDB$FILTERS                            RDB$FORMATS                    
+       RDB$FUNCTIONS                          RDB$FUNCTION_ARGUMENTS         
+       RDB$GENERATORS                         RDB$INDEX_SEGMENTS             
+       RDB$INDICES                            RDB$LOG_FILES                  
+       RDB$PAGES                              RDB$PROCEDURES                 
+       RDB$PROCEDURE_PARAMETERS               RDB$REF_CONSTRAINTS            
+       RDB$RELATIONS                          RDB$RELATION_CONSTRAINTS       
+       RDB$RELATION_FIELDS                    RDB$ROLES                      
+       RDB$SECURITY_CLASSES                   RDB$TRANSACTIONS               
+       RDB$TRIGGERS                           RDB$TRIGGER_MESSAGES           
+       RDB$TYPES                              RDB$USER_PRIVILEGES            
+       RDB$VIEW_RELATIONS                     SAS$METADATA                   
+
+Functions:
+show table sas$metadata;
+SAS$METADATA_ID                 CHAR(32) CHARACTER SET ASCII Nullable 
+SAS$METADATA_VALUE              CHAR(256) CHARACTER SET ASCII Nullable 
+
+connect 'test.sdb;sasopts=sckey="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+rollback work;
+drop database;
+-- now try with options specified in parentheses;
+create database 'test.sdb;sasopts=(new_sckey="vulcanrules")'; 
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+select * from rdb$database;
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS                                                                            RDB$CHARACTER_SET_NAME                                                                        
+================= =============== =============================================================================== =============================================================================== 
+           <null>             129 <null>                                                                                        ISO8859_1                                                                                     
+
+-- should have 1 row;
+
+select * from sas$metadata;
+
+SAS$METADATA_ID                  SAS$METADATA_VALUE                                                                                                                                                                                                                                               
+================================ =============================================================================== 
+SAS$TRAND_VERSION                9.2                                                                                                                                                                                                                                                              
+SAS$COUPLING_PW                  msFJaHvmFTsHWvsnfWnfmfnTsbWGdJ                                                                                                                                                                                                                                   
+
+-- should have 1 row;
+connect 'test.sdb;sasopts=sckey="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+
+connect 'test.sdb';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 83 in file ddl/custom/table_couple.sql
+-- should fail, no coupling password supplied;
+
+connect 'test.sdb;sasopts=sckey="imaloser"';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 86 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=(sckey="imaloser",new_sckey="bigloser")';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 89 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=sckey="vulcanrules"';
+-- should pass;
+
+connect 'test.sdb;sasopts=(sckey="vulcanrules",new_sckey="fred")'; 
+Rolling back work.
+-- connect and change password, should work.;
+
+connect 'test.sdb;sasopts=sckey="vulcanrules"';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 98 in file ddl/custom/table_couple.sql
+-- should now fail, that password has changed;
+
+connect 'test.sdb;sasopts=sckey="fred"';
+-- should pass with new password;
+
+drop database ;
+
+
+
+
+---;
+--- now try with PW alias;
+---;
+create database 'test.sdb;sasopts=NEWPW="vulcanrules"' default character set iso8859_1;
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+-- it is normal for the show database command to have the "sasopts=..." string;
+-- appended.;
+
+show system;
+Tables:
+       RDB$BACKUP_HISTORY                     RDB$CHARACTER_SETS             
+       RDB$CHECK_CONSTRAINTS                  RDB$COLLATIONS                 
+       RDB$DATABASE                           RDB$DEPENDENCIES               
+       RDB$EXCEPTIONS                         RDB$FIELDS                     
+       RDB$FIELD_DIMENSIONS                   RDB$FILES                      
+       RDB$FILTERS                            RDB$FORMATS                    
+       RDB$FUNCTIONS                          RDB$FUNCTION_ARGUMENTS         
+       RDB$GENERATORS                         RDB$INDEX_SEGMENTS             
+       RDB$INDICES                            RDB$LOG_FILES                  
+       RDB$PAGES                              RDB$PROCEDURES                 
+       RDB$PROCEDURE_PARAMETERS               RDB$REF_CONSTRAINTS            
+       RDB$RELATIONS                          RDB$RELATION_CONSTRAINTS       
+       RDB$RELATION_FIELDS                    RDB$ROLES                      
+       RDB$SECURITY_CLASSES                   RDB$TRANSACTIONS               
+       RDB$TRIGGERS                           RDB$TRIGGER_MESSAGES           
+       RDB$TYPES                              RDB$USER_PRIVILEGES            
+       RDB$VIEW_RELATIONS                     SAS$METADATA                   
+
+Functions:
+show table sas$metadata;
+SAS$METADATA_ID                 CHAR(32) CHARACTER SET ASCII Nullable 
+SAS$METADATA_VALUE              CHAR(256) CHARACTER SET ASCII Nullable 
+
+connect 'test.sdb;sasopts=PW="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+rollback work;
+drop database;
+-- now try with options specified in parentheses;
+create database 'test.sdb;sasopts=(NEWPW="vulcanrules")'; 
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+select * from rdb$database;
+
+  RDB$DESCRIPTION RDB$RELATION_ID RDB$SECURITY_CLASS                                                                            RDB$CHARACTER_SET_NAME                                                                        
+================= =============== =============================================================================== =============================================================================== 
+           <null>             129 <null>                                                                                        ISO8859_1                                                                                     
+
+-- should have 1 row;
+
+select * from sas$metadata;
+
+SAS$METADATA_ID                  SAS$METADATA_VALUE                                                                                                                                                                                                                                               
+================================ =============================================================================== 
+SAS$TRAND_VERSION                9.2                                                                                                                                                                                                                                                              
+SAS$COUPLING_PW                  msFJaHvmFTsHWvsnfWnfmfnTsbWGdJ                                                                                                                                                                                                                                   
+
+-- should have 1 row;
+connect 'test.sdb;sasopts=PW="vulcanrules"' user 'sysdba' password 'masterkey';
+Rolling back work.
+-- should connect;
+
+connect 'test.sdb';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 135 in file ddl/custom/table_couple.sql
+-- should fail, no coupling password supplied;
+
+connect 'test.sdb;sasopts=PW="imaloser"';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 138 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=(PW="imaloser",NEWPW="bigloser")';
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 141 in file ddl/custom/table_couple.sql
+-- should fail;
+
+connect 'test.sdb;sasopts=PW="vulcanrules"';
+-- should pass;
+
+connect 'test.sdb;sasopts=(PW="vulcanrules",NEWPW="fred")'; 
+Rolling back work.
+-- connect and change password, should work.;
+
+connect 'test.sdb;sasopts=PW="vulcanrules"';
+Rolling back work.
+Statement failed, SQLCODE = -902
+Your user name and password are not defined. Ask your database administrator to set up a Firebird login.
+After line 150 in file ddl/custom/table_couple.sql
+-- should now fail, that password has changed;
+
+connect 'test.sdb;sasopts=PW="fred"';
+-- should pass with new password;
+
+drop database ;

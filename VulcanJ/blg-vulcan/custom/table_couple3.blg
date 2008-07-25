@@ -1,0 +1,98 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- Error conditions for table coupling
+
+create database 'test.sdb;sasopts=new_dbpassword="vulcanrules"' default character set iso8859_1;
+show database;
+Database: test.sdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 155
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 5 
+Transaction - oldest active = 6 
+Transaction - oldest snapshot = 6 
+Transaction - Next = 9 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+-- it is normal for the show database command to have the "sasopts=..." string;
+-- appended.;
+
+show system;
+Tables:
+       RDB$BACKUP_HISTORY                     RDB$CHARACTER_SETS             
+       RDB$CHECK_CONSTRAINTS                  RDB$COLLATIONS                 
+       RDB$DATABASE                           RDB$DEPENDENCIES               
+       RDB$EXCEPTIONS                         RDB$FIELDS                     
+       RDB$FIELD_DIMENSIONS                   RDB$FILES                      
+       RDB$FILTERS                            RDB$FORMATS                    
+       RDB$FUNCTIONS                          RDB$FUNCTION_ARGUMENTS         
+       RDB$GENERATORS                         RDB$INDEX_SEGMENTS             
+       RDB$INDICES                            RDB$LOG_FILES                  
+       RDB$PAGES                              RDB$PROCEDURES                 
+       RDB$PROCEDURE_PARAMETERS               RDB$REF_CONSTRAINTS            
+       RDB$RELATIONS                          RDB$RELATION_CONSTRAINTS       
+       RDB$RELATION_FIELDS                    RDB$ROLES                      
+       RDB$SECURITY_CLASSES                   RDB$TRANSACTIONS               
+       RDB$TRIGGERS                           RDB$TRIGGER_MESSAGES           
+       RDB$TYPES                              RDB$USER_PRIVILEGES            
+       RDB$VIEW_RELATIONS                     SAS$METADATA                   
+
+Functions:
+show table sas$metadata;
+SAS$METADATA_ID                 CHAR(32) CHARACTER SET ASCII Nullable 
+SAS$METADATA_VALUE              CHAR(256) CHARACTER SET ASCII Nullable 
+
+-- next test is invalid parse condition - list of options w/o parens
+connect 'test.sdb;sasopts=dbpassword="vulcanrules",newpassword="fred"' user 'sysdba' password 'masterkey';
+Rolling back work.
+Statement failed, SQLCODE = -904
+unavailable database
+-Unable to parse SASOpts
+After line 10 in file ddl/custom/table_couple3.sql
+
+-- should be able to connect - password wasn't changed
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"' user 'sysdba' password 'masterkey';
+
+-- another invalid parse condition - using semicolon as separator
+connect 'test.sdb;sasopts=(dbpassword="vulcanrules";newpassword="fred")' user 'sysdba' password 'masterkey';
+Rolling back work.
+Statement failed, SQLCODE = -904
+unavailable database
+-Unable to parse SASOpts
+After line 16 in file ddl/custom/table_couple3.sql
+
+-- should be able to connect - password wasn't changed
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"' user 'sysdba' password 'masterkey';
+
+-- unknown option test case
+connect 'test.sdb;sasopts=(dbpassword="vulcanrules",ABC="fred")' user 'sysdba' password 'masterkey';
+Rolling back work.
+Statement failed, SQLCODE = -904
+unavailable database
+-Unknown SASOPT
+-ABC
+After line 22 in file ddl/custom/table_couple3.sql
+
+-- goofy test case option outside of list
+connect 'test.sdb;sasopts=(dbpassword="vulcanrules",newpassword="fred");abc=bad' user 'sysdba' password 'masterkey';
+Statement failed, SQLCODE = -904
+unavailable database
+-Unknown SASOPT
+-NEWPASSWORD
+After line 25 in file ddl/custom/table_couple3.sql
+
+-- now connect and drop. If drop fails, something went wrong
+connect 'test.sdb;sasopts=dbpassword="vulcanrules"' user 'sysdba' password 'masterkey';
+drop database;
+
+
+-- now try some bad create calls
+-- invalid parse - list of options w/o parens
+create database 'test.sdb;sasopts=dbpassword="vulcanrules",newpassword="fred"' default character set iso8859_1;
+Statement failed, SQLCODE = -904
+unavailable database
+-Unable to parse SASOpts
+After line 32 in file ddl/custom/table_couple3.sql
+
