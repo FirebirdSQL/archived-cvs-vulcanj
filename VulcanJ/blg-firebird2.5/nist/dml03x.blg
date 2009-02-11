@@ -1,0 +1,737 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
+COMMIT WORK;
+
+
+-- TEST:0135 Upper and loer case letters are distinct!
+
+ INSERT INTO WORKS VALUES('UPP','low',100);
+-- PASS:0135 If 1 row is inserted?
+ SELECT EMPNUM,PNUM FROM WORKS WHERE EMPNUM='UPP' AND PNUM='low';
+
+EMPNUM PNUM   
+====== ====== 
+UPP    low    
+
+-- PASS:0135 If EMPNUM = 'UPP' and PNUM = 'low'?
+
+ SELECT EMPNUM,PNUM FROM WORKS WHERE EMPNUM='upp' OR PNUM='LOW';
+-- PASS:0135 If 0 rows are selected - out of data?
+
+ROLLBACK;
+
+ CREATE TABLE GG (REALTEST     REAL);
+ CREATE TABLE HH (SMALLTEST  SMALLINT);
+ CREATE TABLE II (DOUBLETEST  DOUBLE PRECISION);
+ CREATE TABLE JJ (FLOATTEST  FLOAT);
+ CREATE TABLE KK (FLOATTEST  FLOAT(32));
+ CREATE TABLE LL (NUMTEST  NUMERIC(13,6));
+ CREATE TABLE MM (NUMTEST  NUMERIC);
+ CREATE TABLE MM2 (NUMTEST NUMERIC(10));
+ CREATE TABLE NN (NUMTEST  NUMERIC(9));
+ CREATE TABLE OO (NUMTEST  NUMERIC(9));
+ CREATE TABLE PP (NUMTEST  DECIMAL(13,6));
+ CREATE TABLE QQ (NUMTEST  DECIMAL);
+ CREATE TABLE RR (NUMTEST  DECIMAL(8));
+ CREATE TABLE SS (NUMTEST  DEC(13,6));
+
+COMMIT; 
+-- TEST:0088 Data type REAL!
+
+ INSERT INTO GG VALUES(123.4567E-2);
+ SELECT REALTEST FROM GG;
+
+      REALTEST 
+============== 
+     1.2345670 
+
+-- PASS:0088 If REALTEST = 1.234567 ?
+-- PASS:0088 OR is between 1.234562 and 1.234572 ?
+
+ SELECT * FROM GG WHERE REALTEST > 1.234561 and REALTEST < 1.234573;
+
+      REALTEST 
+============== 
+     1.2345670 
+
+-- PASS:0088 If 1 row selected?
+
+ROLLBACK;
+
+ INSERT INTO II VALUES(0.123456123456E6);
+-- PASS:0090 If 1 row is inserted?
+
+ SELECT DOUBLETEST FROM II;
+
+             DOUBLETEST 
+======================= 
+      123456.1234560000 
+
+-- PASS:0090 If DOUBLETEST = 123456.123456 ?
+-- PASS:0090 OR is between 123456.123451 and 123456.123461 ?
+
+ SELECT * FROM II WHERE DOUBLETEST > 123456.123450 and DOUBLETEST < 123456.123462;
+
+             DOUBLETEST 
+======================= 
+      123456.1234560000 
+
+-- PASS:0090 If 1 row selected?
+
+ROLLBACK;
+
+-- TEST:0091 Data type FLOAT!
+ INSERT INTO JJ VALUES(12.345678);
+-- PASS:0091 If 1 row is inserted?
+
+ SELECT FLOATTEST FROM JJ;
+
+     FLOATTEST 
+============== 
+     12.345678 
+
+-- PASS:0091 If FLOATTEST = 12.345678 ?
+-- PASS:0091 OR is between 12.345673 and 12.345683 ?
+
+ SELECT * FROM JJ WHERE FLOATTEST > 12.345672 and FLOATTEST < 12.345684;
+
+     FLOATTEST 
+============== 
+     12.345678 
+
+-- PASS:0091 If 1 row selected?
+
+ROLLBACK;
+
+-- TEST:0092 Data type FLOAT(32)!
+ INSERT INTO KK VALUES(123.456123456E+3);
+-- PASS:0092 If 1 row is inserted?
+
+ SELECT FLOATTEST FROM KK;
+
+              FLOATTEST 
+======================= 
+      123456.1234560000 
+
+-- PASS:0092 If FLOATTEST = 123456.123456 ?
+-- PASS:0092 OR is between 123456.1233 and 123456.1236 ?
+
+ SELECT * FROM KK WHERE FLOATTEST > 123456.123450 and FLOATTEST < 123456.123462;
+
+              FLOATTEST 
+======================= 
+      123456.1234560000 
+
+-- PASS:0092 If 1 row selected?
+
+-- TEST:0093 Data type NUMERIC(13,6)!
+ INSERT INTO LL VALUES(123456.123456);
+-- PASS:0093 If 1 row is inserted?
+
+ SELECT * FROM LL;
+
+              NUMTEST 
+===================== 
+        123456.123456 
+
+-- PASS:0093 If NUMTEST = 123456.123456 ?
+-- PASS:0093 OR is between 123456.123451 and 123456.123461 ?
+
+ SELECT * FROM LL WHERE NUMTEST > 123456.123450 and NUMTEST < 123456.123462;
+
+              NUMTEST 
+===================== 
+        123456.123456 
+
+-- PASS:0093 If 1 row selected?
+
+
+ROLLBACK;
+
+-- TEST:0094 Data type DECIMAL(13,6)!
+ INSERT INTO PP VALUES(123456.123456);
+-- PASS:0094 If 1 row is inserted?
+
+ SELECT * FROM PP;
+
+              NUMTEST 
+===================== 
+        123456.123456 
+
+-- PASS:0094 If NUMTEST = 123456.123456 ?
+-- PASS:0094 OR is between 123456.123451 and 123456.123461 ?
+
+ROLLBACK;
+
+-- TEST:0095 Data type DEC(13,6)!
+ INSERT INTO SS VALUES(123456.123456);
+-- PASS:0095 If 1 row is inserted?
+ SELECT * FROM SS;
+
+              NUMTEST 
+===================== 
+        123456.123456 
+
+-- PASS:0095 If NUMTEST = 123456.123456 ?
+-- PASS:0095 OR is between 123456.123451 and 123456.123461 ?
+
+
+-- TEST:0157 ORDER BY approximate numeric!
+-- from dml035.sql
+
+ INSERT INTO JJ VALUES(66.2);
+-- PASS:0157 If 1 row is inserted?
+
+ INSERT INTO JJ VALUES(-44.5);
+-- PASS:0157 If 1 row is inserted?
+
+ INSERT INTO JJ VALUES(0.2222);
+-- PASS:0157 If 1 row is inserted?
+
+ INSERT INTO JJ VALUES(66.3);
+-- PASS:0157 If 1 row is inserted?
+
+ INSERT INTO JJ VALUES(-87);
+-- PASS:0157 If 1 row is inserted?
+
+ INSERT INTO JJ VALUES(-66.25);
+-- PASS:0157 If 1 row is inserted?
+
+ SELECT FLOATTEST FROM JJ ORDER BY FLOATTEST DESC;
+
+     FLOATTEST 
+============== 
+     66.300003 
+     66.199997 
+    0.22220001 
+    -44.500000 
+    -66.250000 
+    -87.000000 
+
+-- PASS:0157 If 6 rows are selected ?
+-- PASS:0157 If last FLOATTEST = -87 OR  is between -87.5 and -86.5 ?
+
+ROLLBACK WORK;
+
+-- from dml_037
+-- TEST:0234 SQL-style comments with SQL statements!
+-- OPTIONAL TEST
+
+ CREATE TABLE TEXT240  (TEXXT CHAR(240));
+
+    DELETE  -- we empty the table  
+        FROM TEXT240;
+
+     INSERT INTO TEXT240   -- This is the test for the rules  
+            VALUES         -- for the placement            
+       ('SQL-STYLE COMMENTS') -- of
+                              -- SQL-style comments 
+      ;
+-- PASS:0234 If 1 row is inserted?
+
+    SELECT * 
+            FROM TEXT240;
+
+TEXXT                                                                                                                                                                                                                                            
+=============================================================================== 
+SQL-STYLE COMMENTS                                                                                                                                                                                                                               
+
+-- PASS:0234 If TEXXT = 'SQL-STYLE COMMENTS'?
+     
+     ROLLBACK WORK;
+
+-- from dml_038
+-- TEST:0205 Cartesian product is produced without WHERE clause!
+
+     SELECT GRADE, HOURS, BUDGET
+          FROM STAFF, WORKS, PROJ;
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           40        10000 
+          12           20        10000 
+          12           80        10000 
+          12           20        10000 
+          12           12        10000 
+          12           12        10000 
+          12           40        10000 
+          12           80        10000 
+          12           20        10000 
+          12           20        10000 
+          12           40        10000 
+          12           80        10000 
+          12           40        30000 
+          12           20        30000 
+          12           80        30000 
+          12           20        30000 
+          12           12        30000 
+          12           12        30000 
+          12           40        30000 
+          12           80        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           20        30000 
+          12           20        30000 
+          12           40        30000 
+          12           80        30000 
+          12           40        30000 
+          12           20        30000 
+          12           80        30000 
+          12           20        30000 
+          12           12        30000 
+          12           12        30000 
+          12           40        30000 
+          12           80        30000 
+          12           20        30000 
+          12           20        30000 
+          12           40        30000 
+          12           80        30000 
+          12           40        20000 
+          12           20        20000 
+          12           80        20000 
+          12           20        20000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           12        20000 
+          12           12        20000 
+          12           40        20000 
+          12           80        20000 
+          12           20        20000 
+          12           20        20000 
+          12           40        20000 
+          12           80        20000 
+          12           40        10000 
+          12           20        10000 
+          12           80        10000 
+          12           20        10000 
+          12           12        10000 
+          12           12        10000 
+          12           40        10000 
+          12           80        10000 
+          12           20        10000 
+          12           20        10000 
+          12           40        10000 
+          12           80        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           40        50000 
+          12           20        50000 
+          12           80        50000 
+          12           20        50000 
+          12           12        50000 
+          12           12        50000 
+          12           40        50000 
+          12           80        50000 
+          12           20        50000 
+          12           20        50000 
+          12           40        50000 
+          12           80        50000 
+          10           40        10000 
+          10           20        10000 
+          10           80        10000 
+          10           20        10000 
+          10           12        10000 
+          10           12        10000 
+          10           40        10000 
+          10           80        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          10           20        10000 
+          10           20        10000 
+          10           40        10000 
+          10           80        10000 
+          10           40        30000 
+          10           20        30000 
+          10           80        30000 
+          10           20        30000 
+          10           12        30000 
+          10           12        30000 
+          10           40        30000 
+          10           80        30000 
+          10           20        30000 
+          10           20        30000 
+          10           40        30000 
+          10           80        30000 
+          10           40        30000 
+          10           20        30000 
+          10           80        30000 
+          10           20        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          10           12        30000 
+          10           12        30000 
+          10           40        30000 
+          10           80        30000 
+          10           20        30000 
+          10           20        30000 
+          10           40        30000 
+          10           80        30000 
+          10           40        20000 
+          10           20        20000 
+          10           80        20000 
+          10           20        20000 
+          10           12        20000 
+          10           12        20000 
+          10           40        20000 
+          10           80        20000 
+          10           20        20000 
+          10           20        20000 
+          10           40        20000 
+          10           80        20000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          10           40        10000 
+          10           20        10000 
+          10           80        10000 
+          10           20        10000 
+          10           12        10000 
+          10           12        10000 
+          10           40        10000 
+          10           80        10000 
+          10           20        10000 
+          10           20        10000 
+          10           40        10000 
+          10           80        10000 
+          10           40        50000 
+          10           20        50000 
+          10           80        50000 
+          10           20        50000 
+          10           12        50000 
+          10           12        50000 
+          10           40        50000 
+          10           80        50000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          10           20        50000 
+          10           20        50000 
+          10           40        50000 
+          10           80        50000 
+          13           40        10000 
+          13           20        10000 
+          13           80        10000 
+          13           20        10000 
+          13           12        10000 
+          13           12        10000 
+          13           40        10000 
+          13           80        10000 
+          13           20        10000 
+          13           20        10000 
+          13           40        10000 
+          13           80        10000 
+          13           40        30000 
+          13           20        30000 
+          13           80        30000 
+          13           20        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           12        30000 
+          13           12        30000 
+          13           40        30000 
+          13           80        30000 
+          13           20        30000 
+          13           20        30000 
+          13           40        30000 
+          13           80        30000 
+          13           40        30000 
+          13           20        30000 
+          13           80        30000 
+          13           20        30000 
+          13           12        30000 
+          13           12        30000 
+          13           40        30000 
+          13           80        30000 
+          13           20        30000 
+          13           20        30000 
+          13           40        30000 
+          13           80        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           40        20000 
+          13           20        20000 
+          13           80        20000 
+          13           20        20000 
+          13           12        20000 
+          13           12        20000 
+          13           40        20000 
+          13           80        20000 
+          13           20        20000 
+          13           20        20000 
+          13           40        20000 
+          13           80        20000 
+          13           40        10000 
+          13           20        10000 
+          13           80        10000 
+          13           20        10000 
+          13           12        10000 
+          13           12        10000 
+          13           40        10000 
+          13           80        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           20        10000 
+          13           20        10000 
+          13           40        10000 
+          13           80        10000 
+          13           40        50000 
+          13           20        50000 
+          13           80        50000 
+          13           20        50000 
+          13           12        50000 
+          13           12        50000 
+          13           40        50000 
+          13           80        50000 
+          13           20        50000 
+          13           20        50000 
+          13           40        50000 
+          13           80        50000 
+          12           40        10000 
+          12           20        10000 
+          12           80        10000 
+          12           20        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           12        10000 
+          12           12        10000 
+          12           40        10000 
+          12           80        10000 
+          12           20        10000 
+          12           20        10000 
+          12           40        10000 
+          12           80        10000 
+          12           40        30000 
+          12           20        30000 
+          12           80        30000 
+          12           20        30000 
+          12           12        30000 
+          12           12        30000 
+          12           40        30000 
+          12           80        30000 
+          12           20        30000 
+          12           20        30000 
+          12           40        30000 
+          12           80        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           40        30000 
+          12           20        30000 
+          12           80        30000 
+          12           20        30000 
+          12           12        30000 
+          12           12        30000 
+          12           40        30000 
+          12           80        30000 
+          12           20        30000 
+          12           20        30000 
+          12           40        30000 
+          12           80        30000 
+          12           40        20000 
+          12           20        20000 
+          12           80        20000 
+          12           20        20000 
+          12           12        20000 
+          12           12        20000 
+          12           40        20000 
+          12           80        20000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           20        20000 
+          12           20        20000 
+          12           40        20000 
+          12           80        20000 
+          12           40        10000 
+          12           20        10000 
+          12           80        10000 
+          12           20        10000 
+          12           12        10000 
+          12           12        10000 
+          12           40        10000 
+          12           80        10000 
+          12           20        10000 
+          12           20        10000 
+          12           40        10000 
+          12           80        10000 
+          12           40        50000 
+          12           20        50000 
+          12           80        50000 
+          12           20        50000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          12           12        50000 
+          12           12        50000 
+          12           40        50000 
+          12           80        50000 
+          12           20        50000 
+          12           20        50000 
+          12           40        50000 
+          12           80        50000 
+          13           40        10000 
+          13           20        10000 
+          13           80        10000 
+          13           20        10000 
+          13           12        10000 
+          13           12        10000 
+          13           40        10000 
+          13           80        10000 
+          13           20        10000 
+          13           20        10000 
+          13           40        10000 
+          13           80        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           40        30000 
+          13           20        30000 
+          13           80        30000 
+          13           20        30000 
+          13           12        30000 
+          13           12        30000 
+          13           40        30000 
+          13           80        30000 
+          13           20        30000 
+          13           20        30000 
+          13           40        30000 
+          13           80        30000 
+          13           40        30000 
+          13           20        30000 
+          13           80        30000 
+          13           20        30000 
+          13           12        30000 
+          13           12        30000 
+          13           40        30000 
+          13           80        30000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           20        30000 
+          13           20        30000 
+          13           40        30000 
+          13           80        30000 
+          13           40        20000 
+          13           20        20000 
+          13           80        20000 
+          13           20        20000 
+          13           12        20000 
+          13           12        20000 
+          13           40        20000 
+          13           80        20000 
+          13           20        20000 
+          13           20        20000 
+          13           40        20000 
+          13           80        20000 
+          13           40        10000 
+          13           20        10000 
+          13           80        10000 
+          13           20        10000 
+
+       GRADE        HOURS       BUDGET 
+============ ============ ============ 
+          13           12        10000 
+          13           12        10000 
+          13           40        10000 
+          13           80        10000 
+          13           20        10000 
+          13           20        10000 
+          13           40        10000 
+          13           80        10000 
+          13           40        50000 
+          13           20        50000 
+          13           80        50000 
+          13           20        50000 
+          13           12        50000 
+          13           12        50000 
+          13           40        50000 
+          13           80        50000 
+          13           20        50000 
+          13           20        50000 
+          13           40        50000 
+          13           80        50000 
+
+-- PASS:0205 If 360 rows are selected ?
+
+-- from dml_039
+-- TEST:0208 Upper and lower case in LIKE predicate!
+ INSERT INTO STAFF VALUES('E7', 'yanping',26,'China');
+ INSERT INTO STAFF VALUES('E8','YANPING',30,'NIST');
+ SELECT CITY FROM STAFF WHERE EMPNAME LIKE 'yan____%';
+
+CITY            
+=============== 
+China           
+
+-- PASS:0208 If CITY = 'China'?
+
+ SELECT CITY FROM STAFF WHERE EMPNAME LIKE 'YAN____%';
+
+CITY            
+=============== 
+NIST            
+
+-- PASS:0208 If CITY = 'NIST'?
+
+ROLLBACK WORK;
+
+DROP DATABASE;

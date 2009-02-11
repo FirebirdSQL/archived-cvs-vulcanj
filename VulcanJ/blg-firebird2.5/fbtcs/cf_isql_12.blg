@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb';
+
+/*---------------------------------------------*/
+/* Computed field using another computed field */
+/*---------------------------------------------*/
+create table t3 (a integer, af computed by (a*3), afaf computed by (af*2));
+insert into t3(a) values(10);
+select * from t3;
+
+           A                    AF                  AFAF 
+============ ===================== ===================== 
+          10                    30                    60 
+
+
+drop database;
+exit;

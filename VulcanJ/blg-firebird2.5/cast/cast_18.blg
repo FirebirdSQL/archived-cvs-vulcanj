@@ -1,0 +1,12 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST(CAST('13:28:45' AS TIME) AS CHAR(32)) FROM rdb$Database;
+
+CAST                             
+================================ 
+13:28:45.0000                    
+
+
+DROP DATABASE;
+

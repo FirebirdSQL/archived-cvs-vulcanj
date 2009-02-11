@@ -1,0 +1,22 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER);
+INSERT INTO test VALUES(0);
+INSERT INTO test VALUES(0);
+INSERT INTO test VALUES(null);
+INSERT INTO test VALUES(null);
+INSERT INTO test VALUES(null);
+INSERT INTO test VALUES(1);
+INSERT INTO test VALUES(1);
+INSERT INTO test VALUES(1);
+INSERT INTO test VALUES(1);
+
+SELECT COUNT(*), COUNT(ID), COUNT(DISTINCT ID) FROM test;
+
+       COUNT        COUNT        COUNT 
+============ ============ ============ 
+           9            6            2 
+
+
+DROP DATABASE;
+

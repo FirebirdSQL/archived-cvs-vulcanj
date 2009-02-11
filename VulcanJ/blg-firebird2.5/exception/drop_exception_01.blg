@@ -1,0 +1,10 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test 'message to show';
+
+DROP EXCEPTION test;
+SHOW EXCEPTION test;
+There is no exception TEST in this database
+
+DROP DATABASE;
+

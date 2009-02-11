@@ -1,0 +1,14 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER);
+
+/*
+Tested command:
+*/
+ALTER TABLE test ADD text varchar(32);
+SHOW TABLE test;
+ID                              INTEGER Nullable 
+TEXT                            VARCHAR(32) Nullable 
+
+DROP DATABASE;
+

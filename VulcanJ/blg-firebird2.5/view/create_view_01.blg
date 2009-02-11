@@ -1,0 +1,13 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+
+CREATE VIEW test AS SELECT * FROM tb;
+SHOW VIEW test;
+ID                              INTEGER Nullable 
+View Source:
+==== ======
+ SELECT * FROM tb
+
+DROP DATABASE;
+

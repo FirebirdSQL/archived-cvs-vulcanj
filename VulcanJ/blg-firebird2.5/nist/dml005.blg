@@ -1,0 +1,18 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+-- TEST:0011 FIPS sizing - DECIMAL (15)!
+
+ CREATE TABLE LONGINT (LONG_INT DECIMAL(15));
+ INSERT INTO LONGINT VALUES(123456789012345.);
+ SELECT LONG_INT, LONG_INT /1000000, LONG_INT - 123456789000000. FROM LONGINT;
+
+             LONG_INT                DIVIDE              SUBTRACT 
+===================== ===================== ===================== 
+      123456789012345             123456789                 12345 
+
+-- PASS:0011 If values are (123456789012345, 123456789, 12345), but?
+-- PASS:0011 Second value may be between 123456788 and 123456790?
+
+DROP DATABASE;

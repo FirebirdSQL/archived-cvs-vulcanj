@@ -1,0 +1,30 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg FOR test BEFORE DELETE POSITION 1
+AS
+BEGIN
+  old.text='tg';
+END ^
+Statement failed, SQLSTATE = 42000
+attempted update of read-only column
+After line 4 in file ddl/trigger/alter_trigger_17.sql
+
+ALTER TRIGGER tg AS
+BEGIN
+  new.text='altered trigger';
+END ^
+Statement failed, SQLSTATE = 42S22
+Dynamic SQL Error
+-SQL error code = -206
+-Column unknown
+-NEW.TEXT
+-At line 3, column 7
+At line 12 in file ddl/trigger/alter_trigger_17.sql
+
+SET TERM ;^
+
+DROP DATABASE;
+

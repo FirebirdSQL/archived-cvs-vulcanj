@@ -1,0 +1,97 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb';
+
+create table ONEROW (i integer);
+insert into ONEROW values (1);
+commit;
+
+-- I am a comment
+
+/* BEGIN */
+-- I am a comment
+select * from onerow;
+
+           I 
+============ 
+           1 
+
+/* END */
+
+/* BEGIN */
+-- comment with unclosed 'quoted string
+select * from onerow;
+
+           I 
+============ 
+           1 
+
+/* END */
+
+/* BEGIN */
+-- comment with unclosed "quoted string
+select * from onerow;
+
+           I 
+============ 
+           1 
+
+/* END */
+
+/* BEGIN */
+-- I am a comment;
+select * from onerow;
+
+           I 
+============ 
+           1 
+
+/* END */
+
+/* BEGIN with unclosed "quoted */
+-- I am a comment;
+select * from onerow;
+
+           I 
+============ 
+           1 
+
+/* END */
+
+select * /*
+comment
+*/
+from onerow;
+
+           I 
+============ 
+           1 
+
+
+select * 
+/* comment */
+from onerow;
+
+           I 
+============ 
+           1 
+
+
+select * 
+-- comment
+from onerow;
+
+           I 
+============ 
+           1 
+
+
+/*
+Comment
+*/ select * from onerow;
+
+           I 
+============ 
+           1 
+
+
+drop database;

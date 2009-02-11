@@ -14,9 +14,14 @@ function process_dir {
          mydir=${f##*ddl/}
          mydir=${mydir##*/}
          # echo dir is ${mydir}
-         if [ ${mydir} != input ] && [ ${mydir} != draft ] && [ ${mydir} != security ] && [ ${mydir} != CVS ]; then
+         if [ ${mydir} != input ] && [ ${mydir} != draft ] && [ ${mydir} != security ] && [ ${mydir} != custom ] && [ ${mydir} != CVS ]; then
             process_dir "$f"
          fi
+
+         if [ ${mydir} = custom ] && [ $custom = true ]; then
+            process_dir "$f"
+         fi
+
       else
          case "$f" in
           *.sql)
@@ -61,11 +66,11 @@ function process_dir {
              rm -f "$outfile" "$outfile"
              if [ $time_each_test = true ]; then
                 st=`date '+%s.%N'`
-                isql -i "$f" -o "$outfile" -m -m2 -e
+                isql -i "$f" -o "$outfile" -m -m2 -e -u sysdba -p masterkey
                 en=`date '+%s.%N'`
                 echo "$f","$st","$en" >> timings.txt
              else
-                isql -i "$f" -o "$outfile" -m -m2 -e
+                isql -i "$f" -o "$outfile" -m -m2 -e -u sysdba -p masterkey
              fi
 
              let numTests=$numTests+1
@@ -109,6 +114,7 @@ blgdir=blg-vulcan
 numTests=0
 failedTests=0
 verbose=false
+custom=false
 start_tm=0
 end_tm=0
 time_each_test=false
@@ -118,6 +124,9 @@ echo "beginning fbmust tests..."
 while [ -n "$(echo $1 | grep '-')" ]; do
    case $1 in
       -b ) blgdir="$2"
+           shift
+           ;;
+      -c ) custom='true'
            shift
            ;;
       -d ) sqldir="$2"

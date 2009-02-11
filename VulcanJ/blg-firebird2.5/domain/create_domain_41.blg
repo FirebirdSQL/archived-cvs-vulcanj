@@ -1,0 +1,13 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test AS INTEGER;
+
+CREATE DOMAIN test AS VARCHAR(32);
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-STORE RDB$FIELDS failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_2"
+After line 2 in file ddl/domain/create_domain_41.sql
+
+DROP DATABASE;
+

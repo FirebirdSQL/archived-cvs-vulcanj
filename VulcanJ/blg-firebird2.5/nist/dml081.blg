@@ -1,0 +1,176 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
+COMMIT WORK;
+
+-- NOTE Direct support for SQLCODE or SQLSTATE is not required
+-- NOTE in Interactive Direct SQL, as defined in FIPS 127-2.
+-- NOTE ********************* instead ***************************
+-- NOTE If a statement raises an exception condition,
+-- NOTE then the system shall display a message indicating that
+-- NOTE the statement failed, giving a textual description
+-- NOTE of the failure.
+-- NOTE If a statement raises a completion condition that is a
+-- NOTE "warning" or "no data", then the system shall display
+-- NOTE a message indicating that the statement completed,
+-- NOTE giving a textual description of the "warning" or "no data."
+
+-- TEST:0487 SQLSTATE 00000: successful completion!
+
+ SELECT COUNT(*) FROM WORKS;
+
+       COUNT 
+============ 
+          12 
+
+-- PASS:0487 If count = 12?
+-- PASS:0487 OR SQLSTATE = 00000: successful completion?
+
+-- TEST:0488 SQLSTATE 21000: cardinality violation!
+ SELECT COUNT(*) FROM WORKS WHERE PNUM = (SELECT PNUM FROM WORKS WHERE HOURS = 80);
+
+       COUNT 
+============ 
+Statement failed, SQLSTATE = 21000
+multiple rows in singleton select
+After line 21 in file ddl/nist/dml081.sql
+--  PASS:0488 If ERROR, cardinality violation, 0 rows selected?
+--  PASS:0488 OR SQLSTATE = 21000 OR SQLCODE < 0?
+
+ SELECT GRADE FROM STAFF WHERE EMPNUM = 'xx';
+-- PASS:0489 If 0 rows selected?
+-- PASS:0489 OR SQLSTATE = 02000: no data OR SQLCODE = 100?
+
+ DELETE FROM STAFF WHERE GRADE = 11;
+-- PASS:0489 If 0 rows deleted?
+-- PASS:0489 OR SQLSTATE = 02000: no data OR SQLCODE = 100?
+
+ INSERT INTO STAFF (EMPNUM,GRADE) SELECT EMPNUM, 9 FROM WORKS WHERE PNUM = 'X9';
+-- PASS:0489 If 0 rows inserted?
+-- PASS:0489 OR SQLSTATE = 02000: no data OR SQLCODE = 100?
+
+ UPDATE STAFF SET CITY = 'Ho' WHERE GRADE = 15;
+-- PASS:0489 If 0 rows updated?
+-- PASS:0489 OR SQLSTATE = 02000: no data OR SQLCODE = 100?
+
+ROLLBACK WORK;
+
+-- TEST:0490 SQLSTATE 22012: data exception/division by zero!
+ INSERT INTO STAFF VALUES ('E6','Fidel',0,'Havana');
+
+ SELECT COUNT(*) FROM STAFF WHERE EMPNAME = 'Fidel' AND 16/GRADE > 2;
+
+       COUNT 
+============ 
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 49 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  selected?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+ SELECT 16/GRADE FROM STAFF WHERE EMPNAME = 'Fidel';
+
+               DIVIDE 
+===================== 
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 51 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  selected?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+ SELECT COUNT(*) FROM STAFF GROUP BY CITY HAVING SUM(GRADE/0) > 44;
+
+       COUNT 
+============ 
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 56 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  selected?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+ SELECT COUNT(*) FROM STAFF WHERE GRADE = (SELECT 16/GRADE FROM STAFF WHERE EMPNUM = 'E6');
+
+       COUNT 
+============ 
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 61 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  selected?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+ UPDATE STAFF SET GRADE = GRADE/0 WHERE GRADE = 12;
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 66 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  updated?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+ INSERT INTO STAFF SELECT 'X','Y',HOURS/0,'z' FROM WORKS WHERE PNUM = 'P6';
+Statement failed, SQLSTATE = 22012
+arithmetic exception, numeric overflow, or string truncation
+-Integer divide by zero.  The code attempted to divide an integer value by an integer divisor of zero.
+After line 71 in file ddl/nist/dml081.sql
+--  PASS:0490 If ERROR, data exception/division by zero, 0 rows
+--  inserted?
+--  PASS:0490 OR SQLSTATE = 22012 OR SQLCODE < 0?
+
+DROP DATABASE;

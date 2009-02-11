@@ -1,0 +1,34 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0363296 ALTER TABLE ERROR MESSAGE / SQLSTATE ISSUES
+create database 'test.fdb'; 
+
+create table t (i integer);
+
+set SQLSTATE ON;
+Valid options are:
+AUTOddl                  BLOBdisplay              BAIL                     
+BULK_INSERT              COUNT                    ECHO                     
+GENERATOR                HEADING                  LIST                     
+NAMES                    PLAN                     PLANONLY                 
+ROWCOUNT                 STATs                    SQLDA_DISPLAY            
+SQL                      STATISTICS               TRANSaction              
+TERMinator               TIME                     WIDTH                    
+WARNINGs                 WNG                      
+Command error: set SQLSTATE ON
+
+-- column XYZ not present. should be 42S22, column not found
+alter table t drop xyz;
+Statement failed, SQLSTATE = 42S22
+unsuccessful metadata update
+-column XYZ does not exist in table/view T
+After line 6 in file ddl/vulcan/alter_sqlstate.sql
+
+-- again column XYZ not present, but this is a modify operation
+-- again 42S22
+alter table t alter xyz type integer;
+Statement failed, SQLSTATE = 42S22
+unsuccessful metadata update
+-column XYZ does not exist in table/view T
+After line 9 in file ddl/vulcan/alter_sqlstate.sql
+
+drop database;

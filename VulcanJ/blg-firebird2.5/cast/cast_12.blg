@@ -1,0 +1,13 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST('9:11:60' AS TIME) FROM rdb$Database;
+
+         CAST 
+============= 
+Statement failed, SQLSTATE = 22018
+conversion error from string "9:11:60"
+After line 1 in file ddl/cast/cast_12.sql
+
+DROP DATABASE;
+

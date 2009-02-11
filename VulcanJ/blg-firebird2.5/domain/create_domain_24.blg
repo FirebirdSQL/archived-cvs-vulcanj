@@ -1,0 +1,9 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
+
+CREATE DOMAIN test NATIONAL CHAR VARYING(32765);
+SHOW DOMAIN test;
+TEST                            VARCHAR(32765) Nullable
+
+DROP DATABASE;
+

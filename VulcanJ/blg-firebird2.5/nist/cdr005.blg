@@ -1,0 +1,45 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+ CREATE TABLE STAFF5 (EMPNUM    CHAR(3) NOT NULL,EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE > 0 AND GRADE < 20));
+ INSERT INTO STAFF5 VALUES('E2','Tom',14,'Newyork');
+ UPDATE STAFF5 SET GRADE = 20;
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint INTEG_3 on view or table STAFF5
+-At trigger 'CHECK_2'
+After line 5 in file ddl/nist/cdr005.sql
+ SELECT COUNT(*) FROM STAFF5 WHERE GRADE = 14; 
+
+       COUNT 
+============ 
+           1 
+
+ CREATE TABLE STAFF6 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4) CHECK (GRADE > 0 AND GRADE < 20), CITY CHAR(15));
+ INSERT INTO STAFF6 VALUES('E2','Tom',14,'Newyork');
+ UPDATE STAFF6 SET GRADE = 20;
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint INTEG_5 on view or table STAFF6
+-At trigger 'CHECK_4'
+After line 9 in file ddl/nist/cdr005.sql
+ SELECT COUNT(*) FROM STAFF6 WHERE GRADE = 14;
+
+       COUNT 
+============ 
+           1 
+
+ CREATE TABLE STAFF7 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE BETWEEN 1 AND 20));
+ INSERT INTO STAFF7 VALUES('E2','Tom',14,'Newyork');
+ UPDATE STAFF7 SET GRADE = 21; 
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint INTEG_8 on view or table STAFF7
+-At trigger 'CHECK_6'
+After line 13 in file ddl/nist/cdr005.sql
+ SELECT COUNT(*) FROM STAFF7 WHERE GRADE = 14;
+
+       COUNT 
+============ 
+           1 
+
+
+DROP DATABASE;

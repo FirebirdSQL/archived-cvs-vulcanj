@@ -1,0 +1,16 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+CREATE TABLE test(
+ c1 SMALLINT,
+ c1 INTEGER
+);
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-STORE RDB$RELATION_FIELDS failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+After line 1 in file ddl/table/create_table_06.sql
+
+
+DROP DATABASE;
+

@@ -1,0 +1,99 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- test valid page sizes, including default
+set names ascii;
+CREATE DATABASE 'test.fdb' default character set iso8859_1;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 151
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;
+-- test various page sizes;
+-- 1K page size;
+CREATE DATABASE 'test.fdb' PAGE_SIZE 1024;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 1024 
+Number of DB pages allocated = 248
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;
+-- 2k page size;
+CREATE DATABASE 'test.fdb' PAGE_SIZE 2048;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 2048 
+Number of DB pages allocated = 180
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;
+-- 4k page size;
+CREATE DATABASE 'test.fdb' PAGE_SIZE 4096;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 4096 
+Number of DB pages allocated = 151
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;
+-- 8k page size;
+CREATE DATABASE 'test.fdb' PAGE_SIZE 8192;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 8192 
+Number of DB pages allocated = 136
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;
+-- 16k page size;
+CREATE DATABASE 'test.fdb' PAGE_SIZE 16384;
+SHOW DATABASE;
+Database: test.fdb
+        Owner: SYSDBA                         
+PAGE_SIZE 16384 
+Number of DB pages allocated = 132
+Sweep interval = 20000
+Forced Writes are OFF 
+Transaction - oldest = 1 
+Transaction - oldest active = 1 
+Transaction - oldest snapshot = 1 
+Transaction - Next = 4 
+ODS = 11.0
+Default Character set: ISO8859_1                      
+DROP DATABASE;

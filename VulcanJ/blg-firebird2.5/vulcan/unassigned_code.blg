@@ -1,0 +1,26 @@
+Use CONNECT or CREATE DATABASE to specify a database
+--
+-- S0253329
+-- VULCAN NIST UNEXPECTED "UNASSIGNED CODE ERROR" MISSING VALID ERROR
+--
+create database 'test.fdb' default character set iso8859_1 page_size=16834; 
+Statement failed, SQLSTATE = 42000
+Dynamic SQL Error
+-SQL error code = -104
+-Token unknown - line 1, column 97
+-page_size
+At line 1 in file ddl/vulcan/unassigned_code.sql
+
+CREATE TABLE STAFF3
+  (EMPNUM   CHAR(3) NOT NULL,
+   EMPNAME  CHAR(20),
+   GRADE    DECIMAL(4),
+   CITY     CHAR(15));
+Use CONNECT or CREATE DATABASE to specify a database
+
+CREATE TABLE STAFFz
+  ( EMPNUM CHAR(3) REFERENCES STAFF3(EMPNUM),
+    SALARY DECIMAL(6) CHECK (SALARY > 0));
+Use CONNECT or CREATE DATABASE to specify a database
+
+drop database;

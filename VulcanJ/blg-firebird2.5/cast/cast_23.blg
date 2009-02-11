@@ -1,0 +1,12 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST(CAST('1.4.2002 0:59:59.1' AS TIMESTAMP) AS DATE) FROM rdb$Database;
+
+       CAST 
+=========== 
+2002-04-01  
+
+
+DROP DATABASE;
+

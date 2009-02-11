@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- s0284777
+-- VULCAN ERROR MESSAGE ON DROP TABLE CASCADE
+
+CREATE DATABASE 'test.fdb' ;
+
+create table t3 (i integer);
+drop table t3 cascade;
+Statement failed, SQLSTATE = 42000
+Dynamic SQL Error
+-SQL error code = -104
+-Token unknown - line 1, column 15
+-cascade
+At line 7 in file ddl/table/create_table_08.sql
+
+SHOW TABLE t3;
+I                               INTEGER Nullable 
+
+DROP DATABASE;

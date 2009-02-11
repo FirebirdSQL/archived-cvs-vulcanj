@@ -1,0 +1,16 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb';
+
+/*-----------------------------------------------------------------------------*/
+/* Create a table with computed field which is defined using non-existing UDF. */
+/*-----------------------------------------------------------------------------*/
+create table t0 (a integer, af computed by (non_exist_udf(a)));
+Statement failed, SQLSTATE = 39000
+Dynamic SQL Error
+-SQL error code = -804
+-Function unknown
+-NON_EXIST_UDF
+After line 1 in file ddl/fbtcs/cf_isql_15.sql
+
+drop database;
+exit;

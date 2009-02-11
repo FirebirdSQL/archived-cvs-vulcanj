@@ -1,0 +1,186 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
+
+ SELECT EMPNUM,HOURS FROM WORKS WHERE PNUM='P2' ORDER BY EMPNUM DESC;
+
+EMPNUM        HOURS 
+====== ============ 
+E4               20 
+E3               20 
+E2               80 
+E1               20 
+
+-- PASS:0001 If 4 rows selected and last EMPNUM = 'E1'?
+
+ SELECT EMPNUM,HOURS FROM WORKS WHERE PNUM='P2' ORDER BY 2 ASC;
+
+EMPNUM        HOURS 
+====== ============ 
+E1               20 
+E3               20 
+E4               20 
+E2               80 
+
+-- PASS:0002 If 4 rows selected and last HOURS = 80?
+
+ SELECT EMPNUM,HOURS FROM WORKS WHERE PNUM = 'P2' ORDER BY 2 DESC,EMPNUM DESC;
+
+EMPNUM        HOURS 
+====== ============ 
+E2               80 
+E4               20 
+E3               20 
+E1               20 
+
+-- PASS:0003 If 4 rows selected and last EMPNUM = 'E1'?
+
+ SELECT WORKS.EMPNUM FROM WORKS WHERE WORKS.PNUM = 'P2' UNION SELECT STAFF.EMPNUM FROM STAFF WHERE STAFF.GRADE=13 ORDER BY 1 DESC;
+
+EMPNUM 
+====== 
+E5     
+E4     
+E3     
+E2     
+E1     
+
+-- PASS:0004 If 5 rows selected and last EMPNUM = 'E1'?
+
+ SELECT WORKS.EMPNUM FROM WORKS WHERE WORKS.PNUM = 'P2' UNION ALL SELECT STAFF.EMPNUM FROM STAFF WHERE STAFF.GRADE = 13;
+
+EMPNUM 
+====== 
+E1     
+E2     
+E3     
+E4     
+E3     
+E5     
+
+-- PASS:0005 If 6 rows selected?
+
+ SELECT EMPNAME,PNUM,HOURS FROM STAFF,WORKS WHERE STAFF.EMPNUM = WORKS.EMPNUM UNION SELECT EMPNAME,PNUM,HOURS FROM STAFF,WORKS WHERE NOT EXISTS (SELECT HOURS FROM WORKS WHERE STAFF.EMPNUM = WORKS.EMPNUM);
+
+EMPNAME              PNUM          HOURS 
+==================== ====== ============ 
+Alice                P1               40 
+Alice                P2               20 
+Alice                P3               80 
+Alice                P4               20 
+Alice                P5               12 
+Alice                P6               12 
+Betty                P1               40 
+Betty                P2               80 
+Carmen               P2               20 
+Don                  P2               20 
+Don                  P4               40 
+Don                  P5               80 
+Ed                   P1               40 
+Ed                   P2               20 
+Ed                   P2               80 
+Ed                   P3               80 
+Ed                   P4               20 
+Ed                   P4               40 
+Ed                   P5               12 
+Ed                   P5               80 
+
+EMPNAME              PNUM          HOURS 
+==================== ====== ============ 
+Ed                   P6               12 
+
+
+-- TEST:0158 SELECT with UNION and NOT EXISTS subquery!
+ SELECT PNUM,EMPNUM,HOURS FROM WORKS WHERE HOURS=80 UNION SELECT PNUM,EMPNUM,HOURS FROM WORKS WHERE HOURS=40 UNION SELECT PNUM,EMPNUM,HOURS FROM WORKS WHERE HOURS=20 ORDER BY 3,1;
+
+PNUM   EMPNUM        HOURS 
+====== ====== ============ 
+P2     E1               20 
+P2     E3               20 
+P2     E4               20 
+P4     E1               20 
+P1     E1               40 
+P1     E2               40 
+P4     E4               40 
+P2     E2               80 
+P3     E1               80 
+P5     E4               80 
+
+-- Expected output:
+--
+-- EMPNAME PNUM HOURS
+-- ==================== ====== ============
+-- 
+-- Alice P1 40
+-- Alice P2 20
+-- Alice P3 80
+-- Alice P4 20
+-- Alice P5 12
+-- Alice P6 12
+-- Betty P1 40
+-- Betty P2 80
+-- Carmen P2 20
+-- Don P2 20
+-- Don P4 40
+-- Don P5 80
+-- Ed P1 40
+-- Ed P2 20
+-- Ed P2 80
+-- Ed P3 80
+-- Ed P4 20
+-- Ed P4 40
+-- Ed P5 12
+-- Ed P5 80
+-- Ed P6 12
+ 
+
+DROP DATABASE;

@@ -1,0 +1,108 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- new test cases for sqlstate
+-- tests are not exhaustive, but hopefully provide good coverage
+set names ascii;
+set sqlstate on;
+Valid options are:
+AUTOddl                  BLOBdisplay              BAIL                     
+BULK_INSERT              COUNT                    ECHO                     
+GENERATOR                HEADING                  LIST                     
+NAMES                    PLAN                     PLANONLY                 
+ROWCOUNT                 STATs                    SQLDA_DISPLAY            
+SQL                      STATISTICS               TRANSaction              
+TERMinator               TIME                     WIDTH                    
+WARNINGs                 WNG                      
+Command error: set sqlstate on
+create database 'test.fdb';
+
+create table test (i integer);
+insert into test values (1);
+insert into test values (2);
+commit;
+
+-- cardinality, 21000
+select * from test where i = (select * from test) ;
+
+           I 
+============ 
+Statement failed, SQLSTATE = 21000
+multiple rows in singleton select
+After line 10 in file ddl/vulcan/sqlstate1.sql
+
+
+-- domain not found, 42000 - syntax error or access violation
+drop domain NO_SUCH_DOMAIN;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Domain not found
+After line 13 in file ddl/vulcan/sqlstate1.sql
+
+-- generator not found, 42000
+drop generator NO_SUCH_GEN;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Generator NO_SUCH_GEN not found
+After line 17 in file ddl/vulcan/sqlstate1.sql
+
+
+-- duplicate index, 42S11
+create table idx_test (i integer);
+create index i1 on idx_test (i);
+create index i1 on idx_test (i);
+Statement failed, SQLSTATE = 42S11
+unsuccessful metadata update
+-Index I1 already exists
+After line 25 in file ddl/vulcan/sqlstate1.sql
+
+-- column already exists, 42S21
+create table test_add_column (i integer);
+alter table test_add_column add i integer;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-STORE RDB$RELATION_FIELDS failed
+-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+After line 29 in file ddl/vulcan/sqlstate1.sql
+
+-- column not found, 42S22
+select boogie from rdb$database;
+Statement failed, SQLSTATE = 42S22
+Dynamic SQL Error
+-SQL error code = -206
+-Column unknown
+-BOOGIE
+-At line 1, column 15
+At line 31 in file ddl/vulcan/sqlstate1.sql
+create index i_nf on test(NO_COL) ;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Unknown columns in index I_NF
+After line 33 in file ddl/vulcan/sqlstate1.sql
+alter table test drop NO_COL;
+Statement failed, SQLSTATE = 42S22
+unsuccessful metadata update
+-column NO_COL does not exist in table/view TEST
+After line 34 in file ddl/vulcan/sqlstate1.sql
+
+
+
+-- table not found 42S02 - verify SQLCODE, too, please.
+drop table NOSUCHTABLE;
+Statement failed, SQLSTATE = 42S02
+Dynamic SQL Error
+-SQL error code = -607
+-Invalid command
+-Table NOSUCHTABLE does not exist
+After line 35 in file ddl/vulcan/sqlstate1.sql
+
+-- view not found 42S02 - verify SQLCODE, too, please.
+drop view NOSUCHVIEW;
+Statement failed, SQLSTATE = 42S02
+Dynamic SQL Error
+-SQL error code = -607
+-Invalid command
+-View NOSUCHVIEW does not exist
+After line 40 in file ddl/vulcan/sqlstate1.sql
+
+
+drop database;
+quit;

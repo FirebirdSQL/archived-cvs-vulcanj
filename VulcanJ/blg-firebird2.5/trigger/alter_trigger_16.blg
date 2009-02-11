@@ -1,0 +1,27 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg FOR test BEFORE INSERT POSITION 1
+AS
+BEGIN
+  new.text=new.text||'tg1 ';
+END ^
+
+ALTER TRIGGER tg AS
+BEGIN
+  old.text='altered trigger';
+END ^
+Statement failed, SQLSTATE = 42S22
+Dynamic SQL Error
+-SQL error code = -206
+-Column unknown
+-OLD.TEXT
+-At line 3, column 7
+At line 12 in file ddl/trigger/alter_trigger_16.sql
+
+SET TERM ;^
+
+DROP DATABASE;
+

@@ -1,0 +1,25 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test( id INTEGER NOT NULL CONSTRAINT unq UNIQUE,
+                   text VARCHAR(32));
+SET TERM ^;
+CREATE TRIGGER tg FOR test BEFORE UPDATE
+AS
+BEGIN
+  old.id=1;
+END ^
+Statement failed, SQLSTATE = 42000
+attempted update of read-only column
+After line 4 in file ddl/trigger/alter_trigger_08.sql
+SET TERM ;^
+
+ALTER TRIGGER tg AFTER DELETE;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Trigger TG not found
+After line 10 in file ddl/trigger/alter_trigger_08.sql
+SHOW TRIGGER tg;
+There is no trigger TG in this database
+
+DROP DATABASE;
+

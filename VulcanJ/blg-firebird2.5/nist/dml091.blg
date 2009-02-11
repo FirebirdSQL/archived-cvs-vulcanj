@@ -1,0 +1,162 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+INPUT ddl/input/base-tab.sql;
+ CREATE TABLE STAFF (EMPNUM CHAR(3) NOT NULL UNIQUE,EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF1 (EMPNUM CHAR(3) NOT NULL, EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY CHAR(15));
+ CREATE TABLE STAFF3 (EMPNUM CHAR(3) NOT NULL , EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15), UNIQUE (EMPNUM));
+ CREATE TABLE STAFF4 (EMPNUM CHAR(3) NOT NULL, EMPNAME CHAR(20), GRADE DECIMAL(4), CITY CHAR(15)); 
+ 
+ CREATE TABLE PROJ (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+ CREATE TABLE PROJ1 (PNUM CHAR(3) NOT NULL UNIQUE, PNAME CHAR(20), PTYPE CHAR(6), BUDGET DECIMAL(9), CITY CHAR(15));
+
+ CREATE TABLE WORKS (EMPNUM CHAR(3) NOT NULL, PNUM CHAR(3) NOT NULL, HOURS DECIMAL(5), UNIQUE(EMPNUM,PNUM));
+
+ CREATE TABLE VTABLE (COL1   INTEGER, COL2   INTEGER, COL3   INTEGER, COL4   INTEGER, COL5   DECIMAL(7,2)); 
+ CREATE TABLE UPUNIQ (NUMKEY  DECIMAL(3) NOT NULL UNIQUE, COL2 CHAR(2));
+
+ INSERT INTO STAFF VALUES ('E1','Alice',12,'Deale');
+ INSERT INTO STAFF VALUES ('E2','Betty',10,'Vienna');
+ INSERT INTO STAFF VALUES ('E3','Carmen',13,'Vienna');
+ INSERT INTO STAFF VALUES ('E4','Don',12,'Deale');
+ INSERT INTO STAFF VALUES ('E5','Ed',13,'Akron');
+ INSERT INTO PROJ VALUES  ('P1','MXSS','Design',10000,'Deale');
+ INSERT INTO PROJ VALUES  ('P2','CALM','Code',30000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P3','SDP','Test',30000,'Tampa');
+ INSERT INTO PROJ VALUES  ('P4','SDP','Design',20000,'Deale');
+ INSERT INTO PROJ VALUES  ('P5','IRM','Test',10000,'Vienna');
+ INSERT INTO PROJ VALUES  ('P6','PAYR','Design',50000,'Deale');
+ INSERT INTO WORKS VALUES  ('E1','P1',40);
+ INSERT INTO WORKS VALUES  ('E1','P2',20);
+ INSERT INTO WORKS VALUES  ('E1','P3',80);
+ INSERT INTO WORKS VALUES  ('E1','P4',20);
+ INSERT INTO WORKS VALUES  ('E1','P5',12);
+ INSERT INTO WORKS VALUES  ('E1','P6',12);
+ INSERT INTO WORKS VALUES  ('E2','P1',40);
+ INSERT INTO WORKS VALUES  ('E2','P2',80);
+ INSERT INTO WORKS VALUES  ('E3','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P2',20);
+ INSERT INTO WORKS VALUES  ('E4','P4',40);
+ INSERT INTO WORKS VALUES  ('E4','P5',80);
+ INSERT INTO VTABLE VALUES(10,+20,30,40,10.50);
+ INSERT INTO VTABLE VALUES(0,1,2,3,4.25);
+ INSERT INTO VTABLE VALUES(100,200,300,400,500.01);
+ INSERT INTO VTABLE VALUES(1000,-2000,3000,NULL,4000.00);
+ INSERT INTO STAFF3 SELECT * FROM STAFF;
+ INSERT INTO UPUNIQ VALUES(1,'A');
+ INSERT INTO UPUNIQ VALUES(2,'B');
+ INSERT INTO UPUNIQ VALUES(3,'C');
+ INSERT INTO UPUNIQ VALUES(4,'D');
+ INSERT INTO UPUNIQ VALUES(6,'F');
+ INSERT INTO UPUNIQ VALUES(8,'H');
+COMMIT WORK;
+
+-- TEST:0497 SQLSTATE 22003: data exception/numeric val.range 2!
+
+ CREATE TABLE P1 (NUMTEST  NUMERIC(1));
+ CREATE TABLE P7 (NUMTEST  NUMERIC(7));
+ CREATE TABLE P12 (NUMTEST  NUMERIC(12));
+ CREATE TABLE P15 (NUMTEST  NUMERIC(15));
+ CREATE TABLE FOUR_TYPES (T_INT     INTEGER, T_CHAR    CHAR(10), T_DECIMAL DECIMAL(10,2), T_REAL    REAL);
+ DELETE FROM P1;
+ DELETE FROM FOUR_TYPES;
+
+ INSERT INTO P1 VALUES (100000);
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 15 in file ddl/nist/dml091.sql
+-- PASS:0497 If 1 row is inserted?
+-- PASS:0497 OR ERROR, data exception/numeric value out of range?
+-- PASS:0497 OR 0 rows inserted OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ INSERT INTO P1 VALUES (-1000000);
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 17 in file ddl/nist/dml091.sql
+-- PASS:0497 If 1 row is inserted?
+-- PASS:0497 OR ERROR, data exception/numeric value out of range?
+-- PASS:0497 OR 0 rows inserted OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ INSERT INTO P1 VALUES (-9);
+-- PASS:0497 If 1 row is inserted?
+
+ INSERT INTO P1 VALUES (9);
+-- PASS:0497 If 1 row is inserted?
+
+ UPDATE P1 SET NUMTEST = NUMTEST + 100000 WHERE NUMTEST = 9;
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 30 in file ddl/nist/dml091.sql
+--  PASS:0497 If 1 row is updated?
+--  PASS:0497 OR ERROR, data exception/numeric value out of range?
+--  PASS:0497 OR 0 rows updated OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ UPDATE P1 SET NUMTEST = ((1 + NUMTEST) * 100000) WHERE NUMTEST = 100009 OR NUMTEST IN (SELECT GRADE - 4 FROM STAFF);
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 33 in file ddl/nist/dml091.sql
+--  PASS:0497 If 1 row is updated?
+--  PASS:0497 OR ERROR, data exception/numeric value out of range?
+--  PASS:0497 OR 0 rows updated OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ UPDATE P1 SET NUMTEST = NUMTEST * 200000 WHERE NUMTEST = -9;
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 38 in file ddl/nist/dml091.sql
+--  PASS:0497 If 1 row is updated?
+--  PASS:0497 OR ERROR, data exception/numeric value out of range?
+--  PASS:0497 OR 0 rows updated OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ INSERT INTO FOUR_TYPES VALUES (1,'X',11112222.00,.000003E-25);
+
+ SELECT T_DECIMAL / .000000001 FROM FOUR_TYPES WHERE T_CHAR = 'X';
+
+               DIVIDE 
+===================== 
+Statement failed, SQLSTATE = 22003
+arithmetic exception, numeric overflow, or string truncation
+-numeric value is out of range
+After line 48 in file ddl/nist/dml091.sql
+-- PASS:0497 If 1 row is selected and T_DECIMAL = 1.1112222E+16 ?
+-- PASS:0497 OR ERROR, data exception/numeric value out of range?
+-- PASS:0497 OR 0 rows selected OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+ INSERT INTO FOUR_TYPES (T_REAL) VALUES (-1.555222E+38);
+
+-- NOTE:0497 If we have not inserted enough big values into FOUR_TYPES,
+-- NOTE:0497 to cause an ERROR on the SELECT SUM(T_REAL) below, then
+-- NOTE:0497 use TEd to enlarge the above values for T_REAL to the
+-- NOTE:0497 maximum allowed by your implementation.
+-- NOTE:0497 If that is not enough, add more INSERTs.
+
+ SELECT SUM(T_REAL) FROM FOUR_TYPES;
+
+                    SUM 
+======================= 
+ -2.488355210669293e+39 
+
+-- PASS:0497 If ERROR, data exception/numeric value out of range?
+-- PASS:0497 OR 0 rows selected OR SQLSTATE = 22003 OR SQLCODE < 0?
+
+DROP DATABASE;

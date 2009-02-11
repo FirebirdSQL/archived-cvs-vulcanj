@@ -1,0 +1,18 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE pk( a INTEGER NOT NULL,
+                CONSTRAINT pkindx PRIMARY KEY(a)
+              );
+
+CREATE TABLE fk( a INTEGER NOT NULL,
+                 CONSTRAINT fkindx FOREIGN KEY(a) REFERENCES pk(a)
+              );
+
+ALTER INDEX RDB$FOREIGN2 INACTIVE;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Index not found
+After line 8 in file ddl/index/alter_index_05.sql
+
+DROP DATABASE;
+

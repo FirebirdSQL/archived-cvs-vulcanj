@@ -1,0 +1,19 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+
+SET TERM ^;
+CREATE TRIGGER test FOR tb BEFORE DELETE AS
+BEGIN
+  old.id=1;
+END^
+Statement failed, SQLSTATE = 42000
+attempted update of read-only column
+After line 4 in file ddl/trigger/create_trigger_05.sql
+SET TERM ;^
+SHOW TRIGGER test;
+There is no trigger TEST in this database
+
+
+DROP DATABASE;
+

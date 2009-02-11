@@ -1,0 +1,10 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+CREATE DOMAIN test NUMERIC(18,18)[32768];
+SHOW DOMAIN test;
+TEST                            ARRAY OF [32768]
+                                NUMERIC(18, 18) Nullable
+
+DROP DATABASE;
+

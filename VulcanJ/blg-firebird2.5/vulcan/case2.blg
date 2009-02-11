@@ -1,0 +1,23 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0371095
+-- XYTHOS: (24) DSQL ERROR: INTERNAL: ASSERTION FAILURE IN BANDWIDTHQUOTATEST SUITE
+
+create database 'test.fdb';
+
+create table xy_test (bytes_this_period bigint, period_start timestamp);
+commit;
+
+update xy_test
+set
+   bytes_this_period =
+      case
+         when period_start < ? then bytes_this_period + ?
+         else ?
+      end;
+Statement failed, SQLSTATE = 07002
+Dynamic SQL Error
+-SQL error code = -804
+-SQLDA missing or incorrect version, or incorrect number/type of variables
+After line 7 in file ddl/vulcan/case2.sql
+
+drop database ;

@@ -1,0 +1,12 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test 'A1';
+
+CREATE EXCEPTION test 'message to show';
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Exception TEST already exists
+After line 2 in file ddl/exception/create_exception_03.sql
+
+DROP DATABASE;
+

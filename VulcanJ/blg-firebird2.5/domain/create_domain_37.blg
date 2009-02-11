@@ -1,0 +1,9 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+CREATE DOMAIN test VARCHAR(32) NOT NULL;
+SHOW DOMAIN test;
+TEST                            VARCHAR(32) Not Null
+
+DROP DATABASE;
+

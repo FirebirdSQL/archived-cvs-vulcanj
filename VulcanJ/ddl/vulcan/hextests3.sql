@@ -16,20 +16,13 @@ insert into testy (bi) values ('0xDEADBEEF');
 -- preceding spaces will be ignored
 insert into testy (bi) values ('   0xDEADBEEF');
 
--- we now allow spaces in between too
-insert into testy (bi) values ('   0xDEAD BEEF');
-
--- this is the same, but different
-insert into testy (bi) values ('0xDEAD BEEF');
-
 -- max length is 16 hex digits
-insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF ');
-insert into testy (bi) values (' 0xDEAD BEEF DEAD BEEF ');
-
--- should get 6 rows
-select * from testy;
+insert into testy (bi) values ('0xDEADBEEFDEADBEEF');
 
 -- invalid case, too long
-insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF B');
+insert into testy (bi) values ('0xDEADBEEFDEADBEEFB');
+
+-- should get 3 rows
+select * from testy;
 
 drop database;

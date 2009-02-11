@@ -1,0 +1,801 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+set list on;
+
+/* varchar(255) as primary key didn't work in FB 1.5, but should now. */
+/* index was too big... */
+
+REcreate table t (v varchar(255) not null primary key); 
+show table t; 
+V                               VARCHAR(255) Not Null 
+CONSTRAINT INTEG_2:
+  Primary key (V)
+
+REcreate table t (i integer, v varchar(255)); 
+create index index1 on t(v); 
+show table t; 
+I                               INTEGER Nullable 
+V                               VARCHAR(255) Nullable 
+
+/* insert some data */
+set terminator ^;
+create procedure populate_t AS
+declare variable i integer =1; BEGIN
+while (i <= 255) DO BEGIN
+   insert into t values (1, 'text string '||:i );
+   i=i+1;
+END
+END ^
+set terminator ;^
+execute procedure populate_t; 
+select * from t; 
+
+I                               1
+V                               text string 1
+
+I                               1
+V                               text string 2
+
+I                               1
+V                               text string 3
+
+I                               1
+V                               text string 4
+
+I                               1
+V                               text string 5
+
+I                               1
+V                               text string 6
+
+I                               1
+V                               text string 7
+
+I                               1
+V                               text string 8
+
+I                               1
+V                               text string 9
+
+I                               1
+V                               text string 10
+
+I                               1
+V                               text string 11
+
+I                               1
+V                               text string 12
+
+I                               1
+V                               text string 13
+
+I                               1
+V                               text string 14
+
+I                               1
+V                               text string 15
+
+I                               1
+V                               text string 16
+
+I                               1
+V                               text string 17
+
+I                               1
+V                               text string 18
+
+I                               1
+V                               text string 19
+
+I                               1
+V                               text string 20
+
+I                               1
+V                               text string 21
+
+I                               1
+V                               text string 22
+
+I                               1
+V                               text string 23
+
+I                               1
+V                               text string 24
+
+I                               1
+V                               text string 25
+
+I                               1
+V                               text string 26
+
+I                               1
+V                               text string 27
+
+I                               1
+V                               text string 28
+
+I                               1
+V                               text string 29
+
+I                               1
+V                               text string 30
+
+I                               1
+V                               text string 31
+
+I                               1
+V                               text string 32
+
+I                               1
+V                               text string 33
+
+I                               1
+V                               text string 34
+
+I                               1
+V                               text string 35
+
+I                               1
+V                               text string 36
+
+I                               1
+V                               text string 37
+
+I                               1
+V                               text string 38
+
+I                               1
+V                               text string 39
+
+I                               1
+V                               text string 40
+
+I                               1
+V                               text string 41
+
+I                               1
+V                               text string 42
+
+I                               1
+V                               text string 43
+
+I                               1
+V                               text string 44
+
+I                               1
+V                               text string 45
+
+I                               1
+V                               text string 46
+
+I                               1
+V                               text string 47
+
+I                               1
+V                               text string 48
+
+I                               1
+V                               text string 49
+
+I                               1
+V                               text string 50
+
+I                               1
+V                               text string 51
+
+I                               1
+V                               text string 52
+
+I                               1
+V                               text string 53
+
+I                               1
+V                               text string 54
+
+I                               1
+V                               text string 55
+
+I                               1
+V                               text string 56
+
+I                               1
+V                               text string 57
+
+I                               1
+V                               text string 58
+
+I                               1
+V                               text string 59
+
+I                               1
+V                               text string 60
+
+I                               1
+V                               text string 61
+
+I                               1
+V                               text string 62
+
+I                               1
+V                               text string 63
+
+I                               1
+V                               text string 64
+
+I                               1
+V                               text string 65
+
+I                               1
+V                               text string 66
+
+I                               1
+V                               text string 67
+
+I                               1
+V                               text string 68
+
+I                               1
+V                               text string 69
+
+I                               1
+V                               text string 70
+
+I                               1
+V                               text string 71
+
+I                               1
+V                               text string 72
+
+I                               1
+V                               text string 73
+
+I                               1
+V                               text string 74
+
+I                               1
+V                               text string 75
+
+I                               1
+V                               text string 76
+
+I                               1
+V                               text string 77
+
+I                               1
+V                               text string 78
+
+I                               1
+V                               text string 79
+
+I                               1
+V                               text string 80
+
+I                               1
+V                               text string 81
+
+I                               1
+V                               text string 82
+
+I                               1
+V                               text string 83
+
+I                               1
+V                               text string 84
+
+I                               1
+V                               text string 85
+
+I                               1
+V                               text string 86
+
+I                               1
+V                               text string 87
+
+I                               1
+V                               text string 88
+
+I                               1
+V                               text string 89
+
+I                               1
+V                               text string 90
+
+I                               1
+V                               text string 91
+
+I                               1
+V                               text string 92
+
+I                               1
+V                               text string 93
+
+I                               1
+V                               text string 94
+
+I                               1
+V                               text string 95
+
+I                               1
+V                               text string 96
+
+I                               1
+V                               text string 97
+
+I                               1
+V                               text string 98
+
+I                               1
+V                               text string 99
+
+I                               1
+V                               text string 100
+
+I                               1
+V                               text string 101
+
+I                               1
+V                               text string 102
+
+I                               1
+V                               text string 103
+
+I                               1
+V                               text string 104
+
+I                               1
+V                               text string 105
+
+I                               1
+V                               text string 106
+
+I                               1
+V                               text string 107
+
+I                               1
+V                               text string 108
+
+I                               1
+V                               text string 109
+
+I                               1
+V                               text string 110
+
+I                               1
+V                               text string 111
+
+I                               1
+V                               text string 112
+
+I                               1
+V                               text string 113
+
+I                               1
+V                               text string 114
+
+I                               1
+V                               text string 115
+
+I                               1
+V                               text string 116
+
+I                               1
+V                               text string 117
+
+I                               1
+V                               text string 118
+
+I                               1
+V                               text string 119
+
+I                               1
+V                               text string 120
+
+I                               1
+V                               text string 121
+
+I                               1
+V                               text string 122
+
+I                               1
+V                               text string 123
+
+I                               1
+V                               text string 124
+
+I                               1
+V                               text string 125
+
+I                               1
+V                               text string 126
+
+I                               1
+V                               text string 127
+
+I                               1
+V                               text string 128
+
+I                               1
+V                               text string 129
+
+I                               1
+V                               text string 130
+
+I                               1
+V                               text string 131
+
+I                               1
+V                               text string 132
+
+I                               1
+V                               text string 133
+
+I                               1
+V                               text string 134
+
+I                               1
+V                               text string 135
+
+I                               1
+V                               text string 136
+
+I                               1
+V                               text string 137
+
+I                               1
+V                               text string 138
+
+I                               1
+V                               text string 139
+
+I                               1
+V                               text string 140
+
+I                               1
+V                               text string 141
+
+I                               1
+V                               text string 142
+
+I                               1
+V                               text string 143
+
+I                               1
+V                               text string 144
+
+I                               1
+V                               text string 145
+
+I                               1
+V                               text string 146
+
+I                               1
+V                               text string 147
+
+I                               1
+V                               text string 148
+
+I                               1
+V                               text string 149
+
+I                               1
+V                               text string 150
+
+I                               1
+V                               text string 151
+
+I                               1
+V                               text string 152
+
+I                               1
+V                               text string 153
+
+I                               1
+V                               text string 154
+
+I                               1
+V                               text string 155
+
+I                               1
+V                               text string 156
+
+I                               1
+V                               text string 157
+
+I                               1
+V                               text string 158
+
+I                               1
+V                               text string 159
+
+I                               1
+V                               text string 160
+
+I                               1
+V                               text string 161
+
+I                               1
+V                               text string 162
+
+I                               1
+V                               text string 163
+
+I                               1
+V                               text string 164
+
+I                               1
+V                               text string 165
+
+I                               1
+V                               text string 166
+
+I                               1
+V                               text string 167
+
+I                               1
+V                               text string 168
+
+I                               1
+V                               text string 169
+
+I                               1
+V                               text string 170
+
+I                               1
+V                               text string 171
+
+I                               1
+V                               text string 172
+
+I                               1
+V                               text string 173
+
+I                               1
+V                               text string 174
+
+I                               1
+V                               text string 175
+
+I                               1
+V                               text string 176
+
+I                               1
+V                               text string 177
+
+I                               1
+V                               text string 178
+
+I                               1
+V                               text string 179
+
+I                               1
+V                               text string 180
+
+I                               1
+V                               text string 181
+
+I                               1
+V                               text string 182
+
+I                               1
+V                               text string 183
+
+I                               1
+V                               text string 184
+
+I                               1
+V                               text string 185
+
+I                               1
+V                               text string 186
+
+I                               1
+V                               text string 187
+
+I                               1
+V                               text string 188
+
+I                               1
+V                               text string 189
+
+I                               1
+V                               text string 190
+
+I                               1
+V                               text string 191
+
+I                               1
+V                               text string 192
+
+I                               1
+V                               text string 193
+
+I                               1
+V                               text string 194
+
+I                               1
+V                               text string 195
+
+I                               1
+V                               text string 196
+
+I                               1
+V                               text string 197
+
+I                               1
+V                               text string 198
+
+I                               1
+V                               text string 199
+
+I                               1
+V                               text string 200
+
+I                               1
+V                               text string 201
+
+I                               1
+V                               text string 202
+
+I                               1
+V                               text string 203
+
+I                               1
+V                               text string 204
+
+I                               1
+V                               text string 205
+
+I                               1
+V                               text string 206
+
+I                               1
+V                               text string 207
+
+I                               1
+V                               text string 208
+
+I                               1
+V                               text string 209
+
+I                               1
+V                               text string 210
+
+I                               1
+V                               text string 211
+
+I                               1
+V                               text string 212
+
+I                               1
+V                               text string 213
+
+I                               1
+V                               text string 214
+
+I                               1
+V                               text string 215
+
+I                               1
+V                               text string 216
+
+I                               1
+V                               text string 217
+
+I                               1
+V                               text string 218
+
+I                               1
+V                               text string 219
+
+I                               1
+V                               text string 220
+
+I                               1
+V                               text string 221
+
+I                               1
+V                               text string 222
+
+I                               1
+V                               text string 223
+
+I                               1
+V                               text string 224
+
+I                               1
+V                               text string 225
+
+I                               1
+V                               text string 226
+
+I                               1
+V                               text string 227
+
+I                               1
+V                               text string 228
+
+I                               1
+V                               text string 229
+
+I                               1
+V                               text string 230
+
+I                               1
+V                               text string 231
+
+I                               1
+V                               text string 232
+
+I                               1
+V                               text string 233
+
+I                               1
+V                               text string 234
+
+I                               1
+V                               text string 235
+
+I                               1
+V                               text string 236
+
+I                               1
+V                               text string 237
+
+I                               1
+V                               text string 238
+
+I                               1
+V                               text string 239
+
+I                               1
+V                               text string 240
+
+I                               1
+V                               text string 241
+
+I                               1
+V                               text string 242
+
+I                               1
+V                               text string 243
+
+I                               1
+V                               text string 244
+
+I                               1
+V                               text string 245
+
+I                               1
+V                               text string 246
+
+I                               1
+V                               text string 247
+
+I                               1
+V                               text string 248
+
+I                               1
+V                               text string 249
+
+I                               1
+V                               text string 250
+
+I                               1
+V                               text string 251
+
+I                               1
+V                               text string 252
+
+I                               1
+V                               text string 253
+
+I                               1
+V                               text string 254
+
+I                               1
+V                               text string 255
+
+
+
+drop database ;

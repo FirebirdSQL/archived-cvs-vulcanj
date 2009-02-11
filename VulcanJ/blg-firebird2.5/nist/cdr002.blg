@@ -1,0 +1,24 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+ CREATE TABLE STAFF5 (EMPNUM    CHAR(3) NOT NULL,EMPNAME  CHAR(20), GRADE DECIMAL(4), CITY   CHAR(15), PRIMARY KEY (EMPNUM), CHECK (GRADE > 0 AND GRADE < 20));
+ INSERT INTO STAFF5 VALUES('E1','Alice',0,'Deale');
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint INTEG_3 on view or table STAFF5
+-At trigger 'CHECK_1'
+After line 4 in file ddl/nist/cdr002.sql
+ INSERT INTO STAFF5 VALUES('E3','Susan',11,'Hawaii');
+ INSERT INTO STAFF5 VALUES('E2','Tom',22,'Newyork');
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint INTEG_3 on view or table STAFF5
+-At trigger 'CHECK_1'
+After line 6 in file ddl/nist/cdr002.sql
+ SELECT COUNT(*) FROM STAFF5;
+
+       COUNT 
+============ 
+           1 
+
+
+DROP DATABASE;

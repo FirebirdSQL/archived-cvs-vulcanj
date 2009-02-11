@@ -1,0 +1,24 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+-- Firebird SQL requires a comma after the 1st column definition.
+-- Tested 6/16/2005.
+
+--  TEST:0831 FIPS Flagger - ADD (column, ...)!
+--  FIPS Flagger Test. Support for this feature is not required.
+--  If supported, this feature must be flagged as an extension to the
+--  standard.
+
+ CREATE TABLE USIG (C1 INT, C_1 INT);
+ ALTER TABLE USIG ADD COL3 INTEGER, ADD COL4 SMALLINT;
+
+ SHOW TABLE USIG;
+C1                              INTEGER Nullable 
+C_1                             INTEGER Nullable 
+COL3                            INTEGER Nullable 
+COL4                            SMALLINT Nullable 
+--  PASS:0831 If 2 columns added?
+--  NOTE:0831 Shows support for X/Open ADD (column, ...) extension
+
+DROP DATABASE;

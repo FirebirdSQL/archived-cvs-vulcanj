@@ -1,0 +1,36 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+show generators;
+There are no generators in this database
+
+CREATE GENERATOR test;
+COMMIT;
+SELECT RDB$GENERATOR_NAME, RDB$SYSTEM_FLAG FROM RDB$GENERATORS WHERE RDB$GENERATOR_NAME='TEST';
+
+RDB$GENERATOR_NAME                                                                            RDB$SYSTEM_FLAG 
+=============================================================================== =============== 
+TEST                                                                                                        0 
+
+
+CREATE GENERATOR test2;
+COMMIT;
+SELECT RDB$GENERATOR_NAME, RDB$SYSTEM_FLAG FROM RDB$GENERATORS WHERE RDB$GENERATOR_NAME='TEST2';
+
+RDB$GENERATOR_NAME                                                                            RDB$SYSTEM_FLAG 
+=============================================================================== =============== 
+TEST2                                                                                                       0 
+
+
+SHOW GENERATORS;
+Generator TEST, current value is 0
+Generator TEST2, current value is 0
+
+drop generator test;
+drop generator test2;
+
+show generators;
+There are no generators in this database
+
+DROP DATABASE;
+

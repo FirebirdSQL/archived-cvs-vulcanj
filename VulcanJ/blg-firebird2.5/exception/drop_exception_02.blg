@@ -1,0 +1,26 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE EXCEPTION test 'message to show';
+SET TERM ^;
+CREATE PROCEDURE a AS
+BEGIN
+  EXCEPTION test;
+END ^
+SET TERM ;^
+
+DROP EXCEPTION test;
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-cannot delete
+-EXCEPTION TEST
+-there are 1 dependencies
+After line 8 in file ddl/exception/drop_exception_02.sql
+SHOW EXCEPTION test;
+Exception Name                  Used by, Type
+=============================== =============================================
+TEST                            A, Stored procedure
+Msg: message to show
+
+
+DROP DATABASE;
+

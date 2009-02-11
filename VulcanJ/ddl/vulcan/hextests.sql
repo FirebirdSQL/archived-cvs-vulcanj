@@ -27,7 +27,7 @@ select * from HEXTEST1;
 rollback;
 
 -- try some valid literals
-insert into HEXTEST1 (c1, c2) values (x'aF3', x'aF3');
+insert into HEXTEST1 (c1, c2) values (x'F3', x'F3');
 select c1 from HEXTEST1;
 rollback;
 
@@ -35,8 +35,8 @@ insert into HEXTEST2 values (0xaF3, 0xaF3);
 select * from HEXTEST2;
 rollback;
 
--- another valid case, x'3'
-insert into HEXTEST1 (c1, c2) values (x'3', x'3');
+-- another valid case
+insert into HEXTEST1 (c1, c2) values (x'03', x'03');
 select c1 from HEXTEST1;
 rollback;
 
@@ -45,13 +45,13 @@ insert into HEXTEST1 (c1, c2) values (x'7af3', x'7af3');
 select c1 from HEXTEST1;
 rollback;
 
--- another valid case, x'aA7bB3c6C2DdE4e10fF8'
+-- another valid case
 insert into HEXTEST1 values (x'aA7bB3c6C2DdE4e10fF8', x'aA7bB3c6C2DdE4e10fF8');
 select c1 from HEXTEST1;
 rollback;
 
 -- invalid test case, truncation
-insert into HEXTEST1 values (x'0aA7bB3c6C2DdE4e10fF8', x'0aA7bB3c6C2DdE4e10fF8');
+insert into HEXTEST1 values (x'0aA7bB3c6C2DdE4e10fF80', x'0aA7bB3c6C2DdE4e10fF80');
 select * from HEXTEST1;
 rollback;
 
@@ -133,11 +133,10 @@ select * from testy;
 
 -- now some BIGINT tests
 
-insert into testy (bi) values ('0xDEADBEEF');
 insert into testy (bi) values ('0x8000000000000000');
 insert into testy (bi) values ('0x7FFFFFFFFFFFFFFF');
 
--- select should return 3 rows
+-- select should return 2 rows
 select * from testy where bi is not null;
 
 drop database;

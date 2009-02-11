@@ -1,0 +1,42 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- S0302911
+-- FREBIRD DOESN'T SUPPORT "LONG" FLOATING POINT CONSTANTS 
+
+set names ascii;
+create database 'test.fdb'; 
+
+create table dp_test (x double precision);
+insert into dp_test values(11000000000000000.1);
+insert into dp_test values(110000000000000000.);
+insert into dp_test values(1100000000000000000);
+insert into dp_test values(11000000000000000000);
+Statement failed, SQLSTATE = 42000
+Dynamic SQL Error
+-SQL error code = -104
+-Token unknown - line 1, column 28
+-1
+At line 11 in file ddl/types/double.sql
+insert into dp_test values(110000000000000000.00);
+Statement failed, SQLSTATE = 42000
+Dynamic SQL Error
+-SQL error code = -104
+-Token unknown - line 1, column 28
+-1
+At line 12 in file ddl/types/double.sql
+insert into dp_test values(110000000000.00000000);
+Statement failed, SQLSTATE = 42000
+Dynamic SQL Error
+-SQL error code = -104
+-Token unknown - line 1, column 28
+-1
+At line 13 in file ddl/types/double.sql
+select * from dp_test;
+
+                      X 
+======================= 
+  1.100000000000000e+16 
+  1.100000000000000e+17 
+  1.100000000000000e+18 
+
+
+drop database;

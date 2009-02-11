@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE test(
+ c1 SMALLINT
+);
+
+CREATE TABLE test(
+ c1 SMALLINT,
+ c2 INTEGER
+);
+Statement failed, SQLSTATE = 42S01
+unsuccessful metadata update
+-Table TEST already exists
+After line 4 in file ddl/table/create_table_05.sql
+
+DROP DATABASE;
+

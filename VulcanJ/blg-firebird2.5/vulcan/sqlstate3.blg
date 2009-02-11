@@ -1,0 +1,94 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect s0369191
+-- FIREBIRD RETURNS WARNING SQLSTATE FOR STRING TRUCATION ON INSERT (WRONG SQLSTATE)
+set names ascii;
+set sqlstate on;
+Valid options are:
+AUTOddl                  BLOBdisplay              BAIL                     
+BULK_INSERT              COUNT                    ECHO                     
+GENERATOR                HEADING                  LIST                     
+NAMES                    PLAN                     PLANONLY                 
+ROWCOUNT                 STATs                    SQLDA_DISPLAY            
+SQL                      STATISTICS               TRANSaction              
+TERMinator               TIME                     WIDTH                    
+WARNINGs                 WNG                      
+Command error: set sqlstate on
+create database 'test.fdb' default character set iso8859_1;
+set sqlstate on;
+Valid options are:
+AUTOddl                  BLOBdisplay              BAIL                     
+BULK_INSERT              COUNT                    ECHO                     
+GENERATOR                HEADING                  LIST                     
+NAMES                    PLAN                     PLANONLY                 
+ROWCOUNT                 STATs                    SQLDA_DISPLAY            
+SQL                      STATISTICS               TRANSaction              
+TERMinator               TIME                     WIDTH                    
+WARNINGs                 WNG                      
+Command error: set sqlstate on
+
+create table test (c char(3) );
+
+-- should produce sqlstate 22001
+insert into test values ('xxxx');
+Statement failed, SQLSTATE = 22001
+arithmetic exception, numeric overflow, or string truncation
+-string right truncation
+After line 8 in file ddl/vulcan/sqlstate3.sql
+
+create table testsrc (c char(5) );
+create table testdest (c char(4) );
+insert into testsrc values ('xxxxx');
+
+-- again, sqlstate 22001
+insert into testdest select * from testsrc;
+Statement failed, SQLSTATE = 22001
+arithmetic exception, numeric overflow, or string truncation
+-string right truncation
+After line 15 in file ddl/vulcan/sqlstate3.sql
+
+create table test_utf8 (c char(5) character set utf8);
+create table test_ascii (c char(5) character set ascii);
+insert into test_utf8 values (_utf8'testñ');
+Statement failed, SQLSTATE = 22000
+Dynamic SQL Error
+-SQL error code = -104
+-Malformed string
+After line 21 in file ddl/vulcan/sqlstate3.sql
+insert into test_ascii select * from test_utf8;
+
+
+
+SET TERM ^;
+CREATE PROCEDURE trunc_proc (c_src char(10) ) 
+AS
+  declare c_dest char(5);
+BEGIN
+  c_dest = c_src;
+END ^
+SET TERM ;^
+SHOW PROCEDURE trunc_proc;
+Procedure text:
+=============================================================================
+  declare c_dest char(5);
+BEGIN
+  c_dest = c_src;
+END
+=============================================================================
+Parameters:
+C_SRC                             INPUT CHAR(10)
+
+execute procedure trunc_proc ('xxxxxxxxxxx');
+Statement failed, SQLSTATE = 22001
+arithmetic exception, numeric overflow, or string truncation
+-string right truncation
+After line 35 in file ddl/vulcan/sqlstate3.sql
+execute procedure trunc_proc ('xxxxxxxxxx');
+Statement failed, SQLSTATE = 22001
+arithmetic exception, numeric overflow, or string truncation
+-string right truncation
+-At procedure 'TRUNC_PROC' line: 5, col: 3
+After line 37 in file ddl/vulcan/sqlstate3.sql
+
+drop database;
+
+quit;

@@ -1,0 +1,27 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- Defect S0284783
+-- VULCAN HANDLING OF SUBSTRING() 
+
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
+
+create table t4 (city char(20)); 
+insert into t4 values ('raleigh'); 
+select substring (city from 4 for -1) from t4; 
+Statement failed, SQLSTATE = 22011
+Invalid length parameter -1 to SUBSTRING. Negative integers are not allowed.
+After line 8 in file ddl/vulcan/substring_bug.sql
+
+select substring (city from 0 for 2) from t4; 
+Statement failed, SQLSTATE = 22011
+Invalid offset parameter 0 to SUBSTRING. Only positive integers are allowed.
+After line 9 in file ddl/vulcan/substring_bug.sql
+
+select substring (city from 4 for 0) from t4; 
+
+SUBSTRING            
+==================== 
+                     
+
+
+drop database;

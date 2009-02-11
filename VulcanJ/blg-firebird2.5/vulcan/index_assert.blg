@@ -1,0 +1,29 @@
+Use CONNECT or CREATE DATABASE to specify a database
+create database 'test.fdb' user 'sysdba' password 'masterkey' 
+   page_size=16834 default character set iso8859_1; 
+
+set sqlstate on;
+Valid options are:
+AUTOddl                  BLOBdisplay              BAIL                     
+BULK_INSERT              COUNT                    ECHO                     
+GENERATOR                HEADING                  LIST                     
+NAMES                    PLAN                     PLANONLY                 
+ROWCOUNT                 STATs                    SQLDA_DISPLAY            
+SQL                      STATISTICS               TRANSaction              
+TERMinator               TIME                     WIDTH                    
+WARNINGs                 WNG                      
+Command error: set sqlstate on
+
+recreate table t (i integer not null primary key,
+   c char(10) character set unicode_fss); 
+
+insert into t values (1, 'text'); 	
+
+recreate table t (i integer not null primary key,
+   c char(10) ); 
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-object T is in use
+After line 9 in file ddl/vulcan/index_assert.sql
+
+drop database;

@@ -1,0 +1,40 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect s0442109
+-- error message cleanup
+create database 'test.fdb';
+
+create table foo (c char(32768));
+Statement failed, SQLSTATE = 22003
+Dynamic SQL Error
+-SQL error code = -842
+-Short integer expected
+After line 3 in file ddl/vulcan/anne_err.sql
+
+create table foo (c varchar(32768));
+Statement failed, SQLSTATE = 22003
+Dynamic SQL Error
+-SQL error code = -842
+-Short integer expected
+After line 5 in file ddl/vulcan/anne_err.sql
+
+create table foo (c nchar(32768));
+Statement failed, SQLSTATE = 22003
+Dynamic SQL Error
+-SQL error code = -842
+-Short integer expected
+After line 7 in file ddl/vulcan/anne_err.sql
+
+create table foo (c national char varying (32768));
+Statement failed, SQLSTATE = 22003
+Dynamic SQL Error
+-SQL error code = -842
+-Short integer expected
+After line 9 in file ddl/vulcan/anne_err.sql
+
+create table foo4567890123456789012345678901234567 (c22 char(32));
+Statement failed, SQLSTATE = 42000
+unsuccessful metadata update
+-Name longer than database column size
+After line 11 in file ddl/vulcan/anne_err.sql
+
+drop database;

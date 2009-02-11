@@ -1,0 +1,16 @@
+Use CONNECT or CREATE DATABASE to specify a database
+SET NAMES ASCII;
+CREATE DATABASE 'test.fdb' ;
+CREATE DOMAIN test VARCHAR(63) CHECK(VALUE LIKE 'TE%');
+
+ALTER DOMAIN test DROP CONSTRAINT;
+COMMIT;
+SELECT RDB$FIELD_NAME, RDB$VALIDATION_SOURCE FROM rdb$fields WHERE RDB$FIELD_NAME='TEST';
+
+RDB$FIELD_NAME                  RDB$VALIDATION_SOURCE 
+=============================== ===================== 
+TEST                                           <null> 
+
+
+DROP DATABASE;
+

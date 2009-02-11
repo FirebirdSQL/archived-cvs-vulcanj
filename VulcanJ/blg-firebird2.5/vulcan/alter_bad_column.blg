@@ -1,0 +1,17 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect s0389131
+-- sigaccess on alter table with bogus column name
+
+set names ascii;
+
+create database 'test.fdb';
+create table testme (i integer) ;
+
+-- should get error message "local column BOGUS not found"
+alter table testme alter BOGUS to NEWNAME ;
+Statement failed, SQLSTATE = 42S22
+unsuccessful metadata update
+-column BOGUS does not exist in table/view TESTME
+After line 7 in file ddl/vulcan/alter_bad_column.sql
+
+drop database;

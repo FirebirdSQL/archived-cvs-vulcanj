@@ -1,0 +1,13 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+CREATE TABLE tb(id INT);
+
+CREATE VIEW test (id) AS SELECT id FROM tb WHERE id<10 WITH CHECK OPTION;
+INSERT INTO test VALUES(10);
+Statement failed, SQLSTATE = 23000
+Operation violates CHECK constraint  on view or table TEST
+-At trigger 'CHECK_2'
+After line 4 in file ddl/view/create_view_08.sql
+
+DROP DATABASE;
+

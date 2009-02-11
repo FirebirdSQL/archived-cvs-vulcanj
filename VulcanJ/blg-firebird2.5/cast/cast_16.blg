@@ -1,0 +1,12 @@
+Use CONNECT or CREATE DATABASE to specify a database
+CREATE DATABASE 'test.fdb' ;
+
+SELECT CAST(CAST('10.2.1973' AS DATE) AS VARCHAR(40)) FROM rdb$Database;
+
+CAST                                     
+======================================== 
+1973-02-10                               
+
+
+DROP DATABASE;
+
