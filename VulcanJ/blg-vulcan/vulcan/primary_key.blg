@@ -10,6 +10,10 @@ Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -Column: C not defined as NOT NULL - cannot be used in PRIMARY KEY constraint definition
 After line 5 in file ddl/vulcan/primary_key.sql
--- create table should fail, because c is NULLABLE
+-- create table fails in vulcan, because c is NULLABLE
+-- create table succeeds in fb2.5, and sets C to NOT NULL
+
+show table t2;
+There is no table T2 in this database
 
 drop database;

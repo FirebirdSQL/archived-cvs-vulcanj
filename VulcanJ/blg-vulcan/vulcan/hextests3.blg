@@ -25,41 +25,23 @@ insert into testy (bi) values ('0xDEADBEEF');
 -- preceding spaces will be ignored
 insert into testy (bi) values ('   0xDEADBEEF');
 
--- we now allow spaces in between too
-insert into testy (bi) values ('   0xDEAD BEEF');
-Statement failed, SQLCODE = -413
-conversion error from string "   0xDEAD BEEF"
-After line 17 in file ddl/vulcan/hextests3.sql
+-- max length is 16 hex digits
+insert into testy (bi) values ('0xDEADBEEFDEADBEEF');
 
--- this is the same, but different
-insert into testy (bi) values ('0xDEAD BEEF');
+-- invalid case, too long
+insert into testy (bi) values ('0xDEADBEEFDEADBEEFB');
 Statement failed, SQLCODE = -413
-conversion error from string "0xDEAD BEEF"
+conversion error from string "0xDEADBEEFDEADBEEFB"
 After line 20 in file ddl/vulcan/hextests3.sql
 
--- max length is 16 hex digits
-insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF ');
-Statement failed, SQLCODE = -413
-conversion error from string "0xDEAD BEEF DEAD BEEF "
-After line 23 in file ddl/vulcan/hextests3.sql
-insert into testy (bi) values (' 0xDEAD BEEF DEAD BEEF ');
-Statement failed, SQLCODE = -413
-conversion error from string " 0xDEAD BEEF DEAD BEEF "
-After line 26 in file ddl/vulcan/hextests3.sql
-
--- should get 6 rows
+-- should get 3 rows
 select * from testy;
 
            I                    BI 
 ============ ===================== 
       <null>            3735928559 
       <null>            3735928559 
+      <null>  -2401053088876216593 
 
-
--- invalid case, too long
-insert into testy (bi) values ('0xDEAD BEEF DEAD BEEF B');
-Statement failed, SQLCODE = -413
-conversion error from string "0xDEAD BEEF DEAD BEEF B"
-After line 30 in file ddl/vulcan/hextests3.sql
 
 drop database;

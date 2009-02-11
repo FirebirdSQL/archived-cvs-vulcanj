@@ -48,12 +48,12 @@ C1                   C2
 rollback;
 
 -- try some valid literals
-insert into HEXTEST1 (c1, c2) values (x'aF3', x'aF3');
+insert into HEXTEST1 (c1, c2) values (x'F3', x'F3');
 select c1 from HEXTEST1;
 
 C1                   
 ==================== 
-0AF30000000000000000 
+F3000000000000000000 
 
 rollback;
 
@@ -66,8 +66,8 @@ select * from HEXTEST2;
 
 rollback;
 
--- another valid case, x'3'
-insert into HEXTEST1 (c1, c2) values (x'3', x'3');
+-- another valid case
+insert into HEXTEST1 (c1, c2) values (x'03', x'03');
 select c1 from HEXTEST1;
 
 C1                   
@@ -86,7 +86,7 @@ C1
 
 rollback;
 
--- another valid case, x'aA7bB3c6C2DdE4e10fF8'
+-- another valid case
 insert into HEXTEST1 values (x'aA7bB3c6C2DdE4e10fF8', x'aA7bB3c6C2DdE4e10fF8');
 select c1 from HEXTEST1;
 
@@ -97,7 +97,7 @@ AA7BB3C6C2DDE4E10FF8
 rollback;
 
 -- invalid test case, truncation
-insert into HEXTEST1 values (x'0aA7bB3c6C2DdE4e10fF8', x'0aA7bB3c6C2DdE4e10fF8');
+insert into HEXTEST1 values (x'0aA7bB3c6C2DdE4e10fF80', x'0aA7bB3c6C2DdE4e10fF80');
 Statement failed, SQLCODE = -802
 arithmetic exception, numeric overflow, or string truncation
 After line 51 in file ddl/vulcan/hextests.sql
@@ -238,16 +238,14 @@ select * from testy;
 
 -- now some BIGINT tests
 
-insert into testy (bi) values ('0xDEADBEEF');
 insert into testy (bi) values ('0x8000000000000000');
 insert into testy (bi) values ('0x7FFFFFFFFFFFFFFF');
 
--- select should return 3 rows
+-- select should return 2 rows
 select * from testy where bi is not null;
 
            I                    BI 
 ============ ===================== 
-      <null>            3735928559 
       <null>  -9223372036854775808 
       <null>   9223372036854775807 
 

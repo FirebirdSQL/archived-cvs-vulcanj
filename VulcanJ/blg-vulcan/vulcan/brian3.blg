@@ -1,0 +1,79 @@
+Use CONNECT or CREATE DATABASE to specify a database
+-- defect S0550609
+-- VIEW WITH CASE LOSES SQLSUBTYPE OF UNICODE_FSS 
+
+create database 'test.tdb' default character set unicode_fss; 
+set sqlda_display on;
+
+drop view all_privs;
+Statement failed, SQLCODE = -607
+View ALL_PRIVS does not exist
+After line 5 in file ddl/vulcan/brian3.sql
+
+REcreate table privs (
+   is_negative char(1),
+   privilege_type varchar(5)
+   );
+   
+insert into privs values ('N', 'FOO');
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+commit;
+
+-- works, sqlsubtype is 3
+select cast (privilege_type as varchar(5) character set unicode_fss) from privs;
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+
+OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
+01: sqltype: 449 VARYING   Nullable sqlscale: 0 sqlsubtype: 3 sqllen: 15
+  :  name: (4)CAST  alias: (4)CAST
+  : table: (0)  owner: (0)
+
+CAST            
+=============== 
+FOO             
+
+
+-- view appears to be created ok...
+create view all_privs1 as select cast (privilege_type as varchar(5) character set unicode_fss) PV from privs;
+
+show view all_privs1;
+PV                              Computed by: 
+View Source:
+==== ======
+ select cast (privilege_type as varchar(5) character set unicode_fss) PV from privs
+
+-- but we lose the sqlsubtype in query using view - should be 3 for unicode_fss
+select * from all_privs1;
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+
+OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
+01: sqltype: 449 VARYING   Nullable sqlscale: 0 sqlsubtype: 3 sqllen: 15
+  :  name: (2)PV  alias: (2)PV
+  : table: (10)ALL_PRIVS1  owner: (6)SYSDBA
+
+PV              
+=============== 
+FOO             
+
+
+
+-- this one uses the database default
+create view all_privs2 as select cast (privilege_type as varchar(5)) PV from privs;
+select * from all_privs2;
+
+INPUT  SQLDA version: 1 sqln: 10 sqld: 0
+
+OUTPUT SQLDA version: 1 sqln: 20 sqld: 1
+01: sqltype: 449 VARYING   Nullable sqlscale: 0 sqlsubtype: 3 sqllen: 15
+  :  name: (2)PV  alias: (2)PV
+  : table: (10)ALL_PRIVS2  owner: (6)SYSDBA
+
+PV              
+=============== 
+FOO             
+
+
+drop database;
