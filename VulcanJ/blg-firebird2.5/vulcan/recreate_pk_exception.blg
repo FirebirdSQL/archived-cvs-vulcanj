@@ -4,8 +4,7 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 -- these tests are from cts5sch2.sql
 
-create database 'test.fdb' user 'sysdba' password 'masterkey'
-   page_size=16834 default character set iso8859_1;
+create database 'test.fdb' page_size=16834 default character set iso8859_1;
 
 recreate table t (i integer not null primary key,
    c char(10) character set unicode_fss);
@@ -16,7 +15,7 @@ recreate table t (i integer not null primary key,
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -object T is in use
-After line 12 in file ddl/vulcan/recreate_pk_exception.sql
+After line 11 in file ddl/vulcan/recreate_pk_exception.sql
 
 -- new lines are below
 

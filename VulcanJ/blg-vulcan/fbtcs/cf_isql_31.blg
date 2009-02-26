@@ -1,5 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
-CREATE DATABASE 'test.fdb' USER 'SYSDBA' PASSWORD 'masterkey';
+CREATE DATABASE 'test.fdb';
 
 set echo;
 UID                             (DM_ID) BIGINT Not Null 

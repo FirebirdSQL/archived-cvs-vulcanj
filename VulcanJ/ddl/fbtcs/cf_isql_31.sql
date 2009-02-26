@@ -1,4 +1,4 @@
-CREATE DATABASE 'test.fdb' USER 'SYSDBA' PASSWORD 'masterkey';
+CREATE DATABASE 'test.fdb';
 
 set echo;
 

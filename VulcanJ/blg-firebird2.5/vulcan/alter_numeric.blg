@@ -1,6 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
-create database 'test.fdb' user 'sysdba' password 'masterkey' 
-   page_size=16834 default character set iso8859_1; 
+create database 'test.fdb' default character set iso8859_1; 
 
 -- bigint and numeric are both large integers, it's just that their
 -- subtype is different. There was a problem where altering the 
@@ -12,7 +11,7 @@ alter table tt alter n type integer;
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -Cannot change datatype for N.  Conversion from base type BIGINT to INTEGER is not supported.
-After line 9 in file ddl/vulcan/alter_numeric.sql
+After line 8 in file ddl/vulcan/alter_numeric.sql
 -- Statement failed, SQLCODE = -607
 -- unsuccessful metadata update
 -- -Cannot change datatype for N.  Conversion from base type BIGINT to INTEGER is not supported.

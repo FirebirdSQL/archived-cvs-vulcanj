@@ -1,4 +1,4 @@
-CREATE DATABASE 'test.fdb' user 'sysdba' password 'masterkey';
+CREATE DATABASE 'test.fdb';
 create table foo (col char(10));
 commit work;
 insert into foo values (1);

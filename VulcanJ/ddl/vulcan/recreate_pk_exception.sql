@@ -3,8 +3,7 @@
 
 -- these tests are from cts5sch2.sql
 
-create database 'test.fdb' user 'sysdba' password 'masterkey'
-   page_size=16834 default character set iso8859_1;
+create database 'test.fdb' page_size=16834 default character set iso8859_1;
 
 recreate table t (i integer not null primary key,
    c char(10) character set unicode_fss);

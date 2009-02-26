@@ -1,5 +1,4 @@
-create database 'test.fdb' user 'sysdba' password 'masterkey' 
-   page_size=16834 default character set iso8859_1; 
+create database 'test.fdb' default character set iso8859_1; 
 
 -- bigint and numeric are both large integers, it's just that their
 -- subtype is different. There was a problem where altering the 

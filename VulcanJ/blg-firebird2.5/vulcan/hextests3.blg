@@ -41,6 +41,6 @@ select * from testy;
 ============ ===================== 
       <null>            3735928559 
       <null>            3735928559
-      <null>            dunno 
+      <null>  -2401053088876216593 
 
 drop database;

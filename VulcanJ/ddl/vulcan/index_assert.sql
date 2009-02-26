@@ -1,5 +1,4 @@
-create database 'test.fdb' user 'sysdba' password 'masterkey' 
-   page_size=16834 default character set iso8859_1; 
+create database 'test.fdb' page_size=16834 default character set iso8859_1; 
 
 set sqlstate on;
 

@@ -1,6 +1,6 @@
 -- defect S0302147
 -- will need to rebench when this defect is fixed.
-create database 'test.fdb' user 'sysdba' password 'masterkey'; 
+create database 'test.fdb' default character set iso8859_1; 
 
 CREATE TABLE FSK_GROUP (
        group_id             INTEGER NOT NULL PRIMARY KEY,

@@ -69,9 +69,6 @@ ROLLBACK WORK;
  DELETE FROM WORKS1;
  INSERT INTO WORKS1 SELECT * FROM WORKS;
  UPDATE WORKS1 SET PNUM = EMPNUM, EMPNUM = PNUM, HOURS = (HOURS + 3) * HOURS;
-Statement failed, SQLCODE = -803
-violation of PRIMARY or UNIQUE KEY constraint "INTEG_18" on table "WORKS1"
-After line 17 in file ddl/nist/dml069.sql
 -- integrity constraint violation
 
 DROP DATABASE;

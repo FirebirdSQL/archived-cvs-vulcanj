@@ -1,7 +1,7 @@
 -- S0328089
 -- CREATING A FIREBIRD TABLE WITH ROW WIDTH >64K ABENDS WITH ASSERTION FAILURE
 
-create database 'test.fdb' user 'sysdba' password 'masterkey'
+create database 'test.fdb'
    page_size=2048;
 
 -- 64k is too big, will fail

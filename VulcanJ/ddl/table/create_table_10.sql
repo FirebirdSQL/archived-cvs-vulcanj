@@ -4,7 +4,7 @@
 -- S0340381
 -- PROBLEMS WITH RECREATE TABLE WITH PRIMARY KEY
 
-create database 'test.fdb' user 'sysdba' password 'masterkey'
+create database 'test.fdb'
    page_size=16834 default character set iso8859_1;
 
 recreate table t (i integer not null primary key,

@@ -27,7 +27,7 @@ commit;
 -- this did crash
 select  -2.488355210669293e+39 from rdb$database;
 
-                        
+               CONSTANT 
 ======================= 
  -2.488355210669293e+39 
 
