@@ -3,7 +3,6 @@
 
 set names ascii;
 create database 'test.fdb';
-set sqlstate on;
 recreate table test (
    i000 integer,
    i001 integer,

@@ -1,7 +1,6 @@
 -- S0385573
 -- DI STUDIO ISSUES WITH FOREIGN KEYS 
 set names ascii;
-set sqlstate on;
 
 create database 'test.fdb';
 

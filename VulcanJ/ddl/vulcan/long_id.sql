@@ -3,8 +3,6 @@ set names ascii;
 
 create database 'test.fdb';
 
-set sqlstate on;
-
 -- this create table statement fails, since table name > 31 characters
 create table test567890test567890test567890test567890 (i integer);
 

@@ -30,17 +30,6 @@ select count(*) from t where str is null;
 
 
 -- fixed by vlad, no tracker id that i found
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 create table buggg (f1 int not null, f2 int not null);
 commit;
 
@@ -50,7 +39,7 @@ commit;
 alter table buggg add pk int not null primary key;
 Statement failed, SQLSTATE = 23000
 validation error for column PK, value "*** null ***"
-After line 27 in file ddl/vulcan/bad_idx.sql
+After line 26 in file ddl/vulcan/bad_idx.sql
 -- alter table buggg add constraint pk_buggg primary key (pk);
 -- alter table buggg add constraint pk_buggg primary key (f1, f2, pk);
 

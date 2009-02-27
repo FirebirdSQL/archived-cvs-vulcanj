@@ -3,17 +3,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- NEED BETTER ERROR MESSAGE FOR MAXIMUM # OF COLUMNS IN ORDER BY CLAUSE
 
 set names ascii;
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 create database 'test.fdb';
 
 
@@ -734,6 +723,6 @@ Dynamic SQL Error
 -Invalid command
 -invalid ORDER BY clause
 -cannot sort on more than 255 items
-After line 450 in file ddl/vulcan/maxColumnsPerOrderBy.sql
+After line 449 in file ddl/vulcan/maxColumnsPerOrderBy.sql
 
 drop database;

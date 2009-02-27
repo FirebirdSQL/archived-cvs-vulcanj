@@ -10,7 +10,6 @@
 -- 2005/11/28
 --
 set names ascii;
-set sqlstate on;
 create database 'test.fdb'; 
 
 -- should get "new record size of 65536 bytes is too big"

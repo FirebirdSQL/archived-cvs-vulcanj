@@ -1,7 +1,6 @@
 -- S0341813
 -- MAXIMUM NUMBER OF TABLES PER SELECT STATEMENT
 set names ascii;
-set sqlstate on;
 create database 'test.fdb';
 
 recreate table test (i integer);

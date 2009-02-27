@@ -4,17 +4,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 
 set names ascii;
 create database 'test.fdb';
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 recreate table test (
    i000 integer,
    i001 integer,
@@ -720,7 +709,7 @@ Dynamic SQL Error
 -SQL error code = -104
 -Invalid command
 -cannot group on more than 255 items
-After line 447 in file ddl/vulcan/maxColumnsPerGroupBy.sql
+After line 446 in file ddl/vulcan/maxColumnsPerGroupBy.sql
 
 
 drop database;

@@ -1,5 +1,4 @@
 set names ascii;
-set sqlstate on;
 create database 'test.fdb' default character set iso8859_1;
 
 create table test (i integer);

@@ -1,6 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
-set sqlstate on;
 create database 'test.fdb' default character set iso8859_1;
 
 create table test (i integer);
@@ -259,11 +258,11 @@ alter table test add i252 integer;
 alter table test add i253 integer;
 alter table test add i254 integer;
 alter table test add i255 integer;
-Statement failed, SQLCODE = -607, SQLSTATE = 54000
+Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -TABLE TEST
 -too many versions
-After line 259 in file ddl/vulcan/alter_255.sql
+After line 258 in file ddl/vulcan/alter_255.sql
 
 drop database;
 quit;

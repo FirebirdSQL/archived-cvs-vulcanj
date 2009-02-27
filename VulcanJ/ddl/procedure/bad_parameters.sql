@@ -3,7 +3,6 @@
 set names ascii;
 
 create database 'test.fdb';
-set sqlstate on;
 
 -- procedure won't be created because we're using p1 as 
 -- a parameter and return parameter also

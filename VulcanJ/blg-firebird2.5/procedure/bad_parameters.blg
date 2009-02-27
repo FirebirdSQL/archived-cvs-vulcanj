@@ -4,17 +4,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
 
 create database 'test.fdb';
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 
 -- procedure won't be created because we're using p1 as 
 -- a parameter and return parameter also
@@ -29,7 +18,7 @@ Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -STORE RDB$PROCEDURE_PARAMETERS failed
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_18"
-After line 10 in file ddl/procedure/bad_parameters.sql
+After line 9 in file ddl/procedure/bad_parameters.sql
 
 set term ;^
 

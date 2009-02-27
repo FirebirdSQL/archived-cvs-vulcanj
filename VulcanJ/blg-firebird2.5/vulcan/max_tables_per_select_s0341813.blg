@@ -2,17 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- S0341813
 -- MAXIMUM NUMBER OF TABLES PER SELECT STATEMENT
 set names ascii;
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 create database 'test.fdb';
 
 recreate table test (i integer);
@@ -296,7 +285,7 @@ select test.i from test
 Statement failed, SQLSTATE = 54001
 invalid request BLR at offset 5510
 -Too many Contexts of Relation/Procedure/Views. Maximum allowed is 255
-After line 9 in file ddl/vulcan/max_tables_per_select_s0341813.sql
+After line 8 in file ddl/vulcan/max_tables_per_select_s0341813.sql
 
 drop database;
 quit;

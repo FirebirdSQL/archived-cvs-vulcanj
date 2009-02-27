@@ -2,17 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- S0385573
 -- DI STUDIO ISSUES WITH FOREIGN KEYS 
 set names ascii;
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 
 create database 'test.fdb';
 
@@ -36,7 +25,7 @@ alter table KBDISCOUNTTGT
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -partner index segment no 1 has incompatible data type
-After line 21 in file ddl/vulcan/kerries_fk_bug.sql
+After line 20 in file ddl/vulcan/kerries_fk_bug.sql
 
 drop database;
 

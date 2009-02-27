@@ -19,7 +19,6 @@ select count(*) from t where str = '';
 select count(*) from t where str is null;
 
 -- fixed by vlad, no tracker id that i found
-set sqlstate on;
 create table buggg (f1 int not null, f2 int not null);
 commit;
 

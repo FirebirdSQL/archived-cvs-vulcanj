@@ -4,7 +4,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
 
 create database 'test.fdb';
-set sqlstate on;
 
 -- procedure won't be created because we're using p1 as 
 -- a parameter and return parameter also
@@ -15,11 +14,11 @@ create procedure myproc (p1 char(10))
       p1='zzz';
    end
 ^
-Statement failed, SQLCODE = -607, SQLSTATE = 42000
+Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -STORE RDB$PROCEDURE_PARAMETERS failed. Invalid or duplicate parameter
 -attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_18"
-After line 10 in file ddl/procedure/bad_parameters.sql
+After line 9 in file ddl/procedure/bad_parameters.sql
 
 set term ;^
 

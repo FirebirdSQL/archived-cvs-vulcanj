@@ -11,17 +11,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- 2005/11/28
 --
 set names ascii;
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 create database 'test.fdb'; 
 
 -- should get "new record size of 65536 bytes is too big"
@@ -31,7 +20,7 @@ Statement failed, SQLSTATE = 54000
 unsuccessful metadata update
 -new record size of 65536 bytes is too big
 -TABLE BIGROW
-After line 14 in file ddl/vulcan/fblimits.sql
+After line 13 in file ddl/vulcan/fblimits.sql
 
 -- should pass...
 recreate table bigrow (c1 char(30000),
@@ -48,7 +37,7 @@ Dynamic SQL Error
 -SQL error code = -204
 -Implementation limit exceeded
 -block size exceeds implementation restriction
-After line 25 in file ddl/vulcan/fblimits.sql
+After line 24 in file ddl/vulcan/fblimits.sql
 
 rollback;
 
@@ -149,14 +138,14 @@ alter table lotsa_columns
 Statement failed, SQLSTATE = 54011
 unsuccessful metadata update
 -too many keys defined for index PK_LOTSA_COLUMNS
-After line 115 in file ddl/vulcan/fblimits.sql
+After line 114 in file ddl/vulcan/fblimits.sql
 
 -- ...and the drop should fail.
 alter table lotsa_columns drop constraint pk_lotsa_columns;
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -CONSTRAINT PK_LOTSA_COLUMNS does not exist.
-After line 121 in file ddl/vulcan/fblimits.sql
+After line 120 in file ddl/vulcan/fblimits.sql
 
 -- here is another way to do it, all in 1 statement. This will fail (17 columns for PK).
 recreate table lots_columns (i1 integer not null, i2 integer not null, i3 integer not null, i4 integer not null, i5 integer not null, i6 integer not null, i7 integer not null , i8 integer not null , i9 integer not null , i10 integer not null , i11 integer not null , i12 integer not null , i13 integer not null , i14 integer not null , i15 integer not null , i16 integer not null , i17 integer not null,
@@ -164,7 +153,7 @@ recreate table lots_columns (i1 integer not null, i2 integer not null, i3 intege
 Statement failed, SQLSTATE = 54011
 unsuccessful metadata update
 -too many keys defined for index RDB$PRIMARY1
-After line 124 in file ddl/vulcan/fblimits.sql
+After line 123 in file ddl/vulcan/fblimits.sql
 
 
 drop database;

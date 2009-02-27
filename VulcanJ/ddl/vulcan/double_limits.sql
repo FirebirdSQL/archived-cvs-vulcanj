@@ -1,7 +1,6 @@
 -- defect S0410647
 -- SAS CRASH WHEN INSERTING EXTREMELY LARGE VALUE VIA PROC TSSQL
 set names ascii;
-set sqlstate on;
 create database 'test.fdb';
 create table test (col1 double precision);
 

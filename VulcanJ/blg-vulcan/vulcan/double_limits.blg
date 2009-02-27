@@ -2,7 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- defect S0410647
 -- SAS CRASH WHEN INSERTING EXTREMELY LARGE VALUE VIA PROC TSSQL
 set names ascii;
-set sqlstate on;
 create database 'test.fdb';
 create table test (col1 double precision);
 
@@ -11,9 +10,9 @@ insert into test values (1.79769313486231570E+308);
 
 -- too big, should err
 insert into "TEST" ( "COL1" ) values ( 1.79769313486232e+308 ) ;
-Statement failed, SQLCODE = -802, SQLSTATE = 22003
+Statement failed, SQLCODE = -802
 arithmetic exception, numeric overflow, or string truncation
-After line 9 in file ddl/vulcan/double_limits.sql
+After line 8 in file ddl/vulcan/double_limits.sql
 commit;
 
 select * from test;

@@ -30,7 +30,6 @@ select count(*) from t where str is null;
 
 
 -- fixed by vlad, no tracker id that i found
-set sqlstate on;
 create table buggg (f1 int not null, f2 int not null);
 commit;
 
@@ -38,9 +37,9 @@ insert into buggg values (1, 1);
 commit;
 
 alter table buggg add pk int not null primary key;
-Statement failed, SQLCODE = -625, SQLSTATE = 23000
+Statement failed, SQLCODE = -625
 validation error for column PK, value "*** null ***"
-After line 27 in file ddl/vulcan/bad_idx.sql
+After line 26 in file ddl/vulcan/bad_idx.sql
 -- alter table buggg add constraint pk_buggg primary key (pk);
 -- alter table buggg add constraint pk_buggg primary key (f1, f2, pk);
 

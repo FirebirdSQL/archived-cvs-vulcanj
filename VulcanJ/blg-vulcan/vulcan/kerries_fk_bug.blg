@@ -2,7 +2,6 @@ Use CONNECT or CREATE DATABASE to specify a database
 -- S0385573
 -- DI STUDIO ISSUES WITH FOREIGN KEYS 
 set names ascii;
-set sqlstate on;
 
 create database 'test.fdb';
 
@@ -23,10 +22,10 @@ create table kbdiscounttgt (
 
 alter table KBDISCOUNTTGT
    add foreign key (PRODUCT_ID) references PRODUCT_LIST;
-Statement failed, SQLCODE = -607, SQLSTATE = 42000
+Statement failed, SQLCODE = -607
 unsuccessful metadata update
 -partner index segment no 1 has incompatible data type
-After line 21 in file ddl/vulcan/kerries_fk_bug.sql
+After line 20 in file ddl/vulcan/kerries_fk_bug.sql
 
 drop database;
 

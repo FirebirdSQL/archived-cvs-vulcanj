@@ -1,16 +1,5 @@
 Use CONNECT or CREATE DATABASE to specify a database
 set names ascii;
-set sqlstate on;
-Valid options are:
-AUTOddl                  BLOBdisplay              BAIL                     
-BULK_INSERT              COUNT                    ECHO                     
-GENERATOR                HEADING                  LIST                     
-NAMES                    PLAN                     PLANONLY                 
-ROWCOUNT                 STATs                    SQLDA_DISPLAY            
-SQL                      STATISTICS               TRANSaction              
-TERMinator               TIME                     WIDTH                    
-WARNINGs                 WNG                      
-Command error: set sqlstate on
 create database 'test.fdb' default character set iso8859_1;
 
 create table test (i integer);
@@ -273,7 +262,7 @@ Statement failed, SQLSTATE = 54000
 unsuccessful metadata update
 -TABLE TEST
 -too many versions
-After line 259 in file ddl/vulcan/alter_255.sql
+After line 258 in file ddl/vulcan/alter_255.sql
 
 drop database;
 quit;
