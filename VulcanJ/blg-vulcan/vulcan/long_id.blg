@@ -27,7 +27,7 @@ Statement failed, SQLCODE = -206
 SQL error code = -206
 -Column unknown
 -TEST567890TEST567890TEST567890TEST567890
--At line 1, column 49
+-At line 1, column 49.
 After line 13 in file ddl/vulcan/long_id.sql
 
 -- but a long alias is ok? Seems fishy
