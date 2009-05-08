@@ -77,7 +77,7 @@ CREATE DATABASE 'test.fdb' DEFAULT CHARACTER SET ISO8859_1;
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN NAMES1.EMPNUM
 -there are 2 dependencies
 After line 58 in file ddl/nist/dml104.sql
 -- PASS:0591 If table and view are dropped?
@@ -86,7 +86,7 @@ After line 58 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN GROUPS1.EMPNUM
 -there are 2 dependencies
 After line 60 in file ddl/nist/dml104.sql
 -- PASS:0591 If table is dropped?
@@ -199,7 +199,7 @@ After line 60 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN NAMES2.EMPNUM
 -there are 4 dependencies
 After line 143 in file ddl/nist/dml104.sql
 -- PASS:0592 If table and 2 views are dropped?
@@ -208,7 +208,7 @@ After line 143 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN GROUPS2.EMPNUM
 -there are 4 dependencies
 After line 145 in file ddl/nist/dml104.sql
 -- PASS:0592 If table is dropped?
@@ -389,7 +389,7 @@ After line 145 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN NAMES3.EMPNUM
 -there are 3 dependencies
 After line 261 in file ddl/nist/dml104.sql
 -- PASS:0593 If table and 2 views are dropped?
@@ -398,7 +398,7 @@ After line 261 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN GROUPS3.EMPNUM
 -there are 3 dependencies
 After line 263 in file ddl/nist/dml104.sql
 -- PASS:0593 If table is dropped?
@@ -514,7 +514,7 @@ After line 263 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN NAMES4.EMPNUM
 -there are 2 dependencies
 After line 349 in file ddl/nist/dml104.sql
 -- PASS:0594 If table and view are dropped?
@@ -523,7 +523,7 @@ After line 349 in file ddl/nist/dml104.sql
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN EMPNUM
+-COLUMN GROUPS4.EMPNUM
 -there are 2 dependencies
 After line 351 in file ddl/nist/dml104.sql
 -- PASS:0594 If table is dropped?

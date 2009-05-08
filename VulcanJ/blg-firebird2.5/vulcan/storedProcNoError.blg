@@ -35,12 +35,12 @@ execute procedure testa;
 
 execute procedure create_test_table;
 Statement failed, SQLSTATE = 42000
-Execute statement error at jrd8_prepare :\
+Execute statement error at jrd8_prepare :
 335544569 : Dynamic SQL Error
 335544436 : SQL error code = -104
 335544634 : Token unknown - line 1, column 81
 335544382 : integer
-Statement : CREATE TABLE test2 ( COL1 integer, COL2 integer, COL3 integer, COL4 integerCOL5 integer );\
+Statement : CREATE TABLE test2 ( COL1 integer, COL2 integer, COL3 integer, COL4 integerCOL5 integer );
 Data source : Internal::
 -At procedure 'CREATE_TEST_TABLE' line: 13, col: 1
 After line 33 in file ddl/vulcan/storedProcNoError.sql

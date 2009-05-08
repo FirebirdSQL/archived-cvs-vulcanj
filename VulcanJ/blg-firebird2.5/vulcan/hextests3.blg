@@ -42,5 +42,4 @@ select * from testy;
       <null>            -559038737 
       <null>            -559038737
       <null>  -2401053088876216593 
-
 drop database;

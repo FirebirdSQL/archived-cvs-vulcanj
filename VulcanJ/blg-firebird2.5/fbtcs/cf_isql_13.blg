@@ -21,7 +21,7 @@ alter table t0 drop a;
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN A
+-COLUMN T0.A
 -there are 1 dependencies
 After line 13 in file ddl/fbtcs/cf_isql_13.sql
 show table t0;
@@ -43,7 +43,7 @@ alter table t1 drop af;
 Statement failed, SQLSTATE = 42000
 unsuccessful metadata update
 -cannot delete
--COLUMN AF
+-COLUMN T1.AF
 -there are 1 dependencies
 After line 21 in file ddl/fbtcs/cf_isql_13.sql
 show table t1;
