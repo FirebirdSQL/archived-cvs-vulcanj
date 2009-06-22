@@ -10,9 +10,10 @@ insert into test values (1.79769313486231570E+308);
 
 -- too big, should err
 insert into "TEST" ( "COL1" ) values ( 1.79769313486232e+308 ) ;
-Statement failed, SQLCODE = -802
+Statement failed, SQLSTATE = 22003
 arithmetic exception, numeric overflow, or string truncation
-After line 9 in file ddl/vulcan/double_limits.sql
+-numeric value is out of range
+After line 8 in file ddl/vulcan/double_limits.sql
 commit;
 
 select * from test;
